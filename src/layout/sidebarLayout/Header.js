@@ -54,7 +54,7 @@ const Header = ({ grid, mapView, mapModal, gridBar, tabHeader, title, AdvancedSe
           </div>
         )}
 
-        {/* <ul className="grid-list-filter d-flex">
+        <ul className="grid-list-filter d-flex justify-content-end">
           {mapModal && (
             <li>
               <a
@@ -67,7 +67,7 @@ const Header = ({ grid, mapView, mapModal, gridBar, tabHeader, title, AdvancedSe
               </a>
             </li>
           )}
-          <li>
+          <li className=" d-flex justify-content-end">
             {(AdvancedSearchShow || mobileSize) && (
               <div className="filter-bottom-title">
                 <h6 className="mb-0 font-roboto" onClick={() => setAdvancedSearchOpen(!advancedSearchOpen)}>
@@ -77,47 +77,7 @@ const Header = ({ grid, mapView, mapModal, gridBar, tabHeader, title, AdvancedSe
             )}
           </li>
 
-          <li>
-          <Dropdown isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
-          <DropdownToggle className="font-rubik">
-            <span>{sortByValue || "Sort by Newest"}</span> <i className="fas fa-angle-down ms-lg-3 ms-2"></i>
-          </DropdownToggle>
-          <DropdownMenu className="text-start">
-            <DropdownItem onClick={() => handleSortBy("Sort by Newest")}>Sort by Newest</DropdownItem>
-            <DropdownItem onClick={() => handleSortBy("Sort by Oldest")}>Sort by Oldest</DropdownItem>
-            <DropdownItem onClick={() => handleSortBy("High to Low Price")}>High to Low Price</DropdownItem>
-            <DropdownItem onClick={() => handleSortBy("Low to High Price")}>Low to High Price</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-          </li>
-          {gridBar && (
-            <>
-              <li className={`collection-grid-view ${mapView ? "d-none" : "d-block"}`} style={{ opacity: `${grid?.gridStyle === "grid-view" ? "1" : "0"}` }}>
-                <ul>
-                  <li>
-                    <img src="/assets/images/icon/2.png" alt="" className="product-2-layout-view" onClick={() => gridDispatch({ type: "gridSize", payload: 2 })} />
-                  </li>
-                  <li>
-                    <img src="/assets/images/icon/3.png" alt="" className="product-3-layout-view" onClick={() => gridDispatch({ type: "gridSize", payload: 3 })} />
-                  </li>
-                  <li>
-                    <img src="/assets/images/icon/4.png" alt="" className="product-4-layout-view" onClick={() => gridDispatch({ type: "gridSize", payload: 4 })} />
-                  </li>
-                </ul>
-              </li>
-              <li className={`grid-btn ${grid?.gridStyle === "grid-view" && "active"}`}>
-                <a className="grid-layout-view" onClick={() => gridDispatch({ type: "gridStyle", payload: "grid-view" })}>
-                  <Grid />
-                </a>
-              </li>
-              <li className={`list-btn ${grid?.gridStyle === "list-view" && "active"}`}>
-                <a className="list-layout-view" onClick={() => gridDispatch({ type: "gridStyle", payload: "list-view" })}>
-                  <List />
-                </a>
-              </li>
-            </>
-          )}
-        </ul> */}
+        </ul>
       </div>
       <AdvancedSearch advancedSearchOpen={advancedSearchOpen} setAdvancedSearchOpen={setAdvancedSearchOpen} />
     </div>
