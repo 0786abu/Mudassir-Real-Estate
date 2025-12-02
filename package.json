@@ -57,10 +57,7 @@
     "sass": "1.77.6"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": ["next/core-web-vitals"]
   },
   "overrides": {
     "resolve-url-loader": "^5.0.0",

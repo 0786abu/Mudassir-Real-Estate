@@ -1,4 +1,3 @@
-import NoSsr from "@/utils/NoSsr";
 import MainProvider from "./MainProvider";
 import "../../public/assets/scss/app.scss";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,7 +6,6 @@ import { detectLanguage } from "./i18n/server";
 import { I18nProvider } from "./i18n/i18n-context";
 import Navbar from "@/layout/headers/Navbar";
 import BootstrapClient from "@/layout/headers/Bootstrap";
-import LoginModal from "@/components/LoginModal";
 
 export const metadata = {
   title: "Sheltos - Real Estate Next 15",
@@ -35,7 +33,6 @@ export default async function RootLayout({ children }) {
             <MainProvider>
               <BootstrapClient/>
               <Navbar/>
-              <LoginModal/>
               {children}</MainProvider>
         </body>
       </html>
