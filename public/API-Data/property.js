@@ -29,7 +29,7 @@ export const propertyData = {
       bath: 3,
       sqft: 5000,
       type: "FAMILY HOME",
-      img: "/assets/images/property/3.jpg",
+      img: "/assets/images/property/1.webp",
       imgLabel: "Featured",
       id: "4",
     },
@@ -44,7 +44,7 @@ export const propertyData = {
       bath: 3,
       sqft: 1000,
       type: "FAMILY HOME",
-      img: "/assets/images/property/2.jpg",
+      img: "/assets/images/property/3.webp",
       imgLabel: "Featured",
       id: "5",
     },
@@ -286,7 +286,7 @@ export const propertyData = {
   ],
   FeaturedPropertyInClassicLayout: [
     {
-      img: "/assets/images/feature/9.jpg",
+      img: "/assets/images/property/1.webp",
       title: "Monumental Real Estate Services",
       place: "Merrick Way, Miami, FL United Kingdom",
       details: "Residences can be classified by and how they are connected to neighbouring residences and land. Different types of housing tenure can be used for the same physical type.",
@@ -295,7 +295,7 @@ export const propertyData = {
       id: "53",
     },
     {
-      img: "/assets/images/blog/1.jpg",
+      img: "/assets/images/property/3.webp",
       title: "Home in California Avenue",
       place: "Merrick Way, Miami, FL United Kingdom",
       details: "Different types of housing tenure can be used for the same physical type.Residences can be classified by and how they are connected to neighbouring residences and land.",

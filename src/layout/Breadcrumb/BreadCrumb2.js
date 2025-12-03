@@ -6,7 +6,7 @@ import Img from "../../utils/BackgroundImageRatio";
 const BreadCrumb2 = () => {
   return (
     <section className="breadcrumb-section p-0 effect-cls">
-      <Img src="/assets/images/parallax/3.jpg" className="bg-img img-fluid" />
+      <Img src="/assets/images/about.webp" className="bg-img img-fluid" />
       <Container>
         <div className="breadcrumb-content">
           <div className="text-dark">

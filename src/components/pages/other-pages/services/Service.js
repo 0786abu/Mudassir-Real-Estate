@@ -4,12 +4,12 @@ import { Container, Row } from "reactstrap";
 const ServiceSection = () => {
   return (
     <Fragment>
-      <section className='provide-service bg-light'>
+      <section className='provide-service bg-light '>
         <Container>
           <Row>
             <div className='col-lg-6 order-lg-1'>
               <div className='service-img'>
-                <img src='/assets/images/inner-pages/2.png' className='img-fluid' alt='' />
+                <img src='/assets/images/inner-pages/2.webp' className='img-fluid' alt='' />
               </div>
             </div>
             <div className='col-lg-5'>

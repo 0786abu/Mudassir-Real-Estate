@@ -5,7 +5,7 @@ import ReviewStarr from "../../../elements/ReviewStarr";
 import ChangeDetails from "./ChangeDetails";
 import EditProfile from "./EditProfile";
 
-const MyProfileTab = () => {
+const MyProfileTab = ({role}) => {
   const [modal, setModal] = useState();
   const [profileDetail, setProfileDetail] = useState({
     firstName: "Zack",
@@ -27,7 +27,7 @@ const MyProfileTab = () => {
             <div className="user-name media">
               <div className="media-body">
                 <h5>
-                  {profileDetail.firstName + " " + profileDetail.lastName} <span className="label label-success">Real estate agent</span>
+                  {profileDetail.firstName + " " + profileDetail.lastName} <span className="label label-success">{role}</span>
                 </h5>
                 <ReviewStarr rating={4} />
               </div>

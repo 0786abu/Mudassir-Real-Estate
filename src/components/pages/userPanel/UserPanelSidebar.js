@@ -6,7 +6,7 @@ import React from "react";
 import { Camera } from "react-feather";
 import { Col, Nav, NavItem, NavLink } from "reactstrap";
 
-const UserPanelSidebar = ({ activeTab, setActiveTab }) => {
+const UserPanelSidebar = ({ activeTab, setActiveTab, role }) => {
   return (
     <Col lg='3'>
       <div className='sidebar-user sticky-cls'>
@@ -64,11 +64,11 @@ const UserPanelSidebar = ({ activeTab, setActiveTab }) => {
                 Dashboard
               </NavLink>
             </NavItem>
-            {/* <NavItem>
-              <NavLink className={activeTab === 'Listing' ? 'active' : ''} onClick={() => setActiveTab('Listing')}>
-                My Listing
-              </NavLink>
-            </NavItem> */}
+              <NavItem>
+                <NavLink className={activeTab === "CreateProperty" ? "active" : ""} onClick={() => setActiveTab("Listing")}>
+                  My Properties
+                </NavLink>
+              </NavItem>
             <NavItem>
               <NavLink className={activeTab === "CreateProperty" ? "active" : ""} onClick={() => setActiveTab("CreateProperty")}>
                 create property
@@ -84,11 +84,13 @@ const UserPanelSidebar = ({ activeTab, setActiveTab }) => {
                 favourites
               </NavLink>
             </NavItem>
-            <NavItem>
+            {role==="agent" && (
+              <NavItem>
               <NavLink className={activeTab === "Privacy" ? "active" : ""} onClick={() => setActiveTab("Privacy")}>
                 Privacy
               </NavLink>
             </NavItem>
+            )}
           </Nav>
         </div>
       </div>

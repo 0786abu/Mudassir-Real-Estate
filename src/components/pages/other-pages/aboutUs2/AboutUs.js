@@ -16,11 +16,11 @@ const AboutUsSection = () => {
                 <div className='col-xl-7 col-lg-5'>
                   <div className='about-image'>
                     <div className='img-box side-left'>
-                      <img src='/assets/images/about/6.jpg' className='img-fluid' alt='' />
+                      <img src='/assets/images/about/6.webp' className='img-fluid' alt='' />
                       <div className='side-effect'></div>
                     </div>
                     <div className='img-box img-abs side-right'>
-                      <img src='/assets/images/about/5.jpg' className='img-fluid' alt='' />
+                      <img src='/assets/images/about/5.webp' className='img-fluid' alt='' />
                       <div className='side-effect'></div>
                     </div>
                   </div>

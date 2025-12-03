@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Col, Container, Row, TabContent, TabPane } from "reactstrap";
-import CardsPaymentTab from "./cards&paymentTab";
 import CreatePropertyTab from "./createPropertyTab";
 import FavoritesTab from "./favouritesTab";
 import MyListingTab from "./myListingTab";
@@ -9,14 +8,14 @@ import PrivacyTab from "./privacyTab.js";
 import UserDashboardTab from "./userDashboardTab";
 import UserPanelSidebar from "./UserPanelSidebar";
 
-const BodyContent = ({ active }) => {
+const BodyContent = ({ active, role }) => {
   const [activeTab, setActiveTab] = useState(active);
 
   return (
     <section className='user-dashboard small-section'>
       <Container>
         <Row>
-          <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+          <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} role={role} />
           <Col lg='9'>
             <TabContent activeTab={activeTab}>
               <TabPane tabId='Dashboard'>
@@ -35,7 +34,7 @@ const BodyContent = ({ active }) => {
             </TabContent>
             <TabContent activeTab={activeTab}>
               <TabPane tabId='Profile'>
-                <MyProfileTab />
+                <MyProfileTab role={role}/>
               </TabPane>
             </TabContent>
             <TabContent activeTab={activeTab}>

@@ -11,7 +11,7 @@ const UserDashboard = () => {
   return (
     <Fragment>
       <Breadcrumb />
-      <BodyContent active={"Dashboard"} />
+      <BodyContent active={"Dashboard"} role={"individual"}/>
       <FooterThree />
     </Fragment>
   );

@@ -1,9 +1,10 @@
 "use client";
 
+import Signup from "@/components/screen/Signup";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { User, Lock } from "react-feather";
+import { User, Lock, PhoneCall } from "react-feather";
 
 export default function Navbar() {
   const collapseRef = useRef(null);
@@ -57,7 +58,8 @@ export default function Navbar() {
                 <Image src="/assets/images/man.png" width={40} height={40} alt="profile" className="rounded-circle" />
               </a>
               <ul className="dropdown-menu dropdown-menu-end shadow-sm">
-                <li><Link href="/dashboard/user-dashboard" className="dropdown-item">Dashboard</Link></li>
+                <li><Link href="/dashboard/agent-dashboard" className="dropdown-item">Agent Dashboard</Link></li>
+                <li><Link href="/dashboard/user-dashboard" className="dropdown-item">User Dashboard</Link></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><button className="dropdown-item text-danger">Logout</button></li>
               </ul>
@@ -123,31 +125,7 @@ export default function Navbar() {
 
             {/* Signup Form */}
             {!isLogin && (
-              <form>
-                <div className="form-group mb-3">
-                  <div className="input-group">
-                    <span className="input-group-text"><User /></span>
-                    <input type="text" className="form-control" placeholder="Full Name" required />
-                  </div>
-                </div>
-                <div className="form-group mb-3">
-                  <div className="input-group">
-                    <span className="input-group-text"><User /></span>
-                    <input type="email" className="form-control" placeholder="Enter Email" required />
-                  </div>
-                </div>
-                <div className="form-group mb-3">
-                  <div className="input-group">
-                    <span className="input-group-text"><Lock /></span>
-                    <input type="password" className="form-control" placeholder="Password" required />
-                  </div>
-                </div>
-                <button className="btn btn-dark w-100 mb-2">Create Account</button>
-                <p className="text-center">
-                  Already have an account?{" "}
-                  <button type="button" className="btn btn-link p-0" onClick={() => setIsLogin(true)}>Log in</button>
-                </p>
-              </form>
+              <Signup setIsLogin={setIsLogin}/>
             )}
           </div>
         </div>

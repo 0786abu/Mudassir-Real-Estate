@@ -3,26 +3,18 @@
  * @returns The return statement is used to return a value from a function.
  */
 import React, { useState } from "react";
-import { AlignCenter, Grid, List } from "react-feather";
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
+import { AlignCenter } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import AdvancedSearch from "../advancedSearch/AdvancedSearch";
 import useMobileSize from "@/utils/useMobileSize";
-import { sortBy } from "@/redux-toolkit/reducers/inputsReducer";
 
-const Header = ({ grid, mapView, mapModal, gridBar, tabHeader, title, AdvancedSearchShow, productCount, setMapModal, gridDispatch }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Header = ({ grid, mapModal, tabHeader, title, AdvancedSearchShow, productCount, setMapModal }) => {
   const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
   const [mapModalOpen, setMapModalOpen] = useState(false);
-  const { sortBy: sortByValue, propertyStatus } = useSelector((state) => state.inputsReducer);
+  const { propertyStatus } = useSelector((state) => state.inputsReducer);
   const mobileSize = useMobileSize("AdvancedSearch");
   const dispatch = useDispatch();
    
-
-  const handleSortBy = (sortOption) => {
-    dispatch(sortBy(sortOption)); // Dispatch the sortBy action with the selected sort option
-    setIsOpen(false); // Close the dropdown after selecting an option
-  };
 
   return (
     <div className="filter-panel">

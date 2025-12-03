@@ -3,18 +3,18 @@ import React, { Fragment } from "react";
 import FooterThree from "@/layout/footers/FooterThree";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
 import dynamic from "next/dynamic";
-const BodyContent = dynamic(() => import("@/components/pages/userPanel"), {
+const BodyContent = dynamic(() => import("../../../../components/pages/userPanel"), {
   ssr: false,
 });
 
-const CreateProperty = () => {
+const UserDashboard = () => {
   return (
     <Fragment>
       <Breadcrumb />
-      <BodyContent active={"CreateProperty"} />
+      <BodyContent active={"Dashboard"} role={"agent"} />
       <FooterThree />
     </Fragment>
   );
 };
 
-export default CreateProperty;
+export default UserDashboard;
