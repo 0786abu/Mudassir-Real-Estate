@@ -44,12 +44,10 @@ const Signup = ({setIsLogin}) => {
           </div>
         </InputGroup>
       </FormGroup>
-                <div className="mb-4">
+                {/* <div className="mb-4">
 
-  {/* Label */}
   <label className="d-block mb-2 fw-semibold">Phone Number*</label>
 
-  {/* Phone Input Wrapper */}
   <div
     className="d-flex align-items-center border rounded px-2 py-1"
     style={{
@@ -58,7 +56,6 @@ const Signup = ({setIsLogin}) => {
       boxShadow: "0 0 6px rgba(0,0,0,0.08)",
     }}
   >
-    {/* Flag */}
     <img
       src="/assets/images/pk-flag.png"
       alt="PK"
@@ -71,7 +68,6 @@ const Signup = ({setIsLogin}) => {
       }}
     />
 
-    {/* Country Code */}
     <select
       className="border-0 bg-transparent"
       disabled
@@ -85,7 +81,6 @@ const Signup = ({setIsLogin}) => {
       <option value="+92">+92</option>
     </select>
 
-    {/* Divider */}
     <span
       style={{
         width: "1px",
@@ -94,8 +89,6 @@ const Signup = ({setIsLogin}) => {
         margin: "0 10px",
       }}
     ></span>
-
-    {/* Phone Number Input */}
     <input
       type="text"
       placeholder="301 2345678"
@@ -107,7 +100,7 @@ const Signup = ({setIsLogin}) => {
       }}
     />
   </div>
-</div>
+</div> */}
 
 {/* Checkboxes */}
 <div className="mt-3 d-flex justify-content-start gap-4 align-items-center">
