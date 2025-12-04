@@ -6,6 +6,7 @@ import { detectLanguage } from "./i18n/server";
 import { I18nProvider } from "./i18n/i18n-context";
 import Navbar from "@/layout/headers/Navbar";
 import BootstrapClient from "@/layout/headers/Bootstrap";
+import { ToastContainer } from "react-toastify";
 
 export const metadata = {
   title: "Sheltos - Real Estate Next 15",
@@ -26,6 +27,7 @@ export default async function RootLayout({ children }) {
           <link href='https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap' rel='stylesheet'></link>
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
           <link href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap' rel='stylesheet'></link>
           <meta name='theme-color' content='#fff' />
         </head>
@@ -33,7 +35,9 @@ export default async function RootLayout({ children }) {
             <MainProvider>
               <BootstrapClient/>
               <Navbar/>
-              {children}</MainProvider>
+              {children}
+              <ToastContainer/>
+              </MainProvider>
         </body>
       </html>
     </I18nProvider>

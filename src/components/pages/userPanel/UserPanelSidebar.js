@@ -2,18 +2,31 @@
  * It takes the file from the input field and displays it in the image tag
  * @returns A Col component with a div inside of it.
  */
-import React from "react";
+"use client"
+import Image from "next/image";
+import React, { useState } from "react";
 import { Camera } from "react-feather";
+import { BiEdit } from "react-icons/bi";
+import { BsLinkedin, BsYoutube } from "react-icons/bs";
+import { FaFacebookSquare } from "react-icons/fa";
+import { GrInstagram } from "react-icons/gr";
+import { RiGlobalLine } from "react-icons/ri";
 import { Col, Nav, NavItem, NavLink } from "reactstrap";
+import SocialLinksModal from "./myProfileTab/SocialLinksModal";
 
-const UserPanelSidebar = ({ activeTab, setActiveTab, role }) => {
+const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloading }) => {
+   const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
   return (
     <Col lg='3'>
+        <div><SocialLinksModal socialMedia={user?.socialMedia} toggle={toggle} modal={modal} socialloading={socialloading}/></div>
+      
       <div className='sidebar-user sticky-cls'>
         <div className='user-profile'>
           <div className='media'>
             <div className='change-pic'>
-              <img src='/assets/images/avatar/3.jpg' className='img-fluid update_img' alt='' />
+              <Image width={100} height={100} src={user?.role==="agent" ? (user?.agencyProfile ? user?.agencyProfile?.url : '/assets/images/avatar/3.jpg') : (user?.profile ? user?.profile?.url : "/assets/images/avatar/3.jpg")} className='img-fluid update_img' alt='' />
               <div className='change-hover'>
                 <button type='button' className='btn'>
                   <Camera />
@@ -26,36 +39,59 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, role }) => {
               </div>
             </div>
             <div className='media-body'>
-              <h5>Zack Lee</h5>
-              <h6 className='font-roboto'>zackle@gmail.com</h6>
-              <h6 className='font-roboto mb-0'>+91 846 - 547 - 210</h6>
+              <h5>{loading ? "......":user?.name}</h5>
+              <h6 className='font-roboto'>{loading ? "......":user?.email}</h6>
+              <h6 className='font-roboto mb-0'>{loading ? "....." : user?.phone ? user?.phone : "No Phone no. Yet"}</h6>
             </div>
           </div>
+            {user?.role==="agent" && (
           <div className='connected-social'>
             <h6>Connect with</h6>
-            <ul className='agent-social'>
-              <li>
-                <a href='https://www.facebook.com/' className='facebook'>
-                  <i className='fab fa-facebook-f'></i>
+              <div className=" d-flex align-content-center gap-2">
+                {user?.socialMedia && (
+                <ul className=''>
+              {user?.socialMedia?.facebook && (
+                <li>
+                <a href={user?.socialMedia?.facebook} className='facebook'>
+                 <FaFacebookSquare size={20} className="social-icon1"/>
                 </a>
               </li>
+              )}
+              {user?.socialMedia?.instagram && (
               <li>
-                <a href='https://twitter.com/' className='twitter'>
-                  <i className='fab fa-twitter'></i>
+  <a href={user?.socialMedia?.instagram} className="instagram">
+    <GrInstagram size={20} className="social-icon2" />
+  </a>
+</li>
+               )} 
+              
+              {user?.socialMedia?.linkedin && (
+                <li>
+                <a href={user?.socialMedia?.linkedin} className='google'>
+                  <BsLinkedin size={20} className="social-icon3"/>
                 </a>
               </li>
-              <li>
-                <a href='https://account.google.com' className='google'>
-                  <i className='fab fa-google'></i>
+              )}
+              {user?.socialMedia?.youtube && (
+                <li>
+                <a href={user?.socialMedia?.youtube} className='linkedin'>
+                  <BsYoutube size={20} className="social-icon4"/>
                 </a>
               </li>
-              <li>
-                <a href='https://www.linkedin.com/' className='linkedin'>
-                  <i className='fab fa-linkedin-in'></i>
+              )}
+             {user?.socialMedia?.website && (
+               <li>
+                <a href={user?.socialMedia?.website} className='website'>
+                  <RiGlobalLine size={20} className="social-icon5"/>
                 </a>
               </li>
+             )}
             </ul>
+              )}
+              <button onClick={toggle} className="social-button">{!user?.socialMedia ? "Add Social Network":(<><BiEdit size={20}/> Edit</>)}</button>
+              </div>
           </div>
+            )}
         </div>
         <div className='dashboard-list'>
           <Nav tabs className='right-line-tab'>
@@ -84,13 +120,13 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, role }) => {
                 favourites
               </NavLink>
             </NavItem>
-            {role==="agent" && (
+            {/* {user?.role==="agent" && (
               <NavItem>
               <NavLink className={activeTab === "Privacy" ? "active" : ""} onClick={() => setActiveTab("Privacy")}>
                 Privacy
               </NavLink>
             </NavItem>
-            )}
+            )} */}
           </Nav>
         </div>
       </div>

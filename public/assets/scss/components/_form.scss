@@ -525,7 +525,6 @@ input[type='radio'] {
     padding: 0;
     width: 100%;
     text-align: left;
-    color: $white;
     transition: 0.5s;
 
     i {
@@ -543,15 +542,15 @@ input[type='radio'] {
         color: $white;
     }
 
-    &.facebook {
-        background-color: $facebook;
+    // &.facebook {
+    //     background-color: black;
 
-        i,
-        &:hover,
-        &:focus {
-            background-color: darken($facebook, 5%);
-        }
-    }
+    //     i,
+    //     &:hover,
+    //     &:focus {
+    //         background-color: darken($facebook, 5%);
+    //     }
+    // }
 
     &.google {
         background-color: $google;
@@ -563,15 +562,6 @@ input[type='radio'] {
         }
     }
 
-    &.twitter {
-        background-color: $twitter;
-
-        i,
-        &:hover,
-        &:focus {
-            background-color: darken($twitter, 5%);
-        }
-    }
 
     &.linkedin {
         background-color: $linkedin;
@@ -583,6 +573,42 @@ input[type='radio'] {
         }
     }
 }
+.social-icon1 {
+    
+  width: 30px;
+  height: 30px;
+  margin-right: 6px;
+}
+.social-icon2 {
+    color: red;
+    width: 30px;
+    height: 30px;
+    margin-right: 6px;
+}
+.social-icon3 {
+    width: 30px;
+    height: 30px;
+    margin-right: 6px;
+}
+.social-icon4 {
+    color: red;
+  width: 30px;
+  height: 30px;
+  margin-right: 6px;
+}
+.social-icon5 {
+    color: gray;
+  width: 30px;
+  height: 30px;
+  margin-right: 6px;
+}
+.social-button{
+    background-color: rgb(15, 170, 23);
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
 
 // captcha
 .captcha {

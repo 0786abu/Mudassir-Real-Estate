@@ -4,6 +4,7 @@ import wishListSlice from "./reducers/addToWishListReducer";
 import currencyRed from "./reducers/currencyReducer";
 import inputsReducer from "./reducers/inputsReducer";
 import gridRed from "./reducers/gridReducer";
+import Auth from "./slice/authSlice"
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,8 @@ export const store = configureStore({
     addToCompareReducer: compareReducer,
     currencyReducer: currencyRed,
     gridReducer: gridRed,
+
+    // actuall
+    Auth
   },
 });

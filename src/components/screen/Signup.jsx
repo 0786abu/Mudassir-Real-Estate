@@ -1,14 +1,30 @@
+import { RegisterUser } from '@/redux-toolkit/action/authAction';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { Lock, Mail, PhoneCall, User } from 'react-feather'
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, FormGroup, Input, InputGroup, InputGroupText } from 'reactstrap'
 
-const Signup = ({setIsLogin}) => {
+const Signup = ({setIsLogin,onClickForForgot}) => {
+  const {registerloading} = useSelector((state)=>state.Auth)
     const [showPassword, setShowPassword] = useState(false);
     const [role, setRole] = useState("individual");
-    const [landline, setLandline] = useState('+92');
+    const router = useRouter();
+    const [userData, setUserData] = useState({
+      name:"",
+      email:"",
+      password:""
+    });
+    const dispatch = useDispatch();
+
+    const handleSubmit = (e)=>{
+      e.preventDefault();
+      userData.role = role
+      dispatch(RegisterUser(userData,onClickForForgot,router));
+    }
   return (
     <div>
-        <Form>
+        <Form onSubmit={handleSubmit}>
                 <FormGroup>
         <InputGroup>
           <div className="input-group-prepend">
@@ -16,7 +32,7 @@ const Signup = ({setIsLogin}) => {
               <User />
             </InputGroupText>
           </div>
-          <Input type="text" className="form-control rounded-1" placeholder="Enter your name" required />
+          <Input type="text" value={userData.name} onChange={(e)=>setUserData({...userData, name:e.target.value})} className="form-control rounded-1" placeholder="Enter your name" required />
         </InputGroup>
       </FormGroup>
       <FormGroup>
@@ -26,7 +42,7 @@ const Signup = ({setIsLogin}) => {
               <Mail />
             </InputGroupText>
           </div>
-          <Input type="text" className="form-control rounded-1" placeholder="Enter email address" required />
+          <Input type="email" value={userData.email} onChange={(e)=>setUserData({...userData, email:e.target.value})} className="form-control rounded-1" placeholder="Enter email address" required />
         </InputGroup>
       </FormGroup>
       <FormGroup>
@@ -36,7 +52,7 @@ const Signup = ({setIsLogin}) => {
               <Lock />
             </InputGroupText>
           </div>
-          <Input type={showPassword ? "text" : "password"} id="pwd-input1" className="form-control rounded-1" placeholder="Password" required />
+          <Input type={showPassword ? "text" : "password"} id="pwd-input1" value={userData.password} onChange={(e)=>setUserData({...userData, password:e.target.value})} className="form-control rounded-1" placeholder="Password" required />
           <div style={{right:"2px", height:"90%",marginTop:"2px",zIndex:"10"}} className="input-group-apend d-flex justify-content-center align-items-center position-absolute top-0 bottom-o ">
             <InputGroupText className="input-group-text bg-white border-0 h-100">
               <i id="pwd-icon1" className={`far ${showPassword ? "fa-eye" : "fa-eye-slash"}`} onClick={() => setShowPassword((prev) => !prev)} />
@@ -137,7 +153,7 @@ const Signup = ({setIsLogin}) => {
   </div>
 </div>
 
-                <button className="btn btn-dark w-100 mb-2">Create Account</button>
+                <button type='submit' disabled={registerloading} className="btn btn-dark w-100 mb-2">{registerloading ? "Processing...":"Create Account"}</button>
                 <p className="text-center">
                   Already have an account?{" "}
                   <button onClick={()=>setIsLogin(true)} type="button" className="btn btn-link p-0">Log in</button>

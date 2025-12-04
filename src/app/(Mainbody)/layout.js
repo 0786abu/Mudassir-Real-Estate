@@ -5,7 +5,6 @@ import TapToTop from "@/layout/TapToTop";
 import StoreOldData from "@/utils/StoreOldData";
 import { usePathname } from "next/navigation";
 import { Fragment, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
 
 export default function RootLayout({ children }) {
   const pathName = usePathname();
@@ -21,7 +20,6 @@ export default function RootLayout({ children }) {
       <Customizer />
       <TapToTop />
       <StoreOldData />
-      <ToastContainer className={'p-0'} position='bottom-left' autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme={"light"} />
     </Fragment>
   );
 }

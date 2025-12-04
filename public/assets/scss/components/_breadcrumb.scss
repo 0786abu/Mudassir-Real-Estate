@@ -2,7 +2,7 @@
      breadcrumb css start
 ==========================**/
 .breadcrumb-section {
-    height: 500px;
+    height: 400px;
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -44,8 +44,11 @@
     .breadcrumb-content {
         @extend %flex-center;
         justify-content: unset;
-        height: 500px;
-        padding-top: 89px;
+        position: absolute;
+        left: 6%;
+        top: 50%;
+        transform: translateX(-6%);
+        transform: translateY(-50%);
 
         div {
             h2 {

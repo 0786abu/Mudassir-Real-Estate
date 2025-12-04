@@ -1,8 +1,21 @@
+import { AgentUpdateProfile, UserUpdateProfile } from "@/redux-toolkit/action/authAction";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Form, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
 
-const EditProfile = ({ toggle, setModal, profileDetail, setProfileDetail }) => {
-  const [inputs, setInputs] = useState({ ...profileDetail });
+const pakistanStates = [
+  "Punjab",
+  "Sindh",
+  "Khyber Pakhtunkhwa",
+  "Balochistan"
+];
+
+
+
+const EditProfile = ({ toggle, loading, setModal, profileDetail }) => {
+  const [inputs, setInputs] = useState(profileDetail);
+  const dispatch = useDispatch();
+  const {registerloading} = useSelector((state)=>state.Auth);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -12,12 +25,31 @@ const EditProfile = ({ toggle, setModal, profileDetail, setProfileDetail }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setProfileDetail((prev) => ({ ...prev, ...inputs }));
-    setModal(false);
+    const formData = new FormData();
+    formData.append("name", inputs?.name);
+    formData.append("gender", inputs?.gender);
+    formData.append("DOB", inputs?.DOB);
+    formData.append("address", inputs?.address);
+    formData.append("city", inputs?.city);
+   if(inputs.state && inputs.state !== ""){
+  formData.append("state", inputs.state);
+}
+    formData.append("bio", inputs?.bio);
+    if(profileDetail?.role==="agent"){
+      formData.append("whatsappAPI", inputs?.whatsappAPI);
+      formData.append("agencyName", inputs?.agencyName);
+    }
+    if(profileDetail?.role==="individual"){
+      dispatch(UserUpdateProfile(formData,setModal))
+    }else{
+      dispatch(AgentUpdateProfile(formData,setModal))
+    }
   };
 
   return (
-    <div className="modal fade edit-profile-modal" id="edit-profile">
+   <div>
+    {loading ? (<div className="dashboard-container">Wait...</div>) : (
+       <div className="modal fade edit-profile-modal" id="edit-profile">
       <div className="modal-dialog modal-lg modal-dialog-centered">
         <Modal className="modal-content" isOpen={toggle} size="lg">
           <ModalHeader className="modal-header">
@@ -30,39 +62,53 @@ const EditProfile = ({ toggle, setModal, profileDetail, setProfileDetail }) => {
             <Form id="modal-form" onSubmit={handleSubmit}>
               <Row className=" gx-3">
                 <Col md="6" className="form-group">
-                  <Label htmlFor="first">first name</Label>
-                  <Input name="firstName" type="text" className="form-control" id="first" placeholder="first name" value={inputs.firstName || ""} onChange={handleChange} />
+                  <Label htmlFor="first">Name</Label>
+                  <Input name="name" type="text" className="form-control" id="first" placeholder="first name" value={inputs?.name || ""} onChange={handleChange} />
                 </Col>
-                <Col md="6" className="form-group col-md-6">
-                  <Label htmlFor="last">last name</Label>
-                  <Input name="lastName" type="text" className="form-control" id="last" placeholder="last name" value={inputs.lastName || ""} onChange={handleChange} />
+                {profileDetail?.role==="agent" && (
+                  <Col md="6" className="form-group">
+                  <Label htmlFor="first">Agency Name</Label>
+                  <Input name="name" type="text" className="form-control" id="first" placeholder="first name" value={inputs?.agencyName || ""} onChange={handleChange} />
                 </Col>
+                )}
                 <div className="form-group col-md-6">
-                  <Label htmlFor="gender">gender</Label>
-                  <select name="gender" id="gender" className="form-control" value={inputs.gender} onChange={handleChange}>
-                    <option>female</option>
-                    <option>male</option>
+                  <Label htmlFor="gender">Gender</Label>
+                  <select name="gender" id="gender" className="form-control" value={inputs?.gender} onChange={handleChange}>
+                    <option value={""}>Select gender</option>
+                    <option value={"Female"}>Female</option>
+                    <option value={"Male"}>Male</option>
                   </select>
                 </div>
                 <div className="form-group col-md-6">
                   <Label>Birthday</Label>
-                  <Input name="birthDay" type="date" className="form-control" placeholder="18 april" id="datepicker" value={new Date(inputs.birthDay) || ""} onChange={handleChange} />
+                  <Input name="DOB" type="date" className="form-control" placeholder="18 april" id="datepicker" value={inputs?.DOB || ""} onChange={handleChange} />
                 </div>
-                <div className="form-group col-12">
+                <div className="form-group col-6">
                   <Label htmlFor="inputAddress">Address</Label>
-                  <Input name="address" type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" value={inputs.address || ""} onChange={handleChange} />
+                  <Input name="address" type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" value={inputs?.address || ""} onChange={handleChange} />
                 </div>
                 <div className="form-group col-md-6">
                   <label htmlFor="inputCity">City</label>
-                  <input name="city" type="text" className="form-control" id="inputCity" value={inputs.city || ""} onChange={handleChange} />
+                  <input name="city" type="text" className="form-control" id="inputCity" value={inputs?.city || ""} onChange={handleChange} />
                 </div>
+                {profileDetail?.role==="agent" ? (
+                    <div className="form-group col-md-6">
+                  <label htmlFor="inputCity">Whatsapp Api</label>
+                  <input name="whatsappAPI" type="text" className="form-control" id="inputCity" value={inputs?.whatsappAPI || ""} onChange={handleChange} />
+                </div>
+                ) : ""}
                 <div className="form-group col-md-6">
                   <label htmlFor="inputState">State</label>
-                  <select name="state" id="inputState" className="form-control" value={inputs.state} onChange={handleChange}>
-                    <option>IL</option>
-                    <option>PL</option>
-                    <option>GL</option>
+                  <select name="state" id="inputState" className="form-control" value={inputs?.state} onChange={handleChange}>
+                    <option value="">Select state</option>
+                    {pakistanStates.map((state,index)=>{
+                      return <option key={index} value={state}>{state}</option>
+                    })}
                   </select>
+                </div>
+                <div className="form-group col-md-12">
+                  <label htmlFor="inputCity">Bio</label>
+                  <textarea name="bio" type="text" className="form-control" id="inputCity" placeholder="Enter bio..." value={inputs?.bio || ""} onChange={handleChange} />
                 </div>
               </Row>
             </Form>
@@ -77,13 +123,15 @@ const EditProfile = ({ toggle, setModal, profileDetail, setProfileDetail }) => {
               }}>
               Cancel
             </Button>
-            <Button type="submit" className="btn btn-gradient btn-pill" data-bs-dismiss="modal" form="modal-form">
-              Save changes
+            <Button type="submit" disabled={registerloading} className="btn btn-gradient btn-pill" data-bs-dismiss="modal" form="modal-form">
+              {registerloading ? "Loading..." : "Save changes"}
             </Button>
           </ModalFooter>
         </Modal>
       </div>
     </div>
+    )}
+   </div>
   );
 };
 

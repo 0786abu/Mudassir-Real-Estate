@@ -1,16 +1,38 @@
 "use client";
 
+import Login from "@/components/screen/Login";
 import Signup from "@/components/screen/Signup";
+import { Logout_User, MyProfileData } from "@/redux-toolkit/action/authAction";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { User, Lock, PhoneCall } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Navbar() {
+  const {sampleuser,logoutloading} = useSelector((state)=>state.Auth);
+  const dispatch = useDispatch();
   const collapseRef = useRef(null);
   const [isLogin, setIsLogin] = useState(true);
   const modalRef = useRef(null);
   const bsModalRef = useRef(null);
+  const [token, setToken] = useState(null);
+
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const storedToken = localStorage.getItem("real-estate-user-token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }
+}, []);
+const router = useRouter();
+
+// useEffect(() => {
+//   if (token) {
+//     dispatch(MyProfileData());
+//   }
+// }, [token, dispatch]);
 
   useEffect(() => {
     // Import bootstrap JS only on client
@@ -39,11 +61,19 @@ export default function Navbar() {
   const onClickForForgot = () => {
     if (bsModalRef.current) bsModalRef.current.hide();
   };
+  const handleLogout = ()=>{
+    dispatch(Logout_User(router));
+  }
 
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg bg-white shadow-sm py-3 sticky-top">
+      <nav className="navbar navbar-expand-lg bg-white shadow-sm py-3 position-relative sticky-top">
+        {logoutloading && (
+          <div className="logout-loading">
+          <span>Loading...</span>
+        </div>
+        )}
         <div className="container">
 
           {/* Logo */}
@@ -51,19 +81,23 @@ export default function Navbar() {
 
           {/* Right section */}
           <div className="d-flex align-items-center gap-2 ms-auto order-lg-3 order-2">
-            <button className="btn btn-dark rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal">Login</button>
+            {!sampleuser && (
+              <button className="btn btn-dark rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal">Login</button>
+            )}
 
-            <div className="dropdown">
-              <a href="#" className="d-flex align-items-center text-decoration-none" data-bs-toggle="dropdown">
-                <Image src="/assets/images/man.png" width={40} height={40} alt="profile" className="rounded-circle" />
+             {sampleuser && (
+              <div className="dropdown">
+                <a href="#" className="d-flex align-items-center text-decoration-none" data-bs-toggle="dropdown">
+                <Image src={sampleuser?.profile ? sampleuser?.profile?.url : "/assets/images/man.png"} width={40} height={40} alt="profile" className="rounded-circle" />
               </a>
               <ul className="dropdown-menu dropdown-menu-end shadow-sm">
-                <li><Link href="/dashboard/agent-dashboard" className="dropdown-item">Agent Dashboard</Link></li>
-                <li><Link href="/dashboard/user-dashboard" className="dropdown-item">User Dashboard</Link></li>
+                {sampleuser.role === "agent" ? (<li><Link href="/dashboard/agent-dashboard" className="dropdown-item">Agent Dashboard</Link></li>) : sampleuser.role==="individual" ? (<li><Link href="/dashboard/user-dashboard" className="dropdown-item">User Dashboard</Link></li>) : (<li><Link href="/admin/dashboard" className="dropdown-item">Admin Dashboard</Link></li>)}
+                
                 <li><hr className="dropdown-divider" /></li>
-                <li><button className="dropdown-item text-danger">Logout</button></li>
+                <li><button onClick={handleLogout} className="dropdown-item text-danger">{logoutloading ? ("loading..."):"Logout"}</button></li>
               </ul>
             </div>
+             )}
 
             <button className="navbar-toggler border-0 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
               <span className="navbar-toggler-icon"></span>
@@ -99,33 +133,12 @@ export default function Navbar() {
 
             {/* Login Form */}
             {isLogin && (
-              <form>
-                <div className="form-group mb-3">
-                  <div className="input-group">
-                    <span className="input-group-text"><User /></span>
-                    <input type="text" className="form-control" placeholder="Enter Email" required />
-                  </div>
-                </div>
-                <div className="form-group mb-2">
-                  <div className="input-group">
-                    <span className="input-group-text"><Lock /></span>
-                    <input type="password" className="form-control" placeholder="Password" required />
-                  </div>
-                </div>
-                <div className="d-flex justify-content-end">
-                  <Link href="/forgot-password" onClick={onClickForForgot} className="btn btn-link">Forgot Password?</Link>
-                </div>
-                <button className="btn btn-dark w-100 mb-2">Log in</button>
-                <p className="text-center">
-                  Don't have an account?{" "}
-                  <button type="button" className="btn btn-link p-0" onClick={() => setIsLogin(false)}>Create Account</button>
-                </p>
-              </form>
+             <Login setIsLogin={setIsLogin} onClickForForgot={onClickForForgot}/>
             )}
 
             {/* Signup Form */}
             {!isLogin && (
-              <Signup setIsLogin={setIsLogin}/>
+              <Signup setIsLogin={setIsLogin} onClickForForgot={onClickForForgot}/>
             )}
           </div>
         </div>

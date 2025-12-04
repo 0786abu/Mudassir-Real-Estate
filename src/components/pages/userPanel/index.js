@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row, TabContent, TabPane } from "reactstrap";
 import CreatePropertyTab from "./createPropertyTab";
 import FavoritesTab from "./favouritesTab";
@@ -7,15 +7,26 @@ import MyProfileTab from "./myProfileTab";
 import PrivacyTab from "./privacyTab.js";
 import UserDashboardTab from "./userDashboardTab";
 import UserPanelSidebar from "./UserPanelSidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { MyProfileData } from "@/redux-toolkit/action/authAction";
 
-const BodyContent = ({ active, role }) => {
+const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
+  const {user,userloading,socialloading} = useSelector((state)=>state.Auth);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(MyProfileData());
+  },[dispatch])
 
   return (
     <section className='user-dashboard small-section'>
-      <Container>
+      {(userloading && !user) ? (<div className="dashboard-container">
+        <span>Wait...</span>
+      </div>) : (
+        <Container>
         <Row>
-          <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} role={role} />
+          <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} loading={userloading} socialloading={socialloading} />
           <Col lg='9'>
             <TabContent activeTab={activeTab}>
               <TabPane tabId='Dashboard'>
@@ -34,7 +45,7 @@ const BodyContent = ({ active, role }) => {
             </TabContent>
             <TabContent activeTab={activeTab}>
               <TabPane tabId='Profile'>
-                <MyProfileTab role={role}/>
+                <MyProfileTab user={user} loading={userloading}/>
               </TabPane>
             </TabContent>
             <TabContent activeTab={activeTab}>
@@ -50,6 +61,7 @@ const BodyContent = ({ active, role }) => {
           </Col>
         </Row>
       </Container>
+      )}
     </section>
   );
 };

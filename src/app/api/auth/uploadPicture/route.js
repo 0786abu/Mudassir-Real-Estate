@@ -1,0 +1,67 @@
+import { NextResponse } from "next/server";
+import Agent from "@/backend/model/agentModel";
+import User from "@/backend/model/authModel";
+import { isAuthenticated } from "@/backend/utils/middlewere";
+import cloudinary from "@/backend/utils/cloudinary";
+
+export async function POST(req) {
+  try {
+    // 1️⃣ Auth check
+    const user = await isAuthenticated();
+    if (!user) {
+      return NextResponse.json({ success: false, message: "Unauthorized" }, { status: 401 });
+    }
+
+    // 2️⃣ Get file from formData
+    const formData = await req.formData();
+    const file = formData.get("profilePicture");
+    if (!file) return NextResponse.json({ success: false, message: "No file uploaded" }, { status: 400 });
+
+    // 3️⃣ Convert file to buffer
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    // 4️⃣ Determine Model & field
+    const isAgent = user.role === "agent";
+    const Model = isAgent ? Agent : User;
+    const currentUser = await Model.findById(user._id);
+
+    // 5️⃣ Delete old picture if exists
+    const oldUrl = isAgent ? currentUser?.agencyProfile : currentUser?.profile;
+    if (oldUrl && oldUrl?.public_id) {
+        await cloudinary.uploader.destroy(oldUrl.public_id);
+        console.log("old iamge logic apply")
+    }
+
+    // 6️⃣ Upload new file to Cloudinary (easy way)
+    const result = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { folder: "profile_pictures" },
+        (err, result) => {
+          if (err) return reject(err);
+          resolve(result);
+        }
+      );
+      stream.end(buffer);
+    });
+
+    // 7️⃣ Update DB
+    if (isAgent) {
+      currentUser.agencyProfile.url = result.secure_url;
+      currentUser.agencyProfile.public_id = result.public_id;
+    } else {
+      currentUser.profile.url = result.secure_url;
+      currentUser.profile.public_id = result.public_id;
+    }
+    await currentUser.save();
+
+    // 8️⃣ Return response
+    return NextResponse.json({
+      success: true,
+      message: "File uploaded successfully",
+      user:currentUser
+    }, { status: 200 });
+
+  } catch (error) {
+    return NextResponse.json({ success: false, message: error.message }, { status: 500 });
+  }
+};
