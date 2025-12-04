@@ -18,57 +18,35 @@ const EditProfile = ({ toggle, loading, setModal, profileDetail }) => {
   const {registerloading} = useSelector((state)=>state.Auth);
   useEffect(()=>{
     if(profileDetail){
-      setInputs(profileDetail)
+      setInputs({
+        name:profileDetail?.name,
+        gender:profileDetail?.gender,
+        DOB:profileDetail?.DOB,
+        address:profileDetail?.address,
+        city:profileDetail?.city,
+        state:profileDetail?.state,
+        bio:profileDetail?.bio,
+      })
+      if(profileDetail?.role==="agent"){
+        setInputs({
+          agencyName:profileDetail?.agencyName,
+          whatsappAPI:profileDetail?.whatsappAPI,
+        })
+      }
     }
   },[profileDetail]);
  const handleChange = (event) => {
-  const { name, value } = event.target;
-
-  setInputs((prev) => {
-    const updated = { ...prev };
-
-    if (value.trim() === "") {
-      delete updated[name];   // 💥 field remove — DB me nahi jaegi
-    } else {
-      updated[name] = value;  // normal value
-    }
-
-    return updated;
-  });
+  const name = event.target.name;
+  const value = event.target.value;
+  setInputs((values) => ({ ...values, [name]: value }));
 };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("name", inputs?.name);
-    if(inputs?.gender){
-      formData.append("gender", inputs?.gender);
-    }
-    if(inputs?.DOB){
-      formData.append("DOB", inputs?.DOB);
-    }
-    if(inputs?.address){
-      formData.append("address", inputs?.address);
-    }
-    if(inputs?.city){
-      formData.append("city", inputs?.city);
-    }
-   if(inputs.state && inputs.state !== ""){
-  formData.append("state", inputs.state);
-}
-    formData.append("bio", inputs?.bio);
-    if(profileDetail?.role==="agent"){
-      if(inputs?.whatsappAPI){
-        formData.append("whatsappAPI", inputs?.whatsappAPI);
-      }
-      if(inputs?.agencyName){
-        formData.append("agencyName", inputs?.agencyName);
-      }
-    }
     if(profileDetail?.role==="individual"){
-      dispatch(UserUpdateProfile(formData,setModal))
+      dispatch(UserUpdateProfile(inputs,setModal))
     }else{
-      dispatch(AgentUpdateProfile(formData,setModal))
+      dispatch(AgentUpdateProfile(inputs,setModal))
     }
   };
 
