@@ -1,5 +1,5 @@
 import { AgentUpdateProfile, UserUpdateProfile } from "@/redux-toolkit/action/authAction";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Form, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
 
@@ -13,31 +13,57 @@ const pakistanStates = [
 
 
 const EditProfile = ({ toggle, loading, setModal, profileDetail }) => {
-  const [inputs, setInputs] = useState(profileDetail);
+  const [inputs, setInputs] = useState();
   const dispatch = useDispatch();
   const {registerloading} = useSelector((state)=>state.Auth);
+  useEffect(()=>{
+    if(profileDetail){
+      setInputs(profileDetail)
+    }
+  },[profileDetail]);
+ const handleChange = (event) => {
+  const { name, value } = event.target;
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
+  setInputs((prev) => {
+    const updated = { ...prev };
+
+    if (value.trim() === "") {
+      delete updated[name];   // 💥 field remove — DB me nahi jaegi
+    } else {
+      updated[name] = value;  // normal value
+    }
+
+    return updated;
+  });
+};
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData();
     formData.append("name", inputs?.name);
-    formData.append("gender", inputs?.gender);
-    formData.append("DOB", inputs?.DOB);
-    formData.append("address", inputs?.address);
-    formData.append("city", inputs?.city);
+    if(inputs?.gender){
+      formData.append("gender", inputs?.gender);
+    }
+    if(inputs?.DOB){
+      formData.append("DOB", inputs?.DOB);
+    }
+    if(inputs?.address){
+      formData.append("address", inputs?.address);
+    }
+    if(inputs?.city){
+      formData.append("city", inputs?.city);
+    }
    if(inputs.state && inputs.state !== ""){
   formData.append("state", inputs.state);
 }
     formData.append("bio", inputs?.bio);
     if(profileDetail?.role==="agent"){
-      formData.append("whatsappAPI", inputs?.whatsappAPI);
-      formData.append("agencyName", inputs?.agencyName);
+      if(inputs?.whatsappAPI){
+        formData.append("whatsappAPI", inputs?.whatsappAPI);
+      }
+      if(inputs?.agencyName){
+        formData.append("agencyName", inputs?.agencyName);
+      }
     }
     if(profileDetail?.role==="individual"){
       dispatch(UserUpdateProfile(formData,setModal))
@@ -63,12 +89,12 @@ const EditProfile = ({ toggle, loading, setModal, profileDetail }) => {
               <Row className=" gx-3">
                 <Col md="6" className="form-group">
                   <Label htmlFor="first">Name</Label>
-                  <Input name="name" type="text" className="form-control" id="first" placeholder="first name" value={inputs?.name || ""} onChange={handleChange} />
+                  <Input name="name" type="text" className="form-control" id="first" placeholder="Name" value={inputs?.name || ""} onChange={handleChange} />
                 </Col>
                 {profileDetail?.role==="agent" && (
                   <Col md="6" className="form-group">
                   <Label htmlFor="first">Agency Name</Label>
-                  <Input name="agencyName" type="text" className="form-control" id="first" placeholder="first name" value={inputs?.agencyName || ""} onChange={handleChange} />
+                  <Input name="agencyName" type="text" className="form-control" id="first" placeholder="Agency name" value={inputs?.agencyName || ""} onChange={handleChange} />
                 </Col>
                 )}
                 <div className="form-group col-md-6">

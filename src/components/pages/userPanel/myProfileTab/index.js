@@ -21,7 +21,7 @@ const MyProfileTab = ({user,loading}) => {
     if(user){
       setProfileDetail(user);
     }
-  },[user])
+  },[user]);
    
   return (
     <div className="dashboard-content">
