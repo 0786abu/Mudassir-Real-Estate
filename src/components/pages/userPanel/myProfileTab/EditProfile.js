@@ -16,30 +16,37 @@ const EditProfile = ({ toggle, loading, setModal, profileDetail }) => {
   const [inputs, setInputs] = useState();
   const dispatch = useDispatch();
   const {registerloading} = useSelector((state)=>state.Auth);
-  useEffect(()=>{
-    if(profileDetail){
-      setInputs({
-        name:profileDetail?.name,
-        gender:profileDetail?.gender,
-        DOB:profileDetail?.DOB,
-        address:profileDetail?.address,
-        city:profileDetail?.city,
-        state:profileDetail?.state,
-        bio:profileDetail?.bio,
-      })
-      if(profileDetail?.role==="agent"){
-        setInputs({
-          agencyName:profileDetail?.agencyName,
-          whatsappAPI:profileDetail?.whatsappAPI,
-        })
-      }
+  useEffect(() => {
+  if (profileDetail) {
+    // Common fields
+    let updatedInputs = {
+      name: profileDetail?.name,
+      gender: profileDetail?.gender,
+      DOB: profileDetail?.DOB,
+      address: profileDetail?.address,
+      city: profileDetail?.city,
+      state: profileDetail?.state,
+      bio: profileDetail?.bio,
+    };
+
+    // Agent-specific fields
+    if (profileDetail?.role === "agent") {
+      updatedInputs = {
+        ...updatedInputs,  // preserve common fields
+        agencyName: profileDetail?.agencyName,
+        whatsappAPI: profileDetail?.whatsappAPI,
+      };
     }
-  },[profileDetail]);
+
+    setInputs(updatedInputs);
+  }
+}, [profileDetail]);
  const handleChange = (event) => {
   const name = event.target.name;
   const value = event.target.value;
   setInputs((values) => ({ ...values, [name]: value }));
 };
+console.log(profileDetail)
 
   const handleSubmit = (event) => {
     event.preventDefault();
