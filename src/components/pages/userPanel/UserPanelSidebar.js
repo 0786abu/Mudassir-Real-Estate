@@ -11,22 +11,42 @@ import { BsLinkedin, BsYoutube } from "react-icons/bs";
 import { FaFacebookSquare } from "react-icons/fa";
 import { GrInstagram } from "react-icons/gr";
 import { RiGlobalLine } from "react-icons/ri";
-import { Col, Nav, NavItem, NavLink } from "reactstrap";
+import { Button, Col, Nav, NavItem, NavLink } from "reactstrap";
 import SocialLinksModal from "./myProfileTab/SocialLinksModal";
+import { useDispatch, useSelector } from "react-redux";
+import { UploadProfile } from "@/redux-toolkit/action/authAction";
+import { TbTrash } from "react-icons/tb";
 
 const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloading }) => {
    const [modal, setModal] = useState(false);
+   const {uploadloading} = useSelector((state)=>state.Auth);
+   const [preview, setPreview] = useState();
+   const [profilePicture, setProfilePicture] = useState();
+   const dispatch = useDispatch();
+   const handleChange = (e)=>{
+    const file = e.target.files[0];
+    setProfilePicture(file);
+    setPreview(URL.createObjectURL(file))
+   }
+   const handleSubmit = ()=>{
+    const formData = new FormData();
+    formData.append("profilePicture", profilePicture);
+    dispatch(UploadProfile(formData,setPreview))
+   }
+   const cancelUpload = ()=>{
+    setPreview("")
+   }
 
   const toggle = () => setModal(!modal);
   return (
     <Col lg='3'>
         <div><SocialLinksModal socialMedia={user?.socialMedia} toggle={toggle} modal={modal} socialloading={socialloading}/></div>
-      
+        
       <div className='sidebar-user sticky-cls'>
         <div className='user-profile'>
           <div className='media'>
             <div className='change-pic'>
-              <Image width={100} height={100} src={user?.role==="agent" ? (user?.agencyProfile ? user?.agencyProfile?.url : '/assets/images/avatar/3.jpg') : (user?.profile ? user?.profile?.url : "/assets/images/avatar/3.jpg")} className='img-fluid update_img' alt='' />
+              <Image width={80} height={80} src={preview ? preview : user?.role==="agent" ? (user?.agencyProfile ? user?.agencyProfile?.url : '/assets/images/avatar/3.jpg') : (user?.profile ? user?.profile?.url : "/assets/images/avatar/3.jpg")} className='img-fluid update_img' style={{width:"60px",height:"60px",objectFit:"cover"}} alt='' />
               <div className='change-hover'>
                 <button type='button' className='btn'>
                   <Camera />
@@ -35,6 +55,7 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloadin
                   className='updateimg'
                   type='file'
                   name='img'
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -44,6 +65,12 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloadin
               <h6 className='font-roboto mb-0'>{loading ? "....." : user?.phone ? user?.phone : "No Phone no. Yet"}</h6>
             </div>
           </div>
+          {preview && (
+          <div style={{marginBottom:"10px",dispatch:"flex",justifyContent:"center",alignItems:"center", gap:"10px"}}>
+          <Button size="sm" onClick={handleSubmit} className="btn btn-gradient" style={{marginRight:"10px"}}>{uploadloading ? "Uploading...":"upload Image"}</Button>
+          <Button size="sm" onClick={cancelUpload}><TbTrash/> Cancle</Button>
+        </div>
+        )}
             {user?.role==="agent" && (
           <div className='connected-social'>
             <h6>Connect with</h6>

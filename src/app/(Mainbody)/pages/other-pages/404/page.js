@@ -7,7 +7,6 @@ import NavbarFive from "@/layout/headers/NavbarFive";
 const Page404 = () => {
   return (
     <Fragment>
-      <NavbarFive />
       <section className="error-section small-section">
         <Container>
           <Row>

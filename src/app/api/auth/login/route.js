@@ -32,7 +32,7 @@ export async function POST(req) {
         { success: false, message: "Invalid credentials" },
         { status: 400 }
       );
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
     const response = NextResponse.json(

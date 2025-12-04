@@ -18,7 +18,7 @@ export async function POST(req) {
                 { success: false, message: "User not found" },
                 { status: 400}
         )};
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: "10m",
         });
         const link = `http://localhost:3000/reset-password/${token}`

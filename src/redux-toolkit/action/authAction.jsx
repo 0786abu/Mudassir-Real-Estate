@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { setAuthError, setLogoutLoading, setRegisterloading, setResendEmailloading, setSampleUser, setSocialLoading, setUser, setUserLoading } from "../slice/authSlice";
+import { setAuthError, setLogoutLoading, setRegisterloading, setResendEmailloading, setSampleUser, setSocialLoading, setUploadLoading, setUser, setUserLoading } from "../slice/authSlice";
 
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -248,5 +248,49 @@ export const AgentUpdateSocialMedia = (dataa,setModal)=>async(dispatch)=>{
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
         dispatch(setSocialLoading(false));
+    }
+}
+export const ChangePassword = (passwordData,setModal)=>async(dispatch)=>{
+    dispatch(setRegisterloading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/auth/change-password`,passwordData,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        toast.success(data.message);
+        setModal(false)
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRegisterloading(false));
+    }
+}
+export const UploadProfile = (picture,setPreview)=>async(dispatch)=>{
+    dispatch(setUploadLoading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/auth/uploadPicture`,picture,{
+            headers:{
+                "Content-Type":"multipart/form-data"
+            },
+            withCredentials:true
+        });
+        toast.success(data.message);
+        dispatch(setUser(data.user));
+         const sampledata = {
+            _id:data?.user?._id,
+            name:data?.user?.name,
+            profile:data?.user.role==="agent" ? data?.user?.agencyProfile : data?.user?.profile,
+            role:data?.user?.role
+        }
+        localStorage.setItem("sample_user_data", JSON.stringify(sampledata));
+        setPreview("")
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setUploadLoading(false));
     }
 }

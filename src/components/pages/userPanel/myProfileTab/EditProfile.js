@@ -68,7 +68,7 @@ const EditProfile = ({ toggle, loading, setModal, profileDetail }) => {
                 {profileDetail?.role==="agent" && (
                   <Col md="6" className="form-group">
                   <Label htmlFor="first">Agency Name</Label>
-                  <Input name="name" type="text" className="form-control" id="first" placeholder="first name" value={inputs?.agencyName || ""} onChange={handleChange} />
+                  <Input name="agencyName" type="text" className="form-control" id="first" placeholder="first name" value={inputs?.agencyName || ""} onChange={handleChange} />
                 </Col>
                 )}
                 <div className="form-group col-md-6">

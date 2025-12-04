@@ -113,13 +113,10 @@ const MyProfileTab = ({user,loading}) => {
           </div>
         </div>
       </div>
-      <EditProfile toggle={"editProfile" === modal ? true : false} loading={loading} setModal={setModal} profileDetail={user} setProfileDetail={setProfileDetail} />
+      <EditProfile toggle={"editProfile" === modal ? true : false} loading={loading} setModal={setModal} profileDetail={profileDetail} setProfileDetail={setProfileDetail} />
       <ChangeDetails
         toggle={"changePass" === modal ? true : false}
         setModal={setModal}
-        detail={"password"}
-        profileDetail={profileDetail}
-        setProfileDetail={setProfileDetail}
       />
       <VerifiedPhoneNumber
         toggle={"phone" === modal ? true : false}
