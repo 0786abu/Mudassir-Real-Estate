@@ -5,6 +5,7 @@ import currencyRed from "./reducers/currencyReducer";
 import inputsReducer from "./reducers/inputsReducer";
 import gridRed from "./reducers/gridReducer";
 import Auth from "./slice/authSlice"
+import Agent from "./slice/agentSlice"
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     gridReducer: gridRed,
 
     // actuall
-    Auth
+    Auth,
+    Agent
   },
 });

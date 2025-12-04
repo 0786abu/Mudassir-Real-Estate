@@ -1,29 +1,18 @@
-/**
- * It fetches data from the API and passes it to the component
- * @returns The data is being returned from the API.
- */
-"use client";
-import React, { Fragment, useEffect, useState } from "react";
 import BodyContent from "@/components/pages/agency/agencyGrid";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
 import FooterThree from "@/layout/footers/FooterThree";
-import { getData } from "@/utils/getData";
 
-const AgentGrid = () => {
-  const [clientData, setClientData] = useState();
-  useEffect(() => {
-    getData(`/api/client-agent`)
-      .then((res) => {
-        setClientData(res.data.agentList);
-      })
-      .catch((error) => console.error("Error", error));
-  }, []);
+const AgentGrid = async() => {
+  const data = await fetch("http://localhost:3000/api/agents/getAgents",{
+    method:"GET"
+  });
+  const {agents} = await data.json();
   return (
-    <Fragment>
+    <div>
       <Breadcrumb />
-      <BodyContent clientData={clientData} style={"grid-view"} listSize={2} size={3} />
+      <BodyContent agents={agents}/>
       <FooterThree />
-    </Fragment>
+    </div>
   );
 };
 

@@ -1,11 +1,11 @@
- 
+ "use client";
 import React, { Fragment, useEffect, useState } from "react";
 import { Container } from "reactstrap";
 import Img from "../../utils/BackgroundImageRatio";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-const Breadcrumb = ({ right }) => {
+const Breadcrumb = ({ right,page,agentName }) => {
   const pathname = usePathname();
   const router = useRouter();
   const [path, setPath] = useState();
@@ -18,8 +18,9 @@ const Breadcrumb = ({ right }) => {
       <Container>
         <div className={`breadcrumb-content ${right ? "breadcrumb-right" : ""}`}>
           <div>
-            <h2>{path && path[path.length - 1].replaceAll("-", " ")}</h2>
-            <nav aria-label="breadcrumb" className="theme-breadcrumb">
+            <h2>{page==="agent" ? agentName : path && path[path.length - 1].replaceAll("-", " ")}</h2>
+            {!page && (
+              <nav aria-label="breadcrumb" className="theme-breadcrumb">
               <ol className="breadcrumb">
                 {path?.map((data, i) => (
                   <Fragment key={i}>
@@ -32,6 +33,7 @@ const Breadcrumb = ({ right }) => {
                 ))}
               </ol>
             </nav>
+            )}
           </div>
         </div>
       </Container>
