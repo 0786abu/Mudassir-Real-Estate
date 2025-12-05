@@ -84,6 +84,10 @@ const MyProfileTab = ({user,loading}) => {
                         <span>Address :</span>
                         <p>{user?.address ? user?.address : "Still not Added"}</p>
                       </li>
+                      <li>
+                        <span>Member since :</span>
+                        <p>{formatDatenew(user?.createdAt)}</p>
+                      </li>
                     </ul>
                   </div>
                 </div>

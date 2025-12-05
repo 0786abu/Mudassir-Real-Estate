@@ -4,10 +4,12 @@ import bcrypt from "bcrypt";
 import { DataBase } from "@/backend/config/database";
 import User from "@/backend/model/authModel";
 import Agent from "@/backend/model/agentModel";
+import { isAuthenticated } from "@/backend/utils/middlewere";
 
 export async function POST(req,{params}) {
     try {
         await DataBase();
+        const isUser = await isAuthenticated();
         if(isUser){
                     return NextResponse.json(
                         { success: false, message: "You are currently logged in, please first logout to forgot password" },
