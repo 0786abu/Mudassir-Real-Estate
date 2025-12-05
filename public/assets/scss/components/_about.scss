@@ -679,31 +679,39 @@
 ==========================**/
 .category-grid {
           display: grid;
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 1rem;
         }
-
+        @media (max-width: 400px) {
+          .cat-img {
+            width: 60px;
+            height: 60px;
+          }
+          .cat-card {
+            padding: 5px;
+          }
+        } 
         @media (min-width: 576px) {
           .category-grid {
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(4, 1fr);
           }
         }
 
         @media (min-width: 768px) {
           .category-grid {
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: repeat(6, 1fr);
           }
         }
 
         @media (min-width: 992px) {
           .category-grid {
-            grid-template-columns: repeat(8, 1fr);
+            grid-template-columns: repeat(7, 1fr);
           }
         }
 
         @media (min-width: 1200px) {
           .category-grid {
-            grid-template-columns: repeat(10, 1fr); /* XL screens: 9 columns */
+            grid-template-columns: repeat(9, 1fr); /* XL screens: 9 columns */
           }
         }
 
