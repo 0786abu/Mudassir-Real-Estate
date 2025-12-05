@@ -9,6 +9,7 @@ import UserDashboardTab from "./userDashboardTab";
 import UserPanelSidebar from "./UserPanelSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { MyProfileData } from "@/redux-toolkit/action/authAction";
+import ProfileLoader from "@/components/common/Loader";
 
 const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
@@ -21,9 +22,7 @@ const BodyContent = ({ active }) => {
 
   return (
     <section className='user-dashboard small-section'>
-      {(userloading && !user) ? (<div className="dashboard-container">
-        <span>Wait...</span>
-      </div>) : (
+      {(userloading && !user) ? (<ProfileLoader/>) : (
         <Container>
         <Row>
           <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} loading={userloading} socialloading={socialloading} />
