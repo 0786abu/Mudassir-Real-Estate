@@ -171,3 +171,90 @@ export const ResetPasswordTemplate = ({name,link})=>`
 </body>
 </html>
 `
+export const ForGotTemplate = ({name,link})=>`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Reset</title>
+</head>
+<body style="margin:0; padding:0; background:#f5f7fa; font-family:Arial, sans-serif;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background:#f5f7fa; padding:40px 0;">
+    <tr>
+      <td align="center">
+        <table width="100%" style="max-width:520px; background:white; border-radius:12px; padding:40px; box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+          
+          <!-- Logo -->
+          <tr>
+            <td style="text-align:center;">
+              <h2 style="margin:0; font-size:24px; color:#111;">Real Estate Project</h2>
+            </td>
+          </tr>
+           <tr>
+            <td style="text-align:center;">
+              <h2 style="margin:0; font-size:24px; color:#111;">Hello dear ${name}</h2>
+            </td>
+          </tr>
+
+          <!-- Title -->
+          <tr>
+            <td style="padding-top:25px; text-align:center;">
+              <h3 style="margin:0; font-size:22px; color:#333; font-weight:600;">Reset Your Password</h3>
+            </td>
+          </tr>
+
+          <!-- Message -->
+          <tr>
+            <td style="padding-top:15px; text-align:left; color:#555; font-size:16px; line-height:24px;">
+              <p style="margin:0;">
+                Hello,
+                <br/><br/>
+                We received a request to reset your password. Click the button below to set a new password.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Button -->
+          <tr>
+            <td style="padding:35px 0; text-align:center;">
+              <a href="${link}" 
+                style="background:#4F46E5; color:white; padding:14px 26px; 
+                text-decoration:none; font-size:16px; border-radius:8px; 
+                display:inline-block; font-weight:600;">
+                Reset Password
+              </a>
+            </td>
+          </tr>
+
+          <!-- Expire info -->
+          <tr>
+            <td style="text-align:left; color:#777; font-size:14px; line-height:22px;">
+              <p style="margin:0;">
+                This link will expire in <strong>15 minutes</strong>.  
+                If you didn’t request this, you can safely ignore this email.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding:25px 0;">
+              <hr style="border:0; border-top:1px solid #eee;" />
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="text-align:center; color:#999; font-size:13px;">
+              © 2025 Your Platform — All rights reserved.
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+`

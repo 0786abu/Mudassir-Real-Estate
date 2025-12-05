@@ -15,15 +15,16 @@ const OTPPage = () => {
   const [timer, setTimer] = useState(60);
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState();
   useEffect(() => {
   if (typeof window !== "undefined") {
-    const storedEmail = localStorage.getItem("real_estate_project_user_email");
+    const storedEmail = JSON.parse(localStorage.getItem("real_estate_project_user_email"));
     if (storedEmail) {
       setEmail(storedEmail);
     }
   }
 }, []);
+console.log(email)
   // handle change
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -89,7 +90,7 @@ const OTPPage = () => {
               ))}
             </div>
             <div style={{width:"100%",margin:"6px 0px"}} className=" d-flex align-content-center justify-content-end">
-            <div><span style={{fontSize:"20px"}}>{timer}</span> <button disabled={timer>0 || resendloading} style={{background:"transparent", border:"none", color:timer>0 ? "gray" : "blue", textDecoration:"underline"}}>{resendloading ? "Sending...":"Resend email"}</button></div>
+            <div><span style={{fontSize:"20px"}}>{timer}</span> <button onClick={handleResendEmail} disabled={timer>0 || resendloading} style={{background:"transparent", border:"none", color:timer>0 ? "gray" : "blue", textDecoration:"underline"}}>{resendloading ? "Sending...":"Resend email"}</button></div>
           </div>
             
             <Button color="primary" disabled={registerloading} type="submit" className=" mt-lg-1" block>

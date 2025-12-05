@@ -17,7 +17,7 @@ export const RegisterUser = (user,onClickForForgot,router)=>async(dispatch)=>{
         toast.success(data.message)
         onClickForForgot()
         router.push("/otp-verify");
-        localStorage.setItem("real_estate_project_user_email",JSON.stringify(data.user.email));
+        localStorage.setItem("real_estate_project_user_email", JSON.stringify(data.user.email));
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
@@ -292,5 +292,61 @@ export const UploadProfile = (picture,setPreview)=>async(dispatch)=>{
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
         dispatch(setUploadLoading(false));
+    }
+}
+export const Logout_User2 = (router)=>async(dispatch)=>{
+    try {
+        await axios.get(`${baseURL}/api/auth/register`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setSampleUser(null));
+        localStorage.removeItem("real_estate_project_user_email");
+        localStorage.removeItem("real-estate-user-token");
+        localStorage.removeItem("sample_user_data");
+        toast("your token expire now please login again")
+        router.push("/")
+    } catch (error) {
+        console.log(error)
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    }
+}
+export const ForgotPasswordd = ({email,setEmail})=>async(dispatch)=>{
+    dispatch(setRegisterloading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/auth/reset-password`,{email},{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        toast.success(data.message);
+        setEmail("")
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRegisterloading(false));
+    }
+}
+export const ResetPassword = ({password,token,router})=>async(dispatch)=>{
+    dispatch(setRegisterloading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/auth/reset-password/${token}`,{password},{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        toast.success(data.message);
+        router.push("/");
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRegisterloading(false));
     }
 }

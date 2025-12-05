@@ -5,7 +5,7 @@ import Img from "../../utils/BackgroundImageRatio";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-const Breadcrumb = ({ right,page,agentName }) => {
+const Breadcrumb = ({ right, page, agentName }) => {
   const pathname = usePathname();
   const router = useRouter();
   const [path, setPath] = useState();
@@ -18,7 +18,7 @@ const Breadcrumb = ({ right,page,agentName }) => {
       <Container>
         <div className={`breadcrumb-content ${right ? "breadcrumb-right" : ""}`}>
           <div>
-            <h2>{page==="agent" ? agentName : path && path[path.length - 1].replaceAll("-", " ")}</h2>
+            <h2>{page==="agent" ? agentName : page==="Reset" ? "Reset Password" : path && path[path.length - 1].replaceAll("-", " ")}</h2>
             {!page && (
               <nav aria-label="breadcrumb" className="theme-breadcrumb">
               <ol className="breadcrumb">

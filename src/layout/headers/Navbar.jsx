@@ -2,12 +2,13 @@
 
 import Login from "@/components/screen/Login";
 import Signup from "@/components/screen/Signup";
-import { Logout_User, MyProfileData } from "@/redux-toolkit/action/authAction";
+import { Logout_User, Logout_User2 } from "@/redux-toolkit/action/authAction";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode"
 
 export default function Navbar() {
   const {sampleuser,logoutloading} = useSelector((state)=>state.Auth);
@@ -16,26 +17,31 @@ export default function Navbar() {
   const [isLogin, setIsLogin] = useState(true);
   const modalRef = useRef(null);
   const bsModalRef = useRef(null);
-  const [token, setToken] = useState(null);
+ const [token, setToken] = useState(null);
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        const storedToken = localStorage.getItem("real-estate-user-token");
+        if (storedToken) {
+          setToken(storedToken);
+        }
+      }
+    }, []);
 
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    const storedToken = localStorage.getItem("real-estate-user-token");
-    if (storedToken) {
-      setToken(storedToken);
+     useEffect(() => {
+  const checkTokenExpiry = () => {
+    if (token) {
+      const decoded = jwtDecode(token);
+      if (decoded.exp * 1000 < Date.now()) {
+        dispatch(Logout_User2(router));
+      }
     }
-  }
-}, []);
+  };
+
+  checkTokenExpiry();
+}, [token]);
 const router = useRouter();
 
-// useEffect(() => {
-//   if (token) {
-//     dispatch(MyProfileData());
-//   }
-// }, [token, dispatch]);
-
   useEffect(() => {
-    // Import bootstrap JS only on client
     if (typeof window !== "undefined") {
       const bootstrap = require("bootstrap/dist/js/bootstrap.bundle.min.js");
 
@@ -88,7 +94,7 @@ const router = useRouter();
              {sampleuser && (
               <div className="dropdown">
                 <a href="#" className="d-flex align-items-center text-decoration-none" data-bs-toggle="dropdown">
-                <Image src={sampleuser?.profile ? sampleuser?.profile?.url : "/assets/images/man.png"} width={40} height={40} alt="profile" className="rounded-circle" />
+                <Image src={sampleuser?.profile ? sampleuser?.profile?.url : "/assets/images/profile.webp"} width={40} height={40} alt="profile" className="rounded-circle" />
               </a>
               <ul className="dropdown-menu dropdown-menu-end shadow-sm">
                 {sampleuser.role === "agent" ? (<li><Link href="/dashboard/agent-dashboard" className="dropdown-item">Agent Dashboard</Link></li>) : sampleuser.role==="individual" ? (<li><Link href="/dashboard/user-dashboard" className="dropdown-item">User Dashboard</Link></li>) : (<li><Link href="/admin/dashboard" className="dropdown-item">Admin Dashboard</Link></li>)}

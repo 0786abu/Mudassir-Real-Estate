@@ -1,4 +1,4 @@
-import { OTPTEMPLATE, ResetPasswordTemplate } from "./Templates";
+import { ForGotTemplate, OTPTEMPLATE, ResetPasswordTemplate } from "./Templates";
 import nodemailer from "nodemailer"
 
 

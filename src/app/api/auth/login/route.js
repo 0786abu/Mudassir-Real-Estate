@@ -36,7 +36,7 @@ export async function POST(req) {
       expiresIn: "30d",
     });
     const response = NextResponse.json(
-  { success: true, message: `${role === "individual" ? "User" : role === "agent" ? "Agent" : "Admin"} Login Successfull`, user },
+  { success: true, message: `${role === "individual" ? "User" : role === "agent" ? "Agent" : "Admin"} Login Successfull`, user,token },
   { status: 200 }
 );
 

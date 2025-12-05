@@ -44,7 +44,8 @@ export async function POST(req){
         await SendEmail({email,otpCode,name});
         return NextResponse.json({
             success:true,
-            message:`Otp send to your email, otp expire after 5 minutes`
+            message:`Otp send to your email, otp expire after 5 minutes`,
+            user
         },{status:200})
     } catch (error) {
         return NextResponse.json({
@@ -57,13 +58,6 @@ export async function POST(req){
 // for logout
 export async function GET(){
     try {
-        const user = await isAuthenticated();
-        if(!user){
-            return NextResponse.json({
-            success:false,
-            message:"unAuthorized request please login first"
-        },{status:400})
-        }
         const cookieStore = await cookies();
         cookieStore.set({
             name: "token",
