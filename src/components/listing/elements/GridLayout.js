@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import { Col, Row } from "reactstrap";
 import PropertyBox from "../../elements/propertyBoxs/PropertyBox";
 
-const GridLayout =({properties,favProperties,from}) => {
+const GridLayout =({properties,favourites,from}) => {
    
   return (
     <Fragment>
      {!properties ? (
        <Row className={` column-sm zoom-gallery property-grid list-view`}>
-        {!favProperties || favProperties?.length === 0 ? (
+        {!favourites || favourites?.length === 0 ? (
           <Col xs={12} className="text-center py-5">
             <div className="no-properties d-flex flex-column align-items-center justify-content-center">
               {/* You can replace this with an SVG or image */}
@@ -25,7 +25,7 @@ const GridLayout =({properties,favProperties,from}) => {
             </div>
           </Col>
         ) : (
-          favProperties?.map((data, i) => (
+          favourites?.map((data, i) => (
             <Fragment key={i}>
               <Col xs={12} key={i}>
                 <PropertyBox data={data} from={from} />
