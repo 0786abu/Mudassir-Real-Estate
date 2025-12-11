@@ -30,8 +30,8 @@ export default function FilterSidebar() {
     if (minP && maxP) setPriceRange([Number(minP), Number(maxP)]);
   }, [params]);
   useEffect(() => {
-    const minSS = params.get("minPrice");
-    const maxSS = params.get("maxPrice");
+    const minSS = params.get("minsquareSize");
+    const maxSS = params.get("maxsquareSize");
     if (minSS && maxSS) setSquareRange([Number(minSS), Number(maxSS)]);
   }, [params]);
 
