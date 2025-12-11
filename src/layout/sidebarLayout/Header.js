@@ -22,7 +22,7 @@ const Header = ({ title, totalProperties, favProperties, from }) => {
               Showing{" "}
               <span>{totalProperties ? totalProperties : favProperties?.length}
               </span>{" "}
-              Listings
+              {from==="Favourites" ? "Favourite Properties" : "Listings"}
             </span>
           </div>
 
