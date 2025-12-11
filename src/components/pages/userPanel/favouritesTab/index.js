@@ -34,7 +34,7 @@ const FavoritesTab = () => {
         <div className='property-section'>
           <div className='property-grid-2 ratio_63'>
             <section className='property-section p-0'>
-              <Container>
+              {/* <Container>
                 <div className='property-grid-2 property-grid-slider'>
                   <Header grid={grid} gridBar={true} gridDispatch={gridDispatch} title={"Favorites Listing"} value={value} />
                   <div className={`property-wrapper-grid ${grid.gridStyle ? "list-view" : ""}`}>
@@ -42,7 +42,7 @@ const FavoritesTab = () => {
                   </div>
                   <Pagination toPage={grid.toPage} gridDispatch={gridDispatch} totalPages={grid.totalPages} />
                 </div>
-              </Container>
+              </Container> */}
             </section>
           </div>
         </div>

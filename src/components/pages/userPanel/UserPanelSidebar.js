@@ -128,7 +128,7 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloadin
               </NavLink>
             </NavItem>
               <NavItem>
-                <NavLink className={activeTab === "CreateProperty" ? "active" : ""} onClick={() => setActiveTab("Listing")}>
+                <NavLink className={activeTab === "Listing" ? "active" : ""} onClick={() => setActiveTab("Listing")}>
                   My Properties
                 </NavLink>
               </NavItem>
