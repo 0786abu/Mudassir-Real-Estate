@@ -53,6 +53,15 @@
     }
   }
 }
+.trash-icon {
+  color: black; /* default color */
+  transition: color 0.3s;
+}
+
+.trash-icon:hover {
+  color: red;
+  cursor: pointer; /* optional, pointer on hover */
+}
 .property-section {
   .property-box-flat {
     .property-box {

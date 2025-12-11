@@ -3,7 +3,7 @@
  * @returns The return statement is used to return a value from a function.
  */
 "use client"
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row } from "reactstrap";
 import ContactInfo from "../../../layout/sidebarLayout/ContactInfo";
 import Exploration from "../../../layout/sidebarLayout/Exploration";
@@ -15,20 +15,23 @@ import Sidebar from "../../../layout/sidebarLayout/Sidebar";
 import RelatedProperty from "./RelatedProperty";
 import SinglePropertySection from "./SingleProperty";
 import SliderBreadcrumbSection from "./SliderBreadcrumb";
+import { useDispatch, useSelector } from "react-redux";
 
 const BodyContent = ({ side, property,relatedProperties }) => {
+  const { favProperties } = useSelector((state) => state.Favourites);
+  const dispatch = useDispatch();
   return (
       <>
-      <SliderBreadcrumbSection property={property} />
+      <SliderBreadcrumbSection property={property} favourites={favProperties} />
       <section className="single-property">
         <Container>
           <Row className=" ratio_65">
             <Sidebar mortgage={true} side={side} singleProperty={true}>
               <ContactInfo owner={property?.createdBy} />
               <Exploration />
-              <Filter sm={12} />
+              {/* <Filter sm={12} /> */}
               <Featured />
-              <RecentlyAdded />
+              {/* <RecentlyAdded /> */}
             </Sidebar>
             <SinglePropertySection property={property} />
           </Row>

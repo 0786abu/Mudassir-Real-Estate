@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Facebook, Instagram, Twitter } from "react-feather";
 import { Container } from "reactstrap";
 import { formatPK } from "@/utils/Formatter";
-
+import { useDispatch, useSelector } from "react-redux";
+import { AddToFavourites } from "@/redux-toolkit/action/favouritesAction";
 //  <a
 //         href={`https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`}
 //         target="_blank"
@@ -20,16 +21,47 @@ import { formatPK } from "@/utils/Formatter";
 //         Share on Twitter
 //       </a>
 
-const TopTitle = ({ property }) => {
+const TopTitle = ({ property, favourites }) => {
+  const {addfavloading} = useSelector((state)=>state.Favourites)
   const [like, setLike] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    const isLiked = favourites?.some(fav => fav.propertyID?._id === property?._id);
+    setLike(isLiked);
+  },[favourites, property?._id])
+  const url = typeof window !== "undefined" && window.location.href;
+
+  const handleAddToFavourite = () => {
+    const favData = {
+      propertyID: {
+        _id: property?._id,
+        title: property?.title,
+        slug: property?.slug,
+        price: property?.price,
+        location: property?.location,
+        images: property?.images,
+        description: property?.description,
+        category: property?.category,
+        type: property?.type,
+        beds: property?.beds,
+        baths: property?.baths,
+        squareFits: property?.squareFits,
+        city: property?.city,
+      }
+    }
+    dispatch(AddToFavourites(favData))
+  }
   return (
     <div className="single-property-section">
       <Container>
         <div className="single-title">
           <div className="left-single">
-            <div className="d-flex">
+            <div className="d-md-flex ">
+              <span className=" d-md-none d-block mb-1">
+                <span className="label label-shadow">For {property?.category}</span>
+              </span>
               <h2 className="mb-0">{property?.title || "Orchard House"}</h2>
-              <span>
+              <span className=" d-md-block d-none">
                 <span className="label label-shadow ms-2">For {property?.category}</span>
               </span>
             </div>
@@ -69,7 +101,7 @@ const TopTitle = ({ property }) => {
                 <div className="share-hover">
                   <ul>
                     <li>
-                      <a href="https://www.facebook.com/sharer/sharer.php?u=https://example.com" className="icon-facebook" target="_blank" rel="noreferrer">
+                      <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`} className="icon-facebook" target="_blank" rel="noreferrer">
                         <Facebook></Facebook>
                       </a>
                     </li>
@@ -86,10 +118,10 @@ const TopTitle = ({ property }) => {
                   </ul>
                 </div>
               </div>
-              <a className="btn btn-dashed btn-pill ms-md-2 ms-1 save-btn" onClick={() => setLike(!like)}>
-                <i className={`${like ? "fas" : "far"} fa-heart`}></i>
-                Save
-              </a>
+              <button disabled={addfavloading} onClick={handleAddToFavourite} className="btn btn-dashed btn-pill ms-md-2 ms-1 save-btn">
+                <i style={{color:like ? "red" : "inherit"}} className={`${like ? "fas" : "far"} fa-heart`}></i>
+                {addfavloading ? "Saving..." : like ? "Saved" : "Save"}
+              </button>
             </div>
           </div>
           <div className="right-single">

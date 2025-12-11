@@ -6,6 +6,7 @@ import inputsReducer from "./reducers/inputsReducer";
 import gridRed from "./reducers/gridReducer";
 import Auth from "./slice/authSlice"
 import Agent from "./slice/agentSlice"
+import Favourites from "./slice/favouritesSlice"
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
 
     // actuall
     Auth,
-    Agent
+    Agent,
+    Favourites
   },
 });

@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, TabContent, TabPane } from "reactstrap";
 import CreatePropertyTab from "./createPropertyTab";

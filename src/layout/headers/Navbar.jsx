@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode"
+import { GetFavouritesData } from "@/redux-toolkit/action/favouritesAction";
 
 export default function Navbar() {
   const {sampleuser,logoutloading} = useSelector((state)=>state.Auth);
@@ -26,6 +27,9 @@ export default function Navbar() {
         }
       }
     }, []);
+    useEffect(()=>{
+      dispatch(GetFavouritesData());
+    },[dispatch])
 
      useEffect(() => {
   const checkTokenExpiry = () => {

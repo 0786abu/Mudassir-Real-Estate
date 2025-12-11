@@ -23,7 +23,7 @@ export async function POST(req){
         const alreadyFavourite = await Favourite.findOne({savedBy: isUser._id, propertyID});
         if(alreadyFavourite){
             return NextResponse.json({
-                message: "Product is already in favourites",
+                message: "property is already in favourites",
                 success: false
             },{status: 400});
         }
@@ -35,7 +35,7 @@ export async function POST(req){
             createdByModel
         });
         return NextResponse.json({
-            message: "Product added to favourites",
+            message: "property added to favourites",
             success: true,
             data: newFavourite
         },{status: 201});
@@ -57,7 +57,7 @@ export async function GET(req){
                 success: false
             },{status: 401});
         };
-        const favourites = await Favourite.find({savedBy:isUser._id}).populate("propertyID","title slug description price category type beds baths images squareFits location").populate("savedBy","name email profile agencyProfile agencyName phone");
+        const favourites = await Favourite.find({savedBy:isUser._id},{propertyID:1}).populate("propertyID","title slug description price category type beds baths images squareFits location city createdAt")
         return NextResponse.json({
             message: "Favourites fetched successfully",
             success: true,
