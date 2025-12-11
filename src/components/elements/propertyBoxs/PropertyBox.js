@@ -49,7 +49,7 @@ const PropertyBox = ({ data,from }) => {
         {from==="Favourites" && (
           <div className="trash-icon" style={{position:"absolute", top:"4px", zIndex:"100", right:"4px",padding:"10px",borderRadius:"50%"}}>
           {(addfavloading && itemID === data._id) ? (
-            <div class="spinner-border h-50 w-50" role="status">
+            <div class="spinner-border" role="status">
   <span class="sr-only">Loading...</span>
 </div>
           ) : (
