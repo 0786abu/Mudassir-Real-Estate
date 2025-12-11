@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Favourite from "@/backend/model/favouriteModel";
 import { isAuthenticated } from "@/backend/utils/middlewere";
 import { NextResponse } from "next/server";
+import Property from "@/backend/model/propertyModel"; 
 
 export async function POST(req){
     try {
