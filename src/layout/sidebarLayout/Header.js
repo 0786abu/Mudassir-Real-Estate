@@ -20,7 +20,7 @@ const Header = ({ title, totalProperties, favProperties, from }) => {
             <h2>{title}</h2>
             <span className="show-result">
               Showing{" "}
-              <span>{totalProperties ? totalProperties : favProperties}
+              <span>{totalProperties ? totalProperties : favProperties?.length}
               </span>{" "}
               Listings
             </span>
