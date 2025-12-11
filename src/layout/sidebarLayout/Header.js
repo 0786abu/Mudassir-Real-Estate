@@ -8,7 +8,7 @@ import { AlignCenter } from "react-feather";
 import AdvancedSearch from "../advancedSearch/AdvancedSearch";
 import useMobileSize from "@/utils/useMobileSize";
 
-const Header = ({ title, totalProperties }) => {
+const Header = ({ title, totalProperties, favProperties, from }) => {
   const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
   const mobileSize = useMobileSize("AdvancedSearch");
    
@@ -20,13 +20,14 @@ const Header = ({ title, totalProperties }) => {
             <h2>{title}</h2>
             <span className="show-result">
               Showing{" "}
-              <span>{totalProperties}
+              <span>{totalProperties ? totalProperties : favProperties}
               </span>{" "}
               Listings
             </span>
           </div>
 
-        <ul className="grid-list-filter d-flex justify-content-end">
+       {!from && (
+         <ul className="grid-list-filter d-flex justify-content-end">
           <li className=" d-flex justify-content-end">
             {(mobileSize) && (
               <div className="filter-bottom-title">
@@ -38,8 +39,11 @@ const Header = ({ title, totalProperties }) => {
           </li>
 
         </ul>
+       )}
       </div>
-      <AdvancedSearch advancedSearchOpen={advancedSearchOpen} setAdvancedSearchOpen={setAdvancedSearchOpen} />
+     {!from && (
+       <AdvancedSearch advancedSearchOpen={advancedSearchOpen} setAdvancedSearchOpen={setAdvancedSearchOpen} />
+     )}
     </div>
   );
 };

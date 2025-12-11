@@ -22,7 +22,7 @@ const FavoritesTab = () => {
              <section className='property-section p-0'>
               <Container>
                 <div className='property-grid-2 property-grid-slider'>
-                  <Header title={"Favorites Listing"} />
+                  <Header title={"Favorites Listing"} favProperties={favProperties} from={"Favourites"} />
                   <div className={`property-wrapper-grid list-view`}>
                     <GridLayout favourites={favProperties} addfavloading={addfavloading} from="Favourites" />
                   </div>
