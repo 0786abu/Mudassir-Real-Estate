@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container } from "reactstrap";
-import Pagination from "@/layout/Pagination";
 import Header from "@/layout/sidebarLayout/Header";
 import GridLayout from "../../../listing/elements/GridLayout";
 import ProfileLoader from "@/components/common/Loader";

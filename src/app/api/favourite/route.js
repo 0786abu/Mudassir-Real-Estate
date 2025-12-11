@@ -57,7 +57,7 @@ export async function GET(req){
                 success: false
             },{status: 401});
         };
-        const favourites = await Favourite.find({savedBy:isUser._id},{propertyID:1}).populate("propertyID","title slug description price category type beds baths images squareFits location city createdAt")
+        const favourites = await Favourite.find({savedBy:isUser._id}).populate("propertyID","title slug description price category type beds baths images squareFits location city createdAt")
         return NextResponse.json({
             message: "Favourites fetched successfully",
             success: true,
