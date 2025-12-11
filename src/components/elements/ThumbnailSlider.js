@@ -17,8 +17,8 @@ const ThumbnailSlider = ({ images, video, videoData }) => {
   return (
     <>
       {Array.isArray(images) ? (
-        <NoSsr>
           <div>
+            <div>
             <Slider className="slider-for slick-video" {...sliderFor} asNavFor={nav2} ref={(slider) => setSlider1(slider)}>
               {images?.map((data, i) => (
                 <div key={i}>
@@ -43,7 +43,7 @@ const ThumbnailSlider = ({ images, video, videoData }) => {
               ))}
             </Slider>
           </div>
-        </NoSsr>
+          </div>
       ) : (
         ""
       )}

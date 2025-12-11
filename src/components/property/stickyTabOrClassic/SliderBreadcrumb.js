@@ -9,22 +9,22 @@ import Img from "@/utils/BackgroundImageRatio";
 import NoSsr from "@/utils/NoSsr";
 import TopTitle from "./TopTitle";
 
-const SliderBreadcrumbSection = () => {
-  const breadcrumbBg = ["/assets/images/property-detail-1.webp","/assets/images/property-detail-2.webp","/assets/images/property-detail-3.webp"];
+const SliderBreadcrumbSection = ({property}) => {
+  // const breadcrumbBg = ["/assets/images/property-detail-1.webp","/assets/images/property-detail-2.webp","/assets/images/property-detail-3.webp"];
   return (
     <section className="ratio_40 breadcrumb-section p-0 single-property-images">
       <NoSsr>
         <Slider className="main-property-slider arrow-image" {...mainPropertySlider}>
-          {breadcrumbBg.map((item, index) => (
+          {property?.images?.map((item, index) => (
             <div key={index}>
               <div>
-                <Img src={item} className="bg-img" alt="" />
+                <Img src={item.url} className="bg-img" alt="" />
               </div>
             </div>
           ))}
         </Slider>
       </NoSsr>
-      <TopTitle />
+      <TopTitle property={property} />
     </section>
   );
 };

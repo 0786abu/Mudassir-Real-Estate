@@ -6,43 +6,31 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import { galleryFor, galleryNav } from "../../../data/slickSlider";
 import Img from "../../../utils/BackgroundImageRatio";
-import NoSsr from "../../../utils/NoSsr";
 
-const GallerySlider = () => {
+const GallerySlider = ({propertyImages}) => {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
-  const HomeImage = [
-    "/assets/images/property/4.jpg",
-    "/assets/images/property/3.jpg",
-    "/assets/images/property/14.jpg",
-    "/assets/images/property/11.jpg",
-    "/assets/images/property/12.jpg",
-    "/assets/images/property/4.jpg",
-    "/assets/images/property/3.jpg",
-    "/assets/images/property/11.jpg",
-    "/assets/images/property/12.jpg",
-  ];
   return (
-    <NoSsr>
+    <div>
       <Slider className="gallery-for" {...galleryFor} asNavFor={nav2} ref={(slider1) => setNav1(slider1)}>
-        {HomeImage.map((data, i) => (
+        {propertyImages?.map((data, i) => (
           <div key={i}>
             <div>
-              <Img src={data} className="bg-img" />
+              <Img src={data?.url} className="bg-img" />
             </div>
           </div>
         ))}
       </Slider>
       <Slider className="gallery-nav p-1" {...galleryNav} asNavFor={nav1} ref={(slider2) => setNav2(slider2)}>
-        {HomeImage.map((data, i) => (
-          <div key={i}>
+          {propertyImages?.map((data, i) => (
+          <div key={i} className="">
             <div>
-              <Img className="img-fluid bg-img" src={data} />
+              <Img className="img-fluid bg-img" src={data?.url} />
             </div>
           </div>
         ))}
       </Slider>
-    </NoSsr>
+    </div>
   );
 };
 

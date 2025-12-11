@@ -11,29 +11,31 @@
 import React from "react";
 import { MapPin, PhoneCall } from "react-feather";
 
-const ContactInfo = () => {
+const ContactInfo = ({owner}) => {
   return (
     <div className='advance-card'>
-      <h6>Contact Info</h6>
+      <h6>Owner Info</h6>
       <div className='category-property'>
         <div className='agent-info'>
           <div className='media'>
-            <img src='/assets/images/testimonial/3.png' className='img-50' alt='' />
+            <img src={owner?.agencyProfile?.url || owner?.profile?.url || "/assets/images/profile.webp"} className='img-50' style={{borderRadius:"50%",objectFit:"cover"}} alt='' />
             <div className='media-body ms-2'>
-              <h6>Jonathan Scott</h6>
-              <p>Contact@gmail.com</p>
+              <h6>{owner?.name || owner?.agencyName}</h6>
+              <p>{owner?.email}</p>
             </div>
           </div>
         </div>
         <ul>
           <li>
             <MapPin className='me-2' />
-            A-32, Albany, Newyork.
+            {owner?.address}
           </li>
-          <li>
+          {owner?.phone && (
+            <li>
             <PhoneCall className='me-2' />
-            (+066) 518 - 457 - 5181
+            {owner?.phone}
           </li>
+          )}
         </ul>
       </div>
     </div>

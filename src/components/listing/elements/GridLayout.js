@@ -1,33 +1,40 @@
-/**
- * It takes in a list of properties and returns a list of property boxes
- * @returns A div with a className of property-2 row column-sm zoom-gallery property-label
- * property-grid.
- */
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { Col, Row } from "reactstrap";
-import useFilterProducts from "../../../utils/useFilterProducts";
 import PropertyBox from "../../elements/propertyBoxs/PropertyBox";
 
-const GridLayout = ({ value, grid, relativeSlider, video, infiniteScroll, myList, gridDispatch }) => {
-  let cardToShow = 6;
-  const showProduct = useFilterProducts({ value, myList });
-
-  useEffect(() => {
-    gridDispatch({ type: "totalPages", payload: Math.ceil(showProduct?.length / cardToShow) });
-    gridDispatch({ type: "productCount", payload: showProduct?.length });
-  }, [showProduct, cardToShow]);
-
+const GridLayout = async({properties}) => {
+   
   return (
     <Fragment>
-      <Row className={`property-2 column-sm zoom-gallery property-label property-grid list-view`}>
-        {showProduct &&
-          showProduct.slice(!infiniteScroll && cardToShow * grid.toPage - cardToShow, cardToShow * grid.toPage).map((data, i) => (
+      <Row className={` column-sm zoom-gallery property-grid list-view`}>
+        {!properties || properties?.length === 0 ? (
+          <Col xs={12} className="text-center py-5">
+            <div className="no-properties d-flex flex-column align-items-center justify-content-center">
+              {/* You can replace this with an SVG or image */}
+              <div
+                style={{
+                  fontSize: "80px",
+                  color: "#ff8c41",
+                  marginBottom: "20px",
+                }}
+              >
+                🏠
+              </div>
+              <h4>No Properties Found</h4>
+              <p className="text-muted">
+                Try adjusting your search or filters to find what you're looking for.
+              </p>
+            </div>
+          </Col>
+        ) : (
+          properties?.map((data, i) => (
             <Fragment key={i}>
               <Col className={`list-view wow fadeInUp `} key={i}>
-                <PropertyBox data={data} relativeSlider={relativeSlider} video={video} />
+                <PropertyBox data={data} />
               </Col>
             </Fragment>
-          ))}
+          ))
+        )}
       </Row>
     </Fragment>
   );

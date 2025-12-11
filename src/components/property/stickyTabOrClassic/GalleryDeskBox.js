@@ -8,13 +8,13 @@
 import React from "react";
 import GallerySlider from "./GallerySlider";
 
-const GalleryDeskBox = () => {
+const GalleryDeskBox = ({propertyImages}) => {
   return (
     <div className='desc-box' id='gallery'>
       <div className='page-section ratio3_2'>
         <h4 className='content-title'>gallery</h4>
         <div className='single-gallery'>
-          <GallerySlider />
+          <GallerySlider propertyImages={propertyImages} />
         </div>
       </div>
     </div>

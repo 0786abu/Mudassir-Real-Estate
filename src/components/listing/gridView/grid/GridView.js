@@ -14,22 +14,13 @@ import RecentlyAdded from "../../../../layout/sidebarLayout/RecentlyAdded";
 import Sidebar from "../../../../layout/sidebarLayout/Sidebar";
 import { getData } from "../../../../utils/getData";
 import GridLayout from "../../elements/GridLayout";
-import { gridReducer, initialGrid } from "./gridReducer";
 
-const GridView = ({ side, size, gridType, listSize, mapModal, mapView, relativeSlider, gridBar, video, tabHeader, setMapModal, children, AdvancedSearchShow, infiniteScroll, myList }) => {
+const GridView = ({ side }) => {
   const [value, setValue] = useState();
-  const [grid, gridDispatch] = useReducer(gridReducer, initialGrid);
-  useEffect(() => {
-    gridDispatch({ type: "gridSize", payload: size });
-    gridDispatch({ type: "gridStyle", payload: gridType });
-  }, []);
 
   useEffect(() => {
     getData(`/api/property`)
-      .then((res) => {
-        relativeSlider
-          ? setValue(res.data?.LatestPropertyListingInEnterprise)
-          : setValue(
+      .then((res) => {setValue(
               Object.keys(res.data)
                 .map((key) => [res.data[key]])
                 .flat(2)
@@ -37,9 +28,9 @@ const GridView = ({ side, size, gridType, listSize, mapModal, mapView, relativeS
             );
       })
       .catch((error) => console.error("Error", error));
-  }, [relativeSlider]);
+  }, []);
   return (
-    <section className={`property-section  ${mapView && mapModal === "view" ? "section-sm" : ""}  ${relativeSlider ? "property-list-thumbnail" : ""}`}>
+    <section className={`property-section  `}>
       <Container>
         <Row className=' ratio_63'>
           {side && (
@@ -50,19 +41,12 @@ const GridView = ({ side, size, gridType, listSize, mapModal, mapView, relativeS
             </Sidebar>
           )}
 
-          <Col xl={side ? "9" : ""} lg={side ? "8" : ""} className={`${relativeSlider ? "property-grid-3" : "property-grid-2"}  property-grid-slider`}>
-            <Header grid={grid} gridDispatch={gridDispatch} title={"Properties Listing"} mapModal={mapModal} gridBar={gridBar} tabHeader={tabHeader} AdvancedSearchShow={AdvancedSearchShow} value={value} setMapModal={setMapModal} />
-            {children}
-            <div className={`property-wrapper-grid ${grid.gridStyle ? "list-view" : ""}`}>
-              <GridLayout grid={grid} myList={myList} value={value} listSize={listSize} relativeSlider={relativeSlider} video={video} gridDispatch={gridDispatch} infiniteScroll={infiniteScroll} />
+          <Col xl={side ? "9" : ""} lg={side ? "8" : ""} className={`property-grid-2 property-grid-slider`}>
+            <Header title={"Properties Listing"} value={value} />
+            <div className={`property-wrapper-grid list-view`}>
+              <GridLayout value={value} />
             </div>
-            {infiniteScroll ? (
-              <a className='btn btn-solid btn-flat load-more' onClick={() => gridDispatch({ type: "toPage", payload: grid.toPage + 0.5 })}>
-                load more
-              </a>
-            ) : (
-              <Pagination toPage={grid.toPage} gridDispatch={gridDispatch} totalPages={grid.totalPages} />
-            )}
+              <Pagination />
           </Col>
         </Row>
       </Container>

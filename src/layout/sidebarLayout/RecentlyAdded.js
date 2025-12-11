@@ -3,6 +3,7 @@
  * the data in the UI
  * @returns An array of objects.
  */
+"use client"
 import React, { useEffect, useState } from "react";
 import { getData } from "../../utils/getData";
 

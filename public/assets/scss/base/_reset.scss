@@ -590,3 +590,78 @@ a {
 .Toastify{
   padding: 0px;
 }
+
+.aboutProperty h1 { font-size: 2.2rem; }
+.aboutProperty h2 { font-size: 1.9rem; }
+.aboutProperty h3 { font-size: 1.6rem; }
+.aboutProperty h4 { font-size: 1.3rem; }
+.aboutProperty h5 { font-size: 1.1rem; }
+.aboutProperty h6 { font-size: 1rem; }
+
+.aboutProperty p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.aboutProperty ul,
+.aboutProperty ol {
+  margin: 1rem 0 1rem 1.5rem;
+}
+
+.aboutProperty li {
+  margin-bottom: 0.5rem;
+}
+
+.aboutProperty img {
+  max-width: 100%;
+  border-radius: .5rem;
+  margin: 1rem 0;
+}
+
+.aboutProperty blockquote {
+  border-left: 4px solid #0d6efd;
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+
+.aboutProperty code {
+  background: #f1f1f1;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: .95rem;
+}
+
+.aboutProperty pre {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: .5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.aboutProperty table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+.aboutProperty th,
+.aboutProperty td {
+  border: 1px solid #ddd;
+  padding: .75rem;
+}
+
+.aboutProperty hr {
+  margin: 1.5rem 0;
+  border-top: 1px solid #ddd;
+}
+.aboutProperty ul {
+  list-style-type: disc !important;  /* solid bullet */
+  list-style-position: outside !important; /* bullet outside text */
+}
+
+.aboutProperty ol {
+  list-style-type: decimal !important; /* numbered list */
+  list-style-position: outside !important; /* number outside text */
+}

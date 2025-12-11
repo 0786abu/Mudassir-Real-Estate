@@ -1,69 +1,282 @@
-/**
- * It takes in a label, lg, and sm, and returns a row with a dropdown input field, a range input field,
- * and a button
- * @returns an object with the key of the property and the value of the property.
- */
+"use client";
 
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { Button, Col, Row } from "reactstrap";
-import { getData } from "@/utils/getData";
-import { DropdownInputFields } from "../../../elements/DropdownInputFields";
-import RangeInputFields from "../../../elements/RangeInputFields";
+import { formatPK } from "@/utils/Formatter";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { Range, getTrackBackground } from "react-range";
 
-const InputForm = ({ label, lg, sm, lastSm }) => {
-  const [filterValues, setFilterValues] = useState({});
+export default function FilterSidebar() {
+  const router = useRouter();
+  const params = useSearchParams();
 
-  const [value, setValue] = useState();
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("");
+  const [city, setCity] = useState("");
+  const [location, setLocation] = useState("");
 
+  // Dynamic min/max for slider
+  const MIN = 0;
+  const MAX = 100000000;
+  const MINFits = 100;
+  const MAXFits = 40000;
+
+  const [priceRange, setPriceRange] = useState([MIN, MAX]);
+  const [squareRange, setSquareRange] = useState([MINFits, MAXFits]);
+
+  // Sync slider with URL params on initial load
   useEffect(() => {
-    getData(`/api/property`)
-      .then((res) => {
-        setValue(
-          res.data &&
-            res.data !== undefined &&
-            Object.keys(res.data)
-              .map((key) => [res.data[key]])
-              .flat(2)
-              .filter((arrData) => Array.isArray(arrData.img))
-        );
-      })
-      .catch((error) => console.error("Error", error));
-  }, []);
+    const minP = params.get("minPrice");
+    const maxP = params.get("maxPrice");
+    if (minP && maxP) setPriceRange([Number(minP), Number(maxP)]);
+  }, [params]);
+  useEffect(() => {
+    const minSS = params.get("minPrice");
+    const maxSS = params.get("maxPrice");
+    if (minSS && maxSS) setSquareRange([Number(minSS), Number(maxSS)]);
+  }, [params]);
 
-  let minPrice =
-    value?.length !== 0 &&
-    value?.reduce(function (res, obj) {
-      return Math.round(obj?.price) < Math.round(res?.price) ? obj : res;
-    });
-  let maxPrice =
-    value?.length !== 0 &&
-    value?.reduce(function (res, obj) {
-      return Math.round(obj?.price) > Math.round(res?.price) ? obj : res;
-    });
-  let minSqft =
-    value?.length !== 0 &&
-    value?.reduce(function (res, obj) {
-      return Math.round(obj?.sqft) < Math.round(res?.sqft) ? obj : res;
-    });
-  let maxSqft =
-    value?.length !== 0 &&
-    value?.reduce(function (res, obj) {
-      return Math.round(obj?.sqft) > Math.round(res?.sqft) ? obj : res;
-    });
+  const updateFilter = (key, value) => {
+    const newParams = new URLSearchParams(params.toString());
+
+    if (key === "category") setCategory(value);
+    if (key === "type") setType(value);
+    if (key === "city") setCity(value);
+    if (key === "location") setLocation(value);
+
+    // Price Range update
+    if (key === "priceRange") {
+      setPriceRange(value);
+      newParams.set("minPrice", value[0]);
+      newParams.set("maxPrice", value[1]);
+    }
+    if (key === "squareFits") {
+      setSquareRange(value);
+      newParams.set("minsquareSize", value[0]);
+      newParams.set("maxsquareSize", value[1]);
+    }
+
+    if (key !== "priceRange" && key !== "squareFits") {
+  if (value) newParams.set(key, value);
+  else newParams.delete(key);
+}
+
+    router.push(`/properties?${newParams.toString()}`);
+  };
+
+  const resetFilters = () => {
+    setCategory("");
+    setType("");
+    setCity("");
+    setLocation("");
+    setPriceRange([MIN, MAX]);
+    setSquareRange([MINFits, MAXFits]);
+    router.push("/properties");
+  };
 
   return (
-    <Row className='gx-3'>
-      <DropdownInputFields filterValues={filterValues} setFilterValues={setFilterValues} label={label} start={0} end={6} lg={lg} sm={sm} lastSm={lastSm} />
-      <RangeInputFields label='Price' name='price' filterValues={filterValues} setFilterValues={setFilterValues} min={Math.round(minPrice?.price)} max={Math.round(maxPrice?.price)} lg={lg} sm={sm} />
-      <RangeInputFields label='Area' name='area' filterValues={filterValues} setFilterValues={setFilterValues} min={Math.round(minSqft?.sqft)} max={Math.round(maxSqft?.sqft)} lg={lg} sm={sm} />
-      <Col lg={lg || 12}>
-        <Link href='/listing/list-view/listing/left-sidebar' className='btn btn-gradient mt-3'>
-          Search
-        </Link>
-      </Col>
-    </Row>
-  );
-};
+    <div className="p-1">
+      <h5 className="mb-3 border-bottom pb-2">Filter</h5>
 
-export default InputForm;
+      {/* Property Status */}
+      <div className="mb-3">
+        {/* <label className="form-label">Property Status</label> */}
+        <select
+          style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
+          value={category}
+          onChange={(e) => updateFilter("category", e.target.value)}
+        >
+          <option value="">Property category</option>
+          <option value="Sale">For Sale</option>
+          <option value="Rent">For Rent</option>
+        </select>
+      </div>
+
+      {/* Property Type */}
+      <div className="mb-3">
+        {/* <label className="form-label">Property Type</label> */}
+        <select
+          style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
+          value={type}
+          onChange={(e) => updateFilter("type", e.target.value)}
+        >
+          <option value="">Property Type</option>
+          <option value="House">House</option>
+          <option value="Plot">Plot</option>
+          <option value="Flat">Flat</option>
+          <option value="Apartment">Apartment</option>
+        </select>
+      </div>
+
+      {/* City */}
+      <div className="mb-3">
+        {/* <label className="form-label">City</label> */}
+        <select
+          className=""
+          style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
+          value={city}
+          onChange={(e) => updateFilter("city", e.target.value)}
+        >
+          <option value="">Select City</option>
+          <option value="Lahore">Lahore</option>
+          <option value="Karachi">Karachi</option>
+          <option value="Islamabad">Islamabad</option>
+        </select>
+      </div>
+
+      {/* Location */}
+      <div className="mb-3">
+        {/* <label className="form-label">Location</label> */}
+        <select
+          style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
+          value={location}
+          onChange={(e) => updateFilter("location", e.target.value)}
+        >
+          <option value="">Select Location</option>
+          <option value="DHA">DHA</option>
+          <option value="Bahria Town">Bahria Town</option>
+          <option value="Gulberg">Gulberg</option>
+        </select>
+      </div>
+
+      {/* Dual Price Slider */}
+      <div className="mb-4">
+        <label className="form-label">
+          Price: RS. {formatPK(priceRange[0])} - Rs. {formatPK(priceRange[1])}
+        </label>
+        <Range
+          step={100}
+          min={MIN}
+          max={MAX}
+          values={priceRange}
+          onChange={(values) => setPriceRange(values)} // live update while dragging
+          onFinalChange={(values) => updateFilter("priceRange", values)} // apply filter
+          renderTrack={({ props, children }) => {
+            const { key, ...restProps } = props;
+            return (
+            <div
+            key={key}
+              {...restProps}
+              style={{
+                ...props.style,
+                height: "6px",
+                width: "100%",
+                borderRadius: "4px",
+                background: getTrackBackground({
+                  values: priceRange,
+                  colors: ["#ccc", "#ff8c41", "#ccc"],
+                  min: MIN,
+                  max: MAX,
+                }),
+                alignSelf: "center",
+              }}
+            >
+              {children}
+            </div>
+          )
+          }}
+          renderThumb={({ props }) => {
+            const { key, ...restProps } = props;
+            return (
+            <div
+              key={key}
+              {...restProps}
+              style={{
+                position:"absolute",
+                height: "20px",
+                width: "20px",
+                borderRadius: "50%",
+                backgroundColor: "#ff8c41",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  height: "6px",
+                  width: "6px",
+                  borderRadius: "50%",
+                  backgroundColor: "white",
+                }}
+              />
+            </div>
+          )
+          }}
+        />
+      </div>
+      <div className="mb-4">
+        <label className="form-label">
+          sqft: {squareRange[0]} - sqft. {squareRange[1]}
+        </label>
+        <Range
+          step={100}
+          min={MINFits}
+          max={MAXFits}
+          values={squareRange}
+          onChange={(values) => setSquareRange(values)} // live update while dragging
+          onFinalChange={(values) => updateFilter("squareFits", values)} // apply filter
+          renderTrack={({ props, children }) => {
+            const { key, ...restProps } = props;
+            return (
+            <div
+            key={key}
+              {...restProps}
+              style={{
+                ...props.style,
+                height: "6px",
+                width: "100%",
+                borderRadius: "4px",
+                background: getTrackBackground({
+                  values: squareRange,
+                  colors: ["#ccc", "#ff8c41", "#ccc"],
+                  min: MINFits,
+                  max: MAXFits,
+                }),
+                alignSelf: "center",
+              }}
+            >
+              {children}
+            </div>
+          )
+          }}
+          renderThumb={({ props }) => {
+            const { key, ...restProps } = props;
+            return (
+            <div
+              key={key}
+              {...restProps}
+              style={{
+                position:"absolute",
+                height: "20px",
+                width: "20px",
+                borderRadius: "50%",
+                backgroundColor: "#ff8c41",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  height: "6px",
+                  width: "6px",
+                  borderRadius: "50%",
+                  backgroundColor: "white",
+                }}
+              />
+            </div>
+          )
+          }}
+        />
+      </div>
+
+     <button
+        className="btn w-100 py-2 rounded-3 fw-semibold shadow-sm"
+        style={{background:"#FF8C41",color:"white"}}
+        onClick={resetFilters}
+      >
+        Reset Filters
+      </button>
+    </div>
+  );
+}

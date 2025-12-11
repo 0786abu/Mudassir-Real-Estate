@@ -916,7 +916,7 @@ export const singlePropertySlider = {
 
 export const mainPropertySlider = {
   dots: false,
-  infinite: true,
+  infinite: false,
   speed: 500,
   arrows: true,
   slidesToShow: 1,

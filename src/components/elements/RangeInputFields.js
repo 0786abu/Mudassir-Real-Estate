@@ -5,7 +5,6 @@ import { Col, FormGroup, Label } from "reactstrap";
 import { setPrice, setArea } from "@/redux-toolkit/reducers/inputsReducer";  
 
 const RangeInputFields = ({ label, min, max, sm, lg }) => {
-  const { symbol, currencyValue } = useSelector((state) => state.currencyReducer);
   const { price, area } = useSelector((state) => state.inputsReducer);
   const dispatch = useDispatch();
 
@@ -17,21 +16,15 @@ const RangeInputFields = ({ label, min, max, sm, lg }) => {
       <FormGroup>
         <div className='price-range'>
           <Label>
-            {label} : {label === "Price" && `${symbol}`} {(label === "Area" ? area[0] : price[0] * currencyValue).toFixed(2)} - {label === "Price" && `${symbol}`} {(label === "Area" ? area[1] : price[1] * currencyValue).toFixed(2)} {label === "Area" && "sq ft"}
+            {label}
           </Label>
           <div className='theme-range-3' id={label === "Price" ? "slider-1" : "slider-2"}>
             <Range
-              values={label === "Price" ? price : area}
+              values={[0,100000000]}
               step={STEP}
-              min={min || 1000}
-              max={max || 10000}
-              onChange={(values) => {
-                if (label === "Price") {
-                  dispatch(setPrice(values));
-                } else if (label === "Area") {
-                  dispatch(setArea(values));
-                }
-              }}
+              min={min}
+              max={max}
+              onChange={(vals) => dispatch(setPrice(vals[0]))}
               renderTrack={({ props, children }) => (
                 <div
                   {...props}
@@ -41,10 +34,10 @@ const RangeInputFields = ({ label, min, max, sm, lg }) => {
                     width: "100%",
                     borderRadius: "4px",
                     background: getTrackBackground({
-                      values: label === "Price" ? price : area,
+                      values: [0,100000000],
                       colors: ["#ccc", "var(--theme-default2)", "#ccc"],
-                      min: min || 1000,
-                      max: max || 10000,
+                      min: min,
+                      max: max,
                     }),
                     alignSelf: "center",
                   }}

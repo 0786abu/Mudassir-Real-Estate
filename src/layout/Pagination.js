@@ -1,68 +1,71 @@
-/**
- * It takes in the current page number, the total number of pages, and the function to set the current
- * page number, and returns a list of page numbers to display in the pagination
- * @returns A pagination component that is being used to navigate through the pages of the application.
- */
+
+
 "use client";
-import React from "react";
-import UsePagination from "../utils/UsePagination";
 
-const Pagination = ({ toPage, gridDispatch, totalPages }) => {
-  const pages = UsePagination({ toPage: toPage, totalPages: totalPages });
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
-  if (1 !== totalPages && totalPages !== 0) {
-    return (
-      <nav className="theme-pagination">
-        <ul className="pagination">
-          <li className="page-item">
-            <div className="page-link" aria-label="Previous" onClick={() => gridDispatch({ type: "toPage", payload: 1 })}>
-              <span aria-hidden="true">«</span>
-              <span className="sr-only">Previous</span>
-            </div>
-          </li>
-          <li className="page-item">
-            <div
-              className="page-link"
-              aria-label="Previous"
-              onClick={() => {
-                gridDispatch({ type: "toPage", payload: toPage > 1 ? toPage - 1 : toPage });
-              }}>
-              <span aria-hidden="true">{"<"}</span>
-              <span className="sr-only">Previous</span>
-            </div>
-          </li>
-          {pages.map((data, i) => (
-            <li
-              className={`page-item ${data === toPage ? "active" : ""}`}
-              key={i}
-              onClick={() => {
-                gridDispatch({ type: "toPage", payload: data });
-              }}>
-              <div className="page-link">{data}</div>
-            </li>
-          ))}
+const Pagination = ({ totalPages, currentPage, searchParams }) => {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
-          <li className="page-item">
-            <div
-              className="page-link"
-              aria-label="Next"
-              onClick={() => {
-                gridDispatch({ type: "toPage", payload: toPage < totalPages ? toPage + 1 : toPage });
-              }}>
-              <span aria-hidden="true">{">"}</span>
-              <span className="sr-only">Next</span>
-            </div>
+  const goToPage = (page) => {
+    if (page < 1 || page > totalPages) return;
+
+    setLoading(true);
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("page", page);
+    router.push(`/properties?${newParams.toString()}`);
+    setLoading(false);
+  };
+
+  // Generate pages array
+  const getPages = () => {
+    const maxVisible = 4;
+    let start = Math.max(1, currentPage - 1); // sliding window
+    let end = Math.min(totalPages, start + maxVisible - 1);
+
+    // Adjust start if less than maxVisible pages at end
+    if (end - start + 1 < maxVisible) {
+      start = Math.max(1, end - maxVisible + 1);
+    }
+
+    const pages = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
+
+  const pages = getPages();
+
+  if (totalPages <= 1) return null;
+
+  return (
+    <nav className="theme-pagination">
+      <ul className="pagination">
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+          <div className="page-link" onClick={() => goToPage(1)}>«</div>
+        </li>
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+          <div className="page-link" onClick={() => goToPage(currentPage - 1)}>{"<"}</div>
+        </li>
+
+        {pages.map((p,index) => (
+          <li key={index} className={`page-item ${p === currentPage ? "active" : ""}`}>
+            <div className="page-link" onClick={() => goToPage(p)}>{loading && p===currentPage ? "...": p}</div>
           </li>
-          <li className="page-item">
-            <div className="page-link" aria-label="Next" onClick={() => gridDispatch({ type: "toPage", payload: totalPages })}>
-              <span aria-hidden="true">»</span>
-              <span className="sr-only">Next</span>
-            </div>
-          </li>
-        </ul>
-      </nav>
-    );
-  }
+        ))}
+
+        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+          <div className="page-link" onClick={() => goToPage(currentPage + 1)}>{">"}</div>
+        </li>
+        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+          <div className="page-link" onClick={() => goToPage(totalPages)}>»</div>
+        </li>
+      </ul>
+    </nav>
+  );
 };
 
 export default Pagination;

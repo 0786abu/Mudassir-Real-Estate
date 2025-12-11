@@ -68,6 +68,10 @@ const userSchema = new Schema({
   },
   DOB:{
     type:Date
+  },
+  credits:{
+    type:Number,
+    default:1
   }
 },{ timestamps: true });
 const User = mongoose.models.User || mongoose.model("User", userSchema);

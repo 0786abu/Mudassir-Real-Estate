@@ -85,7 +85,11 @@ numOfProperties:{
 },
 whatsappAPI:{
     type:String
-}
+},
+  credits:{
+    type:Number,
+    default:1
+  }
 },{ timestamps: true });
 const Agent = mongoose.models.Agent || mongoose.model("Agent", agentSchema);
 

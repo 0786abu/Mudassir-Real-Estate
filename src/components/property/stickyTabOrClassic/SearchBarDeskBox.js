@@ -11,7 +11,7 @@ import React from "react";
 import { Container } from "reactstrap";
 import AboutDeskBox from "./AboutDeskBox";
 
-const SearchBarDeskBox = ({ fix }) => {
+const SearchBarDeskBox = ({ fix,aboutProperty,floorPlanImage, video }) => {
   return (
     <div className="desc-box" id="navigation">
       <div className={`menu-top ${fix ? "sticky" : ""}`}>
@@ -24,34 +24,38 @@ const SearchBarDeskBox = ({ fix }) => {
             </li>
 
             <li>
-              <a className="" href="#feature">
-                feature
+              <a className="" href="#amenities">
+                amenities
               </a>
             </li>
-            <li>
+            {video && (
+              <li>
               <a className="" href="#video">
                 video
               </a>
             </li>
+            )}
             <li>
               <a className="" href="#details">
                 details
               </a>
             </li>
-            <li>
+            {floorPlanImage && (
+              <li>
               <a className="" href="#floor_plan">
                 Floor plan
               </a>
             </li>
-            <li>
+            )}
+            {/* <li>
               <a className="" href="#location-map">
                 Location
               </a>
-            </li>
+            </li> */}
           </ul>
         </Container>
       </div>
-      <AboutDeskBox />
+      <AboutDeskBox aboutProperty={aboutProperty} />
     </div>
   );
 };

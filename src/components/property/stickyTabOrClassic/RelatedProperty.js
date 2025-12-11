@@ -3,21 +3,29 @@
  * values transformed by the function you pass in
  * @returns The data is being returned as an array of objects.
  */
-import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
-import { getData } from "../../../utils/getData";
 import PropertyBox from "../../elements/propertyBoxs/PropertyBox";
 
-const RelatedProperty = () => {
-  const [value, setValue] = useState();
+const RelatedProperty = ({relatedProperties}) => {
+    <Col xs={12} className="text-center py-5">
+              <div className="no-properties d-flex flex-column align-items-center justify-content-center">
+                {/* You can replace this with an SVG or image */}
+                <div
+                  style={{
+                    fontSize: "80px",
+                    color: "#ff8c41",
+                    marginBottom: "20px",
+                  }}
+                >
+                  🏠
+                </div>
+                <h4>No Properties Found</h4>
+                <p className="text-muted">
+                  Try adjusting your search or filters to find what you're looking for.
+                </p>
+              </div>
+            </Col>
 
-  useEffect(() => {
-    getData(`/api/property`)
-      .then((res) => {
-        setValue(res.data?.LatestPropertyData);
-      })
-      .catch((error) => console.error("Error", error));
-  }, []);
   return (
     <section className="property-section pt-0">
       <Container>
@@ -27,8 +35,23 @@ const RelatedProperty = () => {
         <Row className=" ratio_55">
           <Col sm="12" className=" property-grid-3">
             <Row className="property-2  column-sm zoom-gallery property-label property-grid">
-              {value &&
-                value.slice(0, 3).map((data, i) => (
+              {relatedProperties?.length===0 ? (
+                 <Col xs={12} className="text-center py-5">
+              <div className="no-properties d-flex flex-column align-items-center justify-content-center">
+                {/* You can replace this with an SVG or image */}
+                <div
+                  style={{
+                    fontSize: "80px",
+                    color: "#ff8c41",
+                    marginBottom: "20px",
+                  }}
+                >
+                  🏠
+                </div>
+                <h4>No Related Properties Found</h4>
+              </div>
+            </Col>
+              ) : relatedProperties?.map((data, i) => (
                   <Col xl="4" md="6" className="wow fadeInUp" key={i}>
                     <PropertyBox data={data} />
                   </Col>

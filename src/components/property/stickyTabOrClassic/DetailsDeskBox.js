@@ -1,67 +1,68 @@
+import { formatPK } from "@/utils/Formatter";
 import React from "react";
 import { Col, Row } from "reactstrap";
 
-const DetailsDeskBox = () => {
+const DetailsDeskBox = ({property}) => {
   return (
     <div className='desc-box' id='details'>
       <div className='page-section'>
         <h4 className='content-title'>
           Property Details
-          <a
-            href='https://www.google.com/maps/place/New+York,+NY,+USA/@40.697488,-73.979681,8z/data=!4m5!3m4!1s0x89c24fa5d33f083b:0xc80b8f06e177fe62!8m2!3d40.7127753!4d-74.0059728?hl=en'
-            target='_blank'
-            rel='noreferrer'>
-            <i className='fa fa-map-marker-alt'></i> view on map
-          </a>
         </h4>
         <Row>
           <Col md='6' xl='4'>
             <ul className='property-list-details'>
               <li>
-                <span>Property Type :</span> House
+                <span>Property Type :</span> {property?.type}
               </li>
               <li>
-                <span>Property ID :</span> ZOEA245
+                <span>Property ID :</span> {property?._id.slice(0,8)}
               </li>
               <li>
-                <span>Property status :</span> For sale
+                <span>Property status :</span> For {property?.category}
               </li>
               <li>
-                <span>Operating Since :</span> 2008
-              </li>
-            </ul>
-          </Col>
-          <Col md='6' xl='4'>
-            <ul className='property-list-details'>
-              <li>
-                <span>Price :</span> $ 1,50,000
-              </li>
-              <li>
-                <span>Property Size :</span> 1730 sq / ft
-              </li>
-              <li>
-                <span>Balcony :</span> 2
+                <span>Operating Since :</span> {property?.operatingSince}
               </li>
             </ul>
           </Col>
           <Col md='6' xl='4'>
             <ul className='property-list-details'>
               <li>
-                <span>City :</span> Newyork
+                <span>Price :</span> Rs. {formatPK(property?.price)}
               </li>
               <li>
-                <span>Bedrooms :</span> 8
+                <span>Property Size :</span> {property?.squareFits} sq / ft
+              </li>
+             {property?.furnished && (
+               <li>
+                <span>Furnished :</span> Fully Furnished
+              </li>
+             )}
+              {property?.balcony && (
+                <li>
+                <span>Balcony :</span> {property?.balcony}
+              </li>
+              )}
+            </ul>
+          </Col>
+          <Col md='6' xl='4'>
+            <ul className='property-list-details'>
+              <li>
+                <span>City :</span> {property?.city}
               </li>
               <li>
-                <span>Bathrooms :</span> 4
+                <span>Bedrooms :</span> {property?.beds}
+              </li>
+              <li>
+                <span>Bathrooms :</span> {property?.baths}
+              </li>
+              <li>
+                <span>Totalrooms :</span> {property?.rooms}
               </li>
             </ul>
           </Col>
         </Row>
-        <h4 className='content-title mt-4'>Attachments</h4>
-        <a className='attach-file'>
-          <i className='far fa-file-pdf'></i>Demo Property Document{" "}
-        </a>
       </div>
     </div>
   );
