@@ -13,8 +13,6 @@ export default function FilterSidebar() {
   const searchedType = params.get("type")
   const searchedCity = params.get("city")
   const searchedMinPrice = params.get("minPrice")
-  // const searchedCategory = params.get("category")
-  console.log(searchedMinPrice)
 
   const [category, setCategory] = useState(searchedCategory ? searchedCategory : "");
   const [type, setType] = useState(searchedType ? searchedType : "");
@@ -27,14 +25,14 @@ export default function FilterSidebar() {
   const MINFits = 100;
   const MAXFits = 40000;
 
-  const [priceRange, setPriceRange] = useState([MIN, MAX]);
+  const [priceRange, setPriceRange] = useState([searchedMinPrice ? searchedMinPrice :MIN, MAX]);
   const [squareRange, setSquareRange] = useState([MINFits, MAXFits]);
 
   // Sync slider with URL params on initial load
   useEffect(() => {
     const minP = params.get("minPrice");
     const maxP = params.get("maxPrice");
-    if (minP && maxP) setPriceRange([Number(minP), Number(maxP)]);
+    if (minP !== null && maxP !== null) setPriceRange([Number(minP), Number(maxP)]);
   }, [params]);
   useEffect(() => {
     const minSS = params.get("minsquareSize");
@@ -172,7 +170,7 @@ export default function FilterSidebar() {
           step={100}
           min={MIN}
           max={MAX}
-          values={searchedMinPrice ? priceRange[searchedMinPrice,MAX] : priceRange}
+          values={priceRange}
           onChange={(values) => setPriceRange(values)} // live update while dragging
           onFinalChange={(values) => updateFilter("priceRange", values)} // apply filter
           renderTrack={({ props, children }) => {
