@@ -1,171 +1,340 @@
-import { Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Label, Row } from "reactstrap";
-import * as Yup from "yup";
 import NoSsr from "@/utils/NoSsr";
-import { ReactstrapInput, ReactstrapSelect } from "@/utils/ReactstrapInputsValidation";
 import DropZones from "@/components/common/Dropzones";
+import { areaSizes, citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
+import { Plus, X } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
+import { CreateProperty } from "@/redux-toolkit/action/propertyAction";
 
 const CreatePropertyTab = () => {
- 
+  const {createpropertyloading} = useSelector((state)=>state.Property)
+ const [keywords, setKeywords] = useState([])
+  const [keywordInput, setKeywordInput] = useState("");
+ const [amenities, setAmenities] = useState([])
+  const [amenityInput, setAmenityInput] = useState("");
+  const dispatch = useDispatch();
+  const [propertyData, setPropertyData] = useState({
+    seo_title:"",
+    seo_description:"",
+    slug:"",
+    title:"",
+    description:"",
+    price:"",
+    rooms:"",
+    beds:"",
+    baths:"",
+    squareFits:"",
+    areaSize:"",
+    category:"",
+    type:"",
+    city:"",
+    location:"",
+    address:"",
+    state:"",
+    furnished: false,
+    aboutProperty:"",
+    balcony:"",
+    operatingSince:"",
+    video:""
+  });
+  const [images, setImages] = useState([]);
+  const handleChangeImage = (e)=>{
+    const files = e.target.files;
+    setImages(files);
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("seo_title",propertyData.seo_title)
+    formData.append("seo_description",propertyData.seo_description)
+    formData.append("slug",propertyData.slug)
+    formData.append("keywords",keywords)
+    formData.append("amenities",amenities)
+    formData.append("images",images)
+    formData.append("slug",propertyData.slug)
+    formData.append("title",propertyData.title)
+    formData.append("description",propertyData.description)
+    formData.append("price",propertyData.price)
+    formData.append("rooms",propertyData.rooms)
+    formData.append("beds",propertyData.beds)
+    formData.append("baths",propertyData.baths)
+    formData.append("squareFits",propertyData.squareFits)
+    formData.append("areaSize",propertyData.areaSize)
+    formData.append("category",propertyData.category)
+    formData.append("type",propertyData.type)
+    formData.append("city",propertyData.city)
+    formData.append("state",propertyData.state)
+    formData.append("location",propertyData.location)
+    formData.append("address",propertyData.address)
+    formData.append("aboutProperty",propertyData.aboutProperty)
+    formData.append("operatingSince",propertyData.operatingSince)
+    formData.append("balcony",propertyData.balcony)
+    formData.append("video",propertyData.video);
+    dispatch(CreateProperty(formData))
+  }
+
+
+
+  function handleAddKeyword() {
+    if (keywordInput.trim() && !keywords.includes(keywordInput.trim())) {
+      setKeywords([...keywords, keywordInput.trim()])
+      setKeywordInput("")
+    }
+  }
+
+  function handleRemoveKeyword(index) {
+    setKeywords(keywords.filter((_, i) => i !== index))
+  }
+
+  function handleKeywordKeyPress(event) {
+    if (event.key === "Enter") {
+      event.preventDefault()
+      handleAddKeyword()
+    }
+  }
+  function handleAddAmenity() {
+    if (amenityInput.trim() && !amenities.includes(amenityInput.trim())) {
+      setAmenities([...amenities, amenityInput.trim()])
+      setAmenityInput("")
+    }
+  }
+
+  function handleRemoveAmenity(index) {
+    setAmenities(amenities.filter((_, i) => i !== index))
+  }
+
+  function handleAmenityKeyPress(event) {
+    if (event.key === "Enter") {
+      event.preventDefault()
+      handleAddAmenity()
+    }
+  }
 
   return (
     <NoSsr>
-      <Formik
-        initialValues={{
-          propertyType: "",
-          propertyStatus: "",
-          propertyPrice: "",
-          password: "",
-          maxRooms: "",
-          beds: "",
-          baths: "",
-          area: "",
-          price: "",
-          agencies: "",
-          description: "",
-          address: "",
-          zip: "",
-          anyCountry: "",
-          anyCity: "",
-          landmark: "",
-          mp4Link: "",
-          checkBoxes: [],
-        }}
-        validationSchema={Yup.object().shape({
-          propertyType: Yup.string().required(),
-          propertyStatus: Yup.string().required(),
-          propertyPrice: Yup.number().required(),
-          maxRooms: Yup.string().required(),
-          beds: Yup.string().required(),
-          baths: Yup.string().required(),
-          area: Yup.string().required(),
-          price: Yup.number().required(),
-          agencies: Yup.string().required(),
-          description: Yup.string().required(),
-          address: Yup.string().required(),
-          zip: Yup.string().min(6).max(6).required(),
-          anyCountry: Yup.string().required(),
-          anyCity: Yup.string().required(),
-
-          landmark: Yup.string().required(),
-        })}
-        onSubmit={(values) => {
-          
-          alert("Your data is submitted check console");
-        }}
-      
-      >
-      {(props) => (
-        <Form>
           <div className="dashboard-content">
             <div className="create-tab" id="create-property">
               <div className="property-wizard common-card">
                 <div className="common-header">
                   <h5>Create property</h5>
                 </div>
-                <div className="create-property-form">
+                <form onSubmit={handleSubmit}>
+                  <div className="create-property-form">
+                  <div className="form-inputs">
+                    <h6>SEO Box</h6>
+                    <Row className="gx-2 gx-sm-3">
+                      <Col sm="12" className="form-group">
+                        <input name="seo_title" value={propertyData.seo_title} onChange={(e)=>setPropertyData({...propertyData, seo_title:e.target.value})} type="text" className="form-control" placeholder="Enter SEO Title (under 70 character)" />
+                      </Col>
+                      <Col sm="12" className="form-group">
+                       <input name="seo_description" value={propertyData.seo_description} onChange={(e)=>setPropertyData({...propertyData, seo_description:e.target.value})} type="text" className="form-control" placeholder="Enter SEO Description (under 150 character)" />
+                      </Col>
+                      <Col sm="12" className="form-group">
+                       <input name="slug" value={propertyData.slug} onChange={(e)=>setPropertyData({...propertyData, slug:e.target.value})} type="text" className="form-control" placeholder="Enter Slug(Most Important) ex. my-first-property-5-kanal" />
+                      </Col>
+                      <Col sm="12" className="form-group">
+                        <div className="">
+                  <div className="">
+                    <div className="d-flex gap-2">
+                      <input
+                        value={keywordInput}
+                        onChange={(e) => setKeywordInput(e.target.value)}
+                        onKeyPress={handleKeywordKeyPress}
+                        placeholder="Add a Multiple SEO Keywords"
+                        className="form-control"
+                      />
+                      <button
+                        type="button"
+                        className=" bg-black text-white rounded-1"
+                        onClick={handleAddKeyword}
+                        disabled={!keywordInput.trim() || keywords.includes(keywordInput.trim())}
+                      >
+                        <Plus className="h-75 w-75" />
+                      </button>
+                    </div>
+
+                    {keywords.length > 0 ? (
+                      <div className="d-flex mt-2 flex-wrap gap-2">
+                        {keywords.map((keyword, index) => (
+                          <div style={{color:"black",fontSize:"15px",fontWeight:"500",color:"#9BA0A4"}} key={index} className="d-flex badge justify-content-center align-items-center border gap-1">
+                            <span>{keyword}</span>
+                            <button
+                              type="button"
+                              style={{background:"transparent",border:"none"}}
+                              className="h-100 w-100 p-0"
+                              onClick={() => handleRemoveKeyword(index)}
+                            >
+                              <X className="h-75 w-75" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className=" mt-2">No keywords added yet</p>
+                    )}
+                  </div>
+                </div>
+                      </Col>
+                    </Row>
+                  </div>
                   <div className="form-inputs">
                     <h6>Basic information</h6>
                     <Row className="gx-2 gx-sm-3">
                       <Col sm="4" className="form-group">
-                        <Field name="propertyType" component={ReactstrapInput} type="text" className="form-control" placeholder="villa" label="Property Type" />
+                        <input name="title" value={propertyData.title} onChange={(e)=>setPropertyData({...propertyData, title:e.target.value})} type="text" className="form-control" placeholder="Enter Property Title" />
                       </Col>
                       <div className="form-group col-sm-4">
-                        <Field
-                          name="propertyStatus"
-                          component={ReactstrapSelect}
+                        <input
+                          name="price"
                           type="text"
+                          value={propertyData.price}
+                          onChange={(e)=>setPropertyData({...propertyData, price:+e.target.value})}
                           className="form-control"
-                          label="Property Status"
-                          inputprops={{ options: ["For Rent", "For sale"], defaultOption: "Property Status" }}
+                          placeholder="Property Price in number (ex. 10000000)"
                         />
                       </div>
                       <Col sm="4" className="form-group">
-                        <Field name="propertyPrice" type="text" className="form-control" component={ReactstrapInput} label="Property Price" placeholder="$2800" />
+                       <select
+                       name="category"
+                        value={propertyData.category} onChange={(e)=>setPropertyData({...propertyData, category:e.target.value})}
+                       className="form-control h-100"
+                                //  style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
+                                //  value={type}
+                               >
+                                 <option value="">Property Category</option>
+                                 <option value="Sale">Sale</option>
+                                 <option value="Rent">Rent</option>
+                               </select>
                       </Col>
                       <Col sm="4" className="form-group">
-                        <Field
-                          name="maxRooms"
-                          component={ReactstrapSelect}
-                          type="text"
-                          className="form-control"
-                          label="Max Rooms"
-                          inputprops={{ options: ["1", "2", "3", "4", "5", "6"], defaultOption: "Max Rooms" }}
-                        />
+                       <select
+                       name="type"
+                        value={propertyData.type} onChange={(e)=>setPropertyData({...propertyData, type:e.target.value})}
+                       className="form-control h-100"
+                                //  style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
+                                //  value={type}
+                               >
+                                 <option value="">Property Type</option>
+                                {propertyTypesData.map((item) => (
+                           <optgroup key={item.mainType} label={item.mainType}>
+                             {item.types.map((sub) => (
+                               <option key={sub} value={sub}>
+                                 {sub}
+                               </option>
+                             ))}
+                           </optgroup>
+                         ))}
+                               </select>
                       </Col>
+                      
                       <Col sm="4" className="form-group">
-                        <Field
-                          name="beds"
-                          component={ReactstrapSelect}
-                          type="text"
-                          className="form-control"
-                          label="Beds"
-                          inputprops={{ options: ["1", "2", "3", "4", "5", "6"], defaultOption: "Beds" }}
-                        />
+                        <input name="rooms" value={propertyData.rooms} onChange={(e)=>setPropertyData({...propertyData, rooms:+e.target.value})} type="number" className="form-control" label="rooms" placeholder="Enter Number of rooms (ex. 1 or 4 etc.)" />
                       </Col>
-                      <Col sm="4" className="form-group">
-                        <Field
-                          name="baths"
-                          component={ReactstrapSelect}
-                          type="text"
-                          className="form-control"
-                          label="Baths"
-                          inputprops={{ options: ["1", "2", "3", "4", "5", "6"], defaultOption: "Baths" }}
-                        />
+                       <Col sm="4" className="form-group">
+                        <input name="beds" type="number" value={propertyData.beds} onChange={(e)=>setPropertyData({...propertyData, beds:+e.target.value})} className="form-control" label="beds" placeholder="Enter Number of beds rooms (ex. 1 or 4 etc.)" />
                       </Col>
-                      <Col sm="4" className="form-group">
-                        <Field name="area" type="text" className="form-control" component={ReactstrapInput} label="Area" placeholder="85 Sq Ft" />
+                       <Col sm="4" className="form-group">
+                        <input name="baths" type="number" value={propertyData.baths} onChange={(e)=>setPropertyData({...propertyData, baths:+e.target.value})} className="form-control" label="baths" placeholder="Enter Number of bath rooms (ex. 1 or 4 etc.)" />
                       </Col>
-                      <Col sm="4" className="form-group">
-                        <Field name="price" type="text" className="form-control" component={ReactstrapInput} label="Price" placeholder="$3000" />
+                       <Col sm="4" className="form-group">
+                        <input name="squareFits" value={propertyData.squareFits} onChange={(e)=>setPropertyData({...propertyData, squareFits:+e.target.value})} type="number" className="form-control" label="squareFits" placeholder="Enter your property in sqft (ex. 1200 or 1500 etc.)" />
                       </Col>
-                      <Col sm="4" className="form-group">
-                        <Field
-                          name="agencies"
-                          component={ReactstrapSelect}
-                          type="text"
-                          className="form-control"
-                          label="Agencies"
-                          inputprops={{ options: ["1", "2", "3", "4", "5", "6"], defaultOption: "Agencies" }}
-                        />
+                       <Col sm="4" className="form-group">
+                        <select
+                        name="areaSize"
+                         value={propertyData.areaSize} onChange={(e)=>setPropertyData({...propertyData, areaSize:e.target.value})}
+                                          className="form-control h-100"
+                                        >
+                                          <option>Select Area Size</option>
+                                          {areaSizes.map((filt,index)=>{
+                                                    return <option value={filt} key={index}>{filt}</option>
+                                                  })}
+                                        </select>
+                      </Col>
+                       <Col sm="4" className="form-group">
+                        <input name="balcony" value={propertyData.balcony} onChange={(e)=>setPropertyData({...propertyData, balcony:+e.target.value})} type="number" className="form-control" label="balcony" placeholder="Enter number of balconies (optional)" />
+                      </Col>
+                       <Col sm="4" className="form-group">
+                        <input name="operatingSince" value={propertyData.operatingSince} onChange={(e)=>setPropertyData({...propertyData, operatingSince:+e.target.value})} type="number" className="form-control" label="operatingSince" placeholder="Opertaing since (ex. 2016)" />
+                      </Col>
+                       <Col sm="4" className="form-group d-flex justify-content-start align-items-center">
+  <div className="form-check d-flex align-items-center">
+    <input
+     value={propertyData.furnished} onChange={(e)=>setPropertyData({...propertyData, furnished:!propertyData.furnished})}
+      name="furnished"
+      type="checkbox"
+      className="form-check-input h-100"
+      id="furnishedCheck"
+    />
+    <label className="form-check-label h-100 ms-2 mt-2" htmlFor="furnishedCheck">
+      Furnished
+    </label>
+  </div>
+</Col>
+                      <Col sm="12" className="form-group">
+                        <textarea type="textarea" value={propertyData.description} onChange={(e)=>setPropertyData({...propertyData, description:e.target.value})} name="description" className="form-control" rows={4} label="Description" placeholder="Enter property description under 160 characters" />
                       </Col>
                       <Col sm="12" className="form-group">
-                        <Field type="textarea" name="description" component={ReactstrapInput} className="form-control" rows={4} label="Description" />
+                        <textarea type="textarea" value={propertyData.aboutProperty} onChange={(e)=>setPropertyData({...propertyData, aboutProperty:e.target.value})} name="aboutProperty" className="form-control" rows={6} label="aboutProperty" placeholder="Enter Brief Description About Property" />
                       </Col>
                     </Row>
                   </div>
                   <div className="form-inputs">
                     <h6>Address</h6>
                     <Row className=" gx-3">
-                      <Col sm="6" className="form-group">
-                        <Field type="text" name="address" component={ReactstrapInput} className="form-control" label="Address" placeholder="Address of your property" />
-                      </Col>
-                      <Col sm="6" className="form-group">
-                        <Field type="text" name="zip" component={ReactstrapInput} className="form-control" label="Zip code" placeholder="39702" />
+                      <Col sm="4" className="form-group">
+                       <select
+                       name="state"
+                        value={propertyData.state} onChange={(e)=>setPropertyData({...propertyData, state:e.target.value})}
+                                 className="form-control h-100"
+                               >
+                                 <option value="">Select state</option>
+                                 {["Punjab","Sindh","Islamabad Capital Territory (ICT)","Balochistan","Khyber Pakhtunkhwa (KPK)"].map((filt,index)=>{
+                                   return <option value={filt} key={index}>{filt}</option>
+                                 })}
+                               </select>
                       </Col>
                       <Col sm="4" className="form-group">
-                        <Field
-                          name="anyCountry"
-                          component={ReactstrapSelect}
+                       <select
+                       name="city"
+                        value={propertyData.city} onChange={(e)=>setPropertyData({...propertyData, city:e.target.value})}
+                                 className="form-control h-100"
+                               >
+                                 <option value="">Select Main City</option>
+                                 {citiesLocationsData.map((filt,index)=>{
+                                   return <option value={filt.city} key={index}>{filt.city}</option>
+                                 })}
+                               </select>
+                      </Col>
+                      <Col sm="4" className="form-group">
+                       <select
+                       name="location"
+                        value={propertyData.location} onChange={(e)=>setPropertyData({...propertyData, location:e.target.value})}
+                       className="form-control h-100"
+                       >
+                         <option value="">Select Location</option>
+                         {citiesLocationsData.map((item) => (
+                           <optgroup key={item.city} label={item.city}>
+                             {item.subCities.map((sub) => (
+                               <option key={sub} value={sub}>
+                                 {sub}
+                               </option>
+                             ))}
+                           </optgroup>
+                         ))}
+                       </select>
+                      </Col>
+                      <Col sm="4" className="form-group">
+                        <input
+                          name="address"
                           type="text"
-                          className="form-control"
-                          label="Any country"
-                          inputprops={{ options: ["1", "2", "3", "4", "5", "6"], defaultOption: "Any country" }}
+                           value={propertyData.address} onChange={(e)=>setPropertyData({...propertyData, address:e.target.value})}
+                          className="form-control h-100"
+                          label="address"
+                          placeholder="Enter your current address"
                         />
-                      </Col>
-                      <Col sm="4" className="form-group">
-                        <Field
-                          name="anyCity"
-                          component={ReactstrapSelect}
-                          type="text"
-                          className="form-control"
-                          label="Any City"
-                          inputprops={{ options: ["1", "2", "3", "4", "5", "6"], defaultOption: "Any City" }}
-                        />
-                      </Col>
-                      <Col sm="4" className="form-group">
-                        <Field name="landmark" type="text" component={ReactstrapInput} className="form-control" placeholder="landmark place name" label="Landmark" />
                       </Col>
                     </Row>
                   </div>
@@ -174,47 +343,71 @@ const CreatePropertyTab = () => {
                     <div className="dropzone" id="multiFileUpload">
                       <div className="dz-message needsclick">
                         <i className="fas fa-cloud-upload-alt" />
-                        <DropZones/>
+                        <input type="file" multiple className="form-file-input" onChange={handleChangeImage} />
                       </div>
                     </div>
                     <Row className="gx-3">
                       <Col sm="12" className="form-group">
-                        <Field name="mp4Link" component={ReactstrapInput} type="text" className="form-control" placeholder="mp4 video link" label="Video (mp4)" />
+                        <input name="video" value={propertyData.video} onChange={(e)=>setPropertyData({...propertyData, video:e.target.value})} type="text" className="form-control" placeholder="Enter youtube video link"  />
                       </Col>
                       <Col sm="12" className="form-group">
-                        <Label>Additional features</Label>
-                        <div className="feature-checkbox">
-                          <Label htmlFor="chk-ani">
-                            <Field name="checkBoxes" value="Emergency Exit" className="checkbox_animated color-2" id="chk-ani" type="checkbox" /> Emergency Exit
-                          </Label>
-                          <Label htmlFor="chk-ani1">
-                            <Field name="checkBoxes" value="CCTV" className="checkbox_animated color-2" id="chk-ani1" type="checkbox" /> CCTV
-                          </Label>
-                          <Label htmlFor="chk-ani2">
-                            <Field name="checkBoxes" value="Free Wi-Fi" className="checkbox_animated color-2" id="chk-ani2" type="checkbox" /> Free Wi-Fi
-                          </Label>
-                          <Label htmlFor="chk-ani3">
-                            <Field name="checkBoxes In The Area" value="Free Parking In The Area" className="checkbox_animated color-2" id="chk-ani3" type="checkbox" /> Free Parking In The Area
-                          </Label>
-                          <Label htmlFor="chk-ani4">
-                            <Field name="checkBoxes" value="Air Conditioning" className="checkbox_animated color-2" id="chk-ani4" type="checkbox" /> Air Conditioning
-                          </Label>
-                        </div>
+                        <Label>Enter Property Amenities</Label>
+                        <div className="">
+                  <div className="">
+                    <div className="d-flex gap-2">
+                      <input
+                        value={amenityInput}
+                        onChange={(e) => setAmenityInput(e.target.value)}
+                        onKeyPress={handleAmenityKeyPress}
+                        placeholder="Add a Multiple Property Amenities in tags"
+                        className="form-control"
+                      />
+                      <button
+                        type="button"
+                        className=" bg-black text-white rounded-1"
+                        onClick={handleAddAmenity}
+                        disabled={!amenityInput.trim() || amenities.includes(amenityInput.trim())}
+                      >
+                        <Plus className="h-75 w-75" />
+                      </button>
+                    </div>
+
+                    {amenities.length > 0 ? (
+                      <div className="d-flex mt-2 flex-wrap gap-2">
+                        {amenities.map((amenityy, index) => (
+                          <div style={{color:"black",fontSize:"15px",fontWeight:"500",color:"#9BA0A4"}} key={index} className="d-flex badge justify-content-center align-items-center border gap-1">
+                            <span>{amenityy}</span>
+                            <button
+                              type="button"
+                              style={{background:"transparent",border:"none"}}
+                              className="h-100 w-100 p-0"
+                              onClick={() => handleRemoveAmenity(index)}
+                            >
+                              <X className="h-75 w-75" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className=" mt-2">No Amenities added yet</p>
+                    )}
+                  </div>
+                </div>
                       </Col>
                     </Row>
                   </div>
                   <div className="text-end">
-                    <Button type="submit" className="btn btn-gradient color-2 btn-pill">
-                      Add property
+                    <Button disabled={createpropertyloading} type="submit" className="btn btn-gradient color-2 btn-pill">
+                      {createpropertyloading ? (<div className="d-flex align-items-center gap-2">
+                      <span className="spinner-border text-success spinner-border-sm"></span> <span>Add property</span>
+                      </div>) : "Add property"}
                     </Button>
                   </div>
                 </div>
+                </form>
               </div>
             </div>
           </div>
-        </Form>
-      )}
-        </Formik>
     </NoSsr>
   );
 };

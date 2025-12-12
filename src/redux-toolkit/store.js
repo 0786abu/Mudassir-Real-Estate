@@ -7,6 +7,7 @@ import gridRed from "./reducers/gridReducer";
 import Auth from "./slice/authSlice"
 import Agent from "./slice/agentSlice"
 import Favourites from "./slice/favouritesSlice"
+import Property from "./slice/propertySlice"
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     // actuall
     Auth,
     Agent,
-    Favourites
+    Favourites,
+    Property
   },
 });
