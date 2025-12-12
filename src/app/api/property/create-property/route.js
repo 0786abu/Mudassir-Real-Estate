@@ -32,7 +32,6 @@ export async function POST(req) {
     const formData = await req.formData();
     const files = formData.getAll("images"); // array of property images
     const floorPlanFile = formData.get("floorPlanImage"); // optional
-    
     // ✅ Validate images array
     if (!files || files.length === 0) {
         return NextResponse.json({

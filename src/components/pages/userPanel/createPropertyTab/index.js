@@ -38,7 +38,7 @@ const CreatePropertyTab = () => {
     operatingSince:"",
     video:""
   });
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(null);
   const handleChangeImage = (e)=>{
     const files = e.target.files;
     setImages(files);
@@ -52,7 +52,11 @@ const CreatePropertyTab = () => {
     formData.append("slug",propertyData.slug)
     formData.append("keywords",keywords)
     formData.append("amenities",amenities)
-    formData.append("images",images)
+    if (images && images.length > 0) {
+  Array.from(images).forEach((file) => {
+    formData.append("images", file);
+  });
+}
     formData.append("slug",propertyData.slug)
     formData.append("title",propertyData.title)
     formData.append("description",propertyData.description)
