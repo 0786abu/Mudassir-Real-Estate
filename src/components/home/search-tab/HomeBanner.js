@@ -1,24 +1,35 @@
 "use client"
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { areaSizes, bedsFilterData, citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { Container } from "reactstrap";
 
 const HomeBannerSection = () => {
-  const dispatch = useDispatch();
-  const { propertyStatus } = useSelector((state) => state.inputsReducer);
+  const router = useRouter();
 
   const [filterValues, setFilterValues] = useState({
-    propertyType: "",
-    location: "",
-    area: "",
+    category:"Sale",
+    type: "",
+    city: "",
+    areaSize: "",
     beds: "",
-    price: "",
+    minPrice: "",
   });
 
   const handleSearch = () => {
-    dispatch({ type: "UPDATE_FILTERS", payload: filterValues });
-  };
+  const query = new URLSearchParams();
+
+  // Yeh optional values hain → sirf value ho tabhi URL mein add hongi
+  if (filterValues.category) query.set("category", filterValues.category);
+  if (filterValues.type) query.set("type", filterValues.type);
+  if (filterValues.city) query.set("city", filterValues.city);
+  if (filterValues.areaSize) query.set("areaSize", filterValues.areaSize);
+  if (filterValues.beds) query.set("beds", filterValues.beds);
+  if (filterValues.minPrice) query.set("minPrice", filterValues.minPrice);
+
+  router.push(`/properties?${query.toString()}`);
+};
+
 
   return (
     <section
@@ -52,22 +63,18 @@ professionals
             <div className="btn-group">
               <button
                 className={`btn ${
-                  propertyStatus === "Buy" ? "btn-primary" : "btn-light"
+                  filterValues.category === "Sale" ? "btn-primary" : "btn-light"
                 }`}
-                onClick={() =>
-                  dispatch({ type: "propertyStatus", payload: "Buy" })
-                }
+                onClick={()=>setFilterValues({...filterValues, category:"Sale"})}
               >
                 Buy
               </button>
 
               <button
                 className={`btn ${
-                  propertyStatus === "Rent" ? "btn-primary" : "btn-light"
+                  filterValues.category === "Rent" ? "btn-primary" : "btn-light"
                 }`}
-                onClick={() =>
-                  dispatch({ type: "propertyStatus", payload: "Rent" })
-                }
+                onClick={()=>setFilterValues({...filterValues, category:"Rent"})}
               >
                 Rent
               </button>
@@ -83,16 +90,24 @@ professionals
                 <i className="fas fa-home me-2 text-primary"></i>
                 <select
                   className="form-select border-0"
+                  value={filterValues.type}
                   onChange={(e) =>
                     setFilterValues({
                       ...filterValues,
-                      propertyType: e.target.value,
+                      type: e.target.value,
                     })
                   }
                 >
-                  <option>Houses</option>
-                  <option>Apartments</option>
-                  <option>Plots</option>
+                  <option value="">Property Type</option>
+                   {propertyTypesData.map((item) => (
+                      <optgroup key={item.mainType} label={item.mainType}>
+                        {item.types.map((sub) => (
+                          <option key={sub} value={sub}>
+                            {sub}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
                 </select>
               </div>
             </div>
@@ -101,17 +116,16 @@ professionals
             <div className="col-md-3 col-6">
               <div className="border rounded p-2 d-flex align-items-center">
                 <i className="fas fa-map-marker-alt me-2 text-primary"></i>
-                <input
-                  type="text"
-                  className="form-control border-0"
-                  placeholder="Search Location"
-                  onChange={(e) =>
-                    setFilterValues({
-                      ...filterValues,
-                      location: e.target.value,
-                    })
-                  }
-                />
+                <select
+                          className="form-select border-0"
+                          value={filterValues.city}
+                          onChange={(e) => setFilterValues({...filterValues, city:e.target.value })}
+                        >
+                          <option value="">Select City</option>
+                          {citiesLocationsData.map((filt,index)=>{
+                            return <option value={filt.city} key={index}>{filt.city}</option>
+                          })}
+                        </select>
               </div>
             </div>
 
@@ -120,17 +134,18 @@ professionals
               <div className="border rounded p-2">
                 <select
                   className="form-select border-0"
+                  value={filterValues.areaSize}
                   onChange={(e) =>
                     setFilterValues({
                       ...filterValues,
-                      area: e.target.value,
+                      areaSize: e.target.value,
                     })
                   }
                 >
                   <option>Select Area Size</option>
-                  <option>5 Marla</option>
-                  <option>10 Marla</option>
-                  <option>1 Kanal</option>
+                  {areaSizes.map((filt,index)=>{
+                            return <option value={filt} key={index}>{filt}</option>
+                          })}
                 </select>
               </div>
             </div>
@@ -148,10 +163,9 @@ professionals
                   }
                 >
                   <option>No. of Beds</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4+</option>
+                   {bedsFilterData.map((filt,index)=>{
+                            return <option value={filt} key={index}>{filt}</option>
+                          })}
                 </select>
               </div>
             </div>
@@ -159,32 +173,28 @@ professionals
             {/* Price */}
             <div className="col-md-2 col-6">
               <div className="border rounded p-2">
-                <select
-                  className="form-select border-0"
+                <input
+                  type="number"
+                  className="form-control border-0"
+                  placeholder="Enter budget"
                   onChange={(e) =>
                     setFilterValues({
                       ...filterValues,
-                      price: e.target.value,
+                      minPrice: +e.target.value,
                     })
                   }
-                >
-                  <option>Price</option>
-                  <option>Below 50 Lac</option>
-                  <option>50 Lac – 1 Crore</option>
-                  <option>1 Crore – 2 Crore</option>
-                </select>
+                />
               </div>
             </div>
 
             {/* Search Button */}
             <div className="col-md-2 col-12">
-              <Link
-                href="/listing/list-view/listing/left-sidebar"
+              <button
                 className="btn btn-dark w-100 py-2"
                 onClick={handleSearch}
               >
                 Search
-              </Link>
+              </button>
             </div>
 
           </div>

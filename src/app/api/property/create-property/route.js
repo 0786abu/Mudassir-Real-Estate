@@ -200,6 +200,7 @@ export async function GET(req) {
         await DataBase();
         const { searchParams } = new URL(req.url);
         const page = Number(searchParams.get("page")) || 1;
+        const beds = Number(searchParams.get("beds"));
         const limit = 4;
         const skip = (page - 1) * limit;
         const areaSize = searchParams.get('areaSize');
@@ -216,6 +217,7 @@ export async function GET(req) {
         if (category) filter.category = category;
         if (type) filter.type = type;
         if (location) filter.location = location;
+        if (beds) filter.beds = beds;
         if (city) filter.city = city;
         if (minsquareSize || maxsquareSize) {
             filter.squareFits = {};

@@ -6,7 +6,7 @@ const GridLayout =({properties,favourites,from}) => {
    
   return (
     <Fragment>
-     {!properties ? (
+     {from ? (
        <Row className={` column-sm zoom-gallery property-grid list-view`}>
         {!favourites || favourites?.length === 0 ? (
           <Col xs={12} className="text-center py-5">

@@ -1,37 +1,32 @@
+import { propertyTypesData } from "@/utils/FiltersCities";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Container } from "reactstrap";
 
 // css available on about.scss
 
-const categories = [
-  { img: "/assets/images/category-1.png", title: "Houses" },
-  { img: "/assets/images/category-2.png", title: "Apartments and Flats" },
-  { img: "/assets/images/category-1.png", title: "Portions & Floors" },
-  { img: "/assets/images/category-1.png", title: "Shops" },
-  { img: "/assets/images/category-1.png", title: "Roommates & Paying Guest" },
-  { img: "/assets/images/category-1.png", title: "Vacation Rentals - Guest Houses" },
-  { img: "/assets/images/category-1.png", title: "Rooms" },
-  { img: "/assets/images/category-1.png", title: "Commercial Plots" },
-  { img: "/assets/images/category-1.png", title: "Residential Plots" },
-  { img: "/assets/images/category-1.png", title: "Industrial Plots" },
-  { img: "/assets/images/category-1.png", title: "Agricultural Land" },
-  { img: "/assets/images/category-1.png", title: "Plot Form" },
-  { img: "/assets/images/category-1.png", title: "Building" },
-  { img: "/assets/images/category-1.png", title: "Office" },
-  { img: "/assets/images/category-1.png", title: "Factory" },
-  { img: "/assets/images/category-1.png", title: "Warehouse" },
-];
+
+const propertyTypes = propertyTypesData.flatMap(item => item.types);
 
 const CategorySection = () => {
+  const router = useRouter();
+  
+  const handlePush = (type)=>{
+    router.push(`/properties?type=${type}`)
+  }
   return (
     <section style={{padding:"0px", marginTop:"80px", marginBottom:"0px"}} className="category-section">
       <Container>
-        <h4 className="section-title">Search by Property Type</h4>
+        <div className="d-flex justify-content-between align-items-center">
+          <h4 className="section-title">Search by Property Type</h4>
+          <button type="button" className="btn btn-dark">See all</button>
+        </div>
         <div className="category-grid">
-          {categories.map((item, index) => (
-            <div key={index} className="cat-card">
-              <img src={item.img} alt={item.title} className="cat-img" />
-              <p className="cat-title">{item.title}</p>
+          {propertyTypes.slice(0,18).map((item, index) => (
+            <div onClick={()=>handlePush(item)} key={index} className="cat-card">
+              <Image src={"/assets/images/category-1.png"} width={80} height={80} alt={item} className="cat-img" />
+              <p className="cat-title">{item}</p>
             </div>
           ))}
         </div>

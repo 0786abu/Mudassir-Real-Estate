@@ -1,5 +1,6 @@
 "use client";
 
+import { citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
 import { formatPK } from "@/utils/Formatter";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -8,10 +9,16 @@ import { Range, getTrackBackground } from "react-range";
 export default function FilterSidebar() {
   const router = useRouter();
   const params = useSearchParams();
+  const searchedCategory = params.get("category")
+  const searchedType = params.get("type")
+  const searchedCity = params.get("city")
+  const searchedMinPrice = params.get("minPrice")
+  // const searchedCategory = params.get("category")
+  console.log(searchedMinPrice)
 
-  const [category, setCategory] = useState("");
-  const [type, setType] = useState("");
-  const [city, setCity] = useState("");
+  const [category, setCategory] = useState(searchedCategory ? searchedCategory : "");
+  const [type, setType] = useState(searchedType ? searchedType : "");
+  const [city, setCity] = useState(searchedCity ? searchedCity : "");
   const [location, setLocation] = useState("");
 
   // Dynamic min/max for slider
@@ -100,10 +107,15 @@ export default function FilterSidebar() {
           onChange={(e) => updateFilter("type", e.target.value)}
         >
           <option value="">Property Type</option>
-          <option value="House">House</option>
-          <option value="Plot">Plot</option>
-          <option value="Flat">Flat</option>
-          <option value="Apartment">Apartment</option>
+         {propertyTypesData.map((item) => (
+    <optgroup key={item.mainType} label={item.mainType}>
+      {item.types.map((sub) => (
+        <option key={sub} value={sub}>
+          {sub}
+        </option>
+      ))}
+    </optgroup>
+  ))}
         </select>
       </div>
 
@@ -117,9 +129,9 @@ export default function FilterSidebar() {
           onChange={(e) => updateFilter("city", e.target.value)}
         >
           <option value="">Select City</option>
-          <option value="Lahore">Lahore</option>
-          <option value="Karachi">Karachi</option>
-          <option value="Islamabad">Islamabad</option>
+          {citiesLocationsData.map((filt,index)=>{
+            return <option value={filt.city} key={index}>{filt.city}</option>
+          })}
         </select>
       </div>
 
@@ -127,15 +139,28 @@ export default function FilterSidebar() {
       <div className="mb-3">
         {/* <label className="form-label">Location</label> */}
         <select
-          style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
-          value={location}
-          onChange={(e) => updateFilter("location", e.target.value)}
-        >
-          <option value="">Select Location</option>
-          <option value="DHA">DHA</option>
-          <option value="Bahria Town">Bahria Town</option>
-          <option value="Gulberg">Gulberg</option>
-        </select>
+  style={{
+    outline: "none",
+    width: "100%",
+    padding: "8px",
+    borderRadius: "4px",
+    border: "0.5px solid #ced4da"
+  }}
+  value={location}
+  onChange={(e) => updateFilter("location", e.target.value)}
+>
+  <option value="">Select Location</option>
+
+  {citiesLocationsData.map((item) => (
+    <optgroup key={item.city} label={item.city}>
+      {item.subCities.map((sub) => (
+        <option key={sub} value={sub}>
+          {sub}
+        </option>
+      ))}
+    </optgroup>
+  ))}
+</select>
       </div>
 
       {/* Dual Price Slider */}
@@ -147,7 +172,7 @@ export default function FilterSidebar() {
           step={100}
           min={MIN}
           max={MAX}
-          values={priceRange}
+          values={searchedMinPrice ? priceRange[searchedMinPrice,MAX] : priceRange}
           onChange={(values) => setPriceRange(values)} // live update while dragging
           onFinalChange={(values) => updateFilter("priceRange", values)} // apply filter
           renderTrack={({ props, children }) => {
