@@ -5,7 +5,7 @@ import axios from "axios";
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const AddToFavourites = (property)=>async(dispatch)=>{
+export const AddToFavourites = (property,setLoadingIDs)=>async(dispatch)=>{
     dispatch(setAddToFavLoading())
     try {
         const {data} = await axios.post(`${baseURL}/api/favourite`,{propertyID:property?.propertyID?._id},{
@@ -15,7 +15,7 @@ export const AddToFavourites = (property)=>async(dispatch)=>{
             withCredentials:true
         });
         dispatch(setAddToFavourites(property));
-        toast.success(data.message)
+        toast.success(data.message);
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setFavError(error?.response?.data?.message || error?.response?.data?.error));
