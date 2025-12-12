@@ -5,7 +5,7 @@ import axios from "axios";
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const AddToFavourites = (property,setLoadingIDs)=>async(dispatch)=>{
+export const AddToFavourites = (property)=>async(dispatch)=>{
     dispatch(setAddToFavLoading())
     try {
         const {data} = await axios.post(`${baseURL}/api/favourite`,{propertyID:property?.propertyID?._id},{
