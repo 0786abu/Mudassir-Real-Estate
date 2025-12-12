@@ -127,6 +127,7 @@ export const LoginUser = ({user,onClickForForgot})=>async(dispatch)=>{
         dispatch(setSampleUser(sampledata))
         localStorage.setItem("sample_user_data", JSON.stringify(sampledata));
         localStorage.setItem("real-estate-user-token",data.token);
+        window.location.reload();
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
@@ -185,6 +186,7 @@ export const Logout_User = (router)=>async(dispatch)=>{
         localStorage.removeItem("sample_user_data");
         toast.success(data.message)
         router.push("/")
+        window.location.reload();
     } catch (error) {
         console.log(error)
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
@@ -308,6 +310,7 @@ export const Logout_User2 = (router)=>async(dispatch)=>{
         localStorage.removeItem("sample_user_data");
         toast("your token expire now please login again")
         router.push("/")
+        window.location.reload();
     } catch (error) {
         console.log(error)
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
