@@ -7,7 +7,7 @@ const AddToWhishList = ({ property,loading,favourites }) => {
   const dispatch = useDispatch();
   const isLiked = favourites?.some((item)=>item.propertyID._id === property._id);
 
-  const handleAddToFavourite = (id) => {
+  const handleAddToFavourite = () => {
         const favData = {
           propertyID: {
             _id: property?._id,
@@ -30,14 +30,14 @@ const AddToWhishList = ({ property,loading,favourites }) => {
 
   return (
     <Fragment>
-      {
-        <Heart
+        <button onClick={handleAddToFavourite} disabled={loading} style={{background:"transparent",border:"none"}}>
+          <Heart
         style={{cursor:loading ? "not-allowed" : "pointer"}}
-        onClick={()=>handleAddToFavourite(property?._id)}
+        
         fill={isLiked ? "red" : "none"}
         stroke={isLiked ? undefined : "black"}
       />
-      }
+        </button>
     </Fragment>
   );
 };
