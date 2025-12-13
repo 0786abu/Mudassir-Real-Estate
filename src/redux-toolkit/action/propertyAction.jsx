@@ -67,7 +67,7 @@ export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{
     }
 }
 export const RemovePropertyImage = ({public_id,slug,setPublicID})=>async(dispatch)=>{
-    dispatch(setCreatePropertyLoading())
+    dispatch(setRemovePropertyImageLoading())
     try {
         const {data} = await axios.delete(`${baseURL}/api/property/create-property/${slug}?public_id=${public_id}`,{
             headers:{
@@ -82,7 +82,7 @@ export const RemovePropertyImage = ({public_id,slug,setPublicID})=>async(dispatc
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
-        dispatch(setCreatePropertyLoading(false));
+        dispatch(setRemovePropertyImageLoading(false));
     }
 }
 export const UpdateFloorPlanImage = ({formData,slug,setFloorPlanImage})=>async(dispatch)=>{
