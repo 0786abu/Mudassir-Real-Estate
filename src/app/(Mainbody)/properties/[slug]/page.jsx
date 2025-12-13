@@ -4,15 +4,26 @@ import FooterThree from "@/layout/footers/FooterThree";
 
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property`, {
-    cache: "force-cache", // ✅ recommended for SSG
-  });
-  const {properties} = await res.json();
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property`,
+      { cache: "force-cache" }
+    );
 
-  return properties?.map((property) => ({
-    slug: property.slug,
-  }));
+    const json = await res.json();
+
+    if (!Array.isArray(json.properties)) {
+      return []; // ✅ VERY IMPORTANT
+    }
+
+    return json.properties.map((property) => ({
+      slug: property.slug,
+    }));
+  } catch (error) {
+    return []; // ✅ build kabhi fail nahi hogi
+  }
 }
+
 const page = async({params}) => {
     const {slug} = await params;
     const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property/${slug}`,{ method:"GET", cache:"no-cache" });
