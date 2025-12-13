@@ -25,7 +25,7 @@ const BodyContent = ({ active }) => {
   },[dispatch])
 
   return (
-    <section className='user-dashboard small-section'>
+    <section style={{minHeight:"60vh"}} className='user-dashboard small-section'>
       {(userloading && !user) ? (<ProfileLoader/>) : (
         <Container>
         <Row>
