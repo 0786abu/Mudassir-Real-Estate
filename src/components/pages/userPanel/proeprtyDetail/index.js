@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Home, MapPin, Bed, Bath, Maximize, Calendar, Eye, DollarSign, Check, Star, Play, Edit, Trash2, Share2, Cross } from 'lucide-react';
+import { Home, MapPin, Bed, Bath, Maximize, Calendar, Eye, DollarSign, Check, Star, Play, Edit, Trash2, Share2, Cross, CircleEllipsis } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatPK } from '@/utils/Formatter';
 import { Col, Row } from 'reactstrap';
@@ -13,6 +13,15 @@ import {
   ModalFooter
 } from "reactstrap";
 import Image from 'next/image';
+
+
+
+function getYouTubeEmbedUrl(url) {
+  if(url){
+    const id = url.split("v=")[1]?.split("&")[0];
+  return `https://www.youtube.com/embed/${id}`;
+  }
+}
 
 
 const PropertyDetailDashboard = ({setActivetab}) => {
@@ -33,6 +42,8 @@ const PropertyDetailDashboard = ({setActivetab}) => {
   //     minimumFractionDigits: 0
   //   }).format(price);
   // };
+  const [modal2, setModal2] = useState(false);
+    const toggle2 = () => setModal2(!modal2);
 
     const fileInputRef = useRef(null);
   const handleClick = () => {
@@ -95,11 +106,26 @@ const PropertyDetailDashboard = ({setActivetab}) => {
         </ModalBody>
 
       </Modal>
+       <Modal className='video-modal' centered size='lg' isOpen={modal2} toggle={toggle2} modalTransition={{ timeout: 100 }}>
+              <ModalBody className='m-0 p-0'>
+                <Button onClick={toggle2} type='button' className='btn-close' aria-label='Close'>
+                  <span aria-hidden='true'>×</span>
+                </Button>
+                {/* <iframe src='https://www.youtube.com/embed/3H6Evu2hPpE?si=KS_WdXxa_vWBn4o1' allowFullScreen></iframe> */}
+                <iframe
+        src={getYouTubeEmbedUrl(myProperty.video && myProperty.video)}
+        allowFullScreen
+        width="100%"
+        height="450"
+      ></iframe>
+              </ModalBody>
+            </Modal>
       <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 1rem' }}>
         {/* Header Section */}
         <div style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
+              <h5><span class="badge text-bg-success">Featured Property</span></h5>
               <h2 style={{ marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '1.75rem' }}>{myProperty.title}</h2>
               <p style={{ color: '#6c757d', marginBottom: 0, display: 'flex', alignItems: 'center' }}>
                 <MapPin size={16} style={{ marginRight: '0.5rem' }} />
@@ -124,20 +150,30 @@ const PropertyDetailDashboard = ({setActivetab}) => {
 
         {/* Status Badges */}
         <div style={{ marginBottom: '2rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          <span style={{ background: '#198754', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
-            <Check size={14} style={{ marginRight: '0.25rem' }} />
-            Approved
+          <span title='This property is pending for approval' style={{ background: myProperty.isApproved==="Approved" ? '#198754' : myProperty.isApproved==="No Approved" ? 'red' : "#FFC107", color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
+            {myProperty.isApproved==="Approved" ? <Check size={14} style={{ marginRight: '0.25rem' }} /> : myProperty.isApproved==="No Approved" ? <Plus size={14} style={{ marginRight: '0.25rem', rotate:"45deg" }} /> : <CircleEllipsis style={{ marginRight: '0.25rem' }}/>}
+            {myProperty.isApproved}
           </span>
-          <span style={{ background: '#F8F9FA', color: 'black', padding: '0.5rem 1rem', borderRadius: '6px' }}>
+          {myProperty.isFree && (
+            <span title={`This property is free for you`} style={{ background: '#F8F9FA', color: 'black', padding: '0.5rem 1rem', borderRadius: '6px' }}>
+            {"This property is Free"}
+          </span>
+          )}
+          <span title={`Property Category is ${myProperty.category}`} style={{ background: '#F8F9FA', color: 'black', padding: '0.5rem 1rem', borderRadius: '6px' }}>
             {myProperty.category}
           </span>
-          <span style={{ background: '#6c757d', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px' }}>
+          <span title={`Property Type is ${myProperty.type}`} style={{ background: '#6c757d', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px' }}>
             {myProperty.type}
           </span>
-          <span style={{ background: '#ffc107', color: '#000', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
+          <span title={`Total Property Views is ${myProperty.views}`} style={{ background: '#ffc107', color: '#000', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
             <Eye size={14} style={{ marginRight: '0.25rem' }} />
             {myProperty.views} Views
           </span>
+          {!myProperty.isFree && (
+            <span style={{ background: myProperty.isPaid ? '#F8F9FA' : "red", color: 'white', padding: '0.5rem 1rem', borderRadius: '6px' }}>
+            {myProperty.isPaid ? "Paid" : "No Paid"}
+          </span>
+          )}
         </div>
 
         <div>
@@ -397,7 +433,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                       <Play size={48} style={{ color: 'white', opacity: 0.8 }} />
                     </div>
                   </div>
-                  <button style={{ width: '100%', marginTop: '1rem', padding: '0.75rem', background: '#0d6efd', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <button onClick={toggle2} style={{ width: '100%', marginTop: '1rem', padding: '0.75rem', background: '#0d6efd', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <Play size={16} style={{ marginRight: '0.5rem' }} />
                     Watch Video Tour
                   </button>

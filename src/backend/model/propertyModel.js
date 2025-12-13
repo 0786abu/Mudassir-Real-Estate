@@ -86,8 +86,9 @@ const propertySchema = new Schema({
         default: false
     },
     isApproved:{
-        type: Boolean,
-        default: false
+        type: String,
+        default: "Pending",
+        enum:["Pending","Approved","No Approved"]
     },
     isPaid:{
         type: Boolean,

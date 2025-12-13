@@ -56,7 +56,6 @@ export const GetFavouritesData = ()=>async(dispatch)=>{
         });
         dispatch(setFavourites(data.data));
     } catch (error) {
-        toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setFavError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }

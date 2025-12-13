@@ -136,7 +136,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
         </div>
         {(fromPanel==="user-panel") && (
           <div className="labels-left" style={{top:"50px"}}>
-          <span className={`label label-${data.isApproved ? "success":"danger"}`}>{data.isApproved ? "Approved" : "No Approved"}</span>
+          <span className={`label text-bg-${data.isApproved==="Approved" ? "success": data.isApproved==="No Approved" ? danger : "warning"}`}>{data.isApproved}</span>
         </div>
         )}
         {(fromPanel==="user-panel" && data.isFree) && (

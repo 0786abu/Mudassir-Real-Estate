@@ -213,7 +213,7 @@ export async function GET(req) {
         const city = searchParams.get('city');
         const minPrice = searchParams.get('minPrice');
         const maxPrice = searchParams.get('maxPrice');
-        const filter = {isApproved:true};
+        const filter = {isApproved:"Approved"};
         if (areaSize) filter.areaSize = areaSize;
         if (category) filter.category = category;
         if (type) filter.type = type;
