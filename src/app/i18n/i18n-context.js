@@ -21,6 +21,6 @@ i18next
 export function I18nProvider({ children, language }) {
   useMemo(() => {
     i18next.changeLanguage(language);
-  }, []);
+  }, [i18next]);
   return <Provider i18n={i18next}>{children}</Provider>;
 }

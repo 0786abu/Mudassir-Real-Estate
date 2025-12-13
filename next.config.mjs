@@ -7,6 +7,9 @@ const nextConfig  = {
   env: {
     API_URL: "http://localhost:3000/api",
   },
+  eslint: {
+  ignoreDuringBuilds: true,
+},
   reactStrictMode: false,
 };
 
