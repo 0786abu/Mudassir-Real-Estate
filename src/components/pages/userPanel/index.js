@@ -41,8 +41,8 @@ const BodyContent = ({ active }) => {
     <MyProfileTab user={user} loading={userloading} />
   )}
 
-  {activeTab === "propertyDetail" && <PropertyDetails />}
-  {activeTab === "editProperty" && <EditProperty />}
+  {activeTab === "propertyDetail" && <PropertyDetails setActivetab={setActiveTab} />}
+  {activeTab === "editProperty" && <EditProperty setActivetab={setActiveTab} />}
   {activeTab === "Favorites" && <FavoritesTab />}
 
   {activeTab === "Privacy" && <PrivacyTab />}

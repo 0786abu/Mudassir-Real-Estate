@@ -78,7 +78,7 @@ export async function POST(req, { params }) {
         success: true,
         message: "Images uploaded successfully",
         newImages: uploadedImages,
-        allImages: property.images,
+        property,
       },
       { status: 200 }
     );

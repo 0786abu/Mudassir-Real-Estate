@@ -18,6 +18,7 @@ import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import { GetFavouritesData, RemoveFavouriteProperty } from "@/redux-toolkit/action/favouritesAction";
 import { useEffect, useState } from "react";
+import { SendPropertyDataToMyProperty } from "@/redux-toolkit/action/propertyAction";
 
 const ImageSlider = dynamic(() => import("../ImageSlider"));
 export const formatDatenew = (dateString) => {
@@ -34,6 +35,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
   const {addfavloading,favProperties} = useSelector((state)=>state.Favourites);
   const [itemID, setItemID] = useState("");
 
+
   
   const handleRemoveFav = (id)=>{
     setItemID(id)
@@ -42,11 +44,13 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
    const handleViewDetails = () => {
     if (fromPanel) {
       setActiveTab("propertyDetail");
+      dispatch(SendPropertyDataToMyProperty(data))
     }
   };
    const handleEditProperty = () => {
     if (fromPanel) {
       setActiveTab("editProperty");
+      dispatch(SendPropertyDataToMyProperty(data))
     }
   };
 

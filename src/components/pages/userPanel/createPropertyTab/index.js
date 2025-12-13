@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, Col, Label, Row } from "reactstrap";
 import NoSsr from "@/utils/NoSsr";
-import DropZones from "@/components/common/Dropzones";
 import { areaSizes, citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
 import { Plus, X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";

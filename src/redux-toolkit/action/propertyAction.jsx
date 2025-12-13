@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setMyProperties, setMyPropertyLoading, setPagesContent, setPropertyError } from "../slice/propertySlice";
+import { setCreatePropertyLoading, setMyProperties, setMyProperty, setMyPropertyLoading, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setUpdateProeprty } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 
 
@@ -16,6 +16,87 @@ export const CreateProperty = (property)=>async(dispatch)=>{
         });
         toast.success(data.message)
         // router.push("/otp-verify");
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setCreatePropertyLoading(false));
+    }
+}
+export const UpdateProperty = (property,setActivetab)=>async(dispatch)=>{
+    dispatch(setCreatePropertyLoading())
+    try {
+        const {data} = await axios.put(`${baseURL}/api/property/create-property/${property.slug}`,property,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        toast.success(data.message)
+        dispatch(setUpdateProeprty(property));
+        setTimeout(() => {
+            setActivetab("Listing")
+            window.scrollTo({top:0,behavior:"smooth"})
+        }, 100);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setCreatePropertyLoading(false));
+    }
+}
+export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{
+    dispatch(setCreatePropertyLoading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/property/uploadNewImages/${slug}`,images,{
+            headers:{
+                "Content-Type":"multipart/form-data"
+            },
+            withCredentials:true
+        });
+        dispatch(setMyProperty(data.property));
+        toast.success(data.message);
+        setTimeout(() => {
+            setModal()
+        }, 100);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setCreatePropertyLoading(false));
+    }
+}
+export const RemovePropertyImage = ({public_id,slug,setPublicID})=>async(dispatch)=>{
+    dispatch(setCreatePropertyLoading())
+    try {
+        const {data} = await axios.delete(`${baseURL}/api/property/create-property/${slug}?public_id=${public_id}`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setMyProperty(data.data));
+        toast.success(data.message);
+        setPublicID("")
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setCreatePropertyLoading(false));
+    }
+}
+export const UpdateFloorPlanImage = ({formData,slug,setFloorPlanImage})=>async(dispatch)=>{
+    dispatch(setCreatePropertyLoading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/property/create-property/${slug}`,formData,{
+            headers:{
+                "Content-Type":"multipart/form-data"
+            },
+            withCredentials:true
+        });
+        dispatch(setMyProperty(data.data));
+        toast.success(data.message);
+        setFloorPlanImage(null)
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
@@ -45,4 +126,7 @@ export const MyProperties = ({category,location,type,city,currentPage})=>async(d
     }finally {
         dispatch(setMyPropertyLoading(false))
     }
+}
+export const SendPropertyDataToMyProperty = (data)=>async(dispatch)=>{
+        dispatch(setMyProperty(data))
 }
