@@ -185,7 +185,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                         border: currentImageIndex === idx ? '3px solid #0d6efd' : '3px solid transparent'
                       }}
                     />
-                    <button title='remove image permanently' style={{position:"absolute",background:"transparent",border:"none", top:"2px",right:"2px"}}>{removepropertyimageloading && img.public_id === publicID ? <span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> : <Trash style={{width:"20px",height:"20px",background:"red",padding:"3px",borderRadius:"50%",color:"white"}}/>}</button>
+                    <span title='remove image permanently' style={{position:"absolute",background:"transparent", top:"2px",right:"2px"}}>{removepropertyimageloading && img.public_id === publicID ? <span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> : <Trash style={{width:"20px",height:"20px",background:"red",padding:"3px",borderRadius:"50%",color:"white"}}/>}</span>
                     </div>
                   ))}
                  <div>
