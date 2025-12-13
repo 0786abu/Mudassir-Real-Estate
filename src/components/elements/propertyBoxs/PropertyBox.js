@@ -7,7 +7,7 @@
  */
 "use client"
 import Link from "next/link";
-import { Camera, Trash } from "react-feather";
+import { Camera, Edit, Trash } from "react-feather";
 // import ImageSlider from "../ImageSlider";
 import PropertyLabel from "../PropertyLabel";
 // import ThumbnailSlider from "../ThumbnailSlider";
@@ -29,7 +29,7 @@ export const formatDatenew = (dateString) => {
   }
 
 
-const PropertyBox = ({ data,from }) => {
+const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
   const dispatch = useDispatch();
   const {addfavloading,favProperties} = useSelector((state)=>state.Favourites);
   const [itemID, setItemID] = useState("");
@@ -38,8 +38,18 @@ const PropertyBox = ({ data,from }) => {
   const handleRemoveFav = (id)=>{
     setItemID(id)
     dispatch(RemoveFavouriteProperty({id:data?._id}))
-   
   }
+   const handleViewDetails = () => {
+    if (fromPanel) {
+      setActiveTab("propertyDetail");
+    }
+  };
+   const handleEditProperty = () => {
+    if (fromPanel) {
+      setActiveTab("editProperty");
+    }
+  };
+
   
 
   return (
@@ -69,6 +79,7 @@ const PropertyBox = ({ data,from }) => {
         <div className="labels-left">
           <PropertyLabel labels={data.propertyID.type} />
         </div>
+        
 
             <div className="seen-data">
               <Camera />
@@ -116,14 +127,41 @@ const PropertyBox = ({ data,from }) => {
           <ImageSlider images={data.images} />
         {/* )} */}
 
-        <div className="labels-left">
+        <div className="labels-left" style={{top:"20px"}}>
           <PropertyLabel labels={data.type} />
         </div>
+        {(fromPanel==="user-panel") && (
+          <div className="labels-left" style={{top:"50px"}}>
+          <span className={`label label-${data.isApproved ? "success":"danger"}`}>{data.isApproved ? "Approved" : "No Approved"}</span>
+        </div>
+        )}
+        {(fromPanel==="user-panel" && data.isFree) && (
+          <div className="labels-left" style={{top:"80px"}}>
+          <span className={`label label-success`}>{data.isFree ? "Free" : "No Free"}</span>
+        </div>
+        )}
+        {(fromPanel==="user-panel") && (
+          <div className="labels-left" style={{top:"110px"}}>
+          <span className={`label label-${data.isPaid ? "success" : "danger"}`}>{data.isPaid ? "Paid" : "No Paid"}</span>
+        </div>
+        )}
+        {(fromPanel==="user-panel" && data.isFeatured) && (
+          <div className="labels-left" style={{top:"140px"}}>
+          <span className={`label label-success`}>{"Featured Property"}</span>
+        </div>
+        )}
+        {(fromPanel==="user-panel") && (
+          <div onClick={handleEditProperty} className="labels-right" style={{top:"20px"}}>
+          <span className={`label label-success`}><Edit/></span>
+        </div>
+        )}
 
-            <div className="seen-data">
+            {!fromPanel && (
+              <div className="seen-data">
               <Camera />
               <span>{data.images?.length || 5}</span>
             </div>
+            )}
             <div className="overlay-property-box">
               {/* <a className="effect-round" title="Compare">
                 <AddToCompareProducts id={data._id} />
@@ -159,9 +197,18 @@ const PropertyBox = ({ data,from }) => {
 
         <div className="property-btn d-flex">
           <span>{formatDatenew(data.createdAt)}</span>
-          <Link href={`/properties/${data.slug}`}>
-            <button className="btn btn-dashed btn-pill">Details</button>
-          </Link>
+           {fromPanel ? (
+        <button
+          onClick={handleViewDetails}
+          className="btn btn-dashed btn-pill"
+        >
+          View Details
+        </button>
+      ) : (
+        <Link href={`/properties/${data.slug}`}>
+          <button className="btn btn-dashed btn-pill">Details</button>
+        </Link>
+      )}
         </div>
       </div>
     </div>

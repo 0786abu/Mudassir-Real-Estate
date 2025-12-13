@@ -15,22 +15,9 @@ import Sidebar from "../../../../layout/sidebarLayout/Sidebar";
 import { getData } from "../../../../utils/getData";
 import GridLayout from "../../elements/GridLayout";
 
-const GridView = ({ side }) => {
-  const [value, setValue] = useState();
-
-  useEffect(() => {
-    getData(`/api/property`)
-      .then((res) => {setValue(
-              Object.keys(res.data)
-                .map((key) => [res.data[key]])
-                .flat(2)
-                .filter((arrData) => Array.isArray(arrData.img))
-            );
-      })
-      .catch((error) => console.error("Error", error));
-  }, []);
+const GridView = ({ properties, side, fromPanel,mypropertyloading,setActiveTab }) => {
   return (
-    <section className={`property-section  `}>
+    <section style={{padding:fromPanel ? "0px" : undefined}} className={`property-section  `}>
       <Container>
         <Row className=' ratio_63'>
           {side && (
@@ -41,12 +28,12 @@ const GridView = ({ side }) => {
             </Sidebar>
           )}
 
-          <Col xl={side ? "9" : ""} lg={side ? "8" : ""} className={`property-grid-2 property-grid-slider`}>
-            <Header title={"Properties Listing"} value={value} />
+          <Col xs="12" className={`property-grid-2 property-grid-slider`}>
+            {/* <Header title={"Properties Listing"} value={value} /> */}
             <div className={`property-wrapper-grid list-view`}>
-              <GridLayout value={value} />
+              <GridLayout properties={properties} fromPanel={fromPanel} mypropertyloading={mypropertyloading} setActiveTab={setActiveTab} />
             </div>
-              <Pagination />
+              {/* <Pagination /> */}
           </Col>
         </Row>
       </Container>

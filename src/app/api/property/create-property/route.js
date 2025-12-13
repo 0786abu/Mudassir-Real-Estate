@@ -53,6 +53,7 @@ export async function POST(req) {
     }
     const seo_title = formData.get("seo_title");
     const seo_description = formData.get("seo_description");
+    const keywords = formData.get("keywords");
     const slug = formData.get("slug");
     const title = formData.get("title");
     const description = formData.get("description");
@@ -149,6 +150,7 @@ export async function POST(req) {
     const data = {
       seo_title,
       seo_description,
+      keywords,
       slug,
       title,
       description,

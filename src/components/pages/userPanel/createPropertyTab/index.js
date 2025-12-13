@@ -51,7 +51,9 @@ const CreatePropertyTab = () => {
     formData.append("seo_description",propertyData.seo_description)
     formData.append("slug",propertyData.slug)
     formData.append("keywords",keywords)
-    formData.append("amenities",amenities)
+    amenities.forEach((amenity) => {
+    formData.append("amenities", amenity);
+  });
     if (images && images.length > 0) {
   Array.from(images).forEach((file) => {
     formData.append("images", file);

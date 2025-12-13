@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Col, Row } from "reactstrap";
 import PropertyBox from "../../elements/propertyBoxs/PropertyBox";
 
-const GridLayout =({properties,favourites,from}) => {
+const GridLayout =({properties,favourites,from,fromPanel,setActiveTab}) => {
    
   return (
     <Fragment>
@@ -59,7 +59,7 @@ const GridLayout =({properties,favourites,from}) => {
           properties?.map((data, i) => (
             <Fragment key={i}>
               <Col xs={12} key={i}>
-                <PropertyBox data={data} />
+                <PropertyBox data={data} fromPanel={fromPanel} setActiveTab={setActiveTab} />
               </Col>
             </Fragment>
           ))

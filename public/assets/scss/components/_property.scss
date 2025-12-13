@@ -314,10 +314,25 @@
         }
       }
 
+      .labels-right {
+        position: absolute;
+        right: 6px;
+        div{
+          &+div{
+            margin-top: 6px;
+          }
+        }
+        .label {
+          text-transform: uppercase;
+          font-size: 10px;
+          font-weight: 500;
+          background-color: rgb(146, 16, 163);
+          font-family: $font_1, $font_3;
+        }
+      }
       .labels-left {
         position: absolute;
         left: -6px;
-        top: 20px;
         div{
           &+div{
             margin-top: 6px;
