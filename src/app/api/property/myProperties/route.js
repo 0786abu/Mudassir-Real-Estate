@@ -29,7 +29,6 @@ export async function GET(req) {
         const minPrice = searchParams.get('minPrice');
         const maxPrice = searchParams.get('maxPrice');
         const filter = {createdBy:isUser?._id};
-        console.log(type)
         if (areaSize) filter.areaSize = areaSize;
         if (category) filter.category = category;
         if (type) filter.type = type;
