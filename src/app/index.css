@@ -1,0 +1,5 @@
+@media (max-width:768px) {
+    .skeleton-card{
+        flex-direction: column;
+    }
+}

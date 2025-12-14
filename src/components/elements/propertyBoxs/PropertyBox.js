@@ -8,19 +8,18 @@
 "use client"
 import Link from "next/link";
 import { Camera, Edit, Trash } from "react-feather";
-// import ImageSlider from "../ImageSlider";
 import PropertyLabel from "../PropertyLabel";
-// import ThumbnailSlider from "../ThumbnailSlider";
-import AddToCompareProducts from "../AddToCompareProducts";
-import AddToWhishList from "../AddToWhishList";
+// import AddToCompareProducts from "../AddToCompareProducts";
 import { formatPK } from "@/utils/Formatter";
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
-import { GetFavouritesData, RemoveFavouriteProperty } from "@/redux-toolkit/action/favouritesAction";
-import { useEffect, useState } from "react";
+import { RemoveFavouriteProperty } from "@/redux-toolkit/action/favouritesAction";
+import { useState } from "react";
 import { SendPropertyDataToMyProperty } from "@/redux-toolkit/action/propertyAction";
+import AddToWhishList from "../AddToWhishList";
 
-const ImageSlider = dynamic(() => import("../ImageSlider"));
+const ImageSlider = dynamic(() => import("../ImageSlider"),{ssr:false});
+
 export const formatDatenew = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -34,7 +33,6 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
   const dispatch = useDispatch();
   const {addfavloading,favProperties} = useSelector((state)=>state.Favourites);
   const [itemID, setItemID] = useState("");
-
 
   
   const handleRemoveFav = (id)=>{
@@ -95,7 +93,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
         <span className="font-roboto">{data.propertyID.location} </span>
 
         <Link href={`/properties/${data.propertyID.slug}`}>
-          <h3>{data.propertyID.title}</h3>
+          <h3 >{data.propertyID.title}</h3>
         </Link>
 
         <h6>
