@@ -14,7 +14,7 @@ const AboutDeskBox = ({aboutProperty}) => {
   return (
     <div className='about page-section' id='about'>
       <h4>Property Brief</h4>
-        <div className="aboutProperty" dangerouslySetInnerHTML={{ __html: aboutProperty }}></div>
+        <div className="white-space-pre-line">{aboutProperty}</div>
     </div>
   );
 };
