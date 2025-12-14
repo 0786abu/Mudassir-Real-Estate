@@ -4,7 +4,6 @@ import { Col, Row } from "reactstrap";
 // import PropertyBox from "../../elements/propertyBoxs/PropertyBox";
 
 const GridLayout = ({properties,favourites,from,fromPanel,setActiveTab}) => {
-  console.log({properties,favourites,from,fromPanel,setActiveTab})
   return (
     <Fragment>
      {from ? (

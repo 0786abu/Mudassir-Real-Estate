@@ -115,7 +115,6 @@ export const LoginUser = ({user,onClickForForgot})=>async(dispatch)=>{
             },
             withCredentials:true
         });
-        console.log(data)
         toast.success(data.message);
         onClickForForgot()
         const sampledata = {
@@ -188,7 +187,6 @@ export const Logout_User = (router)=>async(dispatch)=>{
         router.push("/")
         window.location.reload();
     } catch (error) {
-        console.log(error)
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
@@ -312,7 +310,6 @@ export const Logout_User2 = (router)=>async(dispatch)=>{
         router.push("/")
         window.location.reload();
     } catch (error) {
-        console.log(error)
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
     }

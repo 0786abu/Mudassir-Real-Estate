@@ -155,10 +155,11 @@ const EditProperty = ({setActivetab}) => {
                   <div className="form-inputs">
                     <h6>Basic information</h6>
                     <Row className="gx-2 gx-sm-3">
-                      <Col sm="4" className="form-group">
+                      <Col sm="6" md="4" className="form-group">
                         <input name="title" value={propertyData.title} onChange={(e)=>setPropertyData({...propertyData, title:e.target.value})} type="text" className="form-control" placeholder="Enter Property Title" />
                       </Col>
-                      <div className="form-group col-sm-4">
+                      <Col sm="6" md="4">
+                      <div className="form-group">
                         <input
                           name="price"
                           type="text"
@@ -168,7 +169,8 @@ const EditProperty = ({setActivetab}) => {
                           placeholder="Property Price in number (ex. 10000000)"
                         />
                       </div>
-                      <Col sm="4" className="form-group">
+                      </Col>
+                      <Col sm="6" md="4" className="form-group">
                        <select
                        name="category"
                         value={propertyData.category} onChange={(e)=>setPropertyData({...propertyData, category:e.target.value})}
@@ -181,7 +183,7 @@ const EditProperty = ({setActivetab}) => {
                                  <option value="Rent">Rent</option>
                                </select>
                       </Col>
-                      <Col sm="4" className="form-group">
+                      <Col sm="6" md="4" className="form-group">
                        <select
                        name="type"
                         value={propertyData.type} onChange={(e)=>setPropertyData({...propertyData, type:e.target.value})}
@@ -202,19 +204,19 @@ const EditProperty = ({setActivetab}) => {
                                </select>
                       </Col>
                       
-                      <Col sm="4" className="form-group">
+                      <Col sm="6" md="4" className="form-group">
                         <input name="rooms" value={propertyData.rooms} onChange={(e)=>setPropertyData({...propertyData, rooms:+e.target.value})} type="number" className="form-control" label="rooms" placeholder="Enter Number of rooms (ex. 1 or 4 etc.)" />
                       </Col>
-                       <Col sm="4" className="form-group">
+                       <Col sm="6" md="4" className="form-group">
                         <input name="beds" type="number" value={propertyData.beds} onChange={(e)=>setPropertyData({...propertyData, beds:+e.target.value})} className="form-control" label="beds" placeholder="Enter Number of beds rooms (ex. 1 or 4 etc.)" />
                       </Col>
-                       <Col sm="4" className="form-group">
+                       <Col sm="6" md="4" className="form-group">
                         <input name="baths" type="number" value={propertyData.baths} onChange={(e)=>setPropertyData({...propertyData, baths:+e.target.value})} className="form-control" label="baths" placeholder="Enter Number of bath rooms (ex. 1 or 4 etc.)" />
                       </Col>
-                       <Col sm="4" className="form-group">
+                       <Col sm="6" md="4" className="form-group">
                         <input name="squareFits" value={propertyData.squareFits} onChange={(e)=>setPropertyData({...propertyData, squareFits:+e.target.value})} type="number" className="form-control" label="squareFits" placeholder="Enter your property in sqft (ex. 1200 or 1500 etc.)" />
                       </Col>
-                       <Col sm="4" className="form-group">
+                       <Col sm="6" md="4" className="form-group">
                         <select
                         name="areaSize"
                          value={propertyData.areaSize} onChange={(e)=>setPropertyData({...propertyData, areaSize:e.target.value})}
@@ -226,17 +228,18 @@ const EditProperty = ({setActivetab}) => {
                                                   })}
                                         </select>
                       </Col>
-                       <Col sm="4" className="form-group">
+                       <Col sm="6" md="4" className="form-group">
                         <input name="balcony" value={propertyData.balcony} onChange={(e)=>setPropertyData({...propertyData, balcony:+e.target.value})} type="number" className="form-control" label="balcony" placeholder="Enter number of balconies (optional)" />
                       </Col>
-                       <Col sm="4" className="form-group">
+                       <Col sm="6" md="4" className="form-group">
                         <input name="operatingSince" value={propertyData.operatingSince} onChange={(e)=>setPropertyData({...propertyData, operatingSince:+e.target.value})} type="number" className="form-control" label="operatingSince" placeholder="Opertaing since (ex. 2016)" />
                       </Col>
-                       <Col sm="4" className="form-group d-flex justify-content-start align-items-center">
+                       <Col sm="6" md="4" className="form-group d-flex justify-content-start align-items-center">
   <div className="form-check d-flex align-items-center">
     <input
      value={propertyData.furnished} onChange={(e)=>setPropertyData({...propertyData, furnished:!propertyData.furnished})}
       name="furnished"
+      checked={propertyData.furnished}
       type="checkbox"
       className="form-check-input h-100"
       id="furnishedCheck"

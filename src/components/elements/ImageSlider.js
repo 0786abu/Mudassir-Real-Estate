@@ -7,7 +7,6 @@ import dynamic from "next/dynamic";
 // const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
 const ImageSlider = ({ images }) => {
-  console.log(images)
   return (
       <Slider className="property-slider" {...propertySlider}>
         {images?.map((data, i) => (

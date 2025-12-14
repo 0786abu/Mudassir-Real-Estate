@@ -46,7 +46,6 @@ const EditProfile = ({ toggle, loading, setModal, profileDetail }) => {
   const value = event.target.value;
   setInputs((values) => ({ ...values, [name]: value }));
 };
-console.log(profileDetail)
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Home, MapPin, Bed, Bath, Maximize, Calendar, Eye, DollarSign, Check, Star, Play, Edit, Trash2, Share2, Cross, CircleEllipsis } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formatPK } from '@/utils/Formatter';
-import { Col, Row } from 'reactstrap';
+import { Col, Input, Label, Row } from 'reactstrap';
 import { Plus, Trash } from 'react-feather';
 import { RemovePropertyImage, UpdateFloorPlanImage, UploadMoreImages } from '@/redux-toolkit/action/propertyAction';
 import {
@@ -27,11 +27,22 @@ function getYouTubeEmbedUrl(url) {
 const PropertyDetailDashboard = ({setActivetab}) => {
   const {myProperty,createpropertyloading,removepropertyimageloading} = useSelector((state)=>state.Property);
   const [activeTab, setActiveTab] = useState('overview');
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(1);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
-  const [publicID, setPublicID] = useState("")
+  const [publicID, setPublicID] = useState("");
+  const [paidModal, setPaidModal] = useState(false);
+  const [makePayment, setMakePayment] = useState(false);
 
+  useEffect(()=>{
+    if(myProperty){
+      setTimeout(() => {
+        if(myProperty.isPaid===false && myProperty.isFree===false){
+        setPaidModal(true);
+      }
+      }, 200);
+    }
+  },[myProperty])
   const [images, setImages] = useState([]);
   const [floorPlanImage, setFloorPlanImage] = useState(null);
 
@@ -67,12 +78,15 @@ const PropertyDetailDashboard = ({setActivetab}) => {
   const handleRemoveImage = (public_id)=>{
     setPublicID(public_id)
     const slug = myProperty.slug
-    dispatch(RemovePropertyImage({public_id,slug,setPublicID}))
+    dispatch(RemovePropertyImage({public_id,slug,setPublicID,setCurrentImageIndex}))
   }
 
   const toggle = () => {
     setModal(!modal);
     setImages([])
+  }
+  const paidToggle = () => {
+    setPaidModal(!paidModal);
   }
 
   const handleFileChange = (e) => {
@@ -92,6 +106,9 @@ const PropertyDetailDashboard = ({setActivetab}) => {
   const CancelUploadImage = () => {
     setFloorPlanImage(null);
   };
+  useEffect(()=>{
+    window.scrollTo({top:0, behavior:"smooth"})
+  })
   return (
     <div style={{ minHeight: '100vh', padding: '2rem 0' }}>
        <Modal isOpen={modal} toggle={toggle} centered size="lg">
@@ -106,6 +123,55 @@ const PropertyDetailDashboard = ({setActivetab}) => {
         </ModalBody>
 
       </Modal>
+      {/* paid modal */}
+      <Modal isOpen={paidModal} toggle={paidToggle} centered size="lg">
+        <ModalHeader toggle={paidToggle}>
+          {/* Reactstrap Modal */}
+        </ModalHeader>
+
+        <ModalBody style={{textAlign:"center"}}>
+          {makePayment ? (
+            <div>
+              <Row className='gap-4'>
+                <Col md="6">
+                <div className=' d-flex flex-column align-items-start'>
+                <Label>Payment Type</Label>
+                <Input placeholder='Payment method'/>
+              </div>
+              </Col>
+              <Col md="6">
+              <div className=' d-flex flex-column align-items-start'>
+                <Label className=' align-items-start'>Payment Type</Label>
+                <Input placeholder='Payment method'/>
+              </div>
+              </Col>
+              </Row>
+              <div className='d-flex justify-content-end mt-4'>
+               <div>
+                 <Button color="success">
+            Submit
+          </Button>
+          <Button className='ms-2' onClick={()=>setMakePayment(!makePayment)} color="light">
+            Cancel
+          </Button>
+               </div>
+              </div>
+            </div>
+          ) : "Make a payemnt for live and show your property on public"}
+        </ModalBody>
+        {!makePayment && (
+          <ModalFooter>
+          <Button onClick={()=>setMakePayment(!makePayment)} color="success">
+            Proceed to Payment
+          </Button>
+          <Button onClick={paidToggle} color="light">
+            Pay later
+          </Button>
+        </ModalFooter>
+        )}
+
+      </Modal>
+      {/* paid modal */}
        <Modal className='video-modal' centered size='lg' isOpen={modal2} toggle={toggle2} modalTransition={{ timeout: 100 }}>
               <ModalBody className='m-0 p-0'>
                 <Button onClick={toggle2} type='button' className='btn-close' aria-label='Close'>
@@ -120,12 +186,12 @@ const PropertyDetailDashboard = ({setActivetab}) => {
       ></iframe>
               </ModalBody>
             </Modal>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 1rem' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 0.5rem' }}>
         {/* Header Section */}
         <div style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <h5><span class="badge text-bg-success">Featured Property</span></h5>
+              <h5><span className="badge text-bg-success">Featured Property</span></h5>
               <h2 style={{ marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '1.75rem' }}>{myProperty.title}</h2>
               <p style={{ color: '#6c757d', marginBottom: 0, display: 'flex', alignItems: 'center' }}>
                 <MapPin size={16} style={{ marginRight: '0.5rem' }} />
@@ -133,13 +199,15 @@ const PropertyDetailDashboard = ({setActivetab}) => {
               </p>
             </div>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {(myProperty.isPaid===false && myProperty.isFree===false) && (
+                <button onClick={paidToggle} style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #198754', background: 'white', color: '#198754', borderRadius: '6px', cursor: 'pointer' }}>
+                <Edit size={16} style={{ marginRight: '0.5rem' }} />
+                Make payment
+              </button>
+              )}
               <button onClick={()=>setActivetab("editProperty")} style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #0d6efd', background: 'white', color: '#0d6efd', borderRadius: '6px', cursor: 'pointer' }}>
                 <Edit size={16} style={{ marginRight: '0.5rem' }} />
                 Edit
-              </button>
-              <button style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #198754', background: 'white', color: '#198754', borderRadius: '6px', cursor: 'pointer' }}>
-                <Share2 size={16} style={{ marginRight: '0.5rem' }} />
-                Share
               </button>
               <button style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #dc3545', background: 'white', color: '#dc3545', borderRadius: '6px', cursor: 'pointer' }}>
                 <Trash2 size={16} />
@@ -183,7 +251,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
               <div style={{ background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', marginBottom: '1.5rem', overflow: 'hidden' }}>
                 <div style={{ position: 'relative', height: '500px', overflow: 'hidden' }}>
                   <img 
-                    src={myProperty.images[currentImageIndex].url} 
+                    src={myProperty.images[currentImageIndex]?.url} 
                     alt="Property"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
@@ -203,10 +271,25 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                       />
                     ))}
                   </div>
+                  <div style={{ position: 'absolute', top: '8px', right: '8px', display: 'flex', gap: '10px' }}>
+                      <button
+                        style={{
+                          borderRadius: '50%',
+                          border: '1px solid gray',
+                          background:"red",
+                          color:"white",
+                          padding:"4px",
+                          cursor: 'pointer'
+                        }}
+                        onClick={()=>handleRemoveImage(myProperty.images[currentImageIndex]?.public_id)}
+                      >
+                        {removepropertyimageloading && myProperty.images[currentImageIndex]?.public_id === publicID ? <span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> : <Trash style={{width:"20px",height:"20px",background:"red",padding:"3px",borderRadius:"50%",color:"white"}}/>}
+                      </button>
+                  </div>
                 </div>
                 <div style={{ padding: '1rem', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px' }}>
                   {myProperty.images.map((img, idx) => (
-                    <div key={idx} onClick={()=>handleRemoveImage(img.public_id)} style={{position:"relative"}}>
+                    <div key={idx} style={{position:"relative"}}>
                       <img
                       key={idx}
                       src={img.url}
@@ -214,14 +297,13 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                       onClick={() => setCurrentImageIndex(idx)}
                       style={{
                         width: '100%',
-                        height: '80px',
+                        aspectRatio:"1/1",
                         objectFit: 'cover',
                         borderRadius: '6px',
                         cursor: 'pointer',
                         border: currentImageIndex === idx ? '3px solid #0d6efd' : '3px solid transparent'
                       }}
                     />
-                    <span title='remove image permanently' style={{position:"absolute",background:"transparent", top:"2px",right:"2px"}}>{removepropertyimageloading && img.public_id === publicID ? <span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> : <Trash style={{width:"20px",height:"20px",background:"red",padding:"3px",borderRadius:"50%",color:"white"}}/>}</span>
                     </div>
                   ))}
                  <div>
@@ -236,7 +318,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                   onClick={handleClick}
                   style={{
                         width: '100%',
-                        height: '80px',
+                        height:"100%",
                         objectFit: 'cover',
                         borderRadius: '6px',
                         cursor: 'pointer',
@@ -257,7 +339,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
               {/* Tabs Section */}
               <div style={{ background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', padding: '1.5rem' }}>
                 <div style={{ borderBottom: '2px solid #e9ecef', marginBottom: '1.5rem' }}>
-                  <div style={{ display: 'flex', gap: '2rem' }}>
+                  <div style={{ display: 'flex',flexWrap:"wrap", gap: '10px' }}>
                     {['overview', 'amenities', 'location',"seo-field","Floor Plan Image"].map(tab => (
                       <button
                         key={tab}
@@ -316,9 +398,11 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 {activeTab === 'Floor Plan Image' && (
                   <div>
                     
-                      <div>
-                        <Image src={myProperty.floorPlanImage.url} alt='Floor Plan Image' height={400} width={400} style={{width:"100%",aspectRatio:"16/9",objectFit:"cover"}}/>
+                      {myProperty.floorPlanImage && (
+                        <div>
+                        <Image src={myProperty?.floorPlanImage?.url} alt='Floor Plan Image' height={400} width={400} style={{width:"100%",aspectRatio:"16/9",objectFit:"cover"}}/>
                       </div>
+                      )}
                     <div>
                       {!myProperty?.floorPlanImage && (
                         <h4>No Floor Plan Image Added</h4>

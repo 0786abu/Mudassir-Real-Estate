@@ -29,7 +29,6 @@ export async function POST(req) {
     const oldUrl = isAgent ? currentUser?.agencyProfile : currentUser?.profile;
     if (oldUrl && oldUrl?.public_id) {
         await cloudinary.uploader.destroy(oldUrl.public_id);
-        console.log("old iamge logic apply")
     }
 
     // 6️⃣ Upload new file to Cloudinary (easy way)

@@ -24,7 +24,6 @@ const OTPPage = () => {
     }
   }
 }, []);
-console.log(email)
   // handle change
   const handleChange = (e, index) => {
     const value = e.target.value;

@@ -116,7 +116,6 @@ export async function DELETE(req, { params }) {
     const { slug } = await params;
     const { searchParams } = new URL(req.url);
     const public_id = searchParams.get("public_id");
-    console.log(public_id)
     if (!public_id) {
       return NextResponse.json(
         { success: false, message: "public_id is required" },
@@ -174,7 +173,6 @@ export async function DELETE(req, { params }) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { success: false, message:error.message },
       { status: 500 }
@@ -266,7 +264,6 @@ export async function POST(req, { params }) {
       { status: 200 }
     );
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { success: false, message: "Server error" },
       { status: 500 }

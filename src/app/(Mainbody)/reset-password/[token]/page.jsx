@@ -5,7 +5,6 @@ import FooterThree from "@/layout/footers/FooterThree";
 
 const ResetPassword = async({params}) => {
     const {token} = await params;
-    console.log(token)
   return (
     <div>
       <Breadcrumb page="Reset" />

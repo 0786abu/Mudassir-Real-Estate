@@ -57,8 +57,8 @@ const MyListingTab = ({setActiveTab}) => {
           <div className="mb-2">
             <div className="mb-3">
         {/* <label className="form-label">Property Status</label> */}
-        <Row className="">
-          <Col lg="3" className="mt-2">
+        <Row xs={"2"} sm={"3"} lg={"4"} className="">
+          <Col className="mt-2">
           <select
           className=""
           style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
@@ -70,7 +70,7 @@ const MyListingTab = ({setActiveTab}) => {
           <option value="Rent">For Rent</option>
         </select>
         </Col>
-          <Col lg="3" className="mt-2">
+          <Col className="mt-2">
           <select
                     style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
                     value={type}
@@ -88,7 +88,7 @@ const MyListingTab = ({setActiveTab}) => {
             ))}
                   </select>
         </Col>
-          <Col lg="3" className="mt-2">
+          <Col className="mt-2">
           <select
                     className=""
                     style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
@@ -101,7 +101,7 @@ const MyListingTab = ({setActiveTab}) => {
                     })}
                   </select>
         </Col>
-          <Col lg="3" className="mt-2">
+          <Col className="mt-2">
          <select
   style={{
     outline: "none",
@@ -126,7 +126,7 @@ const MyListingTab = ({setActiveTab}) => {
   ))}
 </select>
         </Col>
-        <Col lg="3" className="mt-2"><Button onClick={clearFilter} className="btn-dark">Clear Filter</Button></Col>
+        <Col className="mt-2"><Button onClick={clearFilter} className="btn-dark">Clear Filter</Button></Col>
         </Row>
       </div>
           </div>
