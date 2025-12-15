@@ -15,28 +15,28 @@ const EditProperty = ({setActivetab}) => {
   const [amenityInput, setAmenityInput] = useState("");
   const dispatch = useDispatch();
   const [propertyData, setPropertyData] = useState({
-    seo_title:"" || myProperty.seo_title,
-    seo_description:"" || myProperty.seo_description,
-    slug:"" || myProperty.slug,
-    title:"" || myProperty.title,
-    description:"" || myProperty.description,
-    price:"" || myProperty.price,
-    rooms:"" || myProperty.rooms,
-    beds:"" || myProperty.beds,
-    baths:"" || myProperty.baths,
-    squareFits:"" || myProperty.squareFits,
-    areaSize:"" || myProperty.areaSize,
-    category:"" || myProperty.category,
-    type:"" || myProperty.type,
-    city:"" || myProperty.city,
-    location:"" || myProperty.location,
-    address:"" || myProperty.address,
-    state:"" || myProperty.state,
-    furnished: false || myProperty?.furnished,
-    aboutProperty:"" || myProperty.aboutProperty,
-    balcony:"" || myProperty.balcony,
-    operatingSince:"" || myProperty.operatingSince,
-    video:"" || myProperty.video
+    seo_title:"",
+    seo_description:"",
+    slug:"",
+    title:"",
+    description:"",
+    price:"",
+    rooms:"",
+    beds:"",
+    baths:"",
+    squareFits:"",
+    areaSize:"",
+    category:"",
+    type:"",
+    city:"",
+    location:"",
+    address:"",
+    state:"",
+    furnished: false,
+    aboutProperty:"",
+    balcony:"",
+    operatingSince:"",
+    video:""
   });
 
   const handleSubmit = (e)=>{
@@ -45,10 +45,38 @@ const EditProperty = ({setActivetab}) => {
     propertyData.keywords = keywords
     dispatch(UpdateProperty(propertyData,setActivetab))
   }
+
   useEffect(()=>{
-    setKeywords(myProperty.keywords);
-    setAmenities(myProperty.amenities);
-  },[myProperty.keywords,myProperty.amenities])
+    if(myProperty){
+      setPropertyData({
+        seo_title:myProperty?.seo_title,
+        seo_description:myProperty?.seo_description,
+        seo_description:myProperty?.seo_description,
+        slug:myProperty?.slug,
+        title:myProperty?.title,
+        description:myProperty?.description,
+        price:myProperty?.price,
+        rooms:myProperty?.rooms,
+        beds:myProperty?.beds,
+        baths:myProperty?.baths,
+        squareFits:myProperty?.squareFits,
+        areaSize:myProperty?.areaSize,
+        category:myProperty?.category,
+        type:myProperty?.type,
+        city:myProperty?.city,
+        location:myProperty?.location,
+        address:myProperty?.address,
+        state:myProperty?.state,
+        furnished:myProperty?.furnished,
+        aboutProperty:myProperty?.aboutProperty,
+        balcony:myProperty?.balcony,
+        operatingSince:myProperty?.operatingSince,
+        video:myProperty?.video,
+      });
+      setKeywords(myProperty?.keywords)
+      setAmenities(myProperty?.amenities)
+    }
+  },[myProperty])
 
 useEffect(()=>{
   if(selectedSlug !== null){
@@ -136,9 +164,9 @@ useEffect(()=>{
                       </button>
                     </div>
 
-                    {keywords.length > 0 ? (
+                    {keywords?.length > 0 ? (
                       <div className="d-flex mt-2 flex-wrap gap-2">
-                        {keywords.map((keyword, index) => (
+                        {keywords?.map((keyword, index) => (
                           <div style={{color:"black",fontSize:"15px",fontWeight:"500",color:"#9BA0A4"}} key={index} className="d-flex badge justify-content-center align-items-center border gap-1">
                             <span>{keyword}</span>
                             <button
@@ -349,9 +377,9 @@ useEffect(()=>{
                       </button>
                     </div>
 
-                    {amenities.length > 0 ? (
+                    {amenities?.length > 0 ? (
                       <div className="d-flex mt-2 flex-wrap gap-2">
-                        {amenities.map((amenityy, index) => (
+                        {amenities?.map((amenityy, index) => (
                           <div style={{color:"black",fontSize:"15px",fontWeight:"500",color:"#9BA0A4"}} key={index} className="d-flex badge justify-content-center align-items-center border gap-1">
                             <span>{amenityy}</span>
                             <button
