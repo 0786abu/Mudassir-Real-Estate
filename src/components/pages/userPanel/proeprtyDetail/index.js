@@ -405,6 +405,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
         type="file"
         accept="image/*"
         ref={fileInputRef}
+        multiple
         onChange={handleFileChange}
         style={{ display: "none" }}
       />
