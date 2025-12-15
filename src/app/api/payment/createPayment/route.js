@@ -104,7 +104,7 @@ export async function GET(req) {
         { status: 401 }
       );
     }
-    const payments = await Payment.find().populate("property","slug");
+    const payments = await Payment.find({user:isUser._id}).populate("property","slug");
     return NextResponse.json({
         success:true,
         payments
