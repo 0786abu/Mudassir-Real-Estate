@@ -665,3 +665,15 @@ a {
   list-style-type: decimal !important; /* numbered list */
   list-style-position: outside !important; /* number outside text */
 }
+
+.table th {
+  white-space: nowrap;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table-responsive {
+  max-height: 500px;
+}

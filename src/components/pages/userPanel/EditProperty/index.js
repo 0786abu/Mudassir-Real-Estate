@@ -4,10 +4,11 @@ import NoSsr from "@/utils/NoSsr";
 import { areaSizes, citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
 import { Plus, X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
-import { UpdateProperty } from "@/redux-toolkit/action/propertyAction";
+import { SendPropertyDataToMyProperty, UpdateProperty } from "@/redux-toolkit/action/propertyAction";
+import ProfileLoader from "@/components/common/Loader";
 
 const EditProperty = ({setActivetab}) => {
-  const {createpropertyloading,myProperty} = useSelector((state)=>state.Property)
+  const {createpropertyloading,myProperty,singlepropertyloading,selectedSlug} = useSelector((state)=>state.Property)
  const [keywords, setKeywords] = useState([])
   const [keywordInput, setKeywordInput] = useState("");
  const [amenities, setAmenities] = useState([])
@@ -37,6 +38,7 @@ const EditProperty = ({setActivetab}) => {
     operatingSince:"" || myProperty.operatingSince,
     video:"" || myProperty.video
   });
+
   const handleSubmit = (e)=>{
     e.preventDefault();
     propertyData.amenities = amenities;
@@ -48,6 +50,11 @@ const EditProperty = ({setActivetab}) => {
     setAmenities(myProperty.amenities);
   },[myProperty.keywords,myProperty.amenities])
 
+useEffect(()=>{
+  if(selectedSlug !== null){
+    dispatch(SendPropertyDataToMyProperty(selectedSlug))
+  }
+},[selectedSlug,dispatch])
 
 
   function handleAddKeyword() {
@@ -88,7 +95,8 @@ const EditProperty = ({setActivetab}) => {
   return (
     <NoSsr>
           <div className="dashboard-content">
-            <div className="create-tab" id="create-property">
+            {singlepropertyloading ? (<ProfileLoader/>) : (
+              <div className="create-tab" id="create-property">
               <div className="property-wizard common-card">
                 <div className="common-header">
                   <h5>Create property</h5>
@@ -376,6 +384,7 @@ const EditProperty = ({setActivetab}) => {
                 </form>
               </div>
             </div>
+            )}
           </div>
     </NoSsr>
   );

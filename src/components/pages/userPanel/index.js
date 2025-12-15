@@ -14,6 +14,7 @@ import ProfileLoader from "@/components/common/Loader";
 import PropertyDetails from "./proeprtyDetail";
 import { toast } from "react-toastify";
 import EditProperty from "./EditProperty";
+import Payments from "./payments";
 
 const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
@@ -46,6 +47,7 @@ const BodyContent = ({ active }) => {
   {activeTab === "Favorites" && <FavoritesTab />}
 
   {activeTab === "Privacy" && <PrivacyTab />}
+  {activeTab === "payments" && <Payments setActiveTab={setActiveTab} />}
           </Col>
         </Row>
       </Container>

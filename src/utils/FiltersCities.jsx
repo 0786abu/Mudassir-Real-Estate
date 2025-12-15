@@ -433,4 +433,40 @@ export const areaSizes = [
   "5 Acre",
   "10 Acre"
 ];
-export const bedsFilterData = [1,2,3,4,5,6,7,8,9,10,12]
+export const bedsFilterData = [1,2,3,4,5,6,7,8,9,10,12];
+
+export const paymentMethods = [
+  {
+    key: "jazzcash",
+    label: "JazzCash",
+    type: "mobile",
+    accountName: "ABC Real Estate",
+    number: "0300-0000000"
+  },
+  {
+    key: "easypaisa",
+    label: "EasyPaisa",
+    type: "mobile",
+    accountName: "ABC Real Estate",
+    number: "0300-0000001"
+  },
+  {
+    key: "bank",
+    label: "Bank Transfer",
+    type: "bank",
+    banks: [
+      {
+        bankName: "Meezan Bank",
+        accountTitle: "ABC Real Estate Pvt Ltd",
+        accountNumber: "55120145005",
+        iban: "PK36MEZN00055120145005"
+      },
+      {
+        bankName: "HBL",
+        accountTitle: "ABC Real Estate Pvt Ltd",
+        accountNumber: "00123456789",
+        iban: "PK12HBL00000123456789"
+      }
+    ]
+  }
+];

@@ -122,6 +122,10 @@ const propertySchema = new Schema({
     video:{
         type: String
     },
+    isRequestedForPayment:{
+        type:Boolean,
+        default:false
+    },
     balcony:{
         type: Number
     },

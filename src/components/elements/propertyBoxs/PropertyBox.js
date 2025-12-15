@@ -17,6 +17,7 @@ import { RemoveFavouriteProperty } from "@/redux-toolkit/action/favouritesAction
 import { useState } from "react";
 import { SendPropertyDataToMyProperty } from "@/redux-toolkit/action/propertyAction";
 import AddToWhishList from "../AddToWhishList";
+import { setSelectedSlug } from "@/redux-toolkit/slice/propertySlice";
 
 const ImageSlider = dynamic(() => import("../ImageSlider"),{ssr:false});
 
@@ -42,13 +43,13 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
    const handleViewDetails = () => {
     if (fromPanel) {
       setActiveTab("propertyDetail");
-      dispatch(SendPropertyDataToMyProperty(data))
+      dispatch(setSelectedSlug(data.slug))
     }
   };
    const handleEditProperty = () => {
     if (fromPanel) {
       setActiveTab("editProperty");
-      dispatch(SendPropertyDataToMyProperty(data))
+      dispatch(setSelectedSlug(data.slug))
     }
   };
 
@@ -134,7 +135,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
         </div>
         {(fromPanel==="user-panel") && (
           <div className="labels-left" style={{top:"50px"}}>
-          <span className={`label text-bg-${data.isApproved==="Approved" ? "success": data.isApproved==="No Approved" ? danger : "warning"}`}>{data.isApproved}</span>
+          <span className={`label text-bg-${data.isApproved==="Approved" ? "success": data.isApproved==="No Approved" ? "danger" : "warning"}`}>{data.isApproved}</span>
         </div>
         )}
         {(fromPanel==="user-panel" && data.isFree) && (

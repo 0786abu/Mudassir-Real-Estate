@@ -1,4 +1,5 @@
 export function formatPK(num) {
+  if(!num) return;
   const absNum = Math.abs(num);
 
   if (absNum >= 1000000000) {

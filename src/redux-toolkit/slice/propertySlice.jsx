@@ -5,6 +5,8 @@ const initialState = {
     myProperties:[],
     myProperty:null,
     mypropertyloading:false,
+    selectedSlug:null,
+    singlepropertyloading:false,
     createpropertyloading:false,
     removepropertyimageloading:false,
     totalPages:null,
@@ -31,8 +33,16 @@ const propertySice = createSlice({
         }
        },
        setMyProperty:(state,action)=>{
+        state.mypropertyloading = false
+        state.error = null
         state.myProperty = action.payload
        },
+       setSelectedSlug:(state,action)=>{
+          state.selectedSlug = action.payload
+        },
+        setSinglePropertyLoading:(state,action)=>{
+            state.singlepropertyloading = true
+        },
        setPagesContent:(state,action)=>{
         state.totalPages = action.payload.totalPages
         state.currentPage = action.payload.currentPage;
@@ -47,6 +57,10 @@ const propertySice = createSlice({
         state.error = null
         state.myProperties = action.payload
        },
+       setSingleProperty:(state,action)=>{
+        state.singlepropertyloading = false
+        state.myProperty = action.payload
+       },
        setMyPropertyLoading:(state,action)=>{
         state.mypropertyloading = action.payload
        },
@@ -56,6 +70,6 @@ const propertySice = createSlice({
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty} = propertySice.actions;
 
 export default propertySice.reducer;

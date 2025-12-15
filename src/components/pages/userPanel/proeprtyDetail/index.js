@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatPK } from '@/utils/Formatter';
 import { Col, Input, Label, Row } from 'reactstrap';
 import { Plus, Trash } from 'react-feather';
-import { RemovePropertyImage, UpdateFloorPlanImage, UploadMoreImages } from '@/redux-toolkit/action/propertyAction';
+import { RemovePropertyImage, SendPropertyDataToMyProperty, UpdateFloorPlanImage, UploadMoreImages } from '@/redux-toolkit/action/propertyAction';
 import {
   Button,
   Modal,
@@ -13,6 +13,9 @@ import {
   ModalFooter
 } from "reactstrap";
 import Image from 'next/image';
+import { paymentMethods } from '@/utils/FiltersCities';
+import { CreatePayment } from '@/redux-toolkit/action/paymentAction';
+import ProfileLoader from '@/components/common/Loader';
 
 
 
@@ -25,24 +28,40 @@ function getYouTubeEmbedUrl(url) {
 
 
 const PropertyDetailDashboard = ({setActivetab}) => {
-  const {myProperty,createpropertyloading,removepropertyimageloading} = useSelector((state)=>state.Property);
+  const {myProperty,singlepropertyloading,createpropertyloading,removepropertyimageloading,selectedSlug} = useSelector((state)=>state.Property);
+  const {createpaymentloading} = useSelector((state)=>state.Payment);
   const [activeTab, setActiveTab] = useState('overview');
-  const [currentImageIndex, setCurrentImageIndex] = useState(1);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [publicID, setPublicID] = useState("");
   const [paidModal, setPaidModal] = useState(false);
   const [makePayment, setMakePayment] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState(null);
+  const [selectedBank, setSelectedBank] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const [screenShot, setScreenShot] = useState(null);
+
+  const handleChange = (e)=>{
+    const file = e.target.files[0];
+    setScreenShot(file);
+  }
 
   useEffect(()=>{
     if(myProperty){
       setTimeout(() => {
-        if(myProperty.isPaid===false && myProperty.isFree===false){
+        if(myProperty?.isPaid===false && myProperty?.isFree===false && myProperty?.isRequestedForPayment===false){
         setPaidModal(true);
       }
       }, 200);
     }
   },[myProperty])
+
+  useEffect(()=>{
+    if(selectedSlug !==null){
+      dispatch(SendPropertyDataToMyProperty(selectedSlug))
+    }
+  },[selectedSlug,dispatch])
   const [images, setImages] = useState([]);
   const [floorPlanImage, setFloorPlanImage] = useState(null);
 
@@ -71,14 +90,26 @@ const PropertyDetailDashboard = ({setActivetab}) => {
     formData.append("images", file);
   });
 }
-  dispatch(UploadMoreImages(formData,myProperty.slug,toggle))
+  dispatch(UploadMoreImages(formData,myProperty?.slug,toggle))
   }
 
 
   const handleRemoveImage = (public_id)=>{
     setPublicID(public_id)
-    const slug = myProperty.slug
+    const slug = myProperty?.slug
     dispatch(RemovePropertyImage({public_id,slug,setPublicID,setCurrentImageIndex}))
+  }
+
+  const handleSubmitPayment = ()=>{
+    const formData = new FormData();
+    formData.append("paymentMethod", selectedMethod?.key ?? "");
+    formData.append("propertyID", myProperty?._id);
+    formData.append("amount", amount);
+    formData.append("screenshot", screenShot ?? "");
+    if(selectedBank !==null && selectedMethod?.type==="bank"){
+      formData.append("bankDetails", selectedBank);
+    };
+    dispatch(CreatePayment({formData,setMakePayment,setPaidModal}))
   }
 
   const toggle = () => {
@@ -97,7 +128,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
   const handleUploadFloorPlanImage = ()=>{
     const formData = new FormData();
     formData.append("floorPlanImage", floorPlanImage);
-    dispatch(UpdateFloorPlanImage({formData,slug:myProperty.slug,setFloorPlanImage}))
+    dispatch(UpdateFloorPlanImage({formData,slug:myProperty?.slug,setFloorPlanImage}))
   }
   const handleFileChange2 = (e) => {
     const file = e.target.files[0];
@@ -108,7 +139,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
   };
   useEffect(()=>{
     window.scrollTo({top:0, behavior:"smooth"})
-  })
+  },[])
   return (
     <div style={{ minHeight: '100vh', padding: '2rem 0' }}>
        <Modal isOpen={modal} toggle={toggle} centered size="lg">
@@ -132,26 +163,83 @@ const PropertyDetailDashboard = ({setActivetab}) => {
         <ModalBody style={{textAlign:"center"}}>
           {makePayment ? (
             <div>
-              <Row className='gap-4'>
-                <Col md="6">
-                <div className=' d-flex flex-column align-items-start'>
-                <Label>Payment Type</Label>
-                <Input placeholder='Payment method'/>
+              <Row>
+                <Col md={"6"}>
+                <div className=' d-flex align-items-start flex-column'>
+                  <label>Payment method</label>
+                <select
+                className='form-control'
+  onChange={(e) =>
+    setSelectedMethod(
+      paymentMethods.find(m => m.key === e.target.value)
+    )
+  }
+>
+  <option value="">Select Payment Method</option>
+  {paymentMethods.map(method => (
+    <option key={method.key} value={method.key}>
+      {method.label}
+    </option>
+  ))}
+</select>
               </div>
               </Col>
-              <Col md="6">
+              <Col md={"6"}>
               <div className=' d-flex flex-column align-items-start'>
-                <Label className=' align-items-start'>Payment Type</Label>
-                <Input placeholder='Payment method'/>
+                <Label>Amount</Label>
+                <Input value={amount ?? ""} onChange={(e)=>setAmount(+e.target.value)} placeholder='Enter Amount' type='number'/>
               </div>
+              </Col>
+              <Col md={"12"} className='mt-4'>
+              <div className=' d-flex flex-column align-items-start'>
+                <Label>ScreenShot</Label>
+                <Input placeholder='Enter Amount' onChange={handleChange} type='file'/>
+              </div>
+              </Col>
+              <Col md="12" className='mt-4'>
+              {selectedMethod?.type === "mobile" && (
+  <div>
+    <p><b>Method:</b> {selectedMethod.label}</p>
+    <p><b>Account Name:</b> {selectedMethod.accountName}</p>
+    <p><b>Number:</b> {selectedMethod.number}</p>
+  </div>
+)}
+              </Col>
+              <Col xs="12">
+              {selectedMethod?.type === "bank" && (
+  <div>
+    <h4>Select Bank</h4>
+
+   <div className=' d-flex mt-4 align-items-center justify-content-start gap-2'>
+     {selectedMethod.banks.map((bank, index) => (
+      <label key={index} style={{ display: "block", marginBottom: "10px" }}>
+        <input
+          type="radio"
+          name="bank"
+          value={bank.bankName}
+          checked={selectedBank?.bankName === bank.bankName}
+          onChange={() => setSelectedBank(bank)}
+        />
+
+        <span style={{ marginLeft: "8px" }}>
+          <b>{bank.bankName}</b> <br />
+          Account Title: {bank.accountTitle} <br />
+          Account #: {bank.accountNumber} <br />
+          IBAN: {bank.iban}
+        </span>
+      </label>
+    ))}
+   </div>
+  </div>
+)}
               </Col>
               </Row>
               <div className='d-flex justify-content-end mt-4'>
                <div>
-                 <Button color="success">
-            Submit
+                 <Button disabled={createpaymentloading} onClick={handleSubmitPayment} color="success">
+            {createpaymentloading ? (<div className='d-flex align-items-center gap-1'><span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> <span>Submit</span></div>) : "Submit"}
           </Button>
-          <Button className='ms-2' onClick={()=>setMakePayment(!makePayment)} color="light">
+          <Button disabled={createpaymentloading} className='ms-2' onClick={()=>setMakePayment(!makePayment)} color="light">
             Cancel
           </Button>
                </div>
@@ -179,30 +267,36 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 </Button>
                 {/* <iframe src='https://www.youtube.com/embed/3H6Evu2hPpE?si=KS_WdXxa_vWBn4o1' allowFullScreen></iframe> */}
                 <iframe
-        src={getYouTubeEmbedUrl(myProperty.video && myProperty.video)}
+        src={getYouTubeEmbedUrl(myProperty?.video && myProperty?.video)}
         allowFullScreen
         width="100%"
         height="450"
       ></iframe>
               </ModalBody>
             </Modal>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 0.5rem' }}>
+      {singlepropertyloading ? (<ProfileLoader/>) : (
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 0.5rem' }}>
         {/* Header Section */}
         <div style={{ marginBottom: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
               <h5><span className="badge text-bg-success">Featured Property</span></h5>
-              <h2 style={{ marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '1.75rem' }}>{myProperty.title}</h2>
+              <h2 style={{ marginBottom: '0.5rem', fontWeight: 'bold', fontSize: '1.75rem' }}>{myProperty?.title}</h2>
               <p style={{ color: '#6c757d', marginBottom: 0, display: 'flex', alignItems: 'center' }}>
                 <MapPin size={16} style={{ marginRight: '0.5rem' }} />
-                {myProperty.address}
+                {myProperty?.address}
               </p>
             </div>
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              {(myProperty.isPaid===false && myProperty.isFree===false) && (
+              {(myProperty?.isPaid===false && myProperty?.isFree===false && myProperty?.isRequestedForPayment === false) && (
                 <button onClick={paidToggle} style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #198754', background: 'white', color: '#198754', borderRadius: '6px', cursor: 'pointer' }}>
                 <Edit size={16} style={{ marginRight: '0.5rem' }} />
                 Make payment
+              </button>
+              )}
+              {(myProperty?.isRequestedForPayment === true && myProperty?.isApproved==="Pending") && (
+                <button onClick={paidToggle} style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #198754', backgroundColor:"#198754", color: 'white', borderRadius: '6px', cursor: 'pointer' }}>
+                Payment Requested
               </button>
               )}
               <button onClick={()=>setActivetab("editProperty")} style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #0d6efd', background: 'white', color: '#0d6efd', borderRadius: '6px', cursor: 'pointer' }}>
@@ -218,28 +312,28 @@ const PropertyDetailDashboard = ({setActivetab}) => {
 
         {/* Status Badges */}
         <div style={{ marginBottom: '2rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-          <span title='This property is pending for approval' style={{ background: myProperty.isApproved==="Approved" ? '#198754' : myProperty.isApproved==="No Approved" ? 'red' : "#FFC107", color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
-            {myProperty.isApproved==="Approved" ? <Check size={14} style={{ marginRight: '0.25rem' }} /> : myProperty.isApproved==="No Approved" ? <Plus size={14} style={{ marginRight: '0.25rem', rotate:"45deg" }} /> : <CircleEllipsis style={{ marginRight: '0.25rem' }}/>}
-            {myProperty.isApproved}
+          <span title='This property is pending for approval' style={{ background: myProperty?.isApproved==="Approved" ? '#198754' : myProperty?.isApproved==="No Approved" ? 'red' : "#FFC107", color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
+            {myProperty?.isApproved==="Approved" ? <Check size={14} style={{ marginRight: '0.25rem' }} /> : myProperty?.isApproved==="No Approved" ? <Plus size={14} style={{ marginRight: '0.25rem', rotate:"45deg" }} /> : <CircleEllipsis style={{ marginRight: '0.25rem' }}/>}
+            {myProperty?.isApproved}
           </span>
-          {myProperty.isFree && (
+          {myProperty?.isFree && (
             <span title={`This property is free for you`} style={{ background: '#F8F9FA', color: 'black', padding: '0.5rem 1rem', borderRadius: '6px' }}>
             {"This property is Free"}
           </span>
           )}
-          <span title={`Property Category is ${myProperty.category}`} style={{ background: '#F8F9FA', color: 'black', padding: '0.5rem 1rem', borderRadius: '6px' }}>
-            {myProperty.category}
+          <span title={`Property Category is ${myProperty?.category}`} style={{ background: '#F8F9FA', color: 'black', padding: '0.5rem 1rem', borderRadius: '6px' }}>
+            {myProperty?.category}
           </span>
-          <span title={`Property Type is ${myProperty.type}`} style={{ background: '#6c757d', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px' }}>
-            {myProperty.type}
+          <span title={`Property Type is ${myProperty?.type}`} style={{ background: '#6c757d', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px' }}>
+            {myProperty?.type}
           </span>
-          <span title={`Total Property Views is ${myProperty.views}`} style={{ background: '#ffc107', color: '#000', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
+          <span title={`Total Property Views is ${myProperty?.views}`} style={{ background: '#ffc107', color: '#000', padding: '0.5rem 1rem', borderRadius: '6px', display: 'inline-flex', alignItems: 'center' }}>
             <Eye size={14} style={{ marginRight: '0.25rem' }} />
-            {myProperty.views} Views
+            {myProperty?.views} Views
           </span>
-          {!myProperty.isFree && (
-            <span style={{ background: myProperty.isPaid ? '#F8F9FA' : "red", color: 'white', padding: '0.5rem 1rem', borderRadius: '6px' }}>
-            {myProperty.isPaid ? "Paid" : "No Paid"}
+          {!myProperty?.isFree && (
+            <span style={{ background: myProperty?.isPaid ? '#198754' : "red", color: 'white', padding: '0.5rem 1rem', borderRadius: '6px' }}>
+            {myProperty?.isPaid ? "Paid" : "No Paid"}
           </span>
           )}
         </div>
@@ -251,12 +345,12 @@ const PropertyDetailDashboard = ({setActivetab}) => {
               <div style={{ background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', marginBottom: '1.5rem', overflow: 'hidden' }}>
                 <div style={{ position: 'relative', height: '500px', overflow: 'hidden' }}>
                   <img 
-                    src={myProperty.images[currentImageIndex]?.url} 
+                    src={myProperty?.images[currentImageIndex]?.url} 
                     alt="Property"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                   <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px' }}>
-                    {myProperty.images.map((_, idx) => (
+                    {myProperty?.images.map((_, idx) => (
                       <button
                         key={idx}
                         onClick={() => setCurrentImageIndex(idx)}
@@ -281,14 +375,14 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                           padding:"4px",
                           cursor: 'pointer'
                         }}
-                        onClick={()=>handleRemoveImage(myProperty.images[currentImageIndex]?.public_id)}
+                        onClick={()=>handleRemoveImage(myProperty?.images[currentImageIndex]?.public_id)}
                       >
-                        {removepropertyimageloading && myProperty.images[currentImageIndex]?.public_id === publicID ? <span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> : <Trash style={{width:"20px",height:"20px",background:"red",padding:"3px",borderRadius:"50%",color:"white"}}/>}
+                        {removepropertyimageloading && myProperty?.images[currentImageIndex]?.public_id === publicID ? <span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> : <Trash style={{width:"20px",height:"20px",background:"red",padding:"3px",borderRadius:"50%",color:"white"}}/>}
                       </button>
                   </div>
                 </div>
                 <div style={{ padding: '1rem', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px' }}>
-                  {myProperty.images.map((img, idx) => (
+                  {myProperty?.images.map((img, idx) => (
                     <div key={idx} style={{position:"relative"}}>
                       <img
                       key={idx}
@@ -365,31 +459,31 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 {activeTab === 'overview' && (
                   <div>
                     <h5 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>About This Property</h5>
-                    <p style={{ color: '#6c757d', marginBottom: '1.5rem' }}>{myProperty.aboutProperty}</p>
-                    <p style={{ color: '#6c757d' }}>{myProperty.description}</p>
+                    <p style={{ color: '#6c757d', marginBottom: '1.5rem' }}>{myProperty?.aboutProperty}</p>
+                    <p style={{ color: '#6c757d' }}>{myProperty?.description}</p>
                     
                     <h5 style={{ fontWeight: 'bold', marginTop: '2rem', marginBottom: '1rem' }}>Property Details</h5>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                       <div>
                         <div style={{ marginBottom: '1rem' }}>
-                          <strong>Property Type:</strong> {myProperty.type}
+                          <strong>Property Type:</strong> {myProperty?.type}
                         </div>
                         <div style={{ marginBottom: '1rem' }}>
-                          <strong>Area Size:</strong> {myProperty.areaSize}
+                          <strong>Area Size:</strong> {myProperty?.areaSize}
                         </div>
                         <div style={{ marginBottom: '1rem' }}>
-                          <strong>Square Feet:</strong> {myProperty.squareFits.toLocaleString()} sq ft
+                          <strong>Square Feet:</strong> {myProperty?.squareFits.toLocaleString()} sq ft
                         </div>
                       </div>
                       <div>
                         <div style={{ marginBottom: '1rem' }}>
-                          <strong>Furnished:</strong> {myProperty.furnished ? 'Yes' : 'No'}
+                          <strong>Furnished:</strong> {myProperty?.furnished ? 'Yes' : 'No'}
                         </div>
                         <div style={{ marginBottom: '1rem' }}>
-                          <strong>Operating Since:</strong> {myProperty.operatingSince}
+                          <strong>Operating Since:</strong> {myProperty?.operatingSince}
                         </div>
                         <div style={{ marginBottom: '1rem' }}>
-                          <strong>Balconies:</strong> {myProperty.balcony}
+                          <strong>Balconies:</strong> {myProperty?.balcony}
                         </div>
                       </div>
                     </div>
@@ -398,7 +492,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 {activeTab === 'Floor Plan Image' && (
                   <div>
                     
-                      {myProperty.floorPlanImage && (
+                      {myProperty?.floorPlanImage && (
                         <div>
                         <Image src={myProperty?.floorPlanImage?.url} alt='Floor Plan Image' height={400} width={400} style={{width:"100%",aspectRatio:"16/9",objectFit:"cover"}}/>
                       </div>
@@ -426,7 +520,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                   <div>
                     <h5 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>Premium Amenities</h5>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                      {myProperty.amenities.map((amenity, idx) => (
+                      {myProperty?.amenities.map((amenity, idx) => (
                         <div key={idx} style={{ display: 'flex', alignItems: 'center' }}>
                           <Check size={18} style={{ color: '#198754', marginRight: '0.5rem', flexShrink: 0 }} />
                           <span>{amenity}</span>
@@ -439,11 +533,11 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 {activeTab === 'location' && (
                   <div>
                     <h5 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>Location Details</h5>
-                    <p style={{ marginBottom: '0.5rem' }}><strong>Address:</strong> {myProperty.address}</p>
-                    <p style={{ marginBottom: '0.5rem' }}><strong>Area:</strong> {myProperty.location}</p>
-                    <p style={{ marginBottom: '0.5rem' }}><strong>City:</strong> {myProperty.city}</p>
-                    <p style={{ marginBottom: '0.5rem' }}><strong>State:</strong> {myProperty.state}</p>
-                    <p style={{ marginBottom: '1.5rem' }}><strong>Country:</strong> {myProperty.country}</p>
+                    <p style={{ marginBottom: '0.5rem' }}><strong>Address:</strong> {myProperty?.address}</p>
+                    <p style={{ marginBottom: '0.5rem' }}><strong>Area:</strong> {myProperty?.location}</p>
+                    <p style={{ marginBottom: '0.5rem' }}><strong>City:</strong> {myProperty?.city}</p>
+                    <p style={{ marginBottom: '0.5rem' }}><strong>State:</strong> {myProperty?.state}</p>
+                    <p style={{ marginBottom: '1.5rem' }}><strong>Country:</strong> {myProperty?.country}</p>
                     <div style={{ height: '300px', background: '#e9ecef', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <MapPin size={48} style={{ color: '#6c757d' }} />
                     </div>
@@ -452,12 +546,12 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 {activeTab === 'seo-field' && (
                   <div>
                     <h5 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>Seo Field</h5>
-                    <p style={{ marginBottom: '0.5rem' }}><strong>SEO Title:</strong> {myProperty.seo_title}</p>
-                    <p style={{ marginBottom: '0.5rem' }}><strong>SEO Description:</strong> {myProperty.seo_description}</p>
-                    <p style={{ marginBottom: '0.5rem' }}><strong>Slug:</strong> {myProperty.slug}</p>
+                    <p style={{ marginBottom: '0.5rem' }}><strong>SEO Title:</strong> {myProperty?.seo_title}</p>
+                    <p style={{ marginBottom: '0.5rem' }}><strong>SEO Description:</strong> {myProperty?.seo_description}</p>
+                    <p style={{ marginBottom: '0.5rem' }}><strong>Slug:</strong> {myProperty?.slug}</p>
                     <div className='mt-4'>
                       <h5 style={{fontWeight:"bold"}}>Keywords:</h5>
-                      {myProperty.keywords?.map((keyword,index)=>{
+                      {myProperty?.keywords?.map((keyword,index)=>{
                         return <span style={{fontSize:"15px",fontWeight:"400"}} key={index} class="badge text-bg-light">{keyword}</span>
                       })}
                     </div>
@@ -471,7 +565,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
               {/* Price Card */}
               <div style={{ background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', padding: '1.5rem', marginBottom: '1.5rem', textAlign: 'center' }}>
                 PKR 
-                <h3 style={{ color: '#198754', fontWeight: 'bold', marginBottom: '0.25rem' }}>{formatPK(myProperty.price)}</h3>
+                <h3 style={{ color: '#198754', fontWeight: 'bold', marginBottom: '0.25rem' }}>{formatPK(myProperty?.price)}</h3>
                 <p style={{ color: '#6c757d', fontSize: '0.875rem', marginBottom: 0 }}>Total Price</p>
               </div>
 
@@ -483,33 +577,33 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                     <Home size={20} style={{ color: '#0d6efd', marginRight: '0.5rem' }} />
                     <span>Rooms</span>
                   </div>
-                  <strong>{myProperty.rooms}</strong>
+                  <strong>{myProperty?.rooms}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e9ecef' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Bed size={20} style={{ color: '#0d6efd', marginRight: '0.5rem' }} />
                     <span>Bedrooms</span>
                   </div>
-                  <strong>{myProperty.beds}</strong>
+                  <strong>{myProperty?.beds}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '1rem', borderBottom: '1px solid #e9ecef' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Bath size={20} style={{ color: '#0d6efd', marginRight: '0.5rem' }} />
                     <span>Bathrooms</span>
                   </div>
-                  <strong>{myProperty.baths}</strong>
+                  <strong>{myProperty?.baths}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Maximize size={20} style={{ color: '#0d6efd', marginRight: '0.5rem' }} />
                     <span>Area</span>
                   </div>
-                  <strong>{myProperty.areaSize}</strong>
+                  <strong>{myProperty?.areaSize}</strong>
                 </div>
               </div>
 
               {/* Video Tour */}
-              {myProperty.video && (
+              {myProperty?.video && (
                 <div style={{ background: 'white', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', padding: '1.5rem', marginBottom: '1.5rem' }}>
                   <h5 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>Video Tour</h5>
                   <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', borderRadius: '8px', background: '#000' }}>
@@ -528,6 +622,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
           </Row>
         </div>
       </div>
+      )}
     </div>
   );
 };

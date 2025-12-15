@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setMyProperties, setMyProperty, setMyPropertyLoading, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setUpdateProeprty } from "../slice/propertySlice";
+import { setCreatePropertyLoading, setMyProperties, setMyProperty, setMyPropertyLoading, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 
 
@@ -128,6 +128,18 @@ export const MyProperties = ({category,location,type,city,currentPage})=>async(d
         dispatch(setMyPropertyLoading(false))
     }
 }
-export const SendPropertyDataToMyProperty = (data)=>async(dispatch)=>{
-        dispatch(setMyProperty(data))
+export const SendPropertyDataToMyProperty = (slug)=>async(dispatch)=>{
+    dispatch(setSinglePropertyLoading(true))
+    try {
+        const {data} = await axios.get(`${baseURL}/api/property/getSingleProperty/${slug}`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setSingleProperty(data.property))
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error)
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    }
 }

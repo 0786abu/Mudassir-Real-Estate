@@ -8,6 +8,7 @@ import Auth from "./slice/authSlice"
 import Agent from "./slice/agentSlice"
 import Favourites from "./slice/favouritesSlice"
 import Property from "./slice/propertySlice"
+import Payment from "./slice/paymentSlice"
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     Auth,
     Agent,
     Favourites,
-    Property
+    Property,
+    Payment
   },
 });

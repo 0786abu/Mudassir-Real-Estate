@@ -147,6 +147,11 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloadin
                 favourites
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink className={activeTab === "payments" ? "active" : ""} onClick={() => setActiveTab("payments")}>
+                Payments
+              </NavLink>
+            </NavItem>
             {/* {user?.role==="agent" && (
               <NavItem>
               <NavLink className={activeTab === "Privacy" ? "active" : ""} onClick={() => setActiveTab("Privacy")}>
