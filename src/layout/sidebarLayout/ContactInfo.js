@@ -8,8 +8,10 @@
  * Newyork." and "(+066) 518 - 457 - 5181"
  * @returns A div with a class of advance-card.
  */
+import { Mail, Phone } from "lucide-react";
 import React from "react";
 import { MapPin, PhoneCall } from "react-feather";
+import { BsWhatsapp } from "react-icons/bs";
 
 const ContactInfo = ({owner}) => {
   return (
@@ -36,6 +38,36 @@ const ContactInfo = ({owner}) => {
             {owner?.phone}
           </li>
           )}
+          <li className="d-flex align-items-center justify-content-start gap-3">
+  
+  {/* WhatsApp */}
+  <a
+    href="https://wa.me/923001234567"
+    target="_blank"
+    rel="noopener noreferrer"
+    title="Chat on WhatsApp"
+  >
+    <BsWhatsapp style={{ width: "30px", height: "30px", color: "green" }} />
+  </a>
+
+  {/* Email */}
+  <a
+     href="https://mail.google.com/mail/?view=cm&fs=1&to=abuakar77a9@gmail.com"
+  target="_blank"
+  >
+    <Mail style={{ width: "30px", height: "30px", color: "gray" }} />
+  </a>
+
+  {/* Phone */}
+  <a
+    href="tel:+923001234567"
+    title="Call Now"
+  >
+    <Phone style={{ width: "30px", height: "30px", color: "red" }} />
+  </a>
+
+</li>
+
         </ul>
       </div>
     </div>

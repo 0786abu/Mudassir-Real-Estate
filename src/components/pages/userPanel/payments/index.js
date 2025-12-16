@@ -74,7 +74,11 @@ const Payments = ({setActiveTab}) => {
               </Modal>
       <h5 className="mb-3 fw-semibold">Payments History</h5>
 
-      {paymentloading ? (<ProfileLoader/>) : (
+      {paymentloading ? (<ProfileLoader/>) : payments?.length===0 ? (
+        <div className=" d-flex justify-content-center align-items-center" style={{minHeight:"80vh"}}>
+          <h2>No Payments Yet</h2>
+        </div>
+      ) : (
         <div className="table-responsive">
         <Table hover bordered responsive className="align-middle mb-0">
           <thead className="table-light sticky-top">
