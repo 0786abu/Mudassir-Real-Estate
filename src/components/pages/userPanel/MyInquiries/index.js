@@ -42,7 +42,7 @@ const MyInquiries = () => {
                         </ModalBody>
                 
                       </Modal>
-        <h5 className="mb-3 fw-semibold">Requested property inquiries ({myInquiries?.length>1 ? (myInquiries?.length) : 0})</h5>
+        <h5 className="mb-3 fw-semibold">Requested property inquiries ({myInquiries?.length>0 ? (myInquiries?.length) : 0})</h5>
         {leadloading ? (<ProfileLoader/>) : (
             <Table hover bordered responsive className="align-middle mb-0">
           <thead className="table-light sticky-top">
