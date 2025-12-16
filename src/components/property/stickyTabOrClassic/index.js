@@ -50,8 +50,8 @@ const BodyContent = ({ side, property,relatedProperties }) => {
         <Container>
           <Row className=" ratio_65">
             <Sidebar mortgage={true} side={side} singleProperty={true}>
-              <ContactInfo owner={property?.createdBy} />
-              <Exploration />
+              <ContactInfo owner={property?.createdBy} property={property?._id} />
+              <Exploration owner={property?.createdBy} property={property?._id} />
               {/* <Filter sm={12} /> */}
               <Featured />
               {/* <RecentlyAdded /> */}

@@ -14,6 +14,8 @@ import { MapPin, PhoneCall } from "react-feather";
 import { BsWhatsapp } from "react-icons/bs";
 
 const ContactInfo = ({owner}) => {
+  
+
   return (
     <div className='advance-card'>
       <h6>Owner Info</h6>

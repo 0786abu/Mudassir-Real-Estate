@@ -8,7 +8,7 @@ export async function GET(req,{params}){
     try {
         await DataBase();
         const {slug} = await params;
-        const property = await Property.findOne({slug}).populate("createdBy","name email address agencyName agencyProfile profile whatsappAPI phone");
+        const property = await Property.findOne({slug}).populate("createdBy","name email address role agencyName agencyProfile profile whatsappAPI phone");
         if(!property){
             return NextResponse.json({
                 message: "Property not found",

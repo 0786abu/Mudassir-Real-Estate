@@ -15,6 +15,8 @@ import PropertyDetails from "./proeprtyDetail";
 import { toast } from "react-toastify";
 import EditProperty from "./EditProperty";
 import Payments from "./payments";
+import MyLeads from "./myLeads";
+import MyInquiries from "./MyInquiries";
 
 const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
@@ -48,6 +50,8 @@ const BodyContent = ({ active }) => {
 
   {activeTab === "Privacy" && <PrivacyTab />}
   {activeTab === "payments" && <Payments setActiveTab={setActiveTab} />}
+  {activeTab === "leads" && <MyLeads />}
+  {activeTab === "inquiries" && <MyInquiries />}
           </Col>
         </Row>
       </Container>
