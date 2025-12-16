@@ -59,7 +59,7 @@ export const overviewChartData = {
         },
       },
       padding: {
-        right: -112,
+        right: 0,
         bottom: 0,
         left: 15,
       },
@@ -70,7 +70,7 @@ export const overviewChartData = {
         options: {
           grid: {
             padding: {
-              right: -95,
+              right: 0,
             },
           },
         },
@@ -80,7 +80,7 @@ export const overviewChartData = {
         options: {
           grid: {
             padding: {
-              right: -69,
+              right: 0,
             },
           },
         },
@@ -107,6 +107,7 @@ export const overviewChartData = {
     xaxis: {
       categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       range: undefined,
+      
       axisBorder: {
         low: 0,
         offsetX: 0,
@@ -132,7 +133,7 @@ export const overviewChartData = {
   series: [
     {
       name: "$2530.00",
-      data: [20, 25, 20, 30, 20, 50, 30, 35, 25, 60, 0],
+      data: [21, 25, 22, 30, 23, 50, 31, 35, 25, 60, 0,55],
     },
   ],
 };

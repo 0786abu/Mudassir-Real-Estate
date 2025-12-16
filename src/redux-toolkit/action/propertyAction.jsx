@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setMyProperties, setMyProperty, setMyPropertyLoading, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty } from "../slice/propertySlice";
+import { setCreatePropertyLoading, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 
 
@@ -43,6 +43,23 @@ export const UpdateProperty = (property,setActivetab)=>async(dispatch)=>{
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
         dispatch(setCreatePropertyLoading(false));
+    }
+}
+export const ViewsChartData = ()=>async(dispatch)=>{
+    dispatch(setViewsChartDataLoading())
+    try {
+        const {data} = await axios.get(`${baseURL}/api/property/viewsChartData`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setMyChartData({year:data.year,data:data.data}));
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setViewsChartDataLoading(false));
     }
 }
 export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{

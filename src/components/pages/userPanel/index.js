@@ -17,14 +17,19 @@ import EditProperty from "./EditProperty";
 import Payments from "./payments";
 import MyLeads from "./myLeads";
 import MyInquiries from "./MyInquiries";
+import { ViewsChartData } from "@/redux-toolkit/action/propertyAction";
 
 const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
   const {user,userloading,socialloading} = useSelector((state)=>state.Auth);
+  const {myViewsChartData,viewsdataloading} = useSelector((state)=>state.Property);
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(MyProfileData());
+  },[dispatch])
+  useEffect(()=>{
+    dispatch(ViewsChartData());
   },[dispatch])
 
   return (
@@ -34,7 +39,7 @@ const BodyContent = ({ active }) => {
         <Row>
           <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} loading={userloading} socialloading={socialloading} />
           <Col lg='9'>
-           {activeTab === "Dashboard" && <UserDashboardTab />}
+           {activeTab === "Dashboard" && <UserDashboardTab loading={viewsdataloading} data={myViewsChartData} />}
 
   {activeTab === "Listing" && <MyListingTab setActiveTab={setActiveTab} />}
 

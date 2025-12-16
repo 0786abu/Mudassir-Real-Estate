@@ -4,11 +4,13 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     myProperties:[],
     myProperty:null,
+    myViewsChartData:{},
     mypropertyloading:false,
     selectedSlug:null,
     singlepropertyloading:false,
     createpropertyloading:false,
     removepropertyimageloading:false,
+    viewsdataloading:false,
     totalPages:null,
     currentPage:null,
     error:null
@@ -32,6 +34,10 @@ const propertySice = createSlice({
             state.removepropertyimageloading = action.payload
         }
        },
+       setMyChartData:(state,action)=>{
+        state.viewsdataloading = false
+        state.myViewsChartData = action.payload
+       },
        setMyProperty:(state,action)=>{
         state.mypropertyloading = false
         state.error = null
@@ -52,6 +58,9 @@ const propertySice = createSlice({
         state.error = null
         state.myProperties = state.myProperties.map((item)=>item._id === action.payload._id ? action.payload : item)
        },
+       setViewsChartDataLoading:(state,action)=>{
+        state.viewsdataloading = action.payload
+       },
        setMyProperties:(state,action)=>{
         state.mypropertyloading = false
         state.error = null
@@ -70,6 +79,6 @@ const propertySice = createSlice({
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading} = propertySice.actions;
 
 export default propertySice.reducer;
