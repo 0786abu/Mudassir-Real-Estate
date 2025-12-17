@@ -43,9 +43,8 @@ export async function DELETE(req,{params}) {
         },{status:200})
     } catch (error) {
         return NextResponse.json({
-            success:true,
+            success:false,
             message:"Property Delete Successfull",
-            property
         },{status:500})
     }
 }
