@@ -5,22 +5,29 @@ import PropertyOverview from "./PropertyOverview";
 import SalesByAgent from "./SalesByAgent";
 import SalesOverview from "./SalesOverview";
 import SmallBarCard from "./SmallBarCard";
+import ProfileLoader from "@/components/common/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { ViewsChartData } from "@/redux-toolkit/action/propertyAction";
 
-const UserDashboardTab = ({loading,data,typedData,availableData,latestProperties,setActiveTab}) => {
+const UserDashboardTab = ({setActiveTab}) => {
+  const {myViewsChartData,viewsdataloading,myTypeChartData,myAvailableProeprtiesChartData} = useSelector((state)=>state.Property);
+  const {latestProperties} = useSelector((state)=>state.Agent);
+  const dispatch = useDispatch();
+    useEffect(()=>{
+    dispatch(ViewsChartData());
+  },[dispatch])
   return (
     <div className="dashboard-content">
       <div id="dashboard">
         <div className="user-wrapper">
-            {loading ? (
-              <div className=" d-flex justify-content-center align-items-center" style={{height:"30vh"}}>
-                <span>Please wait...</span>
-              </div>
+            {viewsdataloading ? (
+              <ProfileLoader/>
             ) : (
               <Row>
               <SmallBarCard />
-            <SalesOverview loading={loading} data={data} />
-            <SalesByAgent loading={loading} data={typedData} />
-            <AvailableProperty loading={loading} data={availableData} />
+            <SalesOverview data={myViewsChartData} />
+            <SalesByAgent data={myTypeChartData} />
+            <AvailableProperty data={myAvailableProeprtiesChartData} />
             <PropertyOverview latestProperties={latestProperties} setActiveTab={setActiveTab} />
           </Row>
             )}

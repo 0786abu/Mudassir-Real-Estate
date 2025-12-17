@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, TabContent, TabPane } from "reactstrap";
+import { Col, Container, Row } from "reactstrap";
 import CreatePropertyTab from "./createPropertyTab";
 import FavoritesTab from "./favouritesTab";
 import MyListingTab from "./myListingTab";
@@ -12,26 +12,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { MyProfileData } from "@/redux-toolkit/action/authAction";
 import ProfileLoader from "@/components/common/Loader";
 import PropertyDetails from "./proeprtyDetail";
-import { toast } from "react-toastify";
 import EditProperty from "./EditProperty";
 import Payments from "./payments";
 import MyLeads from "./myLeads";
 import MyInquiries from "./MyInquiries";
-import { ViewsChartData } from "@/redux-toolkit/action/propertyAction";
 
 const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
   const {user,userloading,socialloading} = useSelector((state)=>state.Auth);
-  const {latestProperties} = useSelector((state)=>state.Agent);
-  const {myViewsChartData,viewsdataloading,myTypeChartData,myAvailableProeprtiesChartData} = useSelector((state)=>state.Property);
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(MyProfileData());
   },[dispatch])
-  useEffect(()=>{
-    dispatch(ViewsChartData());
-  },[dispatch])
+
 
   return (
     <section style={{minHeight:"60vh"}} className='user-dashboard small-section'>
