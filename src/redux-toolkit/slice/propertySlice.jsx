@@ -45,6 +45,11 @@ const propertySice = createSlice({
         state.viewsdataloading = false
         state.myTypeChartData = action.payload
        },
+       setDeleteProperty:(state,action)=>{
+        state.createpropertyloading = false
+        state.myProperties = state.myProperties.filter((item)=>item._id !== action.payload._id);
+        state.myProperty = null
+       },
        setMyAvailableProeprtiesChartData:(state,action)=>{
         state.viewsdataloading = false
         state.myAvailableProeprtiesChartData = action.payload
@@ -90,6 +95,6 @@ const propertySice = createSlice({
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData,setDeleteProperty} = propertySice.actions;
 
 export default propertySice.reducer;

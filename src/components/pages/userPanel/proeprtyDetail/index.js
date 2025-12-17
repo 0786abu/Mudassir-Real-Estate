@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formatPK } from '@/utils/Formatter';
 import { Col, Input, Label, Row } from 'reactstrap';
 import { Plus, Trash } from 'react-feather';
-import { RemovePropertyImage, SendPropertyDataToMyProperty, UpdateFloorPlanImage, UploadMoreImages } from '@/redux-toolkit/action/propertyAction';
+import { DeleteProperty, RemovePropertyImage, SendPropertyDataToMyProperty, UpdateFloorPlanImage, UploadMoreImages } from '@/redux-toolkit/action/propertyAction';
 import {
   Button,
   Modal,
@@ -41,6 +41,9 @@ const PropertyDetailDashboard = ({setActivetab}) => {
   const [selectedBank, setSelectedBank] = useState(null);
   const [amount, setAmount] = useState(null);
   const [screenShot, setScreenShot] = useState(null);
+  const [deleteModal, setDeleteModal] = useState(false);
+
+  const deletetoggle = ()=>setDeleteModal(!deleteModal);
 
   const handleChange = (e)=>{
     const file = e.target.files[0];
@@ -116,6 +119,9 @@ const PropertyDetailDashboard = ({setActivetab}) => {
     setModal(!modal);
     setImages([])
   }
+  const handleDelete = ()=>{
+    dispatch(DeleteProperty({id:myProperty?._id,setDeleteModal,setActivetab}))
+  }
   const paidToggle = () => {
     setPaidModal(!paidModal);
   }
@@ -150,6 +156,19 @@ const PropertyDetailDashboard = ({setActivetab}) => {
         <ModalBody style={{textAlign:"center",marginBottom:"20px"}}>
           <Button onClick={handleUpload} color="success">
             {createpropertyloading ? <div className=' d-flex align-items-center gap-1'><span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> <span>Upload</span></div> : "Upload"}
+          </Button>
+        </ModalBody>
+
+      </Modal>
+       <Modal isOpen={deleteModal} toggle={deletetoggle} centered size="lg">
+        <ModalHeader toggle={deletetoggle}>
+          {/* Reactstrap Modal */}
+        </ModalHeader>
+
+        <ModalBody style={{textAlign:"center",marginBottom:"20px"}}>
+          <h4>Are you sure to delete this property</h4>
+          <Button onClick={handleDelete} color="danger">
+            {createpropertyloading ? <div className=' d-flex align-items-center gap-1'><span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> <span>Delete</span></div> : "Delete"}
           </Button>
         </ModalBody>
 
@@ -303,7 +322,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 <Edit size={16} style={{ marginRight: '0.5rem' }} />
                 Edit
               </button>
-              <button style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #dc3545', background: 'white', color: '#dc3545', borderRadius: '6px', cursor: 'pointer' }}>
+              <button onClick={deletetoggle} style={{ display: 'flex', alignItems: 'center', padding: '0.5rem 1rem', border: '1px solid #dc3545', background: 'white', color: '#dc3545', borderRadius: '6px', cursor: 'pointer' }}>
                 <Trash2 size={16} />
               </button>
             </div>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
+import { setCreatePropertyLoading, setDeleteProperty, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 import { setLatestProeprty } from "../slice/agentSlice";
 
@@ -162,5 +162,26 @@ export const SendPropertyDataToMyProperty = (slug)=>async(dispatch)=>{
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error)
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    }
+}
+
+export const DeleteProperty = ({id,setDeleteModal,setActivetab})=>async(dispatch)=>{
+    dispatch(setCreatePropertyLoading(true))
+    try {
+        const {data} = await axios.delete(`${baseURL}/api/property/deleteProperty/${id}`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setDeleteProperty());
+        toast.success(data.message)
+        setDeleteModal(false);
+        setActivetab("Listing")
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setCreatePropertyLoading(false));
     }
 }

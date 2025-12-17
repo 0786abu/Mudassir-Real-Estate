@@ -24,7 +24,7 @@ const UserDashboardTab = ({setActiveTab}) => {
               <ProfileLoader/>
             ) : (
               <Row>
-              <SmallBarCard />
+              <SmallBarCard viewsData={myViewsChartData} availableProperties={myAvailableProeprtiesChartData} />
             <SalesOverview data={myViewsChartData} />
             <SalesByAgent data={myTypeChartData} />
             <AvailableProperty data={myAvailableProeprtiesChartData} />

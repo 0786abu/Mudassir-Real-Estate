@@ -74,7 +74,7 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloadin
             {user?.role==="agent" && (
           <div className='connected-social'>
             <h6>Connect with</h6>
-              <div className=" d-flex align-content-center gap-2">
+              <div className=" d-flex align-content-center mt-4 gap-2">
                 {user?.socialMedia && (
                 <ul className=''>
               {user?.socialMedia?.facebook && (

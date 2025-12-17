@@ -192,7 +192,6 @@ export async function GET(req) {
         views: found ? found.views : 0, // 👈 no data = 0
       });
     }
-
     return NextResponse.json({
       success: true,
       year: now.getFullYear(),
