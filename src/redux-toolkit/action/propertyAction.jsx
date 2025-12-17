@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
+import { setCreatePropertyLoading, setFeaturedProperties, setFeaturedPropertyLoading, setLatestproeprtyloading, setLatestsproperties, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 import { setLatestProeprty } from "../slice/agentSlice";
 
@@ -147,6 +147,38 @@ export const MyProperties = ({category,location,type,city,currentPage})=>async(d
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
     }finally {
         dispatch(setMyPropertyLoading(false))
+    }
+}
+export const LatestProperties = ()=>async(dispatch)=>{
+    dispatch(setLatestproeprtyloading(true))
+    try {
+        const {data} = await axios.get(`${baseURL}/api/property`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setLatestsproperties(data.properties))
+    } catch (error) {
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    }finally {
+        dispatch(setLatestproeprtyloading(false))
+    }
+}
+export const FeaturedProperties = ()=>async(dispatch)=>{
+    dispatch(setFeaturedPropertyLoading(true))
+    try {
+        const {data} = await axios.get(`${baseURL}/api/property/FeaturedProperties`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setFeaturedProperties(data.featuredProperties))
+    } catch (error) {
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    }finally {
+        dispatch(setFeaturedPropertyLoading(false))
     }
 }
 export const SendPropertyDataToMyProperty = (slug)=>async(dispatch)=>{

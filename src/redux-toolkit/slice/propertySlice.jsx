@@ -6,6 +6,10 @@ const initialState = {
     myProperty:null,
     myViewsChartData:{},
     latestProperties:[],
+    latestsproperties:[],
+    featuredProperties:[],
+    latestpropertyloading:false,
+    featurepropertyloading:false,
     myAvailableProeprtiesChartData:{},
     myTypeChartData:[],
     mypropertyloading:false,
@@ -44,6 +48,20 @@ const propertySice = createSlice({
        setMyTypeChartData:(state,action)=>{
         state.viewsdataloading = false
         state.myTypeChartData = action.payload
+       },
+       setLatestsproperties:(state,action)=>{
+        state.latestpropertyloading = false
+        state.latestsproperties = action.payload
+       },
+       setFeaturedProperties:(state,action)=>{
+        state.featurepropertyloading = false
+        state.featuredProperties = action.payload
+       },
+       setLatestproeprtyloading:(state,action)=>{
+        state.latestpropertyloading = action.payload
+       },
+       setFeaturedPropertyLoading:(state,action)=>{
+        state.featurepropertyloading = action.payload
        },
        setMyAvailableProeprtiesChartData:(state,action)=>{
         state.viewsdataloading = false
@@ -90,6 +108,6 @@ const propertySice = createSlice({
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData,setLatestproeprtyloading,setLatestsproperties,setFeaturedProperties,setFeaturedPropertyLoading} = propertySice.actions;
 
 export default propertySice.reducer;

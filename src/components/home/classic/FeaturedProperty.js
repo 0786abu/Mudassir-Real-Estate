@@ -12,9 +12,9 @@ import { feature4 } from "@/data/slickSlider";
 import Img from "@/utils/BackgroundImageRatio";
 import { FeaturedProperty } from "@/constValues/constValues";
 import NoSsr from "@/utils/NoSsr";
+import { formatPK } from "@/utils/Formatter";
 
-const FeaturedPropertySection = ({ value }) => {
-  const { symbol, currencyValue } = useSelector((state) => state.currencyReducer);
+const FeaturedPropertySection = ({ value,loading }) => {
   return (
     <section className='feature-section ratio_landscape bg-half zoom-gallery'>
       <Container>
@@ -23,16 +23,16 @@ const FeaturedPropertySection = ({ value }) => {
             <NoSsr>
               <Slider className='feature-4 modern-feature arrow-gradient' {...feature4}>
                 {value &&
-                  value.map((data, i) => (
+                  value?.map((data, i) => (
                     <div key={i}>
                       <div className='feature-wrap'>
                         <Row>
                           <Gallery>
                             <Col lg='6'>
-                              <Item original={data.img} width='1000' height='600'>
+                              <Item original={data.images[0].url} width='1000' height='600'>
                                 {({ ref, open }) => (
                                   <div className='feature-image'>
-                                    <Img src={data.img} className='bg-img' />
+                                    <Img src={data.images[0].url} className='bg-img' />
                                     <div className='feature-overlay' ref={ref} onClick={open}>
                                       <span>+</span>
                                     </div>
@@ -48,10 +48,9 @@ const FeaturedPropertySection = ({ value }) => {
                             <div className='feature-content'>
                               <div className='details'>
                                 <h3>
-                                  <Link href={Array.isArray(data.img) ? `/property/image-slider/?id=${data.id}` : `/property/image-box/?id=${data.id}`}>{data.title}</Link>
+                                  <Link href={`/properties/${data.slug}`}>{data.title}</Link>
                                 </h3>
-                                <span>{data.place}</span>
-                                <p className='font-roboto'>{data.details}</p>
+                                <span>{data.city}, {data.location}</span>
                               </div>
                               <ul className='detail-list'>
                                 <li>
@@ -71,21 +70,20 @@ const FeaturedPropertySection = ({ value }) => {
                                   </div>
                                 </li>
                                 <li>
-                                  <span className='label label-light label-lg'>{data.sqft} Sq Ft</span>
+                                  <span className='label label-light label-lg'>{data.squareFits} Sq Ft</span>
                                 </li>
                               </ul>
                               <ul className='feature-price'>
                                 <li>
                                   <h3>
-                                    {symbol}
-                                    {(data?.price * currencyValue).toFixed(2)}*
+                                    {formatPK(data.price)}*
                                   </h3>
-                                  <h6>Home For Sale</h6>
+                                  <h6>Home For {data.category}</h6>
                                 </li>
                                 <li>
-                                  <Link href='/agent/submit-property'>
+                                  <Link href={`/properties/${data.slug}`}>
                                     <button type='button' className='btn btn-gradient btn-lg'>
-                                      submit property
+                                      View Detail
                                     </button>
                                   </Link>
                                 </li>

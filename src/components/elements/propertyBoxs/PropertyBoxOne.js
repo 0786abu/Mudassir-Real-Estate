@@ -3,23 +3,28 @@
  * @returns A React component.
  */
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "reactstrap";
 import ContentLoader from "react-content-loader";
-import { useSelector } from "react-redux";
 import Img from "@/utils/BackgroundImageRatio";
 import PropertyLabel from "../PropertyLabel";
+import { formatPK } from "@/utils/Formatter";
 
 const PropertyBoxOne = ({ data }) => {
-  const [load, setLoad] = useState(true);
-  const { symbol, currencyValue } = useSelector((state) => state.currencyReducer);
   return (
     <>
-      {!load ? (
+      {/* {loading ? (
+        <ContentLoader className="skeleton-svg">
+          <rect className="skeleton-img" />
+          <rect className="skeleton-c1" />
+          <rect className="skeleton-c2" />
+          <rect className="skeleton-c3" />
+        </ContentLoader>
+      ) : ( */}
         <div className="property-box">
           <div className="property-image">
             <a>
-              <Img src={data?.img} className="bg-img" />
+              <Img src={data?.images[0].url} className="bg-img" />
               <div className="labels-left">
                 <PropertyLabel labels={data?.label} />
               </div>
@@ -28,35 +33,44 @@ const PropertyBoxOne = ({ data }) => {
               <div className="d-flex">
                 <div>
                   <h5>
-                    <Link href={`/property/image-box/?id=${data.id}`}>{data?.title}</Link>
+                    <Link href={`/properties/${data.slug}`}>{data?.title}</Link>
                   </h5>
                   <h6>
-                    {symbol}
-                    {(data?.price * currencyValue).toFixed(2)} <small>/ start from</small>
+                    {formatPK(data.price)} <small>/ start from</small>
                   </h6>
                 </div>
-                <Link href={`/property/image-box/?id=${data.id}`}>
+                <Link href={`/properties/${data.slug}`}>
                   <Button className=" btn-gradient mt-3">Details</Button>
                 </Link>
               </div>
               <div className="overlay-option">
                 <ul>
-                  <li>
+                  {data.beds>0 ? (
+                    <li>
                     <span>Beds</span>
-                    <h6>{data?.bed}</h6>
+                    <h6>{data?.beds}</h6>
                   </li>
-                  <li>
+                  ):(
+                    <li>
+                    <span>SQFT</span>
+                    <h6>{data?.squareFits}</h6>
+                  </li>
+                  )}
+                  {data.baths>0 && (
+                    <li>
                     <span>Baths</span>
-                    <h6>{data?.bath}</h6>
+                    <h6>{data?.baths}</h6>
                   </li>
-                  <li>
-                    <span>Balcony</span>
-                    <h6>{data?.balcony}</h6>
+                  )}
+                  {data.rooms>0 && (
+                    <li>
+                    <span>Rooms</span>
+                    <h6>{data?.rooms}</h6>
                   </li>
+                  )}
                   <li>
-                    <span>Area</span>
                     <h6>
-                      {data?.area}m<sup>2</sup>
+                      {data?.areaSize}
                     </h6>
                   </li>
                 </ul>
@@ -64,17 +78,7 @@ const PropertyBoxOne = ({ data }) => {
             </div>
           </div>
         </div>
-      ) : (
-        <ContentLoader className="skeleton-svg">
-          {setTimeout(() => {
-            setLoad(false);
-          }, 3000)}
-          <rect className="skeleton-img" />
-          <rect className="skeleton-c1" />
-          <rect className="skeleton-c2" />
-          <rect className="skeleton-c3" />
-        </ContentLoader>
-      )}
+      {/* )} */}
     </>
   );
 };

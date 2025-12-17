@@ -16,10 +16,22 @@ import AboutSection from "../classic/About";
 import BrandSection from "../classic/Brand";
 import HomeBannerSection from "./HomeBanner";
 import CategorySection from "@/layout/SearchByCategory";
+import { useDispatch, useSelector } from "react-redux";
+import { FeaturedProperties, LatestProperties } from "@/redux-toolkit/action/propertyAction";
 
 const BodyContent = () => {
   const [value, setValue] = useState();
   const [clientData, setClientData] = useState();
+  const {latestsproperties,latestpropertyloading,featuredProperties,featureproeprtyloading} = useSelector((state)=>state.Property);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(LatestProperties())
+  },[dispatch])
+  useEffect(()=>{
+    dispatch(FeaturedProperties())
+  },[dispatch])
+  
 
   useEffect(() => {
     getData(`/api/property`)
@@ -37,8 +49,8 @@ const BodyContent = () => {
     <>
       <HomeBannerSection />
       <CategorySection/>
-      <SalePropertySection value={value?.LatestForSalePropertyData} />
-      <FeaturedPropertySection value={value?.FeaturedPropertyInClassicLayout} />
+      <SalePropertySection value={latestsproperties} loading={latestpropertyloading} />
+      <FeaturedPropertySection value={featuredProperties} loading={featureproeprtyloading} />
       <PropertyServicesSection value={AppPropertyData.PropertyServicesInClassic} />
       <LatestPropertySection value={value?.LatestPropertyInClassicLayout} />
       <VideoSection />
