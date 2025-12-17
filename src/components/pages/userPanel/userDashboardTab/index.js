@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row } from "reactstrap";
 import AvailableProperty from "./AvailableProperty";
 import PropertyOverview from "./PropertyOverview";
