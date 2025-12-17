@@ -5,6 +5,7 @@ const initialState = {
     myProperties:[],
     myProperty:null,
     myViewsChartData:{},
+    latestProperties:[],
     myAvailableProeprtiesChartData:{},
     myTypeChartData:[],
     mypropertyloading:false,

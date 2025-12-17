@@ -86,7 +86,7 @@ const AvailableProperty = ({ loading, data }) => {
             options={chartData.options}
             series={chartData.series}
             type="radialBar"
-            height={300}
+            height={250}
           />
         </div>
       </div>

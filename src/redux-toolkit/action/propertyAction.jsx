@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setCreatePropertyLoading, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
+import { setLatestProeprty } from "../slice/agentSlice";
 
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -57,6 +58,7 @@ export const ViewsChartData = ()=>async(dispatch)=>{
         dispatch(setMyChartData({year:data.year,data:data.data}));
         dispatch(setMyTypeChartData(data.typedData));
         dispatch(setMyAvailableProeprtiesChartData(data.availablePropertiesPercent));
+        dispatch(setLatestProeprty(data.properties));
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));

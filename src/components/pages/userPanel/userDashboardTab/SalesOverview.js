@@ -185,7 +185,7 @@ const SalesOverview = ({loading,data}) => {
         {loading ? (
           <span>loading</span>
         ) : (
-          <ReactApexChart options={options} series={series} id='overviewchart' type='area' height={280} />
+          <ReactApexChart options={options} series={series} id='overviewchart' type='area' height={350} />
         )}
         {/* <div id='overviewchart'></div> */}
       </div>

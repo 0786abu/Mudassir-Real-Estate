@@ -71,7 +71,7 @@ export async function GET(req) {
       return NextResponse.json({
         success:false,
         message:"you are unauthorized ot access this route, please first login"
-      },{status:400})
+      },{status:401})
     }
     const now = new Date();
 
@@ -86,6 +86,7 @@ export async function GET(req) {
       59,
       59
     );
+    const properties = await Property.find({createdBy:isUser._id}).limit(3).sort({createdAt:-1});
 
     const result = await Property.aggregate([
       {
@@ -201,7 +202,8 @@ export async function GET(req) {
         totalProperties: 0,
         available: 0,
         availablePercent: 0,
-      }
+      },
+      properties
     },{status:200});
 
   } catch (error) {

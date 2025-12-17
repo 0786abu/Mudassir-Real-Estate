@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     agents:[],
     agentloading:false,
+    latestProperties:[],
     error:null
 }
 
@@ -19,12 +20,15 @@ const agentSlice = createSlice({
         setAgentLoading:(state)=>{
             state.agentloading = true
         },
+        setLatestProeprty:(state,action)=>{
+            state.latestProperties = action.payload
+        },
         setAgentError:(state,action)=>{
             state.error = action.payload
         }
     }
 });
 
-export const {setAgentError,setAgentLoading,setGetAgents} = agentSlice.actions;
+export const {setAgentError,setAgentLoading,setGetAgents,setLatestProeprty} = agentSlice.actions;
 
 export default agentSlice.reducer;
