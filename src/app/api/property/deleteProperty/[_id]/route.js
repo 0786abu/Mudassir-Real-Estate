@@ -1,5 +1,6 @@
 import { DataBase } from "@/backend/config/database";
 import Property from "@/backend/model/propertyModel";
+import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthenticated } from "@/backend/utils/middlewere";
 import { NextResponse } from "next/server";
 
@@ -27,6 +28,13 @@ export async function DELETE(req,{params}) {
                 message:"This is not your property, so you are not authorized to delete this property"
             },{status:401})
         }
+        if (property.images && property.images.length > 0) {
+      for (const img of property.images) {
+        if (img.public_id) {
+          await cloudinary.uploader.destroy(img.public_id);
+        }
+      }
+    }
         const property = await Property.deleteOne({_id:_id,createdBy:isUser._id})
         return NextResponse.json({
             success:true,
