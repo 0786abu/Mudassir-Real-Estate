@@ -174,7 +174,7 @@ export const DeleteProperty = ({id,setDeleteModal,setActivetab})=>async(dispatch
             },
             withCredentials:true
         });
-        dispatch(setDeleteProperty(data.property));
+        dispatch(setDeleteProperty({_id:id}));
         toast.success(data.message)
         setDeleteModal(false);
         setActivetab("Listing")
