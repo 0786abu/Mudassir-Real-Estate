@@ -52,8 +52,10 @@ const AvailableProperty = ({loading,data}) => {
   series: [percent],
 }
 useEffect(()=>{
-  setPercent(data?.availablePercent)
-},[data?.availablePercent])
+  if(data){
+    setPercent(data?.availablePercent)
+  }
+},[data?.availablePercent,data])
   return (
     <div className='col-xl-4 xl-40 col-md-6'>
       <div className='common-card available-property'>
