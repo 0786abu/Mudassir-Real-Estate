@@ -90,6 +90,6 @@ const propertySice = createSlice({
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData,setDeleteProperty} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData} = propertySice.actions;
 
 export default propertySice.reducer;

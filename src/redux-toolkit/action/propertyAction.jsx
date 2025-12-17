@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setDeleteProperty, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
+import { setCreatePropertyLoading, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 import { setLatestProeprty } from "../slice/agentSlice";
 
@@ -176,6 +176,7 @@ export const DeleteProperty = ({id,setDeleteModal,setActivetab})=>async(dispatch
         });
         toast.success(data.message)
         setDeleteModal(false);
+        dispatch(setPagesContent({totalPages:null,currentPage:1}))
         setActivetab("Dashboard")
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
