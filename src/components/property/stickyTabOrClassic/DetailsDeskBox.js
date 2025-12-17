@@ -51,15 +51,21 @@ const DetailsDeskBox = ({property}) => {
               <li>
                 <span>City :</span> {property?.city}
               </li>
-              <li>
+              {property?.beds>0 && (
+                <li>
                 <span>Bedrooms :</span> {property?.beds}
               </li>
-              <li>
+              )}
+              {property?.baths>0 && (
+                <li>
                 <span>Bathrooms :</span> {property?.baths}
               </li>
-              <li>
+              )}
+              {property?.rooms>0 && (
+                <li>
                 <span>Totalrooms :</span> {property?.rooms}
               </li>
+              )}
             </ul>
           </Col>
         </Row>
