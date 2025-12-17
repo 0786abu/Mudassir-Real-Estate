@@ -22,7 +22,7 @@ import { FeaturedProperties, LatestProperties } from "@/redux-toolkit/action/pro
 const BodyContent = () => {
   const [value, setValue] = useState();
   const [clientData, setClientData] = useState();
-  const {latestsproperties,latestpropertyloading,featuredProperties,featureproeprtyloading} = useSelector((state)=>state.Property);
+  const {latestsproperties,latestpropertyloading,featuredProperties,featurepropertyloading} = useSelector((state)=>state.Property);
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -50,7 +50,7 @@ const BodyContent = () => {
       <HomeBannerSection />
       <CategorySection/>
       <SalePropertySection value={latestsproperties} loading={latestpropertyloading} />
-      <FeaturedPropertySection value={featuredProperties} loading={featureproeprtyloading} />
+      <FeaturedPropertySection value={featuredProperties} loading={featurepropertyloading} />
       <PropertyServicesSection value={AppPropertyData.PropertyServicesInClassic} />
       <LatestPropertySection value={value?.LatestPropertyInClassicLayout} />
       <VideoSection />

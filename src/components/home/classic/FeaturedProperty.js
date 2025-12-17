@@ -13,11 +13,13 @@ import Img from "@/utils/BackgroundImageRatio";
 import { FeaturedProperty } from "@/constValues/constValues";
 import NoSsr from "@/utils/NoSsr";
 import { formatPK } from "@/utils/Formatter";
+import ProfileLoader from "@/components/common/Loader";
 
 const FeaturedPropertySection = ({ value,loading }) => {
   return (
     <section className='feature-section ratio_landscape bg-half zoom-gallery'>
-      <Container>
+      {loading ? (<ProfileLoader/>) : (
+        <Container>
         <Row>
           <Col>
             <NoSsr>
@@ -99,6 +101,7 @@ const FeaturedPropertySection = ({ value,loading }) => {
           </Col>
         </Row>
       </Container>
+      )}
     </section>
   );
 };
