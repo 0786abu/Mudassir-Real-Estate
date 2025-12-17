@@ -22,14 +22,14 @@ export async function DELETE(req,{params}) {
                 message:"Property not found"
             },{status:401})
         }
-        if(property?.createdBy?.toString() !== isUser?._id?.toString()){
+        if(existproperty?.createdBy?.toString() !== isUser?._id?.toString()){
             return NextResponse.json({
                 success:false,
                 message:"This is not your property, so you are not authorized to delete this property"
             },{status:401})
         }
-        if (property.images && property.images.length > 0) {
-      for (const img of property.images) {
+        if (existproperty.images && existproperty.images.length > 0) {
+      for (const img of existproperty.images) {
         if (img.public_id) {
           await cloudinary.uploader.destroy(img.public_id);
         }
@@ -44,7 +44,7 @@ export async function DELETE(req,{params}) {
     } catch (error) {
         return NextResponse.json({
             success:false,
-            message:"Property Delete Successfull",
+            message:error.message,
         },{status:500})
     }
 }
