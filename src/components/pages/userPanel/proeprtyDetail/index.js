@@ -479,7 +479,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
                 {activeTab === 'overview' && (
                   <div>
                     <h5 style={{ fontWeight: 'bold', marginBottom: '1rem' }}>About This Property</h5>
-                    <p style={{ color: '#6c757d', marginBottom: '1.5rem' }}>{myProperty?.aboutProperty}</p>
+                    <div className='white-space-pre-line' style={{ color: '#6c757d', marginBottom: '1.5rem' }}>{myProperty?.aboutProperty}</div>
                     <p style={{ color: '#6c757d' }}>{myProperty?.description}</p>
                     
                     <h5 style={{ fontWeight: 'bold', marginTop: '2rem', marginBottom: '1rem' }}>Property Details</h5>

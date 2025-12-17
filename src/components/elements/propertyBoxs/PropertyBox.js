@@ -193,8 +193,12 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
         </p>
 
         <ul>
-          <li>Bed: {data.beds || 5}</li>
-          <li>Bath: {data.baths || 5}</li>
+          {data.beds>0 && (
+            <li>Bed: {data.beds || 5}</li>
+          )}
+          {data.baths>0 && (
+            <li>Bath: {data.baths || 5}</li>
+          )}
           <li>Sq Ft: {data.squareFits || 5}</li>
         </ul>
 
