@@ -34,7 +34,7 @@ const BodyContent = ({ active }) => {
         <Row>
           <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} loading={userloading} socialloading={socialloading} />
           <Col lg='9'>
-           {activeTab === "Dashboard" && <UserDashboardTab setActiveTab={setActiveTab} latestProperties={latestProperties} loading={viewsdataloading} data={myViewsChartData} typedData={myTypeChartData} availableData={myAvailableProeprtiesChartData} />}
+           {activeTab === "Dashboard" && <UserDashboardTab setActiveTab={setActiveTab} />}
 
   {activeTab === "Listing" && <MyListingTab setActiveTab={setActiveTab} />}
 
