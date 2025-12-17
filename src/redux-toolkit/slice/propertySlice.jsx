@@ -45,12 +45,6 @@ const propertySice = createSlice({
         state.viewsdataloading = false
         state.myTypeChartData = action.payload
        },
-       setDeleteProperty:(state,action)=>{
-        state.createpropertyloading = false
-        state.myProperties = state.myProperties.filter((item)=>item._id !== action.payload._id);
-        state.myProperty = null
-        state.selectedSlug = null
-       },
        setMyAvailableProeprtiesChartData:(state,action)=>{
         state.viewsdataloading = false
         state.myAvailableProeprtiesChartData = action.payload
