@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const AvailableProperty = ({loading,data}) => {
-  const percent = data?.availablePercent || 0;
+  const [percent, setPercent] = useState(0)
 
   const availablePropertyData = {
   options: {
@@ -51,6 +51,9 @@ const AvailableProperty = ({loading,data}) => {
   },
   series: [percent],
 }
+useEffect(()=>{
+  setPercent(data?.availablePercent)
+},[data?.availablePercent])
   return (
     <div className='col-xl-4 xl-40 col-md-6'>
       <div className='common-card available-property'>
