@@ -22,7 +22,7 @@ import { ViewsChartData } from "@/redux-toolkit/action/propertyAction";
 const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
   const {user,userloading,socialloading} = useSelector((state)=>state.Auth);
-  const {myViewsChartData,viewsdataloading} = useSelector((state)=>state.Property);
+  const {myViewsChartData,viewsdataloading,myTypeChartData,myAvailableProeprtiesChartData} = useSelector((state)=>state.Property);
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -39,7 +39,7 @@ const BodyContent = ({ active }) => {
         <Row>
           <UserPanelSidebar activeTab={activeTab} setActiveTab={setActiveTab} user={user} loading={userloading} socialloading={socialloading} />
           <Col lg='9'>
-           {activeTab === "Dashboard" && <UserDashboardTab loading={viewsdataloading} data={myViewsChartData} />}
+           {activeTab === "Dashboard" && <UserDashboardTab loading={viewsdataloading} data={myViewsChartData} typedData={myTypeChartData} availableData={myAvailableProeprtiesChartData} />}
 
   {activeTab === "Listing" && <MyListingTab setActiveTab={setActiveTab} />}
 

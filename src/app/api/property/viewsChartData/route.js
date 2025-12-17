@@ -112,7 +112,70 @@ export async function GET(req) {
       },
       { $sort: { month: 1 } },
     ]);
+    const typeData = await Property.aggregate([
+          {
+            $match: {
+              createdBy: isUser._id, // 👈 sirf apni properties
+            },
+          },
+          {
+            $group: {
+              _id: "$type", // 👈 category wise group
+              totalProperties: { $sum: 1 },
+            },
+          },
+          {
+            $project: {
+              _id: 0,
+              type: "$_id",
+              count: "$totalProperties",
+            },
+          },
+          { $sort: { count: -1 } }, // optional: high → low
+        ]);
 
+        const availablePropertiesPercent = await Property.aggregate([
+      {
+        $match: {
+          createdBy: isUser._id, // 👈 sirf agent ki properties
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalProperties: { $sum: 1 },
+          available: {
+            $sum: {
+              $cond: [{ $eq: ["$isApproved", "Approved"] }, 1, 0],
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          totalProperties: 1,
+          available: 1,
+          availablePercent: {
+            $cond: [
+              { $eq: ["$totalProperties", 0] },
+              0,
+              {
+                $round: [
+                  {
+                    $multiply: [
+                      { $divide: ["$available", "$totalProperties"] },
+                      100,
+                    ],
+                  },
+                  0, // 👈 integer percent (80)
+                ],
+              },
+            ],
+          },
+        },
+      },
+    ]);
     // Month names
     const months = [
       "Jan","Feb","Mar","Apr","May","Jun",
@@ -133,6 +196,12 @@ export async function GET(req) {
       success: true,
       year: now.getFullYear(),
       data: formattedData,
+      typedData:typeData,
+      availablePropertiesPercent:availablePropertiesPercent[0] || {
+        totalProperties: 0,
+        available: 0,
+        availablePercent: 0,
+      }
     },{status:200});
 
   } catch (error) {

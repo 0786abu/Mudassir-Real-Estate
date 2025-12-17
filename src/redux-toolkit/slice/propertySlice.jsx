@@ -5,6 +5,8 @@ const initialState = {
     myProperties:[],
     myProperty:null,
     myViewsChartData:{},
+    myAvailableProeprtiesChartData:{},
+    myTypeChartData:[],
     mypropertyloading:false,
     selectedSlug:null,
     singlepropertyloading:false,
@@ -37,6 +39,14 @@ const propertySice = createSlice({
        setMyChartData:(state,action)=>{
         state.viewsdataloading = false
         state.myViewsChartData = action.payload
+       },
+       setMyTypeChartData:(state,action)=>{
+        state.viewsdataloading = false
+        state.myTypeChartData = action.payload
+       },
+       setMyAvailableProeprtiesChartData:(state,action)=>{
+        state.viewsdataloading = false
+        state.myAvailableProeprtiesChartData = action.payload
        },
        setMyProperty:(state,action)=>{
         state.mypropertyloading = false
@@ -79,6 +89,6 @@ const propertySice = createSlice({
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData} = propertySice.actions;
 
 export default propertySice.reducer;

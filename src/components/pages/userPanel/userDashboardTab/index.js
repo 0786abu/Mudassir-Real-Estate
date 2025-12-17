@@ -6,7 +6,7 @@ import SalesByAgent from "./SalesByAgent";
 import SalesOverview from "./SalesOverview";
 import SmallBarCard from "./SmallBarCard";
 
-const UserDashboardTab = ({loading,data}) => {
+const UserDashboardTab = ({loading,data,typedData,availableData}) => {
   return (
     <div className="dashboard-content">
       <div id="dashboard">
@@ -14,8 +14,8 @@ const UserDashboardTab = ({loading,data}) => {
           <Row>
             <SmallBarCard />
             <SalesOverview loading={loading} data={data} />
-            <SalesByAgent />
-            <AvailableProperty />
+            <SalesByAgent loading={loading} data={typedData} />
+            <AvailableProperty loading={loading} data={availableData} />
             <PropertyOverview />
           </Row>
         </div>

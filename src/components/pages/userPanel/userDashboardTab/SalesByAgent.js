@@ -1,17 +1,93 @@
 /* The above code is a React component that is using the dynamic import to load the react-apexcharts
 library. */
 import React from "react";
-import { agentSalesData } from "@/data/chartData";
 import ReactApexChart from "react-apexcharts";
 
-const SalesByAgent = () => {
+const SalesByAgent = ({loading,data}) => {
+    const options = {
+      chart: {
+        type: "bar",
+        toolbar: {
+          show: false,
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          barHeight: "40%",
+        },
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            borderColor: "transparent",
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            borderColor: "transparent",
+            show: false,
+          },
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      responsive: [
+        {
+          breakpoint: 1199,
+          options: {
+            chart: {
+              height: 270,
+            },
+          },
+        },
+      ],
+      colors: ["#ff8c41"],
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          shadeIntensity: 1,
+          type: "horizontal",
+          gradientToColors: ["#ffffff"],
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100],
+        },
+      },
+  
+      xaxis: {
+        categories: data?.map((item)=>item.type),
+        axisBorder: {
+          low: 0,
+          offsetX: 0,
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+      },
+    }
+    const series = [
+      {
+        name: "Num of properties in this category",
+        data: data?.map((item)=>item.count),
+      },
+    ]
   return (
     <div className='col-xl-5 col-md-6'>
       <div className='common-card sales-agent'>
         <div className='common-header'>
           <h5>Sales by agent</h5>
         </div>
-        <ReactApexChart options={agentSalesData?.options} series={agentSalesData?.series} type='bar' height={375} id='agent-sales' />
+         {loading ? (
+                  <span>loading</span>
+                ) : (
+                  <ReactApexChart options={options} series={series} type='bar' height={375} id='agent-sales' />
+                )}
+        
       </div>
     </div>
   );

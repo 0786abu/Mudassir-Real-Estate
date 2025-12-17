@@ -138,7 +138,7 @@ const SalesOverview = ({loading,data}) => {
     const series = [
       {
         name: "Views of this month",
-        data: data.data?.map((item)=>item.views),
+        data: data.data?.map((item)=>item.views) || [],
       },
     ]
   return (

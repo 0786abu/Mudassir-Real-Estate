@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
+import { setCreatePropertyLoading, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 
 
@@ -55,6 +55,8 @@ export const ViewsChartData = ()=>async(dispatch)=>{
             withCredentials:true
         });
         dispatch(setMyChartData({year:data.year,data:data.data}));
+        dispatch(setMyTypeChartData(data.typedData));
+        dispatch(setMyAvailableProeprtiesChartData(data.availablePropertiesPercent));
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
