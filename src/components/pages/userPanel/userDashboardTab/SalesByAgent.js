@@ -72,7 +72,7 @@ const SalesByAgent = ({loading,data}) => {
     }
     const series = [
       {
-        name: "Num of properties in this category",
+        name: "Num of properties in this type",
         data: data?.map((item)=>item.count),
       },
     ]
@@ -80,7 +80,7 @@ const SalesByAgent = ({loading,data}) => {
     <div className='col-xl-5 col-md-6'>
       <div className='common-card sales-agent'>
         <div className='common-header'>
-          <h5>Sales by agent</h5>
+          <h5>Types of properties you create</h5>
         </div>
          {loading ? (
                   <span>loading</span>

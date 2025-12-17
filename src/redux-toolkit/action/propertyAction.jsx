@@ -46,7 +46,7 @@ export const UpdateProperty = (property,setActivetab)=>async(dispatch)=>{
     }
 }
 export const ViewsChartData = ()=>async(dispatch)=>{
-    dispatch(setViewsChartDataLoading())
+    dispatch(setViewsChartDataLoading(true))
     try {
         const {data} = await axios.get(`${baseURL}/api/property/viewsChartData`,{
             headers:{

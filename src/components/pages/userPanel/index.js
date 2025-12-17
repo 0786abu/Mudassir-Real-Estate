@@ -24,6 +24,7 @@ const BodyContent = ({ active }) => {
   const {user,userloading,socialloading} = useSelector((state)=>state.Auth);
   const {myViewsChartData,viewsdataloading,myTypeChartData,myAvailableProeprtiesChartData} = useSelector((state)=>state.Property);
   const dispatch = useDispatch();
+  console.log(viewsdataloading)
 
   useEffect(()=>{
     dispatch(MyProfileData());

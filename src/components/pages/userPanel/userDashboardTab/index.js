@@ -11,13 +11,19 @@ const UserDashboardTab = ({loading,data,typedData,availableData}) => {
     <div className="dashboard-content">
       <div id="dashboard">
         <div className="user-wrapper">
-          <Row>
-            <SmallBarCard />
+            {loading ? (
+              <div className=" d-flex justify-content-center align-items-center" style={{height:"30vh"}}>
+                <span>Please wait...</span>
+              </div>
+            ) : (
+              <Row>
+              <SmallBarCard />
             <SalesOverview loading={loading} data={data} />
             <SalesByAgent loading={loading} data={typedData} />
             <AvailableProperty loading={loading} data={availableData} />
             <PropertyOverview />
           </Row>
+            )}
         </div>
       </div>
     </div>
