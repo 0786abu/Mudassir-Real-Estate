@@ -22,8 +22,7 @@ const SalePropertySection = ({ value,loading }) => {
             </div>
             <Row className='listing-hover-property'>
               {loading ? (
-                 <Col xl='3' lg='4' md='6'>
-                 {Array.from({ length: 4 }).map((_, index) => (
+                 Array.from({ length: 4 }).map((_, index) => (
     <Col xl="3" lg="4" md="6" key={index}>
       <ContentLoader className="skeleton-svg">
         <rect className="skeleton-img" />
@@ -32,8 +31,7 @@ const SalePropertySection = ({ value,loading }) => {
         <rect className="skeleton-c3" />
       </ContentLoader>
     </Col>
-  ))}
-        </Col>
+  ))
               )  : value &&
                 value?.map((data, i) => (
                    <Col xl='3' lg='4' md='6' key={i}>
