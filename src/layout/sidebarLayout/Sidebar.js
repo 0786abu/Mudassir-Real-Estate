@@ -9,7 +9,7 @@ import { Col } from "reactstrap";
 
 const Sidebar = (props) => {
   return (
-    <Col xl='3' lg='4' className={props.side === "right" ? " order-1" : ""}>
+    <Col xl='3' lg='4' className={props.side === "right" ? " order-1" : "mb-4"} style={{marginTop:props.top ? props.top : undefined,}}>
       <div className={`${!props.singleProperty && "left-sidebar"}  blog-sidebar sticky-cls`}>
         <div className='filter-cards'>
           <div className='advance-card'>

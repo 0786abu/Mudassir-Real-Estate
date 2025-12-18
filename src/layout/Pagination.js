@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const Pagination = ({ totalPages, currentPage, searchParams }) => {
+const Pagination = ({ totalPages, currentPage, searchParams, from, agentID }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -15,8 +15,18 @@ const Pagination = ({ totalPages, currentPage, searchParams }) => {
     setLoading(true);
     const newParams = new URLSearchParams(searchParams);
     newParams.set("page", page);
-    router.push(`/properties?${newParams.toString()}`);
+    
+    if(from==="agents"){
+      router.push(`/agents?page=${page}`);
+    }else if(from==="agentDetail" && agentID){
+      router.push(`/agents/${agentID}?page=${page}`);
+    }else{
+      {
+        router.push(`/properties?${newParams.toString()}`);
+      }
+    }
     setLoading(false);
+    console.log(page)
   };
 
   // Generate pages array
@@ -53,7 +63,7 @@ const Pagination = ({ totalPages, currentPage, searchParams }) => {
 
         {pages.map((p,index) => (
           <li key={index} className={`page-item ${p === currentPage ? "active" : ""}`}>
-            <div className="page-link" onClick={() => goToPage(p)}>{loading && p===currentPage ? "...": p}</div>
+            <button disabled={p === currentPage} className="page-link" onClick={() => goToPage(p)}>{loading && p===currentPage ? "...": p}</button>
           </li>
         ))}
 

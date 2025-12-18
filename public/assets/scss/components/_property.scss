@@ -1911,3 +1911,14 @@
 /**=====================
      property css end
 ==========================**/
+
+.agent-img-wrapper {
+  width: 100%;
+  height: 320px;   /* 👈 without this image NEVER shows */
+  position: relative;
+}
+@media (max-width:768px) {
+  .agent-img-wrapper {
+    height: 350px;
+  }
+}

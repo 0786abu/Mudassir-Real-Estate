@@ -13,14 +13,6 @@ import { formatPK } from "@/utils/Formatter";
 const PropertyBoxOne = ({ data }) => {
   return (
     <>
-      {/* {loading ? (
-        <ContentLoader className="skeleton-svg">
-          <rect className="skeleton-img" />
-          <rect className="skeleton-c1" />
-          <rect className="skeleton-c2" />
-          <rect className="skeleton-c3" />
-        </ContentLoader>
-      ) : ( */}
         <div className="property-box">
           <div className="property-image">
             <a>

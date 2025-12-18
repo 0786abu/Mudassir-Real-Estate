@@ -2,21 +2,22 @@
  * It takes in a list of data and returns a list of components
  * @returns The return statement is used to return a value from a function.
  */
-"use client"
-import { Col, Container, Row } from "reactstrap";
-import Sidebar from "@/layout/sidebarLayout/Sidebar";
-import Exploration from "@/layout/sidebarLayout/Exploration";
-import RecentlyAdded from "@/layout/sidebarLayout/RecentlyAdded";
-import Featured from "@/layout/sidebarLayout/Featured";
+import { Col } from "reactstrap";
+
 import PropertyBoxFour from "../../../elements/propertyBoxs/PropertyBoxFour";
+import Pagination from "@/layout/Pagination";
 
-const BodyContent = ({ agents}) => {
-
+const BodyContent = async({baseURL,searchParams}) => {
+  const newpage = searchParams?.page || 1;
+  const query = new URLSearchParams({ page:newpage }).toString();
+  const res = await fetch(`${baseURL}/api/agents/getAgents?${query}`,{
+    method:"GET"
+  });
+  const data = await res.json();
+  const {agents, totalPages, page} = data;
   return (
+    <Col xl="9" lg="8" className="property-grid-3 agent-grids">
     <section className="agent-section property-section">
-      <Container>
-        <Row className="row ratio2_3">
-          <Col xl="9" lg="8" className="property-grid-3 agent-grids">
             {/* <Header title={"Agency Listing"} /> */}
             <div className={`property-wrapper-grid`}>
               <div className={`property-2 row column-sm property-label property-grid  `}>
@@ -24,7 +25,7 @@ const BodyContent = ({ agents}) => {
                   agents.map((data, i) => (
                     <Col
                     xl="4"
-                    md="6"
+                    sm="6"
                       className={` wow fadeInUp grid-view `}
                       key={i}>
                       <PropertyBoxFour data={data} />
@@ -32,15 +33,11 @@ const BodyContent = ({ agents}) => {
                   ))}
               </div>
             </div>
-          </Col>
-          <Sidebar>
-            <Exploration />
-            <Featured />
-            <RecentlyAdded />
-          </Sidebar>
-        </Row>
-      </Container>
+    <div>
+      <Pagination totalPages={totalPages} currentPage={page} searchParams={searchParams} from={"agents"}/>
+    </div>
     </section>
+          </Col>
   );
 };
 

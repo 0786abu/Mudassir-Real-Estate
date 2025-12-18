@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 
 
-export const ChangePassword = ()=>async(dispatch)=>{
+export const FetchAgents = ()=>async(dispatch)=>{
     dispatch(setAgentLoading())
     try {
         const {data} = await axios.get(`${baseURL}/api/agents/getAgents`,{

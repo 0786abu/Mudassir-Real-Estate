@@ -5,6 +5,7 @@
  * class of 'label label-success' and the text 'featured'
  * @returns A React component
  */
+"use client";
 import React from "react";
 import Slider from "react-slick";
 import { featureSlider } from "../../data/slickSlider";
@@ -18,7 +19,7 @@ const Featured = () => {
       <NoSsr>
         <Slider className="feature-slider" {...featureSlider}>
           <div>
-            <Img src="/assets/images/property/4.jpg" className="bg-img" alt="" />
+            <Img src="/assets/images/property/3.webp" className="bg-img" alt="" />
             <div className="bottom-feature">
               <h5>Neverland</h5>
               <h6>

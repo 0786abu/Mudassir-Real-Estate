@@ -2,6 +2,7 @@
  * It's a React component that renders a form with a submit button
  * @returns A function that returns a div.
  */
+"use client"
 import { SendInquiry } from "@/redux-toolkit/action/leadAction";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

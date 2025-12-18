@@ -1,23 +1,38 @@
+import { Globe, Linkedin } from "lucide-react";
 import React from "react";
+import { Facebook, Instagram } from "react-feather";
 
-const SocialAccounts = () => {
+const SocialAccounts = ({socialMedia}) => {
    return (
       <ul>
-         <li>
-            <a href="https://accounts.google.com/">
-               <img src="/assets/images/about/icon-1.png" alt="" />
+         {socialMedia?.website && (
+            <li>
+            <a href={socialMedia?.website}>
+               <Globe/>
             </a>
          </li>
-         <li>
-            <a href="https://twitter.com/">
-               <img src="/assets/images/about/icon-2.png" alt="" />
+         )}
+         {socialMedia?.linkedin && (
+            <li>
+            <a href={socialMedia?.linkedin}>
+               <Linkedin/>
             </a>
          </li>
-         <li>
-            <a href="https://www.facebook.com/">
-               <img src="/assets/images/about/icon-3.png" alt="" />
+         )}
+         {socialMedia?.facebook && (
+            <li>
+            <a href={socialMedia?.facebook}>
+               <Facebook/>
             </a>
          </li>
+         )}
+         {socialMedia?.instagram && (
+            <li>
+            <a href={socialMedia?.instagram}>
+               <Instagram/>
+            </a>
+         </li>
+         )}
       </ul>
    );
 };

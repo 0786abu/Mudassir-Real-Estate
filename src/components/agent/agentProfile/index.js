@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, Mail, MapPin, PhoneCall } from "react-feather";
 import { Col, Container, Row } from "reactstrap";
 import Sidebar from "@/layout/sidebarLayout/Sidebar";
@@ -8,8 +8,12 @@ import Filter from "@/layout/sidebarLayout/Filter";
 import RecentlyAdded from "@/layout/sidebarLayout/RecentlyAdded";
 import Img from "@/utils/BackgroundImageRatio";
 import GridView from "../../listing/gridView/grid/GridView";
+import Pagination from "@/layout/Pagination";
 
-const BodyContent = ({agent}) => {
+const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,searchParams}) => {
+  useEffect(()=>{
+    window.scrollTo({top:100, behavior:"smooth"})
+  })
   return (
     <section className="agent-section property-section agent-profile-wrap">
       <Container>
@@ -119,11 +123,22 @@ const BodyContent = ({agent}) => {
                 </Col>
               </Row>
             </div>
-            <GridView size={2} gridType={"grid-view"} gridBar={true} />
+            <div>
+            <GridView properties={agentProperties}  />
+            {totalProperties>2 && (
+              <Pagination 
+              totalPages={totalPages}
+              currentPage={page}
+              from={"agentDetail"}
+              agentID={agent?._id}
+              searchParams={searchParams}
+              />
+            )}
+            </div>
           </Col>
           <Sidebar>
             <Exploration />
-            <Filter />
+            {/* <Filter /> */}
             <RecentlyAdded />
           </Sidebar>
         </Row>
