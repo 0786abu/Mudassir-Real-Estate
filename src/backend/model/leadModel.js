@@ -7,7 +7,6 @@ const leadSchema = new Schema({
   property: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Property",
-    required: true,
   },
 
   // Request sender (Visitor / User)
