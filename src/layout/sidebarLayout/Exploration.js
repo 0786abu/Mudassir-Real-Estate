@@ -17,7 +17,7 @@ const Exploration = ({owner,property}) => {
     message:"",
     requestedTo:owner?._id,
     requestedToModel:owner?.role,
-    property
+    property:property ? property : ""
   });
   const dispatch = useDispatch();
   // const [modal, setModal] = useState(false);

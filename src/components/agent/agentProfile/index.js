@@ -150,7 +150,7 @@ const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,sear
             </div>
           </Col>
           <Sidebar>
-            <Exploration />
+            <Exploration owner={{_id:gent?._id}} />
             {/* <Filter /> */}
             {/* <RecentlyAdded /> */}
           </Sidebar>

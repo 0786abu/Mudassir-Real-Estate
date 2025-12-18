@@ -9,7 +9,7 @@ export async function POST(req) {
         await DataBase();
         const isUser = await isAuthenticated();
         const {name,email,phone,message,requestedTo, requestedToModel,property} = await req.json();
-        if(!name || !email || !phone || !message || !property){
+        if(!name || !email || !phone || !message){
             return NextResponse.json({
                 success:false,
                 message:"please fill all fields of exploration form"
@@ -18,6 +18,7 @@ export async function POST(req) {
         let data = {
             name,email,phone,message,requestedTo,property,requestedToModel:requestedToModel==="agent" ? "Agent" : "User"
         }
+
         if(isUser){
             if (isUser._id.toString() === requestedTo) {
         return NextResponse.json(
@@ -36,12 +37,14 @@ export async function POST(req) {
         }else{
             data.isGuest = true
         }
-        const isProperty = await Property.findById(property);
+        if(property){
+            const isProperty = await Property.findById(property);
         if(!isProperty){
             return NextResponse.json({
                 success:false,
                 message: "proeprty not found try again",
             },{status:400})
+        }
         }
         if(isUser){
             const existingLead = await Lead.findOne({property,requestedBy:isUser._id});

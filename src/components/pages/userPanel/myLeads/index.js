@@ -54,7 +54,7 @@ const MyLeads = () => {
               <th>phone</th>
               <th>Status</th>
               <th>Message</th>
-              <th>Property</th>
+              <th>Purpose</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -115,11 +115,15 @@ const MyLeads = () => {
                 </Button>
               </td>
               <td>
-                <Link target='_blank' href={`/properties/${lead.property.slug}`}>
+                {lead.property ? (
+                  <Link target='_blank' href={`/properties/${lead.property.slug}`}>
                   <Button size="sm" color="primary" outline>
                   View
                 </Button>
                 </Link>
+                ) : (
+                  <span>For Agent Contact</span>
+                )}
               </td>
               <td>
                 <small className="text-muted">{formatDatenew(lead.createdAt)}</small>
