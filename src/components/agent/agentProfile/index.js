@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, Mail, MapPin, PhoneCall } from "react-feather";
 import { Col, Container, Row } from "reactstrap";
 import Sidebar from "@/layout/sidebarLayout/Sidebar";
@@ -11,9 +11,22 @@ import GridView from "../../listing/gridView/grid/GridView";
 import Pagination from "@/layout/Pagination";
 
 const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,searchParams}) => {
-  useEffect(()=>{
-    window.scrollTo({top:100, behavior:"smooth"})
-  })
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    // 👇 pehli dafa skip karo
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    // 👇 sirf pagination change par scroll
+    window.scrollTo({
+      top: 1000,
+      behavior: "smooth",
+    });
+
+  }, [page]);
   return (
     <section className="agent-section property-section agent-profile-wrap">
       <Container>
