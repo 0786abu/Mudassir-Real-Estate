@@ -106,7 +106,7 @@ const MyInquiries = () => {
                 </Button>
               </td>
               <td>
-              {lead.property ? (
+              {lead.property !== null ? (
                   <Link target='_blank' href={`/properties/${lead.property.slug}`}>
                   <Button size="sm" color="primary" outline>
                   View
