@@ -36,7 +36,7 @@ const GridLayout = ({properties,favourites,from,fromPanel,setActiveTab}) => {
       </Row>
      ):(
        <Row className={` column-sm zoom-gallery property-grid list-view`}>
-        {from==="agentDetail" && (<h2 className="mb-4">Agent Proeprties</h2>)}
+        {from==="agentDetail" && (<h2 className="mb-4">Agent Properties</h2>)}
         {!properties || properties?.length === 0 ? (
           <Col xs={12} className="text-center py-5">
             <div className="no-properties d-flex flex-column align-items-center justify-content-center">
