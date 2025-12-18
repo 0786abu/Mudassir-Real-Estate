@@ -63,7 +63,7 @@ const Pagination = ({ totalPages, currentPage, searchParams, from, agentID }) =>
 
         {pages.map((p,index) => (
           <li key={index} className={`page-item ${p === currentPage ? "active" : ""}`}>
-            <button disabled={p === currentPage} className="page-link" onClick={() => goToPage(p)}>{loading && p===currentPage ? "...": p}</button>
+            <button disabled={p === currentPage || loading} className="page-link" onClick={() => goToPage(p)}>{loading && p===currentPage ? "...": p}</button>
           </li>
         ))}
 

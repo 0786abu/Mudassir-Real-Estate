@@ -124,7 +124,7 @@ const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,sear
               </Row>
             </div>
             <div>
-            <GridView properties={agentProperties}  />
+            <GridView properties={agentProperties} from={"agentDetail"} />
             {totalProperties>2 && (
               <Pagination 
               totalPages={totalPages}
@@ -139,7 +139,7 @@ const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,sear
           <Sidebar>
             <Exploration />
             {/* <Filter /> */}
-            <RecentlyAdded />
+            {/* <RecentlyAdded /> */}
           </Sidebar>
         </Row>
       </Container>

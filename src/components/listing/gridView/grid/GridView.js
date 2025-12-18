@@ -15,7 +15,7 @@ import Sidebar from "../../../../layout/sidebarLayout/Sidebar";
 import { getData } from "../../../../utils/getData";
 import GridLayout from "../../elements/GridLayout";
 
-const GridView = ({ properties, side, fromPanel,mypropertyloading,setActiveTab }) => {
+const GridView = ({ properties, side, from, fromPanel,mypropertyloading,setActiveTab }) => {
   return (
     <section style={{padding:fromPanel ? "0px" : undefined}} className={`property-section  `}>
       <Container>
@@ -31,7 +31,7 @@ const GridView = ({ properties, side, fromPanel,mypropertyloading,setActiveTab }
           <Col xs="12" className={`property-grid-2 property-grid-slider`}>
             {/* <Header title={"Properties Listing"} value={value} /> */}
             <div className={`property-wrapper-grid list-view`}>
-              <GridLayout properties={properties} fromPanel={fromPanel} mypropertyloading={mypropertyloading} setActiveTab={setActiveTab} />
+              <GridLayout from={from} properties={properties} fromPanel={fromPanel} mypropertyloading={mypropertyloading} setActiveTab={setActiveTab} />
             </div>
               {/* <Pagination /> */}
           </Col>
