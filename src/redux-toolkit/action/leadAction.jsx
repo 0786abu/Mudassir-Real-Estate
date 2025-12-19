@@ -7,7 +7,7 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 export const SendInquiry = (leadData,setLeadData)=>async(dispatch)=>{
     dispatch(setSendInquiryLoading())
     try {
-        const {data} = await axios.post(`${baseURL}/api/leads`,leadData,{
+        const {data} = await axios.post(`http://localhost:3000/api/leads`,leadData,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -32,7 +32,7 @@ export const SendInquiry = (leadData,setLeadData)=>async(dispatch)=>{
 export const MyLLeads = (type)=>async(dispatch)=>{
     dispatch(setLeadLoading(true))
     try {
-        const {data} = await axios.get(`${baseURL}/api/leads?type=${type}`,{
+        const {data} = await axios.get(`http://localhost:3000/api/leads?type=${type}`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -49,7 +49,7 @@ export const MyLLeads = (type)=>async(dispatch)=>{
 export const MyInquiriess = (type)=>async(dispatch)=>{
     dispatch(setLeadLoading(true))
     try {
-        const {data} = await axios.get(`${baseURL}/api/leads?type=${type}`,{
+        const {data} = await axios.get(`http://localhost:3000/api/leads?type=${type}`,{
             headers:{
                 "Content-Type":"application/json"
             },

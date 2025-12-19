@@ -9,7 +9,7 @@ const page = async({params,searchParams}) => {
     const {_id} = param;
     const searchparam = await searchParams;
     const newPage = searchparam?.page || 1
-    const data = await fetch(`${baseURL}/api/agents/getAgents/${_id}?page=${newPage}`,{method:"GET"});
+    const data = await fetch(`http://localhost:3000/api/agents/getAgents/${_id}?page=${newPage}`,{method:"GET"});
     const {agent,agentProperties,totalProperties,totalPages,page} = await data.json();
   return (
     <div>

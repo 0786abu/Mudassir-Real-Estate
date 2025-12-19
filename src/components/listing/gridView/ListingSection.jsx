@@ -16,7 +16,7 @@ export default async function ListingSection({ searchParams }) {
   const query = new URLSearchParams(safeParams).toString();
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property?${query}`,
+    `http://localhost:3000/api/property/create-property?${query}`,
     { cache: "no-store" }
   );
 
