@@ -8,7 +8,7 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 export const RegisterUser = (user,onClickForForgot,router)=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/register`,user,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/register`,user,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -28,7 +28,7 @@ export const RegisterUser = (user,onClickForForgot,router)=>async(dispatch)=>{
 export const VerifyOTP = (otp,router)=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/otpVerify`,{otpCode:otp},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/otpVerify`,{otpCode:otp},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -56,7 +56,7 @@ export const VerifyOTP = (otp,router)=>async(dispatch)=>{
 export const VerifyPhoneOTP = (otp,setModal)=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/verifyPhone/verifyPhoneOTP`,{otpCode:otp},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/verifyPhone/verifyPhoneOTP`,{otpCode:otp},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -75,7 +75,7 @@ export const VerifyPhoneOTP = (otp,setModal)=>async(dispatch)=>{
 export const SendOTPOnPhone = (phone,setTimer,setIsSendRequest)=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/verifyPhone`,{phone},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/verifyPhone`,{phone},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -94,7 +94,7 @@ export const SendOTPOnPhone = (phone,setTimer,setIsSendRequest)=>async(dispatch)
 export const MyProfileData = ()=>async(dispatch)=>{
     dispatch(setUserLoading())
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/auth/login`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/login`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -109,7 +109,7 @@ export const MyProfileData = ()=>async(dispatch)=>{
 export const LoginUser = ({user,onClickForForgot})=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/login`,user,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/login`,user,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -137,7 +137,7 @@ export const LoginUser = ({user,onClickForForgot})=>async(dispatch)=>{
 export const Resend_Email = (email,setTimer)=>async(dispatch)=>{
     dispatch(setResendEmailloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/resend`,{email},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/resend`,{email},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -155,7 +155,7 @@ export const Resend_Email = (email,setTimer)=>async(dispatch)=>{
 export const Resend_PhoneOTP = (phone,setTimer)=>async(dispatch)=>{
     dispatch(setResendEmailloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/resend/resendPhoneOTP`,{phone},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/resend/resendPhoneOTP`,{phone},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -173,7 +173,7 @@ export const Resend_PhoneOTP = (phone,setTimer)=>async(dispatch)=>{
 export const Logout_User = (router)=>async(dispatch)=>{
     dispatch(setLogoutLoading())
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/auth/register`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/register`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -196,7 +196,7 @@ export const Logout_User = (router)=>async(dispatch)=>{
 export const UserUpdateProfile = (formdata,setModal)=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.put(`http://localhost:3000/api/auth/register`,formdata,{
+        const {data} = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/register`,formdata,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -215,7 +215,7 @@ export const UserUpdateProfile = (formdata,setModal)=>async(dispatch)=>{
 export const AgentUpdateProfile = (formdata,setModal)=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.put(`http://localhost:3000/api/auth/login`,formdata,{
+        const {data} = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/login`,formdata,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -234,7 +234,7 @@ export const AgentUpdateProfile = (formdata,setModal)=>async(dispatch)=>{
 export const AgentUpdateSocialMedia = (dataa,setModal)=>async(dispatch)=>{
     dispatch(setSocialLoading())
     try {
-        const {data} = await axios.put(`http://localhost:3000/api/auth/resend`,{socialMedia:dataa},{
+        const {data} = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/resend`,{socialMedia:dataa},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -253,7 +253,7 @@ export const AgentUpdateSocialMedia = (dataa,setModal)=>async(dispatch)=>{
 export const ChangePassword = (passwordData,setModal)=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/change-password`,passwordData,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/change-password`,passwordData,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -271,7 +271,7 @@ export const ChangePassword = (passwordData,setModal)=>async(dispatch)=>{
 export const UploadProfile = (picture,setPreview)=>async(dispatch)=>{
     dispatch(setUploadLoading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/uploadPicture`,picture,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/uploadPicture`,picture,{
             headers:{
                 "Content-Type":"multipart/form-data"
             },
@@ -296,7 +296,7 @@ export const UploadProfile = (picture,setPreview)=>async(dispatch)=>{
 }
 export const Logout_User2 = (router)=>async(dispatch)=>{
     try {
-        await axios.get(`http://localhost:3000/api/auth/register`,{
+        await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/register`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -317,7 +317,7 @@ export const Logout_User2 = (router)=>async(dispatch)=>{
 export const ForgotPasswordd = ({email,setEmail})=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/reset-password`,{email},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/reset-password`,{email},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -335,7 +335,7 @@ export const ForgotPasswordd = ({email,setEmail})=>async(dispatch)=>{
 export const ResetPassword = ({password,token,router})=>async(dispatch)=>{
     dispatch(setRegisterloading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/auth/reset-password/${token}`,{password},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/reset-password/${token}`,{password},{
             headers:{
                 "Content-Type":"application/json"
             },

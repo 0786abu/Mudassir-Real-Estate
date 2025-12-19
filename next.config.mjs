@@ -5,7 +5,7 @@ const nextConfig  = {
     domains: ["res.cloudinary.com"],
   },
   env: {
-    API_URL: "http://localhost:3000/api",
+    API_URL: `${process.env.NEXT_PUBLIC_BASE_URL}/api`,
   },
   eslint: {
   ignoreDuringBuilds: true,

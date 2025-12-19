@@ -8,7 +8,7 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 export const AddToFavourites = (property)=>async(dispatch)=>{
     dispatch(setAddToFavLoading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/favourite`,{propertyID:property?.propertyID?._id},{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/favourite`,{propertyID:property?.propertyID?._id},{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -26,7 +26,7 @@ export const AddToFavourites = (property)=>async(dispatch)=>{
 export const RemoveFavouriteProperty = ({id})=>async(dispatch)=>{
     dispatch(setAddToFavLoading())
     try {
-        const {data} = await axios.delete(`http://localhost:3000/api/favourite/${id}`,{
+        const {data} = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/favourite/${id}`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -48,7 +48,7 @@ export const RemoveFavouriteProperty = ({id})=>async(dispatch)=>{
 export const GetFavouritesData = ()=>async(dispatch)=>{
     dispatch(setFavLoading())
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/favourite`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/favourite`,{
             headers:{
                 "Content-Type":"application/json"
             },

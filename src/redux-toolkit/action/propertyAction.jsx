@@ -9,7 +9,7 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 export const CreateProperty = (property)=>async(dispatch)=>{
     dispatch(setCreatePropertyLoading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/property/create-property`,property,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property`,property,{
             headers:{
                 "Content-Type":"multipart/form-data"
             },
@@ -27,7 +27,7 @@ export const CreateProperty = (property)=>async(dispatch)=>{
 export const UpdateProperty = (property,setActivetab)=>async(dispatch)=>{
     dispatch(setCreatePropertyLoading())
     try {
-        const {data} = await axios.put(`http://localhost:3000/api/property/create-property/${property.slug}`,property,{
+        const {data} = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property/${property.slug}`,property,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -49,7 +49,7 @@ export const UpdateProperty = (property,setActivetab)=>async(dispatch)=>{
 export const ViewsChartData = ()=>async(dispatch)=>{
     dispatch(setViewsChartDataLoading(true))
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/property/viewsChartData`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/viewsChartData`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -69,7 +69,7 @@ export const ViewsChartData = ()=>async(dispatch)=>{
 export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{
     dispatch(setCreatePropertyLoading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/property/uploadNewImages/${slug}`,images,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/uploadNewImages/${slug}`,images,{
             headers:{
                 "Content-Type":"multipart/form-data"
             },
@@ -90,7 +90,7 @@ export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{
 export const RemovePropertyImage = ({public_id,slug,setPublicID,setCurrentImageIndex})=>async(dispatch)=>{
     dispatch(setRemovePropertyImageLoading())
     try {
-        const {data} = await axios.delete(`http://localhost:3000/api/property/create-property/${slug}?public_id=${public_id}`,{
+        const {data} = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property/${slug}?public_id=${public_id}`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -110,7 +110,7 @@ export const RemovePropertyImage = ({public_id,slug,setPublicID,setCurrentImageI
 export const UpdateFloorPlanImage = ({formData,slug,setFloorPlanImage})=>async(dispatch)=>{
     dispatch(setCreatePropertyLoading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/property/create-property/${slug}`,formData,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property/${slug}`,formData,{
             headers:{
                 "Content-Type":"multipart/form-data"
             },
@@ -135,7 +135,7 @@ export const MyProperties = ({category,location,type,city,currentPage})=>async(d
         if(city) params.append("city", city);
         if(location) params.append("location", location);
         if(currentPage) params.append("page", currentPage);
-        const {data} = await axios.get(`http://localhost:3000/api/property/myProperties?${params.toString()}`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/myProperties?${params.toString()}`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -152,7 +152,7 @@ export const MyProperties = ({category,location,type,city,currentPage})=>async(d
 export const LatestProperties = ()=>async(dispatch)=>{
     dispatch(setLatestproeprtyloading(true))
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/property`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -168,7 +168,7 @@ export const LatestProperties = ()=>async(dispatch)=>{
 export const FeaturedProperties = ()=>async(dispatch)=>{
     dispatch(setFeaturedPropertyLoading(true))
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/property/FeaturedProperties`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/FeaturedProperties`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -184,7 +184,7 @@ export const FeaturedProperties = ()=>async(dispatch)=>{
 export const SendPropertyDataToMyProperty = (slug)=>async(dispatch)=>{
     dispatch(setSinglePropertyLoading(true))
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/property/getSingleProperty/${slug}`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/getSingleProperty/${slug}`,{
             headers:{
                 "Content-Type":"application/json"
             },
@@ -200,7 +200,7 @@ export const SendPropertyDataToMyProperty = (slug)=>async(dispatch)=>{
 export const DeleteProperty = ({id,setDeleteModal,setActivetab})=>async(dispatch)=>{
     dispatch(setCreatePropertyLoading(true))
     try {
-        const {data} = await axios.delete(`http://localhost:3000/api/property/deleteProperty/${id}`,{
+        const {data} = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/deleteProperty/${id}`,{
             headers:{
                 "Content-Type":"application/json"
             },

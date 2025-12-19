@@ -9,6 +9,6 @@ export async function getData(url) {
     return await axios.get(url);
   } catch (error) {
     console.error("Error", error);
-    alert(`${"data is not fetched !! check console.............!!                     imp Note: plz run application on http://localhost:3000/"}`);
+    alert(`${"data is not fetched !! check console.............!!                     imp Note: plz run application on ${process.env.NEXT_PUBLIC_BASE_URL}/"}`);
   }
 }

@@ -9,7 +9,7 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 export const FetchAgents = ()=>async(dispatch)=>{
     dispatch(setAgentLoading())
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/agents/getAgents`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/agents/getAgents`,{
             headers:{
                 "Content-Type":"application/json"
             },

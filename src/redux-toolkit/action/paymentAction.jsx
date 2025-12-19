@@ -8,7 +8,7 @@ const baseURL = process.env.NEXT_PUBLIC_BASE_URL
 export const CreatePayment = ({formData,setMakePayment,setPaidModal})=>async(dispatch)=>{
     dispatch(setCreatePaymentLoading())
     try {
-        const {data} = await axios.post(`http://localhost:3000/api/payment/createPayment`,formData,{
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/createPayment`,formData,{
             headers:{
                 "Content-Type":"multipart/form-data"
             },
@@ -29,7 +29,7 @@ export const CreatePayment = ({formData,setMakePayment,setPaidModal})=>async(dis
 export const getPayments = ()=>async(dispatch)=>{
     dispatch(setPaymentLoading())
     try {
-        const {data} = await axios.get(`http://localhost:3000/api/payment/createPayment`,{
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/createPayment`,{
             headers:{
                 "Content-Type":"application/json"
             },

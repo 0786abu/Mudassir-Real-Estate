@@ -10,7 +10,7 @@ import Pagination from "@/layout/Pagination";
 const BodyContent = async({baseURL,searchParams}) => {
   const newpage = searchParams?.page || 1;
   const query = new URLSearchParams({ page:newpage }).toString();
-  const res = await fetch(`http://localhost:3000/api/agents/getAgents?${query}`,{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/agents/getAgents?${query}`,{
     method:"GET"
   });
   const data = await res.json();

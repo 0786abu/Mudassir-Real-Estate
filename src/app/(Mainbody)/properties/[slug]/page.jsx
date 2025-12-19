@@ -5,7 +5,7 @@ import FooterThree from "@/layout/footers/FooterThree";
 
 
 // export async function generateStaticParams() {
-//   const res = await fetch(`http://localhost:3000/api/property/create-property`, {
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property`, {
 //     cache: "force-cache",
 //      next: { revalidate: 60 }, // ✅ recommended for SSG
 //   });
@@ -17,7 +17,7 @@ import FooterThree from "@/layout/footers/FooterThree";
 // }
 const page = async({params}) => {
     const {slug} = await params;
-    const data = await fetch(`http://localhost:3000/api/property/create-property/${slug}`,{ method:"GET", cache:"no-cache" });
+    const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property/${slug}`,{ method:"GET", cache:"no-cache" });
     const propertyDetails = await data.json();
   return (
       <div>

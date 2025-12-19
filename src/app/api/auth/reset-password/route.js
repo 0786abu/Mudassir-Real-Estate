@@ -29,7 +29,7 @@ export async function POST(req) {
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
             expiresIn: "10m",
         });
-        const link = `http://localhost:3000/reset-password/${token}`
+        const link = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password/${token}`
         await ResetPasswordMailer({email,link,name:user.name})
         return NextResponse.json(
             { success: true, message: "Password reset link sent to your email" },
