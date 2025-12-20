@@ -6,6 +6,7 @@ import { Container } from "reactstrap";
 
 const HomeBannerSection = () => {
   const router = useRouter();
+  const [hovered, setHovered] = useState(null);
 
   const [filterValues, setFilterValues] = useState({
     category:"Sale",
@@ -61,23 +62,48 @@ professionals
           {/* -------- BUY / RENT TOGGLE -------- */}
           <div className="d-flex justify-content-center mb-3">
             <div className="btn-group">
-              <button
-                className={`btn ${
-                  filterValues.category === "Sale" ? "btn-primary" : "btn-light"
-                }`}
-                onClick={()=>setFilterValues({...filterValues, category:"Sale"})}
-              >
-                Buy
-              </button>
+             <button
+  onMouseEnter={() => setHovered("Sale")}
+  onMouseLeave={() => setHovered(null)}
+  style={{
+    background:
+      filterValues.category === "Sale"
+        ? hovered === "Sale"
+          ? "#108a00"
+          : "#14a800"
+        : "#F8F9FA",
+    color: filterValues.category === "Sale" ? "white" : "black",
+    transition: "background 0.3s ease-in-out",
+  }}
+  className="btn"
+  onClick={() =>
+    setFilterValues({ ...filterValues, category: "Sale" })
+  }
+>
+  Sale
+</button>
 
-              <button
-                className={`btn ${
-                  filterValues.category === "Rent" ? "btn-primary" : "btn-light"
-                }`}
-                onClick={()=>setFilterValues({...filterValues, category:"Rent"})}
-              >
-                Rent
-              </button>
+<button
+  onMouseEnter={() => setHovered("Rent")}
+  onMouseLeave={() => setHovered(null)}
+  style={{
+    background:
+      filterValues.category === "Rent"
+        ? hovered === "Rent"
+          ? "#108a00"
+          : "#14a800"
+        : "#F8F9FA",
+    color: filterValues.category === "Rent" ? "white" : "black",
+    transition: "background 0.3s ease-in-out",
+  }}
+  className="btn"
+  onClick={() =>
+    setFilterValues({ ...filterValues, category: "Rent" })
+  }
+>
+  Rent
+</button>
+
             </div>
           </div>
 
