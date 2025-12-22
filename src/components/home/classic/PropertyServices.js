@@ -23,7 +23,7 @@ const PropertyServicesSection = ({ value }) => {
         <Row>
           <Col>
             <NoSsr>
-              <Slider className="service-slider arrow-gradient arrow-right" {...serviceSlider}>
+              <Slider className="service-slider arrow-gradient1" {...serviceSlider}>
                 {value &&
                   value.map((data, i) => (
                     <div key={i}>

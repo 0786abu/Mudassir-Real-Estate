@@ -5,6 +5,7 @@ const initialState = {
     agents:[],
     agentloading:false,
     latestProperties:[],
+    gridStyle:"grid-view",
     error:null
 }
 
@@ -20,6 +21,9 @@ const agentSlice = createSlice({
         setAgentLoading:(state)=>{
             state.agentloading = true
         },
+        setChangeView:(state,action)=>{
+            state.gridStyle = action.payload
+    },
         setLatestProeprty:(state,action)=>{
             state.latestProperties = action.payload
         },
@@ -29,6 +33,6 @@ const agentSlice = createSlice({
     }
 });
 
-export const {setAgentError,setAgentLoading,setGetAgents,setLatestProeprty} = agentSlice.actions;
+export const {setAgentError,setAgentLoading,setGetAgents,setLatestProeprty,setChangeView} = agentSlice.actions;
 
 export default agentSlice.reducer;

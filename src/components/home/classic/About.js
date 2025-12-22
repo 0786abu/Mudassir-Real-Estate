@@ -4,7 +4,7 @@
  * @returns An array of objects.
  */
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { Button, Col, Container, Row } from "reactstrap";
 import { MeetOurAgent, PropertyServicesDetail } from "@/constValues/constValues";
@@ -20,6 +20,7 @@ import { Link2 } from "react-feather";
 const About = () => {
   const {agents,agentloading} = useSelector((state)=>state.Agent);
   const dispatch = useDispatch();
+  const [isHover, setIsHover] = useState(false);
 
   useEffect(()=>{
     dispatch(FetchAgents())
@@ -35,7 +36,7 @@ const About = () => {
               <p className="font-roboto">{PropertyServicesDetail}</p>
             </div>
             <NoSsr>
-              <Slider className="arrow-gradient arrow-right" {...about3}>
+              <Slider className="arrow-gradient-agent arrow-right" {...about3}>
                 {agents &&
                   agents?.slice(0,6)?.map((data, i) => (
                     <div key={i} className=" position-relative">
@@ -44,10 +45,10 @@ const About = () => {
                         <div className="bg-size agent-image">
                           <Img src={data.agencyProfile?.url} className="bg-img" />
                           <div className="overlay-agent">
-                          {/* <div style={{position:"absolute", bottom:"4px",right:"4px"}}><Link2/> </div> */}
+                          <div style={{position:"absolute", bottom:"4px",right:"4px"}}><Link2/> </div>
                             <div className="agent-details">
                               <Link href="/agent/agent-profile">
-                                <h6 className="d-flex">
+                                <h6 className="d-flex" style={{color:"#108A00"}}>
                                   {data.agencyName || data.name}
                                   <span className="label-heart ms-2">
                                     <i className="fas fa-heart"></i>
@@ -59,7 +60,7 @@ const About = () => {
                               <span className="font-roboto">{data.email}</span>
                               <SocialAccounts socialMedia={data.socialMedia} />
                               <Link href={`/agents/${data._id}`}>
-                              <Button style={{background:"#F34451",color:"white"}} className="mt-2">View detail</Button>
+                              <Button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{background:isHover ? "#14a800" : "#108A00",color:"white"}} className="mt-2">View detail</Button>
                               </Link>
                             </div>
                           </div>

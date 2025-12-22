@@ -7,6 +7,7 @@ import { Container } from "reactstrap";
 const HomeBannerSection = () => {
   const router = useRouter();
   const [hovered, setHovered] = useState(null);
+  const [isHover, setIsHover] = useState(false);
 
   const [filterValues, setFilterValues] = useState({
     category:"Sale",
@@ -69,8 +70,8 @@ professionals
     background:
       filterValues.category === "Sale"
         ? hovered === "Sale"
-          ? "#108a00"
-          : "#14a800"
+          ? "#14a800"
+          : "#108a00"
         : "#F8F9FA",
     color: filterValues.category === "Sale" ? "white" : "black",
     transition: "background 0.3s ease-in-out",
@@ -90,8 +91,8 @@ professionals
     background:
       filterValues.category === "Rent"
         ? hovered === "Rent"
-          ? "#108a00"
-          : "#14a800"
+          ? "#14a800"
+          : "#108a00"
         : "#F8F9FA",
     color: filterValues.category === "Rent" ? "white" : "black",
     transition: "background 0.3s ease-in-out",
@@ -212,11 +213,15 @@ professionals
                 />
               </div>
             </div>
+            
 
             {/* Search Button */}
             <div className="col-md-2 col-12">
               <button
-                className="btn btn-dark w-100 py-2"
+              onMouseEnter={()=>setIsHover(true)}
+              onMouseLeave={()=>setIsHover(false)}
+              style={{background:isHover ? "#14a800" : "#108a00",color:"white"}}
+                className="btn w-100 py-2"
                 onClick={handleSearch}
               >
                 Search

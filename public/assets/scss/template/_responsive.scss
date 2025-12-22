@@ -141,18 +141,127 @@
     height: auto;
   }
   // service css
-  .service-slider {
-    &.arrow-gradient {
-      &.arrow-right {
-        .slick-prev {
-          right: 10%;
-        }
-        .slick-next {
-          right: 6.5%;
-        }
-      }
-    }
-  }
+  // .service-slider {
+  //   &.arrow-gradient {
+  //     &.arrow-right {
+  //       .slick-prev {
+  //         right: 10%;
+          
+  //       }
+  //       .slick-next {
+  //         right: 6.5%;
+  //       }
+  //     }
+  //   }
+  // }
+
+  // --------------------
+  /* ===== Slick Slider Custom Arrows ===== */
+
+.arrow-gradient1 .slick-prev,
+.arrow-gradient1 .slick-next {
+  width: 42px;
+  height: 42px;
+  background: #108a00 !important;   /* Green background */
+  border-radius: 8px;
+  z-index: 10;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Arrow icon color – ALWAYS WHITE */
+.arrow-gradient1 .slick-prev:before,
+.arrow-gradient1 .slick-next:before {
+  font-size: 18px;
+  opacity: 1 !important;
+  color: white !important;
+}
+
+/* ❌ Disable hover completely */
+.arrow-gradient1 .slick-prev:hover,
+.arrow-gradient1 .slick-next:hover {
+  background: #108a00 !important;
+}
+
+/* ❌ Disable active / focus styles */
+.arrow-gradient1 .slick-prev:active,
+.arrow-gradient1 .slick-next:active,
+.arrow-gradient1 .slick-prev:focus,
+.arrow-gradient1 .slick-next:focus {
+  background: #108a00 !important;
+  outline: none;
+  box-shadow: none;
+  color: white;
+}
+
+/* Optional positioning (top right) */
+.arrow-gradient1 .slick-prev {
+  right: 55px;
+  left: auto;
+  top: -20px;
+}
+
+.arrow-gradient1 .slick-next {
+  right: 0;
+  top: -20px;
+}
+
+
+
+
+.arrow-gradient-agent .slick-prev,
+.arrow-gradient-agent .slick-next {
+  width: 42px;
+  height: 42px;
+  background: #108a00 !important;   /* Green background */
+  border-radius: 8px;
+  z-index: 10;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Arrow icon color – ALWAYS WHITE */
+.arrow-gradient-agent .slick-prev:before,
+.arrow-gradient-agent .slick-next:before {
+  font-size: 18px;
+  opacity: 1 !important;
+  color: white !important;
+}
+
+/* ❌ Disable hover completely */
+.arrow-gradient-agent .slick-prev:hover,
+.arrow-gradient-agent .slick-next:hover {
+  background: #108a00 !important;
+}
+
+/* ❌ Disable active / focus styles */
+.arrow-gradient-agent .slick-prev:active,
+.arrow-gradient-agent .slick-next:active,
+.arrow-gradient-agent .slick-prev:focus,
+.arrow-gradient-agent .slick-next:focus {
+  background: #108a00 !important;
+  outline: none;
+  box-shadow: none;
+  color: white;
+}
+
+/* Optional positioning (top right) */
+.arrow-gradient-agent .slick-prev {
+  right: 55px;
+  left: auto;
+  top: -40px;
+}
+
+.arrow-gradient-agent .slick-next {
+  right: 0;
+  top: -40px;
+}
+
+  // --------------------
   // blog css
   .blog-2 {
     .slick-list {
@@ -200,8 +309,10 @@
         .slick-arrow {
           left: unset !important;
           right: 0;
+          color: white !important;
           top: 0;
         }
+        color: white !important;
         .slick-prev {
           right: 4%;
         }

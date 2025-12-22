@@ -18,6 +18,8 @@ export const formatDatenew = (dateString) => {
 const MyLeads = () => {
     const {myLeads,leadloading} = useSelector((state)=>state.Lead);
     const dispatch = useDispatch();
+    const [isHover, setIsHover] = useState(null);
+    const [isHover2, setIsHover2] = useState(null);
     const [message, setMessage] = useState("");
     const [messageModal, setMessageModal] = useState(false);
     
@@ -109,15 +111,17 @@ const MyLeads = () => {
                <td>
                  <Badge color={lead.status==="pending" ? "warning" : lead.status==="contacted" ? "success" : "light"}>{lead.status}</Badge>
               </td>
+               {/* ? "#14a800"
+          : "#108a00" */}
               <td>
-                <Button onClick={()=>showMessage(lead.message)} size="sm" color="primary" outline>
+                <Button onMouseEnter={()=>setIsHover(index)} onMouseLeave={()=>setIsHover(null)} style={{background:isHover===index ? "#14a800" : "#108a00"}} onClick={()=>showMessage(lead.message)} size="sm" >
                   View
                 </Button>
               </td>
               <td>
                 {lead.property !== null ? (
                   <Link target='_blank' href={`/properties/${lead.property.slug}`}>
-                  <Button size="sm" color="primary" outline>
+                  <Button onMouseEnter={()=>setIsHover2(index)} onMouseLeave={()=>setIsHover2(null)} style={{background:isHover2===index ? "#14a800" : "#108a00"}} size="sm" >
                   View
                 </Button>
                 </Link>

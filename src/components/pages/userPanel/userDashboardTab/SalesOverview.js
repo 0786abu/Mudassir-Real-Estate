@@ -12,7 +12,7 @@ const SalesOverview = ({loading,data}) => {
           top: 10,
           left: 0,
           blur: 3,
-          color: "#720f1e",
+          color: "#108A00",
           opacity: 0.15,
         },
         toolbar: {
@@ -24,7 +24,7 @@ const SalesOverview = ({loading,data}) => {
       },
       markers: {
         strokeWidth: 4,
-        strokeColors: "#ffffff",
+        strokeColors: "#108A00",
         hover: {
           size: 9,
         },
@@ -40,7 +40,7 @@ const SalesOverview = ({loading,data}) => {
       legend: {
         show: false,
       },
-      colors: ["#ff5c41"],
+      colors: ["#108A00"],
       fill: {
         type: "gradient",
         gradient: {

@@ -59,7 +59,7 @@
 }
 
 .trash-icon:hover {
-  color: red;
+  color: #108a00;
   cursor: pointer; /* optional, pointer on hover */
 }
 
@@ -488,7 +488,7 @@
       h6 {
         font-weight: 600;
         font-size: 17px;
-        color: var(--theme-default);      
+        color: #108A00;      
       }
       .icon-property {
         display: flex;
@@ -577,7 +577,7 @@
       .property-details {
         > a {
           h3 {
-            color: var(--theme-default2);
+            color: #108A00;
             transition: 0.8s;
           }
         }
@@ -1683,7 +1683,7 @@
         width: 150px;
         height: 150px;
         z-index: -1;
-        background: var(--theme-default);
+        background: #108a00;
         opacity: 0.8;
         border-radius: 100%;
         animation: heartbit 2s ease-out;

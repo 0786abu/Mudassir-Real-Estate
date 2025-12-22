@@ -16,10 +16,10 @@ const PropertyBoxFour = ({ data }) => {
           <div className="agent-image">
             <div>
               <ImageSectionBox profile={data?.agencyProfile}/>
-              <span className="label label-shadow">{data?.numOfProperties} properties</span>
+              <span style={{background:"#108A00"}} className="label">{data?.numOfProperties} properties</span>
               <div className="agent-overlay"></div>
               <div className="overlay-content">
-                <SocialAccounts />
+                <SocialAccounts socialMedia={data?.socialMedia} />
                 <span>Connect</span>
               </div>
             </div>
@@ -44,7 +44,7 @@ const PropertyBoxFour = ({ data }) => {
                 <i className="fas fa-envelope"></i> {data?.email}
               </li>
             </ul>
-            <Link href={`/agents/${data?._id}`}>
+            <Link href={`/agents/${data?._id}`} style={{color:"#108A00"}}>
               View profile <i className="fas fa-arrow-right"></i>
             </Link>
           </div>

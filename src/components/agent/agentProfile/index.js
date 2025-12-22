@@ -37,7 +37,7 @@ const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,sear
                 <Col sm="6" className=" ratio_landscape">
                   <div className="agent-image bg-size">
                     <Img src={agent?.agencyProfile?.url} className="img-fluid bg-img" alt="" />
-                    <span className="label label-shadow">{agent?.numOfProperties} Properties</span>
+                    <span className="label" style={{background:"#108A00"}}>{agent?.numOfProperties} Properties</span>
                   </div>
                 </Col>
                 <Col sm="6">
@@ -80,12 +80,12 @@ const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,sear
                      {agent?.socialMedia?.website && (
                        <li className="with-link">
                         <div className="media">
-                          <div className="icons-square">
-                            <Link />
+                          <div className="icons-square" style={{background:"#c2f7bb"}}>
+                            <Link style={{color:"#108A00"}}/>
                           </div>
                           <div className="media-body">
                             <h6>
-                              <a>https://www.sheltos.com</a>
+                              <a style={{color:"#108A00"}}>https://www.sheltos.com</a>
                             </h6>
                           </div>
                         </div>

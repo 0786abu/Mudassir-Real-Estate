@@ -33,7 +33,7 @@ const MyListingTab = ({setActiveTab}) => {
   if (page < 1 || page > totalPages) return;
   dispatch(setPagesContent({ currentPage: page }));
 };
-
+const [isHover, setIsHover] = useState(false);
   const dispatch = useDispatch();
   const [category, setCategory] = useState("");
   const [type, setType] = useState("");
@@ -126,7 +126,7 @@ const MyListingTab = ({setActiveTab}) => {
   ))}
 </select>
         </Col>
-        <Col className="mt-2"><Button onClick={clearFilter} className="btn-dark">Clear Filter</Button></Col>
+        <Col className="mt-2"><Button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} onClick={clearFilter} className="btn" style={{background:isHover ? "#14a800" : "#108A00"}}>Clear Filter</Button></Col>
         </Row>
       </div>
           </div>

@@ -3,7 +3,7 @@
  * @returns A React component.
  */
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "reactstrap";
 import ContentLoader from "react-content-loader";
 import Img from "@/utils/BackgroundImageRatio";
@@ -11,6 +11,7 @@ import PropertyLabel from "../PropertyLabel";
 import { formatPK } from "@/utils/Formatter";
 
 const PropertyBoxOne = ({ data }) => {
+  const [isHover, setIsHover] = useState(false);
   return (
     <>
         <div className="property-box">
@@ -31,8 +32,9 @@ const PropertyBoxOne = ({ data }) => {
                     {formatPK(data.price)} <small>/ start from</small>
                   </h6>
                 </div>
+                
                 <Link href={`/properties/${data.slug}`}>
-                  <Button className=" btn-gradient mt-3">Details</Button>
+                  <Button style={{background:isHover ? "#108a00" : "#14a800"}} onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} className="btn mt-3">Details</Button>
                 </Link>
               </div>
               <div className="overlay-option">

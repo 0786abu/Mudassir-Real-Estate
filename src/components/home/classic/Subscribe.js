@@ -3,11 +3,12 @@
  * p, and form. The form contains a div and a button
  * @returns A section with a container, row, and col.
  */
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import { Realestate, StayUpToDate, VideoDetail } from "@/constValues/constValues";
 
 const SubscribeSection = () => {
+  const [isHover, setIsHover] = useState(false)
   return (
     <section className='subscribe-section'>
       <Container>
@@ -21,7 +22,7 @@ const SubscribeSection = () => {
                 <div className='form-group'>
                   <input type='email' className='form-control' placeholder='Enter Your Email Address' required />
                 </div>
-                <button type='submit' className='btn btn-gradient btn-lg'>
+                <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} type='submit' style={{background:isHover ? "#14a800" : "#108a00",color:"white"}} className='btn btn-lg'>
                   Subscribe Now
                 </button>
               </form>

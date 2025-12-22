@@ -20,6 +20,7 @@ const Exploration = ({owner,property}) => {
     property:property ? property : null
   });
   const dispatch = useDispatch();
+  const [isHover, setIsHover] = useState(false);
   // const [modal, setModal] = useState(false);
 
   const handleChange = (event) => {
@@ -56,7 +57,15 @@ const Exploration = ({owner,property}) => {
           <FormGroup>
             <Input type="textarea" placeholder="Message" className="form-control" rows="3" name="message" value={leadData.message} onChange={handleChange}></Input>
           </FormGroup>
-          <Button disabled={sendInquiryLoading} type="submit" className="btn btn-gradient btn-block btn-pill">
+          {/* ? "#14a800"
+          : "#108a00" */}
+          <Button disabled={sendInquiryLoading}
+          onMouseEnter={()=>setIsHover(true)}
+          onMouseLeave={()=>setIsHover(false)}
+          style={{
+            background:isHover ? "#14a800" : "#108a00"
+          }}
+          type="submit"  className="btn btn-block">
             {sendInquiryLoading ? (
               <div className="d-flex align-items-center gap-2">
                       <span className="spinner-border text-success spinner-border-sm"></span> <span>Submit request</span>

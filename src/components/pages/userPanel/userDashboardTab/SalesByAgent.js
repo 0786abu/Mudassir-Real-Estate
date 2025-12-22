@@ -44,14 +44,14 @@ const SalesByAgent = ({loading,data}) => {
           },
         },
       ],
-      colors: ["#ff8c41"],
+      colors: ["#108A00"],
       fill: {
         type: "gradient",
         gradient: {
           shade: "dark",
           shadeIntensity: 1,
           type: "horizontal",
-          gradientToColors: ["#ffffff"],
+          gradientToColors: ["#108A00"],
           opacityFrom: 1,
           opacityTo: 1,
           stops: [0, 100, 100, 100],

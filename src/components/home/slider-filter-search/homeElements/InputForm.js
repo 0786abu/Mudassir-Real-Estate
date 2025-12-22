@@ -13,6 +13,7 @@ export default function FilterSidebar() {
   const searchedType = params.get("type")
   const searchedCity = params.get("city")
   const searchedMinPrice = params.get("minPrice")
+  const [isHover, setIsHover] = useState(false);
 
   const [category, setCategory] = useState(searchedCategory ? searchedCategory : "");
   const [type, setType] = useState(searchedType ? searchedType : "");
@@ -186,7 +187,7 @@ export default function FilterSidebar() {
                 borderRadius: "4px",
                 background: getTrackBackground({
                   values: priceRange,
-                  colors: ["#ccc", "#ff8c41", "#ccc"],
+                  colors: ["#ccc", "#108a00", "#ccc"],
                   min: MIN,
                   max: MAX,
                 }),
@@ -208,7 +209,7 @@ export default function FilterSidebar() {
                 height: "20px",
                 width: "20px",
                 borderRadius: "50%",
-                backgroundColor: "#ff8c41",
+                backgroundColor: "#108a00",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -251,7 +252,7 @@ export default function FilterSidebar() {
                 borderRadius: "4px",
                 background: getTrackBackground({
                   values: squareRange,
-                  colors: ["#ccc", "#ff8c41", "#ccc"],
+                  colors: ["#ccc", "#108a00", "#ccc"],
                   min: MINFits,
                   max: MAXFits,
                 }),
@@ -273,7 +274,7 @@ export default function FilterSidebar() {
                 height: "20px",
                 width: "20px",
                 borderRadius: "50%",
-                backgroundColor: "#ff8c41",
+                backgroundColor: "#108a00",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -292,10 +293,13 @@ export default function FilterSidebar() {
           }}
         />
       </div>
-
+{/* ? "#14a800"
+          : "#108a00" */}
      <button
+     onMouseEnter={()=>setIsHover(true)}
+     onMouseLeave={()=>setIsHover(false)}
         className="btn w-100 py-2 rounded-3 fw-semibold shadow-sm"
-        style={{background:"#FF8C41",color:"white"}}
+        style={{background:isHover ? "#14a800" : "#108a00",color:"white"}}
         onClick={resetFilters}
       >
         Reset Filters

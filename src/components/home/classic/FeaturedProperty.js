@@ -2,7 +2,7 @@
  * It takes an array of objects and returns a slider with each object as a slide
  * @returns An array of objects.
  */
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import { Col, Container, Row } from "reactstrap";
 import { Gallery, Item } from "react-photoswipe-gallery";
@@ -14,8 +14,10 @@ import { FeaturedProperty } from "@/constValues/constValues";
 import NoSsr from "@/utils/NoSsr";
 import { formatPK } from "@/utils/Formatter";
 import ProfileLoader from "@/components/common/Loader";
+import { Bath, Bed } from "lucide-react";
 
 const FeaturedPropertySection = ({ value,loading }) => {
+  const [isHover, setIsHover] = useState(false);
   return (
     <section className='feature-section ratio_landscape bg-half zoom-gallery'>
       {loading ? (<ProfileLoader/>) : (
@@ -23,7 +25,7 @@ const FeaturedPropertySection = ({ value,loading }) => {
         <Row>
           <Col>
             <NoSsr>
-              <Slider className='feature-4 modern-feature arrow-gradient' {...feature4}>
+              <Slider className='feature-4 modern-feature arrow-gradient1' {...feature4}>
                 {value &&
                   value?.map((data, i) => (
                     <div key={i}>
@@ -36,10 +38,10 @@ const FeaturedPropertySection = ({ value,loading }) => {
                                   <div className='feature-image'>
                                     <Img src={data.images[0].url} className='bg-img' />
                                     <div className='feature-overlay' ref={ref} onClick={open}>
-                                      <span>+</span>
+                                      <span style={{color:"#108a00"}}>+</span>
                                     </div>
 
-                                    <span className='label label-gradient label-lg'>{FeaturedProperty}</span>
+                                    <span className='label label-gradient label-lg' style={{background:"#108a00"}}>{FeaturedProperty}</span>
                                   </div>
                                 )}
                               </Item>
@@ -57,22 +59,24 @@ const FeaturedPropertySection = ({ value,loading }) => {
                               <ul className='detail-list'>
                                 <li>
                                   <div className='d-flex'>
-                                    <span className='label label-light label-lg'>
-                                      <img src='/assets/images/icon/bed.png' className='img-fluid img-icon' alt='' />
+                                    <span className='label label-light label-lg' style={{background:"#14a800"}}>
+                                      {/* <img src='/assets/images/icon/bed.png' className='img-fluid img-icon' alt='' /> */}
+                                      <Bed style={{color:"white"}}/>
                                     </span>
                                     <h6>Bedroom</h6>
                                   </div>
                                 </li>
                                 <li>
                                   <div className='d-flex'>
-                                    <span className='label label-light label-lg'>
-                                      <img src='/assets/images/icon/bathroom.png' className='img-fluid img-icon' alt='' />
+                                    <span className='label label-light label-lg' style={{background:"#14a800"}}>
+                                      {/* <img src='/assets/images/icon/bathroom.png' className='img-fluid img-icon' alt='' /> */}
+                                      <Bath style={{color:"white"}}/>
                                     </span>
                                     <h6>Bathroom</h6>
                                   </div>
                                 </li>
                                 <li>
-                                  <span className='label label-light label-lg'>{data.squareFits} Sq Ft</span>
+                                  <span className='label label-light label-lg' style={{background:"#14a800",color:"white"}}>{data.squareFits} Sq Ft</span>
                                 </li>
                               </ul>
                               <ul className='feature-price'>
@@ -83,8 +87,9 @@ const FeaturedPropertySection = ({ value,loading }) => {
                                   <h6>Home For {data.category}</h6>
                                 </li>
                                 <li>
+                                  
                                   <Link href={`/properties/${data.slug}`}>
-                                    <button type='button' className='btn btn-gradient btn-lg'>
+                                    <button style={{background:isHover ? "#14a800" : "#108a00",color:"white"}} onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} type='button' className='btn btn-lg'>
                                       View Detail
                                     </button>
                                   </Link>

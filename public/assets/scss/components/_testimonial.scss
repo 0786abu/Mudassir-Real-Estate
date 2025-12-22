@@ -364,12 +364,14 @@
         }
 
         .slick-prev {
+            background: #14A800;
             &:before {
                 content: "\f060";
             }
         }
 
-        .slick-next {                        
+        .slick-next {   
+            background: #14A800;                     
             left: 70px;
             &:before {
                 content: "\f061";

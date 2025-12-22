@@ -52,7 +52,7 @@ const AvailableProperty = ({ loading, data }) => {
         },
       },
       labels: ["Available"],
-      colors: ["#ff5c41"],
+      colors: ["#108A00"],
       stroke: {
         lineCap: "round",
       },

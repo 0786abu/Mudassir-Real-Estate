@@ -123,42 +123,42 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloadin
         <div className='dashboard-list'>
           <Nav tabs className='right-line-tab'>
             <NavItem>
-              <NavLink className={activeTab === "Dashboard" ? "active" : ""} onClick={() => setActiveTab("Dashboard")}>
+              <NavLink style={{borderLeftColor:activeTab==="Dashboard" ? "#108A00" : "",color:activeTab==="Dashboard" ? "#108A00" : ""}} onClick={() => setActiveTab("Dashboard")}>
                 Dashboard
               </NavLink>
             </NavItem>
               <NavItem>
-                <NavLink className={activeTab === "Listing" ? "active" : ""} onClick={() => setActiveTab("Listing")}>
+                <NavLink style={{borderLeftColor:activeTab==="Listing" ? "#108A00" : "",color:activeTab==="Listing" ? "#108A00" : ""}} onClick={() => setActiveTab("Listing")}>
                   My Properties
                 </NavLink>
               </NavItem>
             <NavItem>
-              <NavLink className={activeTab === "CreateProperty" ? "active" : ""} onClick={() => setActiveTab("CreateProperty")}>
+              <NavLink style={{borderLeftColor:activeTab==="CreateProperty" ? "#108A00" : "",color:activeTab==="CreateProperty" ? "#108A00" : ""}} onClick={() => setActiveTab("CreateProperty")}>
                 create property
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={activeTab === "Profile" ? "active" : ""} onClick={() => setActiveTab("Profile")}>
+              <NavLink style={{borderLeftColor:activeTab==="Profile" ? "#108A00" : "",color:activeTab==="Profile" ? "#108A00" : ""}} onClick={() => setActiveTab("Profile")}>
                 My profile
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={activeTab === "Favorites" ? "active" : ""} onClick={() => setActiveTab("Favorites")}>
+              <NavLink style={{borderLeftColor:activeTab==="Favorites" ? "#108A00" : "",color:activeTab==="Favorites" ? "#108A00" : ""}} onClick={() => setActiveTab("Favorites")}>
                 favourites
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={activeTab === "leads" ? "active" : ""} onClick={() => setActiveTab("leads")}>
+              <NavLink style={{borderLeftColor:activeTab==="leads" ? "#108A00" : "",color:activeTab==="leads" ? "#108A00" : ""}} onClick={() => setActiveTab("leads")}>
                 Leads
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={activeTab === "inquiries" ? "active" : ""} onClick={() => setActiveTab("inquiries")}>
+              <NavLink style={{borderLeftColor:activeTab==="inquiries" ? "#108A00" : "",color:activeTab==="inquiries" ? "#108A00" : ""}} onClick={() => setActiveTab("inquiries")}>
                 Inquiries Requested
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className={activeTab === "payments" ? "active" : ""} onClick={() => setActiveTab("payments")}>
+              <NavLink style={{borderLeftColor:activeTab==="payments" ? "#108A00" : "",color:activeTab==="payments" ? "#108A00" : ""}} onClick={() => setActiveTab("payments")}>
                 Payments
               </NavLink>
             </NavItem>

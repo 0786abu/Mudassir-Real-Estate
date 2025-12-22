@@ -41,7 +41,7 @@ const PropertyOverview = ({latestProperties,setActiveTab}) => {
                   <span className='label label-light label-success'>{property.isPaid ? "Paid" : "unPaid"}</span>
                 </td>
                 <td>
-                  <Link href={`/properties/${property.slug}`} target="_blank"><Button size="sm" style={{background:"#FD735C",color:"white"}}>View</Button></Link>
+                  <Link href={`/properties/${property.slug}`} target="_blank"><Button size="sm" style={{background:"#108A00",color:"white"}}>View</Button></Link>
                 </td>
               </tr>
                 )
@@ -51,7 +51,7 @@ const PropertyOverview = ({latestProperties,setActiveTab}) => {
           </table>
         </div>
               <div className=" d-flex justify-content-center mt-4 align-items-center">
-            <Button onClick={()=>setActiveTab("Listing")} style={{background:"#FD735C"}}>See all Properties</Button>
+            <Button onClick={()=>setActiveTab("Listing")} style={{background:"#108A00"}}>See all Properties</Button>
               </div>
           
       </div>

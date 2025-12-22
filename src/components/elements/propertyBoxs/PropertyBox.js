@@ -34,6 +34,8 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
   const dispatch = useDispatch();
   const {addfavloading,favProperties} = useSelector((state)=>state.Favourites);
   const [itemID, setItemID] = useState("");
+  const [isHover, setIsHover] = useState(false);
+  const [hoverIndex, setHoverIndex] = useState(null);
 
   
   const handleRemoveFav = (id)=>{
@@ -66,8 +68,8 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
   <span class="sr-only">Loading...</span>
 </div>
           ) : (
-            <span onClick={()=>handleRemoveFav(data._id)}>
-              <Trash className=" "/>
+            <span>
+              <Trash />
             </span>
           )}
         </div>
@@ -116,7 +118,10 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
         <div className="property-btn d-flex">
           <span>{formatDatenew(data.propertyID.createdAt)}</span>
           <Link href={`/properties/${data.propertyID.slug}`}>
-            <button className="btn btn-dashed btn-pill">Details</button>
+            <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
+              background:isHover ? "#14A800" : "",
+              color:isHover ? "#108A00" : ""
+            }} className="btn rounded-pill border border-1">Details</button>
           </Link>
         </div>
       </div>
@@ -207,13 +212,20 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
            {fromPanel ? (
         <button
           onClick={handleViewDetails}
-          className="btn btn-dashed btn-pill"
+          className="btn rounded-pill border border-1"
+           onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
+              background:isHover ? "#14A800" : "",
+              color:isHover ? "white" : "black"
+            }}
         >
           View Details
         </button>
       ) : (
         <Link href={`/properties/${data.slug}`}>
-          <button className="btn btn-dashed btn-pill">Details</button>
+          <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
+              background:isHover ? "#14A800" : "",
+              color:isHover ? "white" : "black"
+            }} className="btn rounded-pill border border-1">Details</button>
         </Link>
       )}
         </div>

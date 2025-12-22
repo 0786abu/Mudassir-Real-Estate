@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 const Pagination = ({ totalPages, currentPage, searchParams, from, agentID }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   const goToPage = (page) => {
     if (page < 1 || page > totalPages) return;
@@ -55,23 +56,23 @@ const Pagination = ({ totalPages, currentPage, searchParams, from, agentID }) =>
     <nav className="theme-pagination">
       <ul className="pagination">
         <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-          <div className="page-link" onClick={() => goToPage(1)}>«</div>
+          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(1)}>«</div>
         </li>
         <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-          <div className="page-link" onClick={() => goToPage(currentPage - 1)}>{"<"}</div>
+          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage - 1)}>{"<"}</div>
         </li>
 
         {pages.map((p,index) => (
-          <li key={index} className={`page-item ${p === currentPage ? "active" : ""}`}>
-            <button disabled={p === currentPage || loading} className="page-link" onClick={() => goToPage(p)}>{loading && p===currentPage ? "...": p}</button>
+          <li key={index} className={`page-item `}>
+            <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{background:p===currentPage ? "#108a00" : "",color:p===currentPage ? "white" : "black"}} disabled={p === currentPage || loading} className="page-link" onClick={() => goToPage(p)}>{loading && p===currentPage ? "...": p}</button>
           </li>
         ))}
 
         <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-          <div className="page-link" onClick={() => goToPage(currentPage + 1)}>{">"}</div>
+          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage + 1)}>{">"}</div>
         </li>
         <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-          <div className="page-link" onClick={() => goToPage(totalPages)}>»</div>
+          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(totalPages)}>»</div>
         </li>
       </ul>
     </nav>

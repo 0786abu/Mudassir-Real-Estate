@@ -49,7 +49,7 @@ const TestimonialSection = ({ value }) => {
                               <div className="media">
                                 <div className="media-body">
                                   <Link href="/pages/user-panel/my-profile">
-                                    <h3 className="d-flex">
+                                    <h3 className="d-flex" style={{color:"#14a800"}}>
                                       {data.name}
                                       <span className="label-heart ms-2">
                                         <i className="fas fa-heart"></i>

@@ -24,6 +24,7 @@ import { AddToFavourites } from "@/redux-toolkit/action/favouritesAction";
 const TopTitle = ({ property, favourites }) => {
   const {addfavloading} = useSelector((state)=>state.Favourites)
   const [like, setLike] = useState(false);
+  const [isHover, setIsHover] = useState(false);
   const dispatch = useDispatch();
   useEffect(()=>{
     const isLiked = favourites?.some(fav => fav.propertyID?._id === property?._id);
@@ -94,7 +95,7 @@ const TopTitle = ({ property, favourites }) => {
             </ul>
             <div className="share-buttons">
               <div className="d-inline-block">
-                <a className="btn btn-gradient btn-pill">
+                <a className="btn share-anchor" style={{background:"#108a00",color:"white"}}>
                   <i className="fas fa-share-square"></i>
                   share
                 </a>
@@ -118,14 +119,20 @@ const TopTitle = ({ property, favourites }) => {
                   </ul>
                 </div>
               </div>
-              <button disabled={addfavloading} onClick={handleAddToFavourite} className="btn btn-dashed btn-pill ms-md-2 ms-1 save-btn">
-                <i style={{color:like ? "red" : "inherit"}} className={`${like ? "fas" : "far"} fa-heart`}></i>
+              <button disabled={addfavloading} onClick={handleAddToFavourite}
+              onMouseEnter={()=>setIsHover(true)}
+              onMouseLeave={()=>setIsHover(false)}
+              style={{
+                color:isHover ? "#108a00" : "black"
+              }}
+              className="btn border border-1 rounded-pill ms-md-2 ms-1 save-btn">
+                <i style={{color:like ? "red" : "inherit"}} className={`${like ? "fas" : "far"} fa-heart me-1`}></i>
                 {addfavloading ? "Saving..." : like ? "Saved" : "Save"}
               </button>
             </div>
           </div>
           <div className="right-single">
-            <h2 className="price">
+            <h2 className="price" style={{color:"#108a00"}}>
             Rs.{" "}
             {formatPK(property?.price)}
               <span>/ start From</span>

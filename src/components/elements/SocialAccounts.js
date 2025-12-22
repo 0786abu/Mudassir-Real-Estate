@@ -1,4 +1,5 @@
 import { Globe, Linkedin } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 import { Facebook, Instagram } from "react-feather";
 
@@ -7,30 +8,30 @@ const SocialAccounts = ({socialMedia}) => {
       <ul>
          {socialMedia?.website && (
             <li>
-            <a href={socialMedia?.website}>
+            <Link style={{color:"#108A00"}} href={socialMedia?.website}>
                <Globe/>
-            </a>
+            </Link>
          </li>
          )}
          {socialMedia?.linkedin && (
             <li>
-            <a href={socialMedia?.linkedin}>
+            <Link style={{color:"#108A00"}} href={socialMedia?.linkedin}>
                <Linkedin/>
-            </a>
+            </Link>
          </li>
          )}
          {socialMedia?.facebook && (
             <li>
-            <a href={socialMedia?.facebook}>
+            <Link style={{color:"#108A00"}} href={socialMedia?.facebook}>
                <Facebook/>
-            </a>
+            </Link>
          </li>
          )}
          {socialMedia?.instagram && (
             <li>
-            <a href={socialMedia?.instagram}>
+            <Link style={{color:"#108A00"}} href={socialMedia?.instagram}>
                <Instagram/>
-            </a>
+            </Link>
          </li>
          )}
       </ul>

@@ -55,7 +55,7 @@ const BodyContent = () => {
       <LatestPropertySection value={value?.LatestPropertyInClassicLayout} />
       <VideoSection />
       <TestimonialSection value={clientData?.OurHappyClientInClassicLayout} />
-      <SubscribeSection />
+      {/* <SubscribeSection /> */}
       <AboutSection value={clientData?.OurAgentInClassicLayout} />
       <BrandSection />
     </>
