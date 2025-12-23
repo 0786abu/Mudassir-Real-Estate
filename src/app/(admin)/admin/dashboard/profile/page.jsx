@@ -1,7 +1,8 @@
 "use client";
 
 import ProfileLoader from "@/components/common/Loader";
-import { AdminProfileData, UploadProfile } from "@/redux-toolkit/action/authAction";
+import { AdminProfileData, AdminUpdateProfile, UploadProfile } from "@/redux-toolkit/action/authAction";
+import { citiesLocationsData } from "@/utils/FiltersCities";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,7 +19,7 @@ import {
 } from "reactstrap";
 
 const AdminProfile = () => {
-    const {user,userloading,uploadloading} = useSelector((state)=>state.Auth);
+    const {user,userloading,uploadloading,registerloading} = useSelector((state)=>state.Auth);
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
   const [preview, setPreview] = useState(null);
@@ -34,6 +35,7 @@ const AdminProfile = () => {
     role: "",
     profile: null,
   });
+  console.log(profile)
   useEffect(()=>{
     dispatch(AdminProfileData())
   },[dispatch])
@@ -59,19 +61,33 @@ const AdminProfile = () => {
   useEffect(()=>{
     if(user){
       setProfile({
-        name:user?.name,
-        email:user?.email,
-        profile:user?.profile,
-        gender:user?.gender,
-        phone:user?.phone,
-        city:user?.city,
-        adress:user?.adress,
-        state:user?.state,
-        role:user?.role,
-        bio:user?.bio,
+        name:user?.name || "",
+        email:user?.email || "",
+        profile:user?.profile || "",
+        gender:user?.gender || "",
+        phone:user?.phone || "",
+        city:user?.city || "",
+        address:user?.address || "",
+        state:user?.state || "",
+        role:user?.role || "",
+        bio:user?.bio || "",
       })
     }
   },[user])
+
+  const handleUpdateProfileData = (e)=>{
+    e.preventDefault();
+    const data = {
+      name:profile?.name,
+      gender:profile?.gender,
+      phone:profile?.phone,
+      city:profile?.city,
+      address:profile?.address,
+      state:profile?.state,
+      bio:profile?.bio,
+    }
+    dispatch(AdminUpdateProfile(data,setIsEdit))
+  }
 
   return (
     <Container fluid className="py-4">
@@ -158,7 +174,7 @@ const AdminProfile = () => {
 
                     <Col md="6">
                       <strong>Phone</strong>
-                      <p>{profile.phone ? profile.biphoneo : "No phone Yet"}</p>
+                      <p>{profile.phone ? profile.phone : "No phone Yet"}</p>
                     </Col>
 
                     <Col md="6">
@@ -181,7 +197,7 @@ const AdminProfile = () => {
 
               {/* ================= EDIT MODE ================= */}
               {isEdit && (
-                <Form>
+                <Form onSubmit={handleUpdateProfileData}>
                   <div className="text-center mb-4">
                     <input
                       type="file"
@@ -241,9 +257,9 @@ const AdminProfile = () => {
                           value={profile.gender}
                           onChange={handleChange}
                         >
-                          <option>Male</option>
-                          <option>Female</option>
-                          <option>Other</option>
+                          <option value={""}>Select Gender</option>
+                          <option value={"Male"}>Male</option>
+                          <option value={"Female"}>Female</option>
                         </Input>
                       </FormGroup>
                     </Col>
@@ -262,6 +278,7 @@ const AdminProfile = () => {
                           name="phone"
                           value={profile.phone}
                           onChange={handleChange}
+                          placeholder="Enter your phone number"
                         />
                       </FormGroup>
                     </Col>
@@ -270,10 +287,16 @@ const AdminProfile = () => {
                       <FormGroup>
                         <Label>City</Label>
                         <Input
+                        type="select"
                           name="city"
                           value={profile.city}
                           onChange={handleChange}
-                        />
+                        >
+                          <option value={""}>Select City</option>
+                          {citiesLocationsData.map((item,index)=>{
+                            return <option value={item.city} key={index}>{item.city}</option>
+                          })}
+                        </Input>
                       </FormGroup>
                     </Col>
 
@@ -281,10 +304,16 @@ const AdminProfile = () => {
                       <FormGroup>
                         <Label>State</Label>
                         <Input
+                        type="select"
                           name="state"
                           value={profile.state}
                           onChange={handleChange}
-                        />
+                        >
+                          <option value={""}>Select State</option>
+                                {["Punjab","Sindh","Islamabad Capital Territory (ICT)","Balochistan","Khyber Pakhtunkhwa (KPK)"].map((filt,index)=>{
+                                   return <option value={filt} key={index}>{filt}</option>
+                                 })}
+                          </Input>
                       </FormGroup>
                     </Col>
 
@@ -295,14 +324,15 @@ const AdminProfile = () => {
                           name="address"
                           value={profile.address}
                           onChange={handleChange}
+                          placeholder="Enter your street address"
                         />
                       </FormGroup>
                     </Col>
                   </Row>
 
                   <div className="text-end mt-4">
-                    <Button color="primary" className="rounded-pill px-4">
-                      Save Changes
+                    <Button type="submit" disabled={registerloading} style={{background:"#108A00"}} className="rounded-pill px-4">
+                      {registerloading ? "Processing..." : "Save Changes"}
                     </Button>
                   </div>
                 </Form>

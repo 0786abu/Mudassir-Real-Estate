@@ -23,8 +23,8 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
-                path: "/myproperties/propertylist",
-                title: 'Property List',
+                path: "/admin/dashboard/allProperties",
+                title: 'All Property',
                 type: 'link'
             },
             {

@@ -20,7 +20,7 @@ const ImageSlider = ({ images }) => {
             {images?.map((data, i) => (
                 <div key={i}>
                     <div>
-                        <Img src={data} className="bg-img" />
+                        <Img src={data.url} className="bg-img" />
                     </div>
                 </div>
             ))}

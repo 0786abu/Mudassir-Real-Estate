@@ -10,6 +10,7 @@ import Favourites from "./slice/favouritesSlice"
 import Property from "./slice/propertySlice"
 import Payment from "./slice/paymentSlice"
 import Lead from "./slice/leadSlice"
+import Admin from "./slice/adminSlice"
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     Favourites,
     Property,
     Payment,
-    Lead
+    Lead,
+    Admin
   },
 });

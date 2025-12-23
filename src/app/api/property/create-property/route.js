@@ -211,7 +211,7 @@ export async function GET(req) {
         const { searchParams } = new URL(req.url);
         const page = Number(searchParams.get("page")) || 1;
         const beds = Number(searchParams.get("beds"));
-        const limit = 4;
+        const limit = 12;
         const skip = (page - 1) * limit;
         const areaSize = searchParams.get('areaSize');
         const category = searchParams.get('category');

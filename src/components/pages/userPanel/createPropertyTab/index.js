@@ -388,7 +388,7 @@ if (floorImage !==null) {
     accept="image/*"
     id="multiFileUpload"
     className="d-none"
-    onChange={handleChangeImage}
+    onChange={handleChangeFloorImage}
   />
 
   <label htmlFor="multiFileUpload" className="dropzone-box">

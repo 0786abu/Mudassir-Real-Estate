@@ -9,7 +9,7 @@
     .page-item {
       .page-link {
         cursor: pointer;
-        color: var(--theme-default);
+        color: #108a00;
         border-radius: 4px;
         font-weight: 500;
         padding: 6px 13px;
@@ -18,16 +18,16 @@
         }
         &:hover,
         &:focus {
-          background-color: var(--theme-default);
-          border-color: var(--theme-default);
-          color: $white;
+          background-color: #108a00;
+          border-color: #108a00;
+          color: white;
         }
       }
       &.active {
         .page-link {
-          background-color: var(--theme-default);
-          border-color: var(--theme-default);
-          color: $white;
+          background-color: #108a00;
+          border-color: #108a00;
+          color: white;
           z-index: 1;
         }
       }

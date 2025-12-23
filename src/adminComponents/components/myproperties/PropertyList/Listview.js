@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from "react";
+import PropertyBox from "@/components/elements/propertyBoxs/PropertyBox";
 import { Col, Row } from "reactstrap";
-import PropertyBox from "../../Common/Propertybox/PropertyBox";
-import { getData } from "../../utils/getData";
-import usePagination from "../../utils/usePagination";
 
-const Listview = () => {
-  const [value, setValue] = useState();
-  useEffect(() => {
-    getData(`/api/property`)
-      .then((res) => {
-        setValue(res.data?.LatestPropertyListingInEnterprise);
-      })
-      .catch((error) => console.error("error", error));
-  }, []);
 
-  const [Pagination, data] = usePagination(value && value);
+
+const Listview = ({data}) => {
   return (
     <div className='col-xl-12'>
-      <Row className='property-2 column-sm property-label property-grid'>
+      <Row className='column-sm zoom-gallery property-grid'>
         {data &&
           data.map((item, i) => {
             return (
-              <Col xl='4' md='6 xl-6' key={i}>
+              <Col xl='4' sm='6' key={i}>
                 <PropertyBox data={item} />
               </Col>
             );
           })}
       </Row>
-      <Pagination />
+      {/* <Pagination /> */}
     </div>
   );
 };

@@ -395,3 +395,22 @@ export const AdminProfileData = ()=>async(dispatch)=>{
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }
+export const AdminUpdateProfile = (formdata,setModal)=>async(dispatch)=>{
+    dispatch(setRegisterloading())
+    try {
+        const {data} = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/register`,formdata,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        toast.success(data.message);
+        dispatch(setUser(data.updatedAdmin));
+        setModal(false)
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRegisterloading(false));
+    }
+}
