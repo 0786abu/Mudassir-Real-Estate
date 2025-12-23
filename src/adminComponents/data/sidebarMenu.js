@@ -13,7 +13,7 @@ export const SidebarMenuItem = [
         type: 'sub',
         children: [
             {
-                path: "admin/dashboard/create-property",
+                path: "/admin/dashboard/create-property",
                 title: 'Add Propery',
                 type: 'link'
             },
