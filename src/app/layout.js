@@ -4,9 +4,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "photoswipe/dist/photoswipe.css";
 import { detectLanguage } from "./i18n/server";
 import { I18nProvider } from "./i18n/i18n-context";
-import Navbar from "@/layout/headers/Navbar";
+// import Navbar from "@/layout/headers/Navbar";
 import BootstrapClient from "@/layout/headers/Bootstrap";
 import { ToastContainer } from "react-toastify";
+import ConditionalNavbar from "@/utils/shoulShowNavbar";
 
 export const metadata = {
   title: "Sheltos - Real Estate Next 15",
@@ -34,7 +35,7 @@ export default async function RootLayout({ children }) {
         <body>
             <MainProvider>
               <BootstrapClient/>
-              <Navbar/>
+              <ConditionalNavbar/>
               {children}
               <ToastContainer/>
               </MainProvider>

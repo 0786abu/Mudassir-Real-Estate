@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { DataBase } from "../config/database";
 import Agent from "../model/agentModel";
 import User from "../model/authModel";
+import Admin from "../model/adminModel";
 
 export const isAuthenticated = async () => {
     try {
@@ -11,9 +12,13 @@ export const isAuthenticated = async () => {
       if (!token) return null;
     await DataBase();
     const decoded = jwt.verify(token?.value, process.env.JWT_SECRET);
-    let user = await User.findById(decoded.id);
-    if(!user){
-        user = await Agent.findById(decoded.id)
+    let user;
+    if(decoded.role==="admin"){
+      user = await Admin.findById(decoded.id);
+    }else if(decoded.role==="agent"){
+      user = await Agent.findById(decoded.id);
+    }else if(decoded.role==="individual"){
+      user = await User.findById(decoded.id);
     }
     if (!user) return null;
     return user || null;

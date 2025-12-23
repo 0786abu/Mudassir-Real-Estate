@@ -5,6 +5,7 @@ import Property from "@/backend/model/propertyModel";
 import { isAuthenticated } from "@/backend/utils/middlewere";
 import cloudinary from "@/backend/utils/cloudinary";
 import { NextResponse } from "next/server";
+import Admin from "@/backend/model/adminModel";
 
 function getOptional(formData, key) {
   const value = formData.get(key);
@@ -39,18 +40,26 @@ export async function POST(req) {
             success: false
         }, { status: 400 });
     }
-    let user = await User.findById(isUser._id);
-    let createdByModel = "User";
-    if (!user) {
-        user = await Agent.findById(isUser._id);
-        createdByModel = "Agent";
-    }
-    if (!user) {
-        return NextResponse.json({
-            message: "User not found",
-            success: false
-        }, { status: 404 });
-    }
+    let user;
+let createdByModel = isUser.role==="individual" ? "User" : isUser.role==="agent" ? "Agent" : "Admin";
+
+if (isUser.role === "individual") {
+  user = await User.findById(isUser._id);
+} 
+else if (isUser.role === "agent") {
+  user = await Agent.findById(isUser._id);
+} 
+else if (isUser.role === "admin") {
+  user = await Admin.findById(isUser._id);
+}
+
+if (!user) {
+  return NextResponse.json(
+    { success: false, message: "User not found" },
+    { status: 404 }
+  );
+}
+
     const seo_title = formData.get("seo_title");
     const seo_description = formData.get("seo_description");
     const keywords = formData.get("keywords");

@@ -134,6 +134,33 @@ export const LoginUser = ({user,onClickForForgot})=>async(dispatch)=>{
         dispatch(setRegisterloading(false));
     }
 }
+export const AdminLogin = ({user,router})=>async(dispatch)=>{
+    dispatch(setRegisterloading())
+    try {
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/login`,user,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        toast.success(data.message);
+        const sampledata = {
+            _id:data?.admin?._id,
+            name:data?.admin?.name,
+            profile:data?.admin?.profile,
+            role:data?.admin?.role
+        }
+        dispatch(setSampleUser(sampledata))
+        localStorage.setItem("sample_user_data", JSON.stringify(sampledata));
+        localStorage.setItem("real-estate-user-token",data.token);
+        router.push("/")
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRegisterloading(false));
+    }
+}
 export const Resend_Email = (email,setTimer)=>async(dispatch)=>{
     dispatch(setResendEmailloading())
     try {
@@ -286,7 +313,7 @@ export const UploadProfile = (picture,setPreview)=>async(dispatch)=>{
             role:data?.user?.role
         }
         localStorage.setItem("sample_user_data", JSON.stringify(sampledata));
-        setPreview("")
+        setPreview(null)
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
@@ -348,5 +375,23 @@ export const ResetPassword = ({password,token,router})=>async(dispatch)=>{
         dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
         dispatch(setRegisterloading(false));
+    }
+}
+
+
+// admin profile
+export const AdminProfileData = ()=>async(dispatch)=>{
+    dispatch(setUserLoading())
+    try {
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/register`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setUser(data.admin));
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }

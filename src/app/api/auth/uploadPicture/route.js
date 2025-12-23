@@ -3,6 +3,7 @@ import Agent from "@/backend/model/agentModel";
 import User from "@/backend/model/authModel";
 import { isAuthenticated } from "@/backend/utils/middlewere";
 import cloudinary from "@/backend/utils/cloudinary";
+import Admin from "@/backend/model/adminModel";
 
 export async function POST(req) {
   try {
@@ -21,12 +22,15 @@ export async function POST(req) {
     const buffer = Buffer.from(await file.arrayBuffer());
 
     // 4️⃣ Determine Model & field
-    const isAgent = user.role === "agent";
-    const Model = isAgent ? Agent : User;
+    const roleModels = { agent: Agent, admin: Admin, individual: User };
+    const Model = roleModels[user.role];
+    if (!Model) {
+    return NextResponse.json({ success: false, message: "invalid user role" }, { status: 401 });
+}
     const currentUser = await Model.findById(user._id);
 
     // 5️⃣ Delete old picture if exists
-    const oldUrl = isAgent ? currentUser?.agencyProfile : currentUser?.profile;
+    const oldUrl = user.role==="agent" ? currentUser?.agencyProfile : currentUser?.profile;
     if (oldUrl && oldUrl?.public_id) {
         await cloudinary.uploader.destroy(oldUrl.public_id);
     }
@@ -44,7 +48,7 @@ export async function POST(req) {
     });
 
     // 7️⃣ Update DB
-    if (isAgent) {
+    if (user.role==="agent") {
       currentUser.agencyProfile.url = result.secure_url;
       currentUser.agencyProfile.public_id = result.public_id;
     } else {

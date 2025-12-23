@@ -313,6 +313,7 @@ body {
                 }
             }
         }
+
         .property-section{
             .property-box{
                 .property-image{
@@ -2056,6 +2057,12 @@ body {
             }
         }
     }
+}
+.detail-anchors {
+    transition: 0.4s ease-in-out;
+}
+.detail-anchors:hover {
+    color: #108A00 !important;
 }
 /**=====================
      dark layout css end

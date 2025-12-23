@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode"
 import { GetFavouritesData } from "@/redux-toolkit/action/favouritesAction";
 
-export default function Navbar() {
+export default function Navbar() { 
   const {sampleuser,logoutloading} = useSelector((state)=>state.Auth);
   const dispatch = useDispatch();
   const collapseRef = useRef(null);
@@ -119,7 +119,6 @@ const router = useRouter();
             <ul className="navbar-nav mx-auto gap-lg-3 md mt-3 p-lg-2 mt-lg-0">
               <li className="nav-item"><Link href="/" className="nav-link nav-anchors fw-medium">Home</Link></li>
               <li className="nav-item"><Link href="/properties" className="nav-link nav-anchors fw-medium">Properties</Link></li>
-              <li className="nav-item"><Link href="/property" className="nav-link nav-anchors fw-medium">Property</Link></li>
               <li className="nav-item"><Link href="/services" className="nav-link nav-anchors fw-medium">Services</Link></li>
               <li className="nav-item"><Link href="/agents" className="nav-link nav-anchors fw-medium">Agents</Link></li>
               <li className="nav-item"><Link href="/blogs" className="nav-link nav-anchors fw-medium">Blogs</Link></li>

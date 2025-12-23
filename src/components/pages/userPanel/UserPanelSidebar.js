@@ -20,7 +20,7 @@ import { TbTrash } from "react-icons/tb";
 const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloading }) => {
    const [modal, setModal] = useState(false);
    const {uploadloading} = useSelector((state)=>state.Auth);
-   const [preview, setPreview] = useState();
+   const [preview, setPreview] = useState(null);
    const [profilePicture, setProfilePicture] = useState();
    const dispatch = useDispatch();
    const handleChange = (e)=>{
@@ -65,7 +65,7 @@ const UserPanelSidebar = ({ activeTab, setActiveTab, user, loading, socialloadin
               <h6 className='font-roboto mb-0'>{loading ? "....." : user?.phone ? user?.phone : "No Phone no. Yet"}</h6>
             </div>
           </div>
-          {preview && (
+          {preview !==null && (
           <div style={{marginBottom:"10px",dispatch:"flex",justifyContent:"center",alignItems:"center", gap:"10px"}}>
           <Button size="sm" onClick={handleSubmit} className="btn btn-gradient" style={{marginRight:"10px"}}>{uploadloading ? "Uploading...":"upload Image"}</Button>
           <Button size="sm" onClick={cancelUpload}><TbTrash/> Cancle</Button>

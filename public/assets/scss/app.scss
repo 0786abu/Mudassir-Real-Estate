@@ -40,6 +40,9 @@ Author URI: https://themeforest.net/user/pixelstrap
 	4. Responsive CSS
 	*/
 
+
+@use "sass:color";
+@use "sass:string";
 //google fonts
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,600,600i,700,700i,800,800i");
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i&display=swap");
@@ -50,6 +53,8 @@ Author URI: https://themeforest.net/user/pixelstrap
 @import "utils/variables";
 @import "utils/mixins";
 @import "utils/dropzone.scss";
+
+
 
 // base
 @import "base/typography";
@@ -90,6 +95,41 @@ Author URI: https://themeforest.net/user/pixelstrap
 @import "template/template";
 @import "template/responsive";
 
+// ------------------------ new css
+// vendors
+@import "vendor/font-awesome";
+
+// utils
+@import "css/utils/variables";
+@import "css/utils/mixins";
+@import "css/utils/dropzone.scss";
+
+// base
+@import "css/base/reset";
+
+// layout
+@import "css/layout/sidebar";
+
+// components
+@import "css/components/buttons";
+@import "css/components/labels";
+@import "css/components/form";
+@import "css/components/card";
+@import "css/components/pagination";
+@import "css/components/property";
+@import "css/components/map";
+@import "css/components/slick";
+@import "css/components/loader";
+@import "css/components/customizer";
+
+// pages
+@import "css/pages/admin-pages";
+@import "css/pages/inner-pages";
+
+// Template
+@import "css/template/admin-responsive";
+// ------------------------ new css
+
 // slick slider
 @import "slick-carousel/slick/slick.css";
 @import "slick-carousel/slick/slick-theme.css";
@@ -102,6 +142,7 @@ Author URI: https://themeforest.net/user/pixelstrap
 
 // font-awesome
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
 
 //map css
 // @import "../../../node_modules/leaflet/dist/leaflet.css";

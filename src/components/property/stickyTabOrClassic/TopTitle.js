@@ -71,25 +71,25 @@ const TopTitle = ({ property, favourites }) => {
               <li>
                 <div>
                   <img src="/assets/images/svg/icon/double-bed.svg" className="img-fluid" alt="" />
-                  <span>{property?.beds || 4} Bedrooms</span>
+                  <span className="detail-anchors">{property?.beds || 4} Bedrooms</span>
                 </div>
               </li>
               <li>
                 <div>
                   <img src="/assets/images/svg/icon/bathroom.svg" className="img-fluid" alt="" />
-                  <span>{property?.baths || 4} Bathrooms</span>
+                  <span className="detail-anchors">{property?.baths || 4} Bathrooms</span>
                 </div>
               </li>
               <li>
                 <div>
                   <img src="/assets/images/svg/icon/sofa.svg" className="img-fluid" alt="" />
-                  <span>{property?.rooms || 4} {property?.rooms===1 ? "Room" : "Rooms"}</span>
+                  <span className="detail-anchors">{property?.rooms || 4} {property?.rooms===1 ? "Room" : "Rooms"}</span>
                 </div>
               </li>
               <li>
                 <div>
                   <img src="/assets/images/svg/icon/square-ruler-tool.svg" className="img-fluid ruler-tool" alt="" />
-                  <span>{property?.squareFits || 5000} Sq ft</span>
+                  <span className="detail-anchors">{property?.squareFits || 5000} Sq ft</span>
                 </div>
               </li>
             </ul>

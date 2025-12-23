@@ -6,7 +6,7 @@ import { Plus, X } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateProperty } from "@/redux-toolkit/action/propertyAction";
 
-const CreatePropertyTab = () => {
+const CreatePropertyTab = ({from}) => {
   const {createpropertyloading} = useSelector((state)=>state.Property)
  const [keywords, setKeywords] = useState([])
   const [keywordInput, setKeywordInput] = useState("");
@@ -38,9 +38,14 @@ const CreatePropertyTab = () => {
     video:""
   });
   const [images, setImages] = useState(null);
+  const [floorImage, setFloorImage] = useState(null);
   const handleChangeImage = (e)=>{
     const files = e.target.files;
     setImages(files);
+  }
+  const handleChangeFloorImage = (e)=>{
+    const files = e.target.files[0];
+    setFloorImage(files);
   }
 
   const handleSubmit = (e)=>{
@@ -57,6 +62,9 @@ const CreatePropertyTab = () => {
   Array.from(images).forEach((file) => {
     formData.append("images", file);
   });
+}
+if (floorImage !==null) {
+    formData.append("floorPlanImage", floorImage);
 }
     formData.append("slug",propertyData.slug)
     formData.append("title",propertyData.title)
@@ -120,7 +128,9 @@ const CreatePropertyTab = () => {
 
   return (
     <NoSsr>
-          <div className="dashboard-content">
+          <div style={{
+            margin:from==="admin" ? "100px 20px" : undefined
+          }} className={`dashboard-content`}>
             <div className="create-tab" id="create-property">
               <div className="property-wizard common-card">
                 <div className="common-header">
@@ -346,14 +356,51 @@ const CreatePropertyTab = () => {
                       </Col>
                     </Row>
                   </div>
-                  <div className="form-inputs">
+                  <div className="form-inputs" style={{width:"100%"}}>
                     <h6>Gallery</h6>
-                    <div className="dropzone" id="multiFileUpload">
-                      <div className="dz-message needsclick">
-                        <i className="fas fa-cloud-upload-alt" />
-                        <input type="file" multiple className="form-file-input" onChange={handleChangeImage} />
-                      </div>
-                    </div>
+                    <Row style={{width:"100%"}}>
+                      {/* <div> */}
+                      <Col md="6" className="mb-4">
+                        <h6>Add Images ({"max limit 10 images"})</h6>
+                      <div className="custom-dropzone">
+  <input
+    type="file"
+    multiple
+    accept="image/*"
+    id="multiFileUpload"
+    className="d-none"
+    onChange={handleChangeImage}
+  />
+
+  <label htmlFor="multiFileUpload" className="dropzone-box">
+    <i className="fas fa-cloud-upload-alt upload-icon"></i>
+    <h6 className="mb-1">Drag & Drop images here</h6>
+    <p className="text-muted mb-0">or click to browse</p>
+  </label>
+</div>
+                      </Col>
+                      <Col md="6">
+                      <h6>Add Floor plan image ({"only one"})</h6>
+                      <div className="custom-dropzone">
+  <input
+    type="file"
+    multiple
+    accept="image/*"
+    id="multiFileUpload"
+    className="d-none"
+    onChange={handleChangeImage}
+  />
+
+  <label htmlFor="multiFileUpload" className="dropzone-box">
+    <i className="fas fa-cloud-upload-alt upload-icon"></i>
+    <h6 className="mb-1">Drag & Drop images here</h6>
+    <p className="text-muted mb-0">or click to browse</p>
+  </label>
+</div>
+                      </Col>
+                    {/* </div> */}
+                    </Row>
+
                     <Row className="gx-3">
                       <Col sm="12" className="form-group">
                         <input name="video" value={propertyData.video} onChange={(e)=>setPropertyData({...propertyData, video:e.target.value})} type="text" className="form-control" placeholder="Enter youtube video link"  />

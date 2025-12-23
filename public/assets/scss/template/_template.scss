@@ -460,7 +460,7 @@
   z-index: 2;
   color: $white;
   text-align: center;
-  background-image: var(--theme-gradient3);
+  background: #108a00;
   border: none;
   font-size: 22px;
   padding: 6px 5px 5px 5px;
@@ -470,7 +470,7 @@
     @extend %common-lightafter;
     border-radius: 8px;
     opacity: 0.26;
-    box-shadow: 5.353px 5.945px 12px var(--theme-default);
+    box-shadow: 5.353px 5.945px 12px #108a00
   }
   
   > div {
