@@ -243,24 +243,19 @@ const AdminPropertyDetail = ({slug}) => {
         
         
       </Row>
-
       {/* EXTRA DETAILS */}
-      <Row className="mt-4 g-4">
+      <Row className="g-2">
+        
+
         <Col lg="6">
           <Card className="shadow-sm border-0">
             <CardBody>
-              <h5 className="fw-bold mb-3">Amenities</h5>
-              <div className="d-flex flex-wrap gap-2">
-                {singleProperty?.amenities?.map((item, i) => (
-                  <Badge key={i} color="secondary" pill>
-                    {item}
-                  </Badge>
-                ))}
-              </div>
+              <h5 className="fw-bold mb-3">Property Brief</h5>
+        <div className=" mb-4">{singleProperty?.description}</div>
+        <div className="white-space-pre-line">{singleProperty?.aboutProperty}</div>
             </CardBody>
           </Card>
         </Col>
-
         <Col lg="6">
           <Card className="shadow-sm border-0">
             <CardBody>
@@ -287,6 +282,21 @@ const AdminPropertyDetail = ({slug}) => {
               </div>
                 </ListGroupItem>
               </ListGroup>
+            </CardBody>
+          </Card>
+        </Col>
+
+        <Col sm="12">
+          <Card className="shadow-sm border-0">
+            <CardBody>
+              <h5 className="fw-bold mb-3">Amenities</h5>
+              <div className="d-flex flex-wrap gap-2">
+                {singleProperty?.amenities?.map((item, i) => (
+                  <Badge key={i} color="secondary" pill>
+                    {item}
+                  </Badge>
+                ))}
+              </div>
             </CardBody>
           </Card>
         </Col>
