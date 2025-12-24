@@ -23,6 +23,11 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
+                path: "/admin/dashboard/singleProperty",
+                title: 'Property detail',
+                type: 'link'
+            },
+            {
                 path: "/admin/dashboard/allProperties",
                 title: 'All Property',
                 type: 'link'
