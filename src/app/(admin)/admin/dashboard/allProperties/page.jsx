@@ -370,7 +370,7 @@ const handleResetFilters = ()=>{
                     </div>
                   </Col>
                   {propertyloading ? <ProfileLoader/> : (
-                    <Listview data={allproperties} />
+                    <Listview data={allproperties} from="admin"/>
                   )}
                    <nav className="theme-pagination">
       <ul className="pagination">

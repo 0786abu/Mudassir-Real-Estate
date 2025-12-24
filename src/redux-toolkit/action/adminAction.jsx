@@ -1,5 +1,5 @@
 import axios from "axios"
-import { setAdminError, setAllProperties, setPropertyLoading } from "../slice/adminSlice"
+import { setAdminError, setAllProperties, setApprovedLoading, setFeaturedLoading, setPropertyLoading, setSingleProperty, setToggleApproved, setToggleFeatured } from "../slice/adminSlice"
 import { toast } from "react-toastify"
 
 
@@ -36,5 +36,51 @@ export const AdminAllProperties = (filters)=>async(dispatch)=>{
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    }
+}
+
+export const AdminFetchSingleProeprty = (slug)=>async(dispatch)=>{
+    dispatch(setPropertyLoading())
+    try {
+        const {data} = await axios.get(`${baseURL}/api/admin/allProperties/${slug}`,{
+            contentType:"application/json",
+            withCredentials:true
+        })
+        dispatch(setSingleProperty(data.data))
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    }
+}
+export const FeaturedToggle = (slug)=>async(dispatch)=>{
+    dispatch(setFeaturedLoading())
+    try {
+        const {data} = await axios.put(`${baseURL}/api/admin/allProperties/${slug}`,{
+            contentType:"application/json",
+            withCredentials:true
+        })
+        dispatch(setToggleFeatured(data.data))
+        toast.success(data.message)
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setFeaturedLoading(false))
+    }
+}
+export const ApprovedToggle = (slug,status)=>async(dispatch)=>{
+    dispatch(setApprovedLoading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/admin/allProperties/${slug}`,{status},{
+            contentType:"application/json",
+            withCredentials:true
+        })
+        dispatch(setToggleApproved(data.data))
+        toast.success(data.message)
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setApprovedLoading(false))
     }
 }

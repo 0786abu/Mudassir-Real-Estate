@@ -4,13 +4,13 @@ import { usePathname } from "next/navigation";
 import Navbar from "@/layout/headers/Navbar";
 import useHasMounted from "./Mounted";
 
-const hideNavbarRoutes = ["/admin/dashboard","/admin/dashboard/user-profile","/admin/dashboard/payments","/admin/dashboard/create-property","/admin-login","/admin/dashboard/profile","/admin/dashboard/allProperties"];
+const hideNavbarRoutes = ["/admin/dashboard","/admin/dashboard/user-profile","/admin/dashboard/payments","/admin/dashboard/create-property","/admin-login","/admin/dashboard/profile","/admin/dashboard/allProperties","/admin/dashboard/singleProperty"];
 
 const dynamicRoutePatterns = [
   /^\/admin-dashboard-doctor\/.+$/,
   /^\/reset-password\/.+$/,
   /^\/admin-dashboard-types\/.+$/,
-    /^\/admin\/dashboard\/allblogs\/[^\/]+$/,
+    /^\/admin\/dashboard\/allProperties\/[^\/]+$/,
      /^\/admin\/dashboard\/allproducts\/[^\/]+$/,
  /^\/admin\/dashboard\/allproducts\/[^\/]+\/edit$/,
  /^\/admin\/dashboard\/allblogs\/[^\/]+\/edit$/,

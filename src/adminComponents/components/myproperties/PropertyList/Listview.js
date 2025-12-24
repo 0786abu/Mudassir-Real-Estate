@@ -3,7 +3,7 @@ import { Col, Row } from "reactstrap";
 
 
 
-const Listview = ({data}) => {
+const Listview = ({data,from}) => {
   return (
     <div className='col-xl-12'>
       <Row className='column-sm zoom-gallery property-grid'>
@@ -11,7 +11,7 @@ const Listview = ({data}) => {
           data.map((item, i) => {
             return (
               <Col xl='4' sm='6' key={i}>
-                <PropertyBox data={item} />
+                <PropertyBox data={item} from={from}/>
               </Col>
             );
           })}

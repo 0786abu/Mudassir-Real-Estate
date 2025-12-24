@@ -54,7 +54,9 @@ const CreatePropertyTab = ({from}) => {
     formData.append("seo_title",propertyData.seo_title)
     formData.append("seo_description",propertyData.seo_description)
     formData.append("slug",propertyData.slug)
-    formData.append("keywords",keywords)
+    keywords.forEach((keyword) => {
+    formData.append("keywords", keyword);
+  });
     amenities.forEach((amenity) => {
     formData.append("amenities", amenity);
   });

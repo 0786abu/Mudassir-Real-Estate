@@ -220,6 +220,13 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
         >
           View Details
         </button>
+      ) : from==="admin" ? (
+        <Link href={`/admin/dashboard/allProperties/${data.slug}`}>
+          <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
+              background:isHover ? "#14A800" : "",
+              color:isHover ? "white" : "black"
+            }} className="btn rounded-pill border border-1">Details</button>
+        </Link>
       ) : (
         <Link href={`/properties/${data.slug}`}>
           <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
