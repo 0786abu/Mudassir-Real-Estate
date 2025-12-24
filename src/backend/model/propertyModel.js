@@ -142,7 +142,7 @@ const propertySchema = new Schema({
         default: 0
     },
      createdBy: { type: mongoose.Schema.Types.ObjectId, required: true, refPath: 'createdByModel' },
-  createdByModel: { type: String, required: true, enum: ['User', 'Agent'] },
+  createdByModel: { type: String, required: true, enum: ['User', 'Agent', "Admin"] },
 },{ timestamps: true  });
 const Property = mongoose.models.Property || mongoose.model("Property", propertySchema);
 
