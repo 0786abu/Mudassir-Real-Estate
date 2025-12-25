@@ -9,10 +9,10 @@ import ProfileLoader from '@/components/common/Loader';
 import RecentPayment from '@/adminComponents/components/manageuser/profile/RecentPayments';
 
 // Dynamically import components with SSR disabled
-const Following = dynamic(() => import('@/adminComponents/components/manageuser/profile/Following'), { ssr: false });
-const UserChart = dynamic(() => import('@/adminComponents/components/manageuser/profile/UserChart'), { ssr: false });
+// const Following = dynamic(() => import('@/adminComponents/components/manageuser/profile/Following'), { ssr: false });
+// const UserChart = dynamic(() => import('@/adminComponents/components/manageuser/profile/UserChart'), { ssr: false });
 const RecentProperty = dynamic(() => import('@/adminComponents/components/manageuser/profile/RecentProperty'), { ssr: false });
-const RecentChart = dynamic(() => import('@/adminComponents/components/manageuser/profile/RecentChart'), { ssr: false });
+// const RecentChart = dynamic(() => import('@/adminComponents/components/manageuser/profile/RecentChart'), { ssr: false });
 const ProfileDetail = dynamic(() => import('@/adminComponents/components/manageuser/profile/ProfileDetail'), { ssr: false });
 
 const Profile = ({_id}) => {

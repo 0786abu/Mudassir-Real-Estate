@@ -159,7 +159,7 @@ export const AdminFetchAllAboutUser = (id)=>async(dispatch)=>{
     }
 }
 export const AdminFetchAllAboutAgent = (id)=>async(dispatch)=>{
-    dispatch(setUserLoading())
+    dispatch(setAgentLoading())
     try {
         const {data} = await axios.get(`${baseURL}/api/admin/all-agents/${id}`,{
             contentType:"application/json",
