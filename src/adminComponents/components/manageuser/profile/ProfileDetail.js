@@ -1,96 +1,107 @@
-import { Monthlydata, Projectimg } from '@/adminComponents/data/manage-profile/profiledata'
 import Link from 'next/link'
 import React from 'react'
-import { ChevronRight } from 'react-feather'
-import { Button, Card, CardBody, Col, Media } from 'reactstrap'
+import { Badge, Card, CardBody, Col, Media, Table } from 'reactstrap'
+import { formatDatenew } from '../../Common/Propertybox/PropertyBox'
 
-const ProfileDetail = () => {
+const ProfileDetail = ({aboutUser}) => {
     return (
         <>
-            <Col xl='5 xl-6'>
+            <Col sm="12">
                 <Card>
                     <CardBody >
                         <Media className="contact-media">
-                            <img src="/assets/images/avatar/7.jpg" className="img-fluid img-80" alt='' />
+                            <img src={aboutUser?.agencyProfile?.url || aboutUser?.profile?.url || "/assets/images/profile.png"} className="img-fluid img-80" alt='' />
                             <Media body>
-                                <h4>Good Evening , Brock Lee</h4>
-                                <span className="light-font">My current address <a>Mina Road, Dubai, United Arab Emirates</a></span>
-                                <ul className="agent-social mt-2">
-                                    <li><Link href="https://www.facebook.com/" className="facebook"><i className="fab fa-facebook-f" /></Link></li>
-                                    <li><Link href="https://twitter.com/" className="twitter"><i className="fab fa-twitter" /></Link></li>
-                                    <li><Link href="https://account.google.com" className="google"><i className="fab fa-google" /></Link></li>
-                                    <li><Link href="https://www.linkedin.com/" className="linkedin"><i className="fab fa-linkedin-in" /></Link></li>
+                                <h4>{aboutUser?.name}</h4>
+                                <span className="light-font">{aboutUser?.email}</span>
+                                <div>
+                                    <Badge color={aboutUser?.role==="agent" ? "info" : "success"}>{aboutUser?.role}</Badge>
+                                </div>
+                               {aboutUser?.role==="agent" && (
+                                 <ul className="agent-social mt-2">
+                                    {aboutUser?.socialMedia?.facebook && (
+                                        <li><Link href={aboutUser?.socialMedia?.facebook} className="facebook"><i className="fab fa-facebook-f" /></Link></li>
+                                    )}
+                                    {aboutUser?.socialMedia?.instagram && (
+                                        <li><Link href={aboutUser?.socialMedia?.instagram} className=" bg-danger"><i className="fab fa-instagram" /></Link></li>
+                                    )}
+                                    {aboutUser?.socialMedia?.website && (
+                                        <li><Link href={aboutUser?.socialMedia?.website} className=" bg-light"><i className="fas fa-globe text-black" /></Link></li>
+                                    )}
+                                    {aboutUser?.socialMedia?.linkedin && (
+                                        <li><Link href={aboutUser?.socialMedia?.linkedin} className="linkedin"><i className="fab fa-linkedin-in" /></Link></li>
+                                    )}
+                                    {aboutUser?.socialMedia?.youtube && (
+                                        <li><Link href={aboutUser?.socialMedia?.youtube} className="bg-danger"><i className="fab fa-youtube" /></Link></li>
+                                    )}
                                 </ul>
+                               )}
                             </Media>
                         </Media>
-                        <div className="contact-btn">
+                        {/* <div className="contact-btn">
                             <Link href='/manage-users/allusers' className="btn btn-gradient btn-pill">Email</Link>
                             <Link href='/manage-users/add-user' className="btn btn-dashed ms-2 btn-pill">Message</Link>
-                        </div>
+                        </div> */}
                     </CardBody>
                 </Card>
-            </Col>
-            <Col xl='4 xl-6'>
-                <Card>
-                    <CardBody>
-                        <div className="partner-info">
-                            <div className="title-about">
-                                <h5>Project meetings</h5>
-                            </div>
-                            <div className="time-details">
-                                <div>
-                                    <ul>
-                                        {
-                                            Projectimg && Projectimg.map((item, i) => {
-                                                return (
-                                                    <li key={i}>
-                                                        <img src={item.img} className="img-fluid" alt='' />
-                                                    </li>
-                                                )
-                                            })
-                                        }
-                                    </ul>
-                                    <Link href='/manage-users/allusers'>Join now <ChevronRight /></Link>
+                 <Card>
+                            <CardBody>
+                                <div className="title-about">
+                                    <h5>About</h5>
                                 </div>
-                                <div>
-                                    <h6>4:00 - 5:00 PM</h6>
-                                    <span className="label label-light-danger">10 mins left</span>
+                                <div className="table-responsive">
+                                    <Table className="table-bordernone mb-0">
+                                        <tbody>
+                                           
+                                           {aboutUser?.agencyName && (
+                                             <tr className='d-flex justify-content-start align-items-center'>
+                                                <td className="pt-0">Agency Name:</td>
+                                                <td className="light-font pt-0">{aboutUser?.agencyName}</td>
+                                            </tr>
+                                           )}
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td className="pt-0">Email:</td>
+                                                <td className="light-font pt-0">{aboutUser?.email} <Badge color='success'>{aboutUser?.isEmailVerified ? "Verified" : "unVerified"}</Badge></td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td>Mobile Number:</td>
+                                                <td className="light-font">{aboutUser?.phone ? aboutUser?.phone : "no phone number yet"} {aboutUser?.phone && (<Badge color={aboutUser?.isPhoneVerified ? "success" : "danger"}>{aboutUser?.isPhoneVerified ? "Verified" : "unVerified"}</Badge>)}</td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td>Gender:</td>
+                                                <td className="light-font">{aboutUser?.gender ? aboutUser?.gender : "No gender selected yet"}</td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td className="pb-0">DOB:</td>
+                                                <td className="light-font pb-0">{aboutUser?.DOB ? formatDatenew(aboutUser?.DOB) : "No DOB added yet"}</td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td className="pb-0">JoinedAt:</td>
+                                                <td className="light-font pb-0">{formatDatenew(aboutUser?.createdAt)}</td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td className="pb-0">State:</td>
+                                                <td className="light-font pb-0">{aboutUser?.state ? aboutUser?.state : "No added yet"}</td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td className="pb-0">City:</td>
+                                                <td className="light-font pb-0">{aboutUser?.city ? aboutUser?.city : "No added yet"}</td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-center'>
+                                                <td className="pb-0">Address:</td>
+                                                <td className="light-font pb-0">{aboutUser?.address ? aboutUser?.address : "No added yet"}</td>
+                                            </tr>
+                                            <tr className='d-flex justify-content-start align-items-start'>
+                                                <td className="pb-0">Bio:</td>
+                                                <td className="light-font pb-0">{aboutUser?.bio ? aboutUser?.bio : "No bio yet"}</td>
+                                            </tr>
+                                            
+                
+                                        </tbody>
+                                    </Table>
                                 </div>
-                            </div>
-                        </div>
-                    </CardBody>
-                </Card>
-            </Col>
-            <Col xl='3 xl-6'>
-                <Card className="timeline-card">
-                    <CardBody>
-                        <div className="partner-info">
-                            <div className="title-about">
-                                <h5>Monthly installment</h5>
-                            </div>
-                            <div className="timeline-pay">
-                                <ul>
-                                    {
-                                        Monthlydata && Monthlydata.map((item, i) => {
-                                            return (
-                                                <li key={i} className={item.class ? item.class : ''}>
-                                                    <div>
-                                                        <i className="fas fa-check-circle" />
-                                                        <span>{item.time}</span>
-                                                    </div>
-                                                </li>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                                <div className="timeline-right">
-                                    <h5 className="mb-0">$4.500</h5>
-                                    <Link href='/agents/invoice'>View Details</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </CardBody>
-                </Card>
+                            </CardBody>
+                        </Card>
             </Col>
         </>
     )

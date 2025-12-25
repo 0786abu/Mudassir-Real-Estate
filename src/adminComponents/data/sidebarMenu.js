@@ -66,7 +66,7 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
-                path: "/manage-users/allusers",
+                path: "/admin/dashboard/allUsers",
                 title: 'All Users',
                 type: 'link'
             }
@@ -99,7 +99,7 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
-                path: "/agents/all-agents",
+                path: "/admin/dashboard/allAgents",
                 title: 'All Agents',
                 type: 'link'
             },

@@ -1,53 +1,55 @@
 import { properylistdata } from '@/adminComponents/data/manage-profile/profiledata'
-import { formatPK } from '@/utils/Formatter'
 import React from 'react'
-import { Badge, Card, CardBody, Col, Media, Table } from 'reactstrap'
-import { formatDatenew } from '../../Common/Propertybox/PropertyBox'
+import { Card, CardBody, Col, Media, Table } from 'reactstrap'
 
-const RecentProperty = ({properties}) => {
+const RecentPayment = () => {
     return (
         <div className="recent-properties">
             <Card>
                 <CardBody>
                     <div className="title-about">
-                        <h5>Recent properties</h5>
+                        <h5>Recent Payments</h5>
                     </div>
                     <div className="table-responsive">
                         <Table className="table-bordernone mb-0">
                             <thead>
                                 <tr>
-                                    <th>Property</th>
-                                    <th>Price</th>
+                                    <th>Property Type</th>
+                                    <th>Property For</th>
                                     <th>Status</th>
+                                    <th>Method</th>
                                     <th>CreatedAt</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    properties?.length===0 ? (
-                                        <tr>
-                                            <td colSpan={4} align='center'>No Properties yet</td>
-                                        </tr>
-                                    ) :properties?.map((item, i) => {
+                                    properylistdata && properylistdata.map((item, i) => {
                                         return (
                                             <tr key={i}>
                                                 <td>
                                                     <Media>
-                                                        <img src={item.images[0]?.url} className="img-fluid img-80 object-fit-cover" alt='' />
+                                                        <img src={item.img} className="img-fluid img-80" alt='' />
                                                         <Media body>
-                                                            <h6>{item.type}</h6>
-                                                            <span className="light-font">{item.category}</span>
+                                                            <h6>{item.name}</h6>
+                                                            <span className="light-font">{item.country}</span>
                                                         </Media>
                                                     </Media>
                                                 </td>
                                                 <td>
-                                                    <span className="light-font">{formatPK(item.price)}</span>
+                                                    <h6>{item.rent}</h6>
+                                                    <span className="light-font">monthly rent</span>
                                                 </td>
                                                 <td>
-                                                    <Badge color={item.isApproved==="Approved" ? "success" : item.isApproved==="Pending" ? "warning" : "danger"}>{item.isApproved}</Badge>
+                                                    <h6>{item.deposit}</h6>
+                                                    <span className="light-font">deposit</span>
                                                 </td>
                                                 <td>
-                                                    <span className="light-font">{formatDatenew(item.createdAt)}</span>
+                                                    <h6>{item.deposit}</h6>
+                                                    <span className="light-font">Jazzcash</span>
+                                                </td>
+                                                <td>
+                                                    <h6>{item.date}</h6>
+                                                    <span className="light-font">start date</span>
                                                 </td>
                                             </tr>
                                         )
@@ -62,4 +64,4 @@ const RecentProperty = ({properties}) => {
     )
 }
 
-export default RecentProperty
+export default RecentPayment

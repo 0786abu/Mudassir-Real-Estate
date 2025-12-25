@@ -462,7 +462,7 @@ export const paymentMethods = [
     number: "0300-0000001"
   },
   {
-    key: "bank",
+    key: "bank_transfer",
     label: "Bank Transfer",
     type: "bank",
     banks: [

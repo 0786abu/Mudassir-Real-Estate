@@ -3,15 +3,14 @@ import { Fragment, useState } from "react";
 import Img from "../../utils/Img";
 import SocialAccounts from "../SocialAccounts";
 
-const PropertyBoxFour = ({ data, label }) => {
+const PropertyBoxFour = ({ data, from }) => {
   const [show, setShow] = useState();
   return (
     <Fragment>
       <div className='property-box'>
         <div className='agent-image'>
           <div>
-            <Img src={data?.img} className='bg-img' alt='' />
-            {label ? data?.properties && <span className='label label-shadow'>{data.properties}</span> : data?.label && <span className='label label-shadow'>New User</span>}
+            <Img src={data?.profile ? data?.profile?.url : data?.agencyProfile?.url} className='bg-img' alt='' />
             <div className='agent-overlay'></div>
             <div className='overlay-content'>
               <SocialAccounts />
@@ -25,27 +24,28 @@ const PropertyBoxFour = ({ data, label }) => {
           </h3>
           <p className='font-roboto'>Real estate Agent</p>
           <ul className='agent-contact'>
-            <li>
+            {data.mobile ? (
+              <li>
               <i className='fas fa-phone-alt'></i>
-              <span className='character'>+91 {data?.mobile === show ? data?.mobile : data?.mobile.slice(0, 5) + "*****"}</span>
+              <span className='character'>+91 {data?.phone === show ? data?.phone : data?.phone.slice(0, 5) + "*****"}</span>
               <span
                 className='label label-light-danger'
                 onClick={() => {
-                  setShow(data?.mobile);
-                  data?.mobile === show && setShow();
+                  setShow(data?.phone);
+                  data?.phone === show && setShow();
                 }}
               >
-                {show === data?.mobile ? "show" : "hide"}
+                {show === data?.phone ? "hide" : "show"}
               </span>
             </li>
+            ):(<li>
+              <span>no phone number yet</span>
+            </li>)}
             <li>
-              <i className='fas fa-envelope'></i> {data?.mail}
-            </li>
-            <li>
-              <i className='fas fa-fax'></i> {data?.pinCode}
+              <i className='fas fa-envelope'></i> {data?.email}
             </li>
           </ul>
-          <Link href='/manage-users/profile'>
+          <Link href={from && from==="agent" ? `/admin/dashboard/allAgents/${data._id}` : `/admin/dashboard/allUsers/${data._id}`}>
             View profile <i className='fas fa-arrow-right'></i>
           </Link>
         </div>

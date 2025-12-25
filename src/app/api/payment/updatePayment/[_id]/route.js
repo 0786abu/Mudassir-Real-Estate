@@ -16,14 +16,14 @@ export async function PUT(req,{params}) {
         }
         const {_id} = await params;
         const {status,adminNote} = await req.json();
-        const payment = await Payment.findById(_id);
+        const payment = await Payment.findById(_id).populate("property","slug type category").populate("user","name email address role agencyName agencyProfile profile");
         if(!payment){
             return NextResponse.json({
                 success:false,
                 message:"payment not found"
             },{status:400})
         }
-        const property = await Property.findById(payment?.property);
+        const property = await Property.findById(payment?.property?._id);
         if(!property){
             return NextResponse.json({
                 success:false,
@@ -31,9 +31,9 @@ export async function PUT(req,{params}) {
             },{status:400})
         }
         payment.status = status;
-        payment.adminNote = adminNote;
+        payment.adminNote = adminNote || undefined;
         if(status==="Rejected"){
-            property.isApproved = "No Approved"
+            property.isRequestedForPayment = false
         }else{
             property.isApproved = "Approved"
             property.isPaid = true
@@ -47,7 +47,7 @@ export async function PUT(req,{params}) {
             payment
         },{status:200})
     } catch (error) {
-         NextResponse.json({
+        return NextResponse.json({
             success:false,
             message:error.message
         },{status:400})
