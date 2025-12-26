@@ -528,7 +528,7 @@ body {
   Your property is now <strong>activated</strong> and live on our platform.
 </p>
 
-<a href="${link}" class="button">Go to Dashboard</a>
+<a href="${link}" class="button">View your property</a>
 
 <p>
   Thank you for choosing our real estate platform.
