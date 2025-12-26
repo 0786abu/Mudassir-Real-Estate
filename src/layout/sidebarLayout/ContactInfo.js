@@ -22,7 +22,7 @@ const ContactInfo = ({owner}) => {
       <div className='category-property'>
         <div className='agent-info'>
           <div className='media'>
-            <img src={owner?.agencyProfile?.url || owner?.profile?.url || "/assets/images/profile.webp"} className='img-50' style={{borderRadius:"50%",objectFit:"cover"}} alt='' />
+            <img src={owner?.agencyProfile?.url || owner?.profile?.url || "/assets/images/profile.webp"} className='img-50' style={{borderRadius:"50%",objectFit:"cover",width:"50px",height:"50px"}} alt='' />
             <div className='media-body ms-2'>
               <h6>{owner?.name || owner?.agencyName}</h6>
               <p>{owner?.email}</p>
