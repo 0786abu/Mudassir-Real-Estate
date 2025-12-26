@@ -1,4 +1,4 @@
-import { ApprovedFreeProperty, ForGotTemplate, OTPTEMPLATE, RejectedFreeProperty, ResetPasswordTemplate } from "./Templates";
+import { ApprovedFreeProperty, ApprovedPayment, ForGotTemplate, OTPTEMPLATE, RejectedFreeProperty, RejectPayment, ResetPasswordTemplate } from "./Templates";
 import nodemailer from "nodemailer"
 
 
@@ -64,6 +64,38 @@ export const RejectPropertyApprovedMail = async({email,name,isFree})=>{
             to:email,
             subject:"Property Approved - Real Estate Project",
             html:RejectedFreeProperty({name,isFree})
+        }
+        await transporter.sendMail(mailOptions);
+}
+export const ApprovedPaymentMail = async({email,name,link})=>{
+    const transporter = nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:process.env.EMAIL,
+                pass:process.env.PASSWORD
+            }
+        })
+        const mailOptions = {
+            from:`"Real Estate Platform" <${process.env.EMAIL}>`,
+            to:email,
+            subject:"Payment Approved - Property Activated | Real Estate Project",
+            html:ApprovedPayment({name,link})
+        }
+        await transporter.sendMail(mailOptions);
+}
+export const RejectPaymentMail = async({email,name,reason})=>{
+    const transporter = nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:process.env.EMAIL,
+                pass:process.env.PASSWORD
+            }
+        })
+        const mailOptions = {
+            from:`"Real Estate Platform" <${process.env.EMAIL}>`,
+            to:email,
+            subject:"Payment Rejected – Action Required | Real Estate Project",
+            html:RejectPayment({name,reason})
         }
         await transporter.sendMail(mailOptions);
 }

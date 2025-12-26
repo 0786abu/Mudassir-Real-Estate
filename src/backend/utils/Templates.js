@@ -448,3 +448,196 @@ export const RejectedFreeProperty = ({name,isFree})=>`
 </body>
 </html>
 `
+
+export const ApprovedPayment = ({name,link})=>`
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Approved</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+.email-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.header {
+  background-color: #108A00;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+.content {
+  padding: 20px;
+  color: #333333;
+  line-height: 1.6;
+}
+.content h2 {
+  color: #108A00;
+  margin-top: 0;
+}
+.button {
+  display: inline-block;
+  background-color: #108A00;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+.footer {
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 15px;
+  font-size: 12px;
+  color: #888888;
+}
+</style>
+</head>
+
+<body>
+<div class="email-container">
+  <div class="header">
+    <h1>Payment Approved</h1>
+  </div>
+
+  <div class="content">
+    <h2>Hi ${name},</h2>
+
+
+<p>
+  Your payment has been <strong>successfully approved</strong>.
+</p>
+
+<p>
+  Your property is now <strong>activated</strong> and live on our platform.
+</p>
+
+<a href="${link}" class="button">Go to Dashboard</a>
+
+<p>
+  Thank you for choosing our real estate platform.
+</p>
+
+<p>Best Regards,<br>Real Estate Team</p>
+
+
+  </div>
+
+  <div class="footer">
+    © 2025 Real Estate Project. All rights reserved.
+  </div>
+</div>
+</body>
+</html>
+`
+
+export const RejectPayment = ({name,reason})=>`
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Rejected</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+.email-container {
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.header {
+  background-color: #108A00;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
+.header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+.content {
+  padding: 20px;
+  color: #333333;
+  line-height: 1.6;
+}
+.content h2 {
+  color: #108A00;
+  margin-top: 0;
+}
+.button {
+  display: inline-block;
+  background-color: #108A00;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+.footer {
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 15px;
+  font-size: 12px;
+  color: #888888;
+}
+</style>
+</head>
+
+<body>
+<div class="email-container">
+  <div class="header">
+    <h1>Payment Rejected</h1>
+  </div>
+
+  <div class="content">
+    <h2>Hi ${name},</h2>
+
+<p>
+  Unfortunately, your payment has been <strong>rejected</strong> by our admin team.
+</p>
+
+<p>
+  <strong>Reason:</strong> ${reason}
+</p>
+
+<p>
+  Please correct the issue and submit your payment again to activate your property.
+</p>
+
+<p>Best Regards,<br>Real Estate Team</p>
+
+
+  </div>
+
+  <div class="footer">
+    © 2025 Real Estate Project. All rights reserved.
+  </div>
+</div>
+</body>
+</html>
+`

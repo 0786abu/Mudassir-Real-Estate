@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Payment from "@/backend/model/paymentModel";
 import Property from "@/backend/model/propertyModel";
 import { isAuthorized } from "@/backend/utils/middlewere";
+import { ApprovedPaymentMail, RejectPaymentMail } from "@/backend/utils/NodeMailer";
 import { NextResponse } from "next/server";
 
 export async function PUT(req,{params}) {
@@ -32,11 +33,14 @@ export async function PUT(req,{params}) {
         }
         payment.status = status;
         payment.adminNote = adminNote || undefined;
+        let link = `${process.env.NEXT_PUBLIC_BASE_URL}/properties/${property.slug}`
         if(status==="Rejected"){
             property.isRequestedForPayment = false
+            await RejectPaymentMail({name:payment.user.name,email:payment.user.email,reason:adminNote})
         }else{
             property.isApproved = "Approved"
             property.isPaid = true
+            await ApprovedPaymentMail({name:payment.user.name,email:payment.user.email,link})
         }
         await payment.save();
         await property.save();

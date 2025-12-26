@@ -19,6 +19,15 @@
     }
   }
 }
+@media (max-width:550px) {
+  .single-title{
+    flex-direction: column;
+    align-items: start !important;
+  }
+  .right-single{
+    text-align: left !important;
+  }
+}
 @media (max-width: 1800px) {
   // home section css
   .layout-home2 {

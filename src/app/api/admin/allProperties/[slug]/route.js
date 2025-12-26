@@ -95,7 +95,6 @@ export async function POST(req,{params}){
         };
         }
         let link = `${process.env.NEXT_PUBLIC_BASE_URL}/properties/${property.slug}`
-        console.log(link)
         if(status==="Approved"){
             if(property.isFree){
                 await FreePropertyApprovedMail({name:property.createdBy.name,email:property.createdBy.email,link,isFree:true})
