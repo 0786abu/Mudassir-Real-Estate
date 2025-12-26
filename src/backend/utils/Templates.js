@@ -258,3 +258,193 @@ export const ForGotTemplate = ({name,link})=>`
 </body>
 </html>
 `
+export const ApprovedFreeProperty = ({name,link,isFree})=>`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Approved</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .email-container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .header {
+        background-color: #108A00;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 24px;
+    }
+    .content {
+        padding: 20px;
+        color: #333333;
+        line-height: 1.6;
+    }
+    .content h2 {
+        color: #108A00;
+        margin-top: 0;
+    }
+    .button {
+        display: inline-block;
+        background-color: #108A00;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+    .footer {
+        background-color: #f4f4f4;
+        text-align: center;
+        padding: 15px;
+        font-size: 12px;
+        color: #888888;
+    }
+    @media screen and (max-width: 600px) {
+        .email-container {
+            width: 100% !important;
+        }
+        .header h1 {
+            font-size: 20px !important;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Congratulations! Your Property is Live</h1>
+    </div>
+    <div class="content">
+        <h2>Hi ${name},</h2>
+        <p>
+            Your ${isFree ? "free" : ""} property on our platform has been approved by our admin team. 
+            You had received a free credit when you created your account, and now your property is officially <strong>live</strong> on our site.
+        </p>
+        <p>
+            Users can now view and inquire about your property. We are excited to help you reach potential buyers and renters through our platform.
+        </p>
+        <a href="${link}" class="button">View Your Property</a>
+        <p>
+            Thank you for trusting us with your property listing. 
+        </p>
+        <p>Best Regards,<br>Real Estate Team</p>
+    </div>
+    <div class="footer">
+        © 2025 Real Estate Project. All rights reserved.
+    </div>
+</div>
+</body>
+</html>
+`
+
+export const RejectedFreeProperty = ({name,isFree})=>`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Rejected</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .email-container {
+        max-width: 600px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .header {
+        background-color: #108A00;
+        color: #ffffff;
+        text-align: center;
+        padding: 20px;
+    }
+    .header h1 {
+        margin: 0;
+        font-size: 24px;
+    }
+    .content {
+        padding: 20px;
+        color: #333333;
+        line-height: 1.6;
+    }
+    .content h2 {
+        color: #108A00;
+        margin-top: 0;
+    }
+    .button {
+        display: inline-block;
+        background-color: #108A00;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        margin: 20px 0;
+    }
+    .footer {
+        background-color: #f4f4f4;
+        text-align: center;
+        padding: 15px;
+        font-size: 12px;
+        color: #888888;
+    }
+    @media screen and (max-width: 600px) {
+        .email-container {
+            width: 100% !important;
+        }
+        .header h1 {
+            font-size: 20px !important;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Property Update Notification</h1>
+    </div>
+    <div class="content">
+        <h2>Hi ${name},</h2>
+        <p>
+            We regret to inform you that your ${isFree ? "free" : ""} property on our platform has been <strong>rejected</strong> by our admin team.
+        </p>
+        <p>
+            This could be due to missing information, incomplete details, or content that does not meet our platform standards.
+        </p>
+        <p>
+            Please make again proeprty so you can submit it again for approval.
+        </p>
+        <p>
+            Thank you for understanding, and we encourage you to improve your listing to go live.
+        </p>
+        <p>Best Regards,<br>Real Estate Team</p>
+    </div>
+    <div class="footer">
+        © 2025 Real Estate Project. All rights reserved.
+    </div>
+</div>
+</body>
+</html>
+`

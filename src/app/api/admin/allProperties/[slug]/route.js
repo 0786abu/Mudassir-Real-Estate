@@ -1,6 +1,7 @@
 import { DataBase } from "@/backend/config/database";
 import Property from "@/backend/model/propertyModel";
 import { isAuthorized } from "@/backend/utils/middlewere";
+import { FreePropertyApprovedMail, RejectPropertyApprovedMail } from "@/backend/utils/NodeMailer";
 import { NextResponse } from "next/server";
 
 export async function GET(req,{params}){
@@ -92,6 +93,20 @@ export async function POST(req,{params}){
                 success: false
             }, { status: 404 });
         };
+        }
+        let link = `${process.env.NEXT_PUBLIC_BASE_URL2}/properties/${property.slug}`
+        if(status==="Approved"){
+            if(property.isFree){
+                await FreePropertyApprovedMail({name:property.createdBy.name,email:property.createdBy.email,link,isFree:true})
+            }else{
+                await FreePropertyApprovedMail({name:property.createdBy.name,email:property.createdBy.email,link,isFree:false})
+            }
+        }else if(status === "Rejected"){
+           if(property.isFree){
+            await RejectPropertyApprovedMail({name:property.createdBy.name,email:property.createdBy.email,isFree:true})
+           }else{
+            await RejectPropertyApprovedMail({name:property.createdBy.name,email:property.createdBy.email,isFree:false})
+           }
         }
         property.isApproved = status;
         await property.save();
