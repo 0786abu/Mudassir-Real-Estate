@@ -494,7 +494,7 @@ body {
 .button {
   display: inline-block;
   background-color: #108A00;
-  color: #ffffff;
+  color: white;
   text-decoration: none;
   padding: 12px 24px;
   border-radius: 5px;
