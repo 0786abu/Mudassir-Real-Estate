@@ -1,99 +1,85 @@
-import { Field, Form, Formik } from 'formik';
-import React from 'react'
-import * as Yup from 'yup';
-import { Button, Col, Row } from 'reactstrap';
-import { ReactstrapInput, ReactstrapSelect } from '../../utils/ReactStarpInputsValidation';
-import DropZones from '@/components/Common/Dropzones';
+"use client"
+import React, { useState } from 'react'
+import { Button, Col, Form, Input, Row } from 'reactstrap';
+import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { AdminAddUserAgent } from '@/redux-toolkit/action/adminAction';
+// import DropZones from '@/components/Common/Dropzones';
 
-const AddUserForm = () => {
-    const getUploadParams = () => {
-        return { url: 'https://httpbin.org/post' }
+const AddUserForm = ({from}) => {
+    const [userData, setUserData] = useState({
+        name:"",
+        email:"",
+        password:"",
+        from:from
+    });
+    const {registerloading} = useSelector((state)=>state.Auth);
+    const dispatch = useDispatch();
+    const [profile, setProfile] = useState(null);
+    const [previewProfile, setPreviewProfile] = useState(null);
+    const handleImageChange = (e)=>{
+        const file = e.target.files[0];
+        setProfile(file);
+        setPreviewProfile(URL.createObjectURL(file));
+    }
+    const handleChange = (e)=>{
+        const {name, value} = e.target;
+        setUserData((prev)=>({
+            ...prev,[name]:value
+        }))
+    }
+    const resetAll = ()=>{
+        setUserData((prev)=>({
+            ...prev,name:"",email:"",password:""
+        }));
+        setProfile(null);
+        setPreviewProfile(null);
+    }
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("name", userData.name);
+        formData.append("email", userData.email);
+        formData.append("password",userData.password);
+        formData.append("profile",profile);
+        formData.append("from",userData.from);
+        dispatch(AdminAddUserAgent(formData,resetAll))
     }
     return (
-        <Formik
-            initialValues={{
-                firstname: "",
-                lastname: "",
-                gender: "",
-                phone: "",
-                dob: "",
-                email: "",
-                password: "",
-                confirmPW: "",
-                description: "",
-                address: "",
-                zip: ""
-            }}
-            validationSchema={Yup.object().shape({
-                firstname: Yup.string().required(),
-                lastname: Yup.string().required(),
-                gender: Yup.string().required(),
-                phone: Yup.number().required(),
-                dob: Yup.string().required(),
-                email: Yup.string().required(),
-                password: Yup.string().required(),
-                confirmPW: Yup.string().required(),
-                description: Yup.string().required(),
-                address: Yup.string().required(),
-                zip: Yup.string().min(6).max(6).required()
-            })}
-            onSubmit={(values) => {
-                alert("Your data is submitted check console");
-            }}>
-             {(props) => (
-                <Form>
+        <div>
+            <Form onSubmit={handleSubmit}>
                     <Row className="gx-3">
-                        <Col sm="4" className="form-group">
-                            <Field name="firstname" type="text" component={ReactstrapInput} className="form-control" placeholder="Enter Your Name" label="First Name" />
-                        </Col>
-                        <Col sm='4' className="form-group">
-                            <Field name="lastname" type="text" component={ReactstrapInput} className="form-control" placeholder="Enter Your Surname" label="Last Name" />
-                        </Col>
-                        <Col sm="4" className="form-group">
-                            <Field name="gender" component={ReactstrapSelect} className="form-control" label="Gender"
-                                inputprops={{ options: ["Male", "Female"], defaultOption: "Gender" }}
+                         {previewProfile && (
+                             <div className=' m-auto mb-4 position-relative' style={{width:"100px",height:"100px"}}>
+                            <Image 
+                            src={previewProfile}
+                            alt='preview user'
+                            fill
+                            className=' rounded-circle object-fit-cover'
                             />
-                        </Col>
-                        <Col sm="4" className="form-group">
-                            <Field name="phone" component={ReactstrapInput} type='number' className="form-control" placeholder='Enter Your Mobile Number' label="Phone number" />
-                        </Col>
-                        <Col sm="4" className="form-group">
-                            <Field name="dob" component={ReactstrapInput} type='date' className="form-control" label="Date of birth" />
-                        </Col>
-                        <Col sm="4" className="form-group">
-                            <Field name="email" type="email" component={ReactstrapInput} className="form-control" placeholder="Enter Your Email" label="Email Address" />
-                        </Col>
-                        <Col sm="6" className="form-group">
-                            <Field name="password" type="text" component={ReactstrapInput} className="form-control" placeholder="Enter Your Password" label="Password" />
-                        </Col>
-                        <Col sm="6" className="form-group">
-                            <Field name="confirmPW" type="text" component={ReactstrapInput} className="form-control" placeholder="Enter Your Password" label="Confirm Password" />
+                          </div>
+                         )}
+                        <Col sm="12" className="form-group">
+                            <Input name="name" type="text" value={userData.name} onChange={handleChange} className="form-control" placeholder="Enter Your Name" label="First Name" />
                         </Col>
                         <Col sm="12" className="form-group">
-                            <Field type="textarea" name="description" component={ReactstrapInput} className="form-control" rows={4} label="Description" />
+                            <Input name="email" type="email" value={userData.email} onChange={handleChange} className="form-control" placeholder="Enter Your Email" label="Email Address" />
                         </Col>
-                        <Col sm="6" className="form-group">
-                            <Field type="text" name="address" component={ReactstrapInput} className="form-control" label="Address" placeholder="Enter Your Address" />
+                        <Col sm="12" className="form-group">
+                            <Input name="password" type="text" value={userData.password} onChange={handleChange} className="form-control" placeholder="Enter Your Password" label="Password" />
                         </Col>
-                        <Col sm="6" className="form-group">
-                            <Field type="text" name="zip" component={ReactstrapInput} className="form-control" label="Zip code" placeholder="Enter Pin Code" />
+                        <Col sm="12" className="form-group">
+                            <Input type="file" name="profile" onChange={handleImageChange} className="form-control" rows={4} label="Description" />
                         </Col>
                     </Row>
                     <div className="dropzone-admin mb-0">
-                        <h6>Media</h6>
-                        <div className="dropzone form" id="multiFileUpload">
-                            <div className="dz-message needsclick">
-                                 <DropZones/>
-                            </div>
-                        </div>
                         <Col sm='12' className="form-btn">
-                            <Button type="submit" className="btn btn-gradient btn-pill">Submit</Button>
-                            <Button className="btn btn-dashed btn-pill">Cancel</Button>
+                            <Button disabled={registerloading} type="submit" className="btn btn-gradient btn-pill">{registerloading ? "Submitting..." : "Submit"}</Button>
+                            <Button onClick={resetAll} className="btn btn-dashed btn-pill">Reset All</Button>
                         </Col>
                     </div>
                 </Form>
-            )}
-            </Formik>
+        </div>
     )
 }
 

@@ -4,6 +4,9 @@ import { Row } from "reactstrap";
 import ChangeDetails from "./ChangeDetails";
 import EditProfile from "./EditProfile";
 import VerifiedPhoneNumber from "./VerifiedPhoneModal";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { VerifyEmail } from "@/redux-toolkit/action/adminAction";
 
 export const formatDatenew = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -15,14 +18,20 @@ export const formatDatenew = (dateString) => {
 
 const MyProfileTab = ({user,loading}) => {
   const [modal, setModal] = useState();
+  const {registerloading} = useSelector((state)=>state.Auth);
   const [profileDetail, setProfileDetail] = useState();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     if(user){
       setProfileDetail(user);
     }
   },[user]);
-   
+   const handleOTPVERIFY = ()=>{
+    let email = user?.email
+    dispatch(VerifyEmail(email,router))
+   }
   return (
     <div className="dashboard-content">
       <div className="my-profile" id="profile">
@@ -64,6 +73,11 @@ const MyProfileTab = ({user,loading}) => {
                   </div>
                   <div className="information">
                     <ul>
+                      {!user?.isEmailVerified && (
+                        <li>
+                          Please verify your email <button onClick={handleOTPVERIFY} disabled={registerloading} style={{color:"#0000FF",cursor:"pointer",background:"transparent",border:"none"}}>{registerloading ? "Submitting..." : "Verify email"}</button>
+                      </li>
+                      )}
                       <li>
                         <span>Gender :</span>
                         <p>{user?.gender ? user?.gender : "Still not selected"}</p>

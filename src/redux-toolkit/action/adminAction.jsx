@@ -2,6 +2,7 @@ import axios from "axios"
 import { setAboutAgent, setAboutUser, setAdminError, setAgentLoading, setAllAgents, setAllProperties, setAllusers, setApprovedLoading, setFeaturedLoading, setPaymentAction, setPaymentActionLoading, setPaymentLoading, setPayments, setPropertyLoading, setSingleProperty, setToggleApproved, setToggleFeatured, setUserLoading } from "../slice/adminSlice"
 import { toast } from "react-toastify"
 import { setCreatePropertyLoading, setPropertyError, setRemovePropertyImageLoading } from "../slice/propertySlice"
+import { setAuthError, setRegisterloading } from "../slice/authSlice"
 
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -211,5 +212,38 @@ export const AdminFetchAllAboutAgent = (id)=>async(dispatch)=>{
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    }
+}
+export const AdminAddUserAgent = (formData,resetAll)=>async(dispatch)=>{
+    dispatch(setRegisterloading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/admin/all-agents`,formData,{
+            contentType:"multipart/form-data",
+            withCredentials:true
+        })
+        toast.success(data.message);
+        resetAll()
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRegisterloading(false))
+    }
+}
+export const VerifyEmail = (email,router)=>async(dispatch)=>{
+    dispatch(setRegisterloading())
+    try {
+        const {data} = await axios.post(`${baseURL}/api/auth/verify-email`,{email},{
+            contentType:"application/json",
+            withCredentials:true
+        })
+        router.push("/otp-verify");
+        localStorage.setItem("real_estate_project_user_email", JSON.stringify(data.user.email));
+        toast.success(data.message);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAuthError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRegisterloading(false))
     }
 }

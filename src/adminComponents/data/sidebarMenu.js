@@ -50,7 +50,7 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
-                path: "/manage-users/add-user",
+                path: "/admin/dashboard/add-user",
                 title: 'Add User',
                 type: 'link'
             },
@@ -83,7 +83,7 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
-                path: "/agents/add-agent",
+                path: "/admin/dashboard/add-agent",
                 title: 'Add Agent',
                 type: 'link'
             },

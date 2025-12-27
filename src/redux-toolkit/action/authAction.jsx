@@ -39,7 +39,7 @@ export const VerifyOTP = (otp,router)=>async(dispatch)=>{
         const sampledata = {
             _id:data.user._id,
             name:data.user.name,
-            profile:data.role==="agent" ? data.user.agencyProfile : data.user.profile,
+            profile:data.user.role==="agent" ? data.user.agencyProfile : data.user.profile,
             role:data.user.role
         }
         dispatch(setSampleUser(sampledata));

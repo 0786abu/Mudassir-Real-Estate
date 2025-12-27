@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Navbar from "@/layout/headers/Navbar";
 import useHasMounted from "./Mounted";
 
-const hideNavbarRoutes = ["/admin/dashboard","/admin/dashboard/user-profile","/admin/dashboard/payments","/admin/dashboard/create-property","/admin-login","/admin/dashboard/profile","/admin/dashboard/allProperties","/admin/dashboard/singleProperty","/admin/dashboard/allUsers","/admin/dashboard/allAgents","/admin/dashboard/favouriteProperties","/admin/dashboard/myProperties"];
+const hideNavbarRoutes = ["/admin/dashboard","/admin/dashboard/user-profile","/admin/dashboard/payments","/admin/dashboard/create-property","/admin-login","/admin/dashboard/profile","/admin/dashboard/allProperties","/admin/dashboard/singleProperty","/admin/dashboard/allUsers","/admin/dashboard/allAgents","/admin/dashboard/favouriteProperties","/admin/dashboard/myProperties","/admin/dashboard/add-user","/admin/dashboard/add-agent"];
 
 const dynamicRoutePatterns = [
   /^\/admin-dashboard-doctor\/.+$/,
@@ -13,7 +13,7 @@ const dynamicRoutePatterns = [
     /^\/admin\/dashboard\/allProperties\/[^\/]+$/,
   /^\/admin\/dashboard\/allUsers\/[^\/]+$/,
  /^\/admin\/dashboard\/allAgents\/[^\/]+$/,
- /^\/admin\/dashboard\/allblogs\/[^\/]+\/edit$/,
+ /^\/admin\/dashboard\/allProperties\/[^\/]+\/edit$/,
 ];
 
 const shouldShowNavbar = (pathname) => {
