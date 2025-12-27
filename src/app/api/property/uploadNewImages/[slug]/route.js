@@ -20,7 +20,7 @@ export async function POST(req, { params }) {
 
     const { slug } = await params;
 
-    const property = await Property.findOne({ slug });
+    const property = await Property.findOne({ slug }).populate("createdBy","name email profile agencyProfile agencyName");
     if (!property) {
       return NextResponse.json(
         { success: false, message: "Property not found" },

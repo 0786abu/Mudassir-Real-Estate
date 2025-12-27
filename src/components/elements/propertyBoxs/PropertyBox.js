@@ -18,6 +18,7 @@ import { useState } from "react";
 import { SendPropertyDataToMyProperty } from "@/redux-toolkit/action/propertyAction";
 import AddToWhishList from "../AddToWhishList";
 import { setSelectedSlug } from "@/redux-toolkit/slice/propertySlice";
+import { useRouter } from "next/navigation";
 
 const ImageSlider = dynamic(() => import("../ImageSlider"),{ssr:false});
 
@@ -32,6 +33,7 @@ export const formatDatenew = (dateString) => {
 
 const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const {addfavloading,favProperties} = useSelector((state)=>state.Favourites);
   const [itemID, setItemID] = useState("");
   const [isHover, setIsHover] = useState(false);
@@ -48,11 +50,17 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
       dispatch(setSelectedSlug(data.slug))
     }
   };
+  const handleAdminViewDetail = ()=>{
+    router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/dashboard/allProperties/${data.slug}`)
+  }
    const handleEditProperty = () => {
     if (fromPanel) {
       setActiveTab("editProperty");
       dispatch(setSelectedSlug(data.slug))
     }
+  };
+   const handleAdminEditProperty = () => {
+      router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/dashboard/allProperties/${data.slug}/edit`)
   };
 
   
@@ -158,8 +166,8 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
           <span className={`label label-success`}>{"Featured Property"}</span>
         </div>
         )}
-        {(fromPanel==="user-panel") && (
-          <div onClick={handleEditProperty} className="labels-right" style={{top:"20px"}}>
+        {(fromPanel==="user-panel" || from==="admin") && (
+          <div onClick={from==="admin" ? handleAdminEditProperty : handleEditProperty} className="labels-right" style={{top:"20px"}}>
           <span className={`label label-success`}><Edit/></span>
         </div>
         )}
@@ -211,7 +219,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
           <span>{formatDatenew(data.createdAt)}</span>
            {fromPanel ? (
         <button
-          onClick={handleViewDetails}
+          onClick={from==="admin" ? handleAdminViewDetail : handleViewDetails}
           className="btn rounded-pill border border-1"
            onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
               background:isHover ? "#14A800" : "",

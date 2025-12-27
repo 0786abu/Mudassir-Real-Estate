@@ -7,7 +7,7 @@ import { Button, Col, Row } from "reactstrap";
 import { citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
 import { setPagesContent } from "@/redux-toolkit/slice/propertySlice";
 
-const MyListingTab = ({setActiveTab}) => {
+const MyListingTab = ({setActiveTab,from}) => {
   const {myProperties,mypropertyloading,totalPages,currentPage} = useSelector((state)=>state.Property);
   
     // Generate pages array
@@ -137,7 +137,7 @@ const [isHover, setIsHover] = useState(false);
           <div className='property-section'>
           <div className='property-grid-2 ratio_63'>
           {/* askjdhkashdkjasd */}
-            <GridView properties={myProperties} propertyloading={mypropertyloading} setActiveTab={setActiveTab} fromPanel="user-panel" />
+            <GridView properties={myProperties} from={from} propertyloading={mypropertyloading} setActiveTab={setActiveTab} fromPanel="user-panel" />
           </div>
         </div>
         </div>

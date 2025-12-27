@@ -1,6 +1,7 @@
 import axios from "axios"
 import { setAboutAgent, setAboutUser, setAdminError, setAgentLoading, setAllAgents, setAllProperties, setAllusers, setApprovedLoading, setFeaturedLoading, setPaymentAction, setPaymentActionLoading, setPaymentLoading, setPayments, setPropertyLoading, setSingleProperty, setToggleApproved, setToggleFeatured, setUserLoading } from "../slice/adminSlice"
 import { toast } from "react-toastify"
+import { setCreatePropertyLoading, setPropertyError, setRemovePropertyImageLoading } from "../slice/propertySlice"
 
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -66,6 +67,47 @@ export const FeaturedToggle = (slug)=>async(dispatch)=>{
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
         dispatch(setFeaturedLoading(false))
+    }
+}
+export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{
+    dispatch(setCreatePropertyLoading())
+    try {
+        const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/uploadNewImages/${slug}`,images,{
+            headers:{
+                "Content-Type":"multipart/form-data"
+            },
+            withCredentials:true
+        });
+            dispatch(setSingleProperty(data.property));
+        toast.success(data.message);
+        setTimeout(() => {
+            setModal()
+        }, 100);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setCreatePropertyLoading(false));
+    }
+}
+export const RemovePropertyImage = ({public_id,slug,setPublicID,setCurrentImageIndex})=>async(dispatch)=>{
+    dispatch(setRemovePropertyImageLoading())
+    try {
+        const {data} = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property/${slug}?public_id=${public_id}`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setSingleProperty(data.data));
+        setCurrentImageIndex(0)
+        toast.success(data.message);
+        setPublicID("");
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setRemovePropertyImageLoading(false));
     }
 }
 export const ApprovedToggle = (slug,status)=>async(dispatch)=>{

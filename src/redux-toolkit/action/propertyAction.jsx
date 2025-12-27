@@ -36,7 +36,9 @@ export const UpdateProperty = (property,setActivetab)=>async(dispatch)=>{
         toast.success(data.message)
         dispatch(setUpdateProeprty(property));
         setTimeout(() => {
-            setActivetab("Listing")
+            if(setActivetab){
+                setActivetab("Listing")
+            }
             window.scrollTo({top:0,behavior:"smooth"})
         }, 100);
     } catch (error) {
@@ -66,7 +68,7 @@ export const ViewsChartData = ()=>async(dispatch)=>{
         dispatch(setViewsChartDataLoading(false));
     }
 }
-export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{
+export const UploadMoreImages = (images,slug,setModal,from)=>async(dispatch)=>{
     dispatch(setCreatePropertyLoading())
     try {
         const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/uploadNewImages/${slug}`,images,{

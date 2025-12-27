@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { Button, Col, Label, Row } from "reactstrap";
 import NoSsr from "@/utils/NoSsr";
@@ -7,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SendPropertyDataToMyProperty, UpdateProperty } from "@/redux-toolkit/action/propertyAction";
 import ProfileLoader from "@/components/common/Loader";
 
-const EditProperty = ({setActivetab}) => {
+const EditProperty = ({setActivetab,adminSlug,from}) => {
   const {createpropertyloading,myProperty,singlepropertyloading,selectedSlug} = useSelector((state)=>state.Property)
  const [keywords, setKeywords] = useState([])
   const [keywordInput, setKeywordInput] = useState("");
@@ -43,7 +44,11 @@ const EditProperty = ({setActivetab}) => {
     e.preventDefault();
     propertyData.amenities = amenities;
     propertyData.keywords = keywords
-    dispatch(UpdateProperty(propertyData,setActivetab))
+    if(from==="admin"){
+      dispatch(UpdateProperty(propertyData))
+    }else{
+      dispatch(UpdateProperty(propertyData,setActivetab))
+    }
   }
 
   useEffect(()=>{
@@ -79,10 +84,14 @@ const EditProperty = ({setActivetab}) => {
   },[myProperty])
 
 useEffect(()=>{
-  if(selectedSlug !== null){
+  if(adminSlug){
+    dispatch(SendPropertyDataToMyProperty(adminSlug))
+  }else{
+    if(selectedSlug !== null){
     dispatch(SendPropertyDataToMyProperty(selectedSlug))
   }
-},[selectedSlug,dispatch])
+  }
+},[adminSlug,selectedSlug,dispatch])
 
 
   function handleAddKeyword() {

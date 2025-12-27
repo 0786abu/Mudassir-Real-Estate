@@ -60,7 +60,7 @@ const GridLayout = ({properties,favourites,from,fromPanel,setActiveTab}) => {
           properties?.map((data, i) => (
             <Fragment key={i}>
               <Col xs={12} key={i}>
-                <PropertyBox data={data} fromPanel={fromPanel} setActiveTab={setActiveTab} />
+                <PropertyBox data={data} from={from} fromPanel={fromPanel} setActiveTab={setActiveTab} />
               </Col>
             </Fragment>
           ))

@@ -125,15 +125,18 @@ export async function DELETE(req, { params }) {
 
     // Auth check
     const user = await isAuthenticated();
+    console.log(user)
     if (!user) {
       return NextResponse.json(
         { success: false, message: "Unauthorized" },
         { status: 401 }
       );
     }
+    console.log("hi delete")
+
 
     // Find property by slug
-    const property = await Property.findOne({ slug });
+    const property = await Property.findOne({ slug }).populate("createdBy","name email profile agencyProfile agencyName");
     if (!property) {
       return NextResponse.json(
         { success: false, message: "Property not found" },
@@ -142,7 +145,7 @@ export async function DELETE(req, { params }) {
     }
 
     // Owner check
-    if (property.createdBy.toString() !== user._id.toString()) {
+    if (property.createdBy._id.toString() !== user._id.toString()) {
       return NextResponse.json(
         { success: false, message: "Not authorized" },
         { status: 403 }

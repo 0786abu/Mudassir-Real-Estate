@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Container,
   Row,
@@ -11,30 +11,76 @@ import {
   ListGroupItem,
   Button,
   Input,
+  Modal,
+  ModalHeader,
+  ModalBody,
 } from "reactstrap";
-import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { AdminFetchSingleProeprty, ApprovedToggle, FeaturedToggle } from "@/redux-toolkit/action/adminAction";
+import { AdminFetchSingleProeprty, ApprovedToggle, FeaturedToggle, UploadMoreImages, RemovePropertyImage } from "@/redux-toolkit/action/adminAction";
 import ProfileLoader from "../common/Loader";
+import { Plus, Trash } from "react-feather";
 
 const AdminPropertyDetail = ({slug}) => {
     const {propertyloading,singleProperty,featuredloading,approvedloading} = useSelector((state)=>state.Admin);
+    const {sampleuser} = useSelector((state)=>state.Auth);
+    const {removepropertyimageloading,createpropertyloading} = useSelector((state)=>state.Property);
     const dispatch = useDispatch();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [publicID, setPublicID] = useState("")
+    const [modal, setModal] = useState(false);
+    const [images, setImages] = useState([])
     const toggleFeatured = ()=>{
         dispatch(FeaturedToggle(singleProperty?.slug))
     }
-
+     const fileInputRef = useRef(null);
+    const handleRemoveImage = (public_id)=>{
+        setPublicID(public_id)
+        const slug = singleProperty?.slug
+        dispatch(RemovePropertyImage({public_id,slug,setPublicID,setCurrentImageIndex}))
+      }
     const handleChange = (e)=>{
         const status = e.target.value;
         dispatch(ApprovedToggle(slug,status))
     }
+    const handleClick = () => {
+    fileInputRef.current.click();
+  };
+    const handleFileChange = (e) => {
+    const files = e.target.files;
+    setImages(files);
+    setModal(true)
+  };
+  const handleUpload = ()=>{
+      const formData = new FormData();
+      if (images && images.length > 0) {
+    Array.from(images).forEach((file) => {
+      formData.append("images", file);
+    });
+  }
+    dispatch(UploadMoreImages(formData,singleProperty?.slug,toggle))
+    }
+  const toggle = () => {
+    setModal(!modal);
+    setImages([])
+  }
     
     useEffect(()=>{
         dispatch(AdminFetchSingleProeprty(slug))
     },[dispatch,slug])
   return (
     <>
+     <Modal isOpen={modal} toggle={toggle} centered size="lg">
+            <ModalHeader toggle={toggle}>
+              {/* Reactstrap Modal */}
+            </ModalHeader>
+    
+            <ModalBody style={{textAlign:"center",marginBottom:"20px"}}>
+              <Button onClick={handleUpload} color="success">
+                {createpropertyloading ? <div className=' d-flex align-items-center gap-1'><span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> <span>Upload</span></div> : "Upload"}
+              </Button>
+            </ModalBody>
+    
+          </Modal>
     {propertyloading ? (<ProfileLoader/>) : (
         <Container fluid className="py-4" style={{maxWidth:"1080px",margin:"auto"}}>
         <div className=" d-flex p-2 shadow-sm rounded-2 align-items-center gap-2">
@@ -201,21 +247,38 @@ const AdminPropertyDetail = ({slug}) => {
                               style={{ width: '100%', aspectRatio:"16/9", objectFit: 'cover' }}
                             />
                             <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px' }}>
-                              {singleProperty?.images.map((_, idx) => (
-                                <button
-                                  key={idx}
-                                  onClick={() => setCurrentImageIndex(idx)}
-                                  style={{
-                                    width: '12px',
-                                    height: '12px',
-                                    borderRadius: '50%',
-                                    border: 'none',
-                                    background: currentImageIndex === idx ? '#fff' : 'rgba(255,255,255,0.5)',
-                                    cursor: 'pointer'
-                                  }}
-                                />
-                              ))}
-                            </div>
+                                                {singleProperty?.images.map((_, idx) => (
+                                                  <button
+                                                    key={idx}
+                                                    onClick={() => setCurrentImageIndex(idx)}
+                                                    style={{
+                                                      width: '12px',
+                                                      height: '12px',
+                                                      borderRadius: '50%',
+                                                      border: 'none',
+                                                      background: currentImageIndex === idx ? '#fff' : 'rgba(255,255,255,0.5)',
+                                                      cursor: 'pointer'
+                                                    }}
+                                                  />
+                                                ))}
+                                              </div>
+                                             {sampleuser?._id === singleProperty?.createdBy?._id && (
+                                               <div style={{ position: 'absolute', top: '8px', right: '8px', display: 'flex', gap: '10px' }}>
+                                                  <button
+                                                    style={{
+                                                      borderRadius: '50%',
+                                                      border: '1px solid gray',
+                                                      background:"red",
+                                                      color:"white",
+                                                      padding:"4px",
+                                                      cursor: 'pointer'
+                                                    }}
+                                                    onClick={()=>handleRemoveImage(singleProperty?.images[currentImageIndex]?.public_id)}
+                                                  >
+                                                    {removepropertyimageloading && singleProperty?.images[currentImageIndex]?.public_id === publicID ? <span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> : <Trash style={{width:"20px",height:"20px",background:"red",padding:"3px",borderRadius:"50%",color:"white"}}/>}
+                                                  </button>
+                                              </div>
+                                             )}
                           </div>
                           <div style={{ padding: '1rem', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px' }}>
                             {singleProperty?.images.map((img, idx) => (
@@ -236,6 +299,36 @@ const AdminPropertyDetail = ({slug}) => {
                               />
                               </div>
                             ))}
+                            {sampleuser?._id === singleProperty?.createdBy?._id && (
+                              <div>
+                                               <input
+                                    type="file"
+                                    accept="image/*"
+                                    ref={fileInputRef}
+                                    multiple
+                                    onChange={handleFileChange}
+                                    style={{ display: "none" }}
+                                  />
+                                              <div 
+                                              onClick={handleClick}
+                                              style={{
+                                                    width: '100%',
+                                                    height:"100%",
+                                                    objectFit: 'cover',
+                                                    borderRadius: '6px',
+                                                    cursor: 'pointer',
+                                                    border: '3px solid #0FAA17',
+                                                    display:"flex",
+                                                    justifyContent:"center",
+                                                    alignItems:"center"
+                                                  }}
+                                                  onMouseEnter={(e) => (e.currentTarget.style.background = "#f3fff6")}
+                                    onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                                              >
+                                               <Plus/> 
+                                              </div>
+                                             </div>
+                            )}
                           </div>
                         </div>
         </Col>

@@ -8,7 +8,7 @@ export const SidebarMenuItem = [
         path: "/admin/dashboard"
     },
     {
-        title: 'My Properies',
+        title: 'Properties',
         icon: <Grid />,
         type: 'sub',
         children: [
@@ -23,8 +23,8 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
-                path: "/admin/dashboard/singleProperty",
-                title: 'Property detail',
+                path: "/admin/dashboard/myProperties",
+                title: 'My Property',
                 type: 'link'
             },
             {
