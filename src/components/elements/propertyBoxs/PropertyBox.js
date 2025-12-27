@@ -31,7 +31,7 @@ export const formatDatenew = (dateString) => {
   }
 
 
-const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
+const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const {addfavloading,favProperties} = useSelector((state)=>state.Favourites);
@@ -166,7 +166,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab }) => {
           <span className={`label label-success`}>{"Featured Property"}</span>
         </div>
         )}
-        {(fromPanel==="user-panel" || from==="admin") && (
+        {(fromPanel==="user-panel" || (from==="admin" && fromTo==="myListing")) && (
           <div onClick={from==="admin" ? handleAdminEditProperty : handleEditProperty} className="labels-right" style={{top:"20px"}}>
           <span className={`label label-success`}><Edit/></span>
         </div>

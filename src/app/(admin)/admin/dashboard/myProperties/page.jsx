@@ -4,7 +4,7 @@ import MyListingTab from '@/components/pages/userPanel/myListingTab'
 const page = () => {
   return (
     <div>
-        <MyListingTab from="admin"/>
+        <MyListingTab from="admin" fromTo="myListing"/>
     </div>
   )
 }
