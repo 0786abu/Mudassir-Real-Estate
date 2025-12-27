@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AdminFetchAllAboutAgent, AdminFetchAllAboutUser } from '@/redux-toolkit/action/adminAction';
 import ProfileLoader from '@/components/common/Loader';
 import RecentPayment from '@/adminComponents/components/manageuser/profile/RecentPayments';
+import SalesOverview from '@/components/pages/userPanel/userDashboardTab/SalesOverview';
+import SalesByAgent from '@/components/pages/userPanel/userDashboardTab/SalesByAgent';
+import AvailableProperty from '@/components/pages/userPanel/userDashboardTab/AvailableProperty';
 
 // Dynamically import components with SSR disabled
 // const Following = dynamic(() => import('@/adminComponents/components/manageuser/profile/Following'), { ssr: false });
@@ -32,6 +35,9 @@ const Profile = ({_id}) => {
                             <ProfileDetail aboutUser={aboutAgent?.agent} />
                             <Col sm="12">
                                 <RecentProperty properties={aboutAgent?.recentProperties} />
+                                <SalesOverview data={aboutAgent?.viewsData} from="admin"/>
+                                    <SalesByAgent data={aboutAgent?.typedData} from="admin"/>
+                                <AvailableProperty data={aboutAgent?.availablePropertiesPercent} from="admin"/>
                                 {/* <RecentPayment /> */}
                             </Col>
                         </Row>

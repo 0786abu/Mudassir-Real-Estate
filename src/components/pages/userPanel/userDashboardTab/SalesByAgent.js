@@ -3,7 +3,7 @@ library. */
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-const SalesByAgent = ({loading,data}) => {
+const SalesByAgent = ({loading,data,from}) => {
     const options = {
       chart: {
         type: "bar",
@@ -77,7 +77,7 @@ const SalesByAgent = ({loading,data}) => {
       },
     ]
   return (
-    <div className='col-xl-5 col-md-6'>
+    <div className={` ${from==="admin" ? "shadow-sm p-2 rounded-2 col-md-12" : "col-xl-5 col-md-6"}`}>
       <div className='common-card sales-agent'>
         <div className='common-header'>
           <h5>Types of properties you create</h5>

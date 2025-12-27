@@ -208,7 +208,7 @@ export const AdminFetchAllAboutAgent = (id)=>async(dispatch)=>{
             contentType:"application/json",
             withCredentials:true
         })
-        dispatch(setAboutAgent({agent:data.agent,recentProperties:data.recentProperties,recentPayments:data.recentPayments}))
+        dispatch(setAboutAgent({agent:data.agent,recentProperties:data.recentProperties,recentPayments:data.recentPayments,viewsData:data.data,typedData:data.typeData,availablePropertiesPercent:data.availablePropertiesPercent}))
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));

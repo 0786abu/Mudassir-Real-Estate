@@ -3,7 +3,7 @@ import React from "react";
 // import { overviewChartData } from "@/data/chartData";
 import ReactApexChart from "react-apexcharts";
 
-const SalesOverview = ({loading,data}) => {
+const SalesOverview = ({loading,data,from}) => {
    const options = {
       chart: {
         type: "area",
@@ -110,7 +110,7 @@ const SalesOverview = ({loading,data}) => {
         },
       },
       xaxis: {
-        categories: data?.data?.map((item)=>item.month),
+        categories: from==="admin" ? data?.map((item)=>item.month) : data?.data?.map((item)=>item.month),
         range: undefined,
         
         axisBorder: {
@@ -138,14 +138,14 @@ const SalesOverview = ({loading,data}) => {
     const series = [
       {
         name: "Views of this month",
-        data: data.data?.map((item)=>item.views) || [],
+        data: from==="admin" ? data?.map((item)=>item.views) || [] : data?.data?.map((item)=>item.views) || [],
       },
     ]
   return (
-    <div className='col-xl-7 col-md-12'>
+    <div className={` ${from==="admin" ? " shadow-sm p-2 rounded-2 mb-4" : "col-xl-7 col-md-12"}`}>
       <div className='common-card overview'>
         <div className='common-header'>
-          <h5>View overview</h5>
+          <h5>Views overview</h5>
         </div>
         {/* <ul className='overview-content'>
           <li>
