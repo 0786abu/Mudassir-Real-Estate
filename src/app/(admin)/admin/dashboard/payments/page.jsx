@@ -180,9 +180,9 @@ const Payments = () => {
                             <tr key={i}>
                               <td>{i+1}</td>
                               <td>
-                                  <span style={{cursor:"pointer"}} onClick={()=>handlePush(item.property.slug)}>{item.property.type}</span>
+                                  <span style={{cursor:"pointer"}} onClick={()=>handlePush(item.property?.slug)}>{item.property?.type}</span>
                               </td>
-                              <td>{item.property.category}</td>
+                              <td>{item.property?.category}</td>
                               <td>
                                 <Badge color={`${item.status === "Pending" ? "warning" : item.status==="Rejected" ? "danger" : "success"}`}>{item.status}</Badge>
                               </td>
