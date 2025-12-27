@@ -25,6 +25,24 @@ export async function POST(req) {
         success: false
       }, { status: 401 });
     }
+    if(isUser.role !== "admin" && !isUser.isEmailVerified){
+      return NextResponse.json({
+        message: "your account email not verified, please first verify your email to create property",
+        success: false
+      }, { status: 401 });
+    }
+    if(isUser.role !== "admin" && (!isUser.whatsappAPI || !isUser.city || !isUser.address || !isUser.bio)){
+      return NextResponse.json({
+        message: "please complete your profile to create property",
+        success: false
+      }, { status: 401 });
+    }
+    if((isUser.role==="agent" && !isUser.agencyProfile) || (isUser.role==="individual" && !isUser.profile)){
+       return NextResponse.json({
+        message: "Please add your profile picture in your profile",
+        success: false
+      }, { status: 401 });
+    }
 
     // ✅ Get user (either User or Agent)
     
@@ -185,7 +203,9 @@ if (!user) {
       floorPlanImage: uploadedFloorPlan,
       createdBy: user._id,
       createdByModel,
-      isFree
+      isFree,
+      isApproved:isUser.role==="admin" ? "Approved" : "Pending",
+      isPaid:isUser.role==="admin" ? true : false,
     };
 
     // ✅ Save property to DB
