@@ -28,7 +28,7 @@ export async function POST(req, { params }) {
       );
     }
 
-    if (user._id.toString() !== property.createdBy.toString()) {
+    if (user._id.toString() !== property.createdBy._id.toString()) {
       return NextResponse.json(
         { success: false, message: "You are not authorized" },
         { status: 403 }
