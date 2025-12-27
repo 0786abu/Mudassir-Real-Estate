@@ -33,7 +33,7 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
-                path: "/myproperties/favourites",
+                path: "/admin/dashboard/favouriteProperties",
                 title: 'Favourites',
                 type: 'link'
             }

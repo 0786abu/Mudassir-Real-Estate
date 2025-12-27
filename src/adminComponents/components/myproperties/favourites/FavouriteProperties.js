@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
 import { Col, Row } from "reactstrap";
-import PropertyBox from "@/components/Common/Propertybox/PropertyBox";
-import { getData } from "@/components/utils/getData";
+import PropertyBox from "../../Common/Propertybox/PropertyBox";
+import ProfileLoader from "@/components/common/Loader";
 
-const FavouriteProperties = () => {
-  const [propertyList, setPropertyList] = useState();
-
-  useEffect(() => {
-    getData(`/api/property`)
-      .then((res) => {
-        setPropertyList(res.data?.LatestPropertyListingInEnterprise);
-      })
-      .catch((error) => console.error("Error", error));
-  }, []);
+const FavouriteProperties = ({properties,favloading}) => {
+  
 
   return (
     <Col xl='12'>
-      <Row className='property-2 column-sm property-label property-grid'>
-        {propertyList &&
-          propertyList.slice(0, 6).map((item, index) => {
+      {favloading ? <ProfileLoader/> : properties?.length===0 ? (
+        <div className=" d-flex justify-content-center align-items-center" style={{height:"60vh"}}>
+          <h2>No Favourite Properties yet</h2>
+        </div>
+      ) : (
+        <Row className='property-2 column-sm property-label property-grid'>
+        {properties &&
+          properties.slice(0, 6).map((item, index) => {
             return (
               <Col key={index} xl='4' md='6 xl-6'>
                 <PropertyBox data={item} />
@@ -26,6 +22,7 @@ const FavouriteProperties = () => {
             );
           })}
       </Row>
+      )}
     </Col>
   );
 };

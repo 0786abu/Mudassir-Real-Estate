@@ -27,7 +27,7 @@ const Img = (props) => {
       );
     }
   }, [props.src]);
-  return <img ref={bgImg} {...props} alt="" />;
+  return <img ref={bgImg} {...props} style={{aspectRatio:"16/9"}} alt="" />;
 };
 export default Img;
 
