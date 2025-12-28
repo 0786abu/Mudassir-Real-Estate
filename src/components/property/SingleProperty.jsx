@@ -396,7 +396,8 @@ const AdminPropertyDetail = ({slug}) => {
       {/* EXTRA DETAILS */}
       <Row className="g-2">
 
-        <Col lg="6" className=" position-relative">
+        {singleProperty?.createdBy?._id === sampleuser?._id && (
+          <Col lg="6" className=" position-relative">
         {singleProperty?.floorPlanImage && (
           <div className=" position-absolute" style={{top:"10px",right:"10px"}}>
           {floorPlanImage!==null ? <Button color="light" onClick={handleUploadFloorPlanImage}>{createpropertyloading ? "Submitting..." : "Submit"}</Button> : <Button onClick={handlefloorClick2} disabled={createpropertyloading} color="light">Change Image</Button>}
@@ -427,6 +428,7 @@ const AdminPropertyDetail = ({slug}) => {
             <img src={singleProperty?.floorPlanImage?.url} alt="floor plan image" style={{width:"100%",height:"300px" ,borderRadius:"10px"}}/>
           )}
         </Col>
+        )}
         <Col lg="6">
           <Card className="shadow-sm border-0">
             <CardBody>
