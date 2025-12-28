@@ -13,23 +13,18 @@ export const SidebarMenuItem = [
         type: 'sub',
         children: [
             {
-                path: "/admin/dashboard/create-property",
-                title: 'Add Propery',
+                path: "/admin/dashboard/allProperties",
+                title: 'All Property',
                 type: 'link'
             },
             {
-                path: "/myproperties/edit-property",
-                title: 'Edit Propery',
+                path: "/admin/dashboard/create-property",
+                title: 'Add Property',
                 type: 'link'
             },
             {
                 path: "/admin/dashboard/myProperties",
                 title: 'My Property',
-                type: 'link'
-            },
-            {
-                path: "/admin/dashboard/allProperties",
-                title: 'All Property',
                 type: 'link'
             },
             {
