@@ -180,40 +180,40 @@ export const AdminFetchPayments = ({selectedStatus,selectedPaymentMethod})=>asyn
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }
-export const AdminFetchUsers = ()=>async(dispatch)=>{
+export const AdminFetchUsers = (currentPage)=>async(dispatch)=>{
     dispatch(setUserLoading())
     try {
-        const {data} = await axios.get(`${baseURL}/api/admin/all-users`,{
+        const {data} = await axios.get(`${baseURL}/api/admin/all-users?page=${currentPage}`,{
             contentType:"application/json",
             withCredentials:true
         })
-        dispatch(setAllusers(data.users))
+        dispatch(setAllusers({users:data.users,totalUsers:data.totalUsers,totalPages:data.totalPages}))
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }
-export const AdminFetchAgents = ()=>async(dispatch)=>{
+export const AdminFetchAgents = (currentPage)=>async(dispatch)=>{
     dispatch(setAgentLoading())
     try {
-        const {data} = await axios.get(`${baseURL}/api/admin/all-agents`,{
+        const {data} = await axios.get(`${baseURL}/api/admin/all-agents?page=${currentPage}`,{
             contentType:"application/json",
             withCredentials:true
         })
-        dispatch(setAllAgents(data.agents))
+        dispatch(setAllAgents({agents:data.agents,totalAgents:data.totalAgents,totalPages:data.totalPages}))
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }
-export const AdminFetchAdmins = ()=>async(dispatch)=>{
+export const AdminFetchAdmins = (currentPage)=>async(dispatch)=>{
     dispatch(setUserLoading())
     try {
-        const {data} = await axios.get(`${baseURL}/api/admin/all-admins`,{
+        const {data} = await axios.get(`${baseURL}/api/admin/all-admins?page=${currentPage}`,{
             contentType:"application/json",
             withCredentials:true
         })
-        dispatch(setAllAdmins(data.admins))
+        dispatch(setAllAdmins({admins:data.admins,totalAdmins:data.totalAdmins,totalPages:data.totalPages}))
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));

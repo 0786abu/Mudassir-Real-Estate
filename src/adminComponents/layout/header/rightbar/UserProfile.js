@@ -7,7 +7,7 @@ const UserProfile = ({user,loading}) => {
         <li className="profile-avatar onhover-dropdown">
             <div>
                {loading ? (
-                <div class="spinner-border" role="status" style={{width:"20px",height:"20px"}}>
+                <div className="spinner-border" role="status" style={{width:"20px",height:"20px"}}>
 </div>
                ) :  <img src={user?.profile?.url} className="img-fluid rounded-circle" style={{width:"50px",height:"50px"}} alt={user?.name} />}
             </div>

@@ -19,6 +19,8 @@ const initialState = {
     approvedloading:false,
     paymentactionloading:false,
     totalPages:null,
+    totalAuthPages:null,
+    totalAuths:null,
     propertyloading:false,
     error:null
 }
@@ -62,17 +64,23 @@ const adminSlice = createSlice({
         setAllusers:(state,action)=>{
             state.userloading = false
             state.error = null
-            state.allusers = action.payload
+            state.allusers = action.payload.users
+            state.totalAuthPages = action.payload.totalPages
+            state.totalAuths = action.payload.totalUsers
         },
         setAllAdmins:(state,action)=>{
             state.userloading = false
             state.error = null
-            state.alladmins = action.payload
+            state.alladmins = action.payload.admins
+             state.totalAuthPages = action.payload.totalPages
+            state.totalAuths = action.payload.totalAdmins
         },
         setAllAgents:(state,action)=>{
             state.agentloading = false
             state.error = null
-            state.allagents = action.payload
+            state.allagents = action.payload.agents
+            state.totalAuths = action.payload.totalAgents
+            state.totalAuthPages = action.payload.totalPages
         },
         setPaymentActionLoading:(state,action)=>{
             if(action.payload===undefined){

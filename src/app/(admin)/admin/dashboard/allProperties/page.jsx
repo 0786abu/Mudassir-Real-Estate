@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Col, Container, Input, Label, Row, Button } from "reactstrap";
 
 const AllProperties = () => {
-    const {allproperties,propertyloading,totalPages} = useSelector((state)=>state.Admin);
+    const {allproperties,propertyloading,totalPages,totalProperties} = useSelector((state)=>state.Admin);
     const dispatch = useDispatch();
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [hovered, setHovered] = useState(false);
@@ -372,7 +372,8 @@ const handleResetFilters = ()=>{
                   {propertyloading ? <ProfileLoader/> : (
                     <Listview data={allproperties} from="admin"/>
                   )}
-                   <nav className="theme-pagination">
+                  {totalProperties>12 && (
+                     <nav className="theme-pagination">
       <ul className="pagination">
         <li className={`page-item ${filters.page === 1 ? "disabled" : ""}`}>
           <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(1)}>«</div>
@@ -395,6 +396,7 @@ const handleResetFilters = ()=>{
         </li>
       </ul>
     </nav>
+                  )}
                 </Row>
               </div>
             </div>

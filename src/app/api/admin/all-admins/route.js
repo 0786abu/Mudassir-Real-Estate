@@ -13,10 +13,18 @@ export async function GET(req) {
                 message:"you are not authorized to access this route"
             },{sttaus:401})
         }
-        const admins = await Admin.find();
+        const {searchParams} = new URL(req.url);
+                const page = Number(searchParams.get("page")) || 1;
+                const limit = 12;
+                const skip = (page - 1) * limit;
+                const totalAdmins = await Admin.countDocuments();
+                 const totalPages = Math.ceil(totalAdmins / limit);
+        const admins = await Admin.find().skip(skip).limit(limit);
         return NextResponse.json({
             success:true,
-            admins
+            admins,
+            totalAdmins,
+            totalPages
         },{status:200})
     } catch (error) {
         return NextResponse.json({

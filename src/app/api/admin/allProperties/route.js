@@ -22,11 +22,11 @@ export async function GET(req) {
         }
         const { searchParams } = new URL(req.url);
         const page = Number(searchParams.get("page")) || 1;
+        const limit = 12;
+        const skip = (page - 1) * limit;
         const beds = Number(searchParams.get("beds"));
         const baths = Number(searchParams.get("baths"));
         const rooms = Number(searchParams.get("rooms"));
-        const limit = 12;
-        const skip = (page - 1) * limit;
         const areaSize = searchParams.get('areaSize');
         const isApproved = searchParams.get('isApproved');
         const category = searchParams.get('category');
