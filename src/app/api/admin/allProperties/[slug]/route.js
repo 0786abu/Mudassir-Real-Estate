@@ -1,7 +1,7 @@
 import { DataBase } from "@/backend/config/database";
 import Property from "@/backend/model/propertyModel";
 import { isAuthorized } from "@/backend/utils/middlewere";
-import { FreePropertyApprovedMail, RejectPropertyApprovedMail } from "@/backend/utils/NodeMailer";
+import { DeletePropertyMail, FreePropertyApprovedMail, RejectPropertyApprovedMail } from "@/backend/utils/NodeMailer";
 import { NextResponse } from "next/server";
 
 export async function GET(req,{params}){
@@ -120,5 +120,46 @@ export async function POST(req,{params}){
             message: error.message,
             success: false
         }, { status: 500 });
+    }
+}
+
+// for: admin delete proeprty
+export async function DELETE(req,{params}) {
+    try {
+        await DataBase();
+        const {slug} = await params;
+        const isAdmin = await isAuthorized();
+        if(!isAdmin){
+            return NextResponse.json({
+                success:false,
+                message:"you are not authorized to access this route"
+            },{status:401})
+        }
+        const {searchParams} = new URL(req.url);
+        const reason = searchParams.get("reason")
+        if(!reason){
+            return NextResponse.json({
+                success:false,
+                message:"please add reason to delete property"
+            },{status:401})
+        }
+        const property = await Property.findOne({slug}).populate("createdBy","name email");
+        if(!property){
+            return NextResponse.json({
+                success:false,
+                message:"property not found"
+            },{status:401})
+        }
+        await DeletePropertyMail({name:property?.createdBy?.name,email:property?.createdBy?.email,reason,propertyType:property?.type,propertyCategory:property?.category,propertyTitle:property?.title})
+        await Property.deleteOne({slug});
+        return NextResponse.json({
+            success:true,
+            message:"property delete successfull"
+        },{status:200})
+    } catch (error) {
+        return NextResponse.json({
+            success:false,
+            message:error.message
+        },{status:400})
     }
 }

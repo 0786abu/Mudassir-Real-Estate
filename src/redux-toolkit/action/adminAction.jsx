@@ -1,5 +1,5 @@
 import axios from "axios"
-import { setAboutAdmin, setAboutAgent, setAboutUser, setAdminError, setAgentLoading, setAllAdmins, setAllAgents, setAllProperties, setAllusers, setApprovedLoading, setFeaturedLoading, setPaymentAction, setPaymentActionLoading, setPaymentLoading, setPayments, setPropertyLoading, setSingleProperty, setToggleApproved, setToggleFeatured, setUserLoading } from "../slice/adminSlice"
+import { setAboutAdmin, setAboutAgent, setAboutUser, setAdminError, setAgentLoading, setAllAdmins, setAllAgents, setAllProperties, setAllusers, setApprovedLoading, setDelPropertyLoading, setFeaturedLoading, setPaymentAction, setPaymentActionLoading, setPaymentLoading, setPayments, setPropertyLoading, setSingleProperty, setToggleApproved, setToggleFeatured, setUserLoading } from "../slice/adminSlice"
 import { toast } from "react-toastify"
 import { setCreatePropertyLoading, setPropertyError, setRemovePropertyImageLoading } from "../slice/propertySlice"
 import { setAuthError, setRegisterloading } from "../slice/authSlice"
@@ -68,6 +68,24 @@ export const FeaturedToggle = (slug)=>async(dispatch)=>{
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
     } finally {
         dispatch(setFeaturedLoading(false))
+    }
+}
+export const AdminDeleteProperty = (slug,reason,router,setDelModal)=>async(dispatch)=>{
+    dispatch(setDelPropertyLoading())
+    try {
+        const {data} = await axios.delete(`${baseURL}/api/admin/allProperties/${slug}?reason=${reason}`,{
+            contentType:"application/json",
+            withCredentials:true
+        })
+        dispatch(setSingleProperty(null))
+        setDelModal(false)
+        router.push("/admin/dashboard/allProperties");
+        toast.success(data.message);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    } finally {
+        dispatch(setDelPropertyLoading(false))
     }
 }
 export const UploadMoreImages = (images,slug,setModal)=>async(dispatch)=>{

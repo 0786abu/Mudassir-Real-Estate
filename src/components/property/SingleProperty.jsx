@@ -14,24 +14,28 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Label,
 } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { AdminFetchSingleProeprty, ApprovedToggle, FeaturedToggle, UploadMoreImages, RemovePropertyImage } from "@/redux-toolkit/action/adminAction";
+import { AdminFetchSingleProeprty, ApprovedToggle, FeaturedToggle, UploadMoreImages, RemovePropertyImage, AdminDeleteProperty } from "@/redux-toolkit/action/adminAction";
 import ProfileLoader from "../common/Loader";
 import { Plus, Trash } from "react-feather";
+import { useRouter } from "next/navigation";
 
 const AdminPropertyDetail = ({slug}) => {
-    const {propertyloading,singleProperty,featuredloading,approvedloading} = useSelector((state)=>state.Admin);
+    const {propertyloading,singleProperty,featuredloading,approvedloading,delpropertyloading} = useSelector((state)=>state.Admin);
     const {sampleuser} = useSelector((state)=>state.Auth);
     const {removepropertyimageloading,createpropertyloading} = useSelector((state)=>state.Property);
     const dispatch = useDispatch();
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [publicID, setPublicID] = useState("")
     const [modal, setModal] = useState(false);
+    const [delModal, setDelModal] = useState(false);
     const [images, setImages] = useState([])
     const toggleFeatured = ()=>{
         dispatch(FeaturedToggle(singleProperty?.slug))
     }
+    const [reason, setReason] = useState("");
      const fileInputRef = useRef(null);
     const handleRemoveImage = (public_id)=>{
         setPublicID(public_id)
@@ -50,6 +54,7 @@ const AdminPropertyDetail = ({slug}) => {
     setImages(files);
     setModal(true)
   };
+  const router = useRouter();
   const handleUpload = ()=>{
       const formData = new FormData();
       if (images && images.length > 0) {
@@ -62,6 +67,12 @@ const AdminPropertyDetail = ({slug}) => {
   const toggle = () => {
     setModal(!modal);
     setImages([])
+  }
+  const delToggle = () => {
+    setDelModal(!delModal);
+  }
+  const handleDeleteProperty = ()=>{
+    dispatch(AdminDeleteProperty(slug,reason,router,setDelModal))
   }
     
     useEffect(()=>{
@@ -77,6 +88,30 @@ const AdminPropertyDetail = ({slug}) => {
             <ModalBody style={{textAlign:"center",marginBottom:"20px"}}>
               <Button onClick={handleUpload} color="success">
                 {createpropertyloading ? <div className=' d-flex align-items-center gap-1'><span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> <span>Upload</span></div> : "Upload"}
+              </Button>
+            </ModalBody>
+    
+          </Modal>
+     <Modal isOpen={delModal} toggle={delToggle} centered size="lg">
+            <ModalHeader toggle={delToggle}>
+              {/* Reactstrap Modal */}
+            </ModalHeader>
+    
+            <ModalBody style={{textAlign:"center",marginBottom:"20px"}}>
+              <div className="mb-4">
+                <Label>Add Reason</Label>
+                <Input
+                name="reason"
+                value={reason}
+                onChange={(e)=>setReason(e.target.value)}
+                placeholder="Write reason..."
+                />
+              </div>
+              <Button onClick={handleDeleteProperty} disabled={delpropertyloading} color="danger" className="me-2">
+                {delpropertyloading ? <div className=' d-flex align-items-center gap-1'><span style={{width:"15px",height:"15px"}} className='spinner spinner-border'></span> <span>Deleteing...</span></div> : "Delete property"}
+              </Button>
+              <Button onClick={delToggle} disabled={delpropertyloading} color="light">
+                Cancel
               </Button>
             </ModalBody>
     
@@ -107,6 +142,9 @@ const AdminPropertyDetail = ({slug}) => {
             
                 </div>
             )}
+            <div>
+              <Button onClick={delToggle} color="danger"><Trash/></Button>
+            </div>
         </div>
       <Row className="g-4 mt-2">
         {/* RIGHT: MAIN INFO */}

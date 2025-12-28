@@ -641,3 +641,130 @@ body {
 </body>
 </html>
 `
+export const AdminDeleteProperty = ({name,propertyTitle,propertyType,propertyCategory,reason})=>`
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Deleted</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+.email-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.header {
+    background-color: #108A00;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+.content {
+    padding: 20px;
+    color: #333333;
+    line-height: 1.6;
+}
+.content h2 {
+    color: #108A00;
+    margin-top: 0;
+}
+.property-box {
+    background-color: #f9f9f9;
+    border-left: 4px solid #108A00;
+    padding: 15px;
+    margin: 15px 0;
+}
+.button {
+    display: inline-block;
+    background-color: #108A00;
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+.footer {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 15px;
+    font-size: 12px;
+    color: #888888;
+}
+@media screen and (max-width:600px){
+    .header h1 {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="email-container">
+
+<div class="header">
+    <h1>Property Removed</h1>
+</div>
+
+<div class="content">
+    <h2>Hi ${name},</h2>
+
+    <p>
+        We would like to inform you that your property has been <strong>deleted</strong> by our admin team.
+    </p>
+
+    <div class="property-box">
+        <p><strong>Property Title:</strong> ${propertyTitle}</p>
+        <p><strong>Property Type:</strong> ${propertyType}</p>
+        <p><strong>Property Category:</strong> ${propertyCategory}</p>
+    </div>
+
+    <p>
+        This action may have been taken due to one or more of the following reasons:
+    </p>
+
+    <ul>
+        <li>Violation of platform policies</li>
+        <li>Incorrect or misleading information</li>
+        <li>Duplicate or inactive listing</li>
+    </ul>
+
+    <p>
+        <strong>Admin Note:</strong> ${reason}
+    </p>
+
+    <p>
+        If you believe this was a mistake or want to create a new listing, you can do so from your dashboard.
+    </p>
+
+    <a href="${process.env.NEXT_PUBLIC_BASE_URL}/dashboard" class="button">Go to Dashboard</a>
+
+    <p>
+        Thank you for your understanding.
+    </p>
+
+    <p>Best Regards,<br>Real Estate Team</p>
+</div>
+
+<div class="footer">
+    © 2025 Real Estate Project. All rights reserved.
+</div>
+
+</div>
+</body>
+</html>
+`

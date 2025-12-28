@@ -12,6 +12,7 @@ const initialState = {
     singleProperty:null,
     totalProperties:null,
     paymentloading:false,
+    delpropertyloading:false,
     userloading:false,
     agentloading:false,
     featuredloading:false,
@@ -94,6 +95,13 @@ const adminSlice = createSlice({
                 state.approvedloading = action.payload
             }
         },
+        setDelPropertyLoading:(state,action)=>{
+            if(action.payload===undefined){
+                state.delpropertyloading = true
+            }else{
+                state.delpropertyloading = action.payload
+            }
+        },
         setToggleFeatured:(state,action)=>{
             state.featuredloading = false
             state.singleProperty = action.payload
@@ -125,6 +133,6 @@ const adminSlice = createSlice({
     }
 });
 
-export const {setAdminError,setAllProperties,setPropertyLoading,setSingleProperty,setToggleFeatured,setFeaturedLoading,setApprovedLoading,setToggleApproved,setPaymentLoading,setPayments,setPaymentAction,setPaymentActionLoading,setAllusers,setUserLoading,setAboutUser,setAgentLoading,setAllAgents,setAboutAgent,setAllAdmins,setAboutAdmin} = adminSlice.actions;
+export const {setAdminError,setAllProperties,setPropertyLoading,setSingleProperty,setToggleFeatured,setFeaturedLoading,setApprovedLoading,setToggleApproved,setPaymentLoading,setPayments,setPaymentAction,setPaymentActionLoading,setAllusers,setUserLoading,setAboutUser,setAgentLoading,setAllAgents,setAboutAgent,setAllAdmins,setAboutAdmin,setDelPropertyLoading} = adminSlice.actions;
 
 export default adminSlice.reducer;
