@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import dynamic from 'next/dynamic';
 import { Container } from 'reactstrap';
 import Breadcrumb from '@/adminComponents/components/Common/Breadcrumb';
+import ProfileLoader from '@/components/common/Loader';
 
 // Dynamically import components with SSR disabled
 const Assigness = dynamic(() => import('@/adminComponents/components/dashboard/Assigness'), { ssr: false });
@@ -15,10 +16,12 @@ const Soldout = dynamic(() => import('@/adminComponents/components/dashboard/Sol
 const Status = dynamic(() => import('@/adminComponents/components/dashboard/Status'), { ssr: false });
 
 const Dashboard = () => {
+    
     return (
         <Fragment>
             <Breadcrumb title='Dashboard' titleText='Welcome To Admin Panel' parent='Dashboard' />
-            <Container fluid={true}>
+            {/* {userloading ? <ProfileLoader/> : ( */}
+                <Container fluid={true}>
                 <div className="row">
                     <Properies />
                     <SalaryChart />
@@ -30,6 +33,7 @@ const Dashboard = () => {
                     <Soldout />
                 </div>
             </Container>
+            {/* )} */}
         </Fragment>
     )
 }

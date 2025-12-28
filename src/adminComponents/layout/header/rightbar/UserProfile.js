@@ -2,11 +2,14 @@ import Link from 'next/link'
 import React from 'react'
 import { FileText, LogIn, User } from 'react-feather'
 
-const UserProfile = () => {
+const UserProfile = ({user,loading}) => {
     return (
         <li className="profile-avatar onhover-dropdown">
             <div>
-                <img src="/assets/images/avatar/3.jpg" className="img-fluid" alt='' />
+               {loading ? (
+                <div class="spinner-border" role="status" style={{width:"20px",height:"20px"}}>
+</div>
+               ) :  <img src={user?.profile?.url} className="img-fluid rounded-circle" style={{width:"50px",height:"50px"}} alt={user?.name} />}
             </div>
             <ul className="profile-dropdown onhover-show-div">
                 <li>

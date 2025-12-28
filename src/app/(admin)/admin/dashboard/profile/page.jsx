@@ -35,10 +35,6 @@ const AdminProfile = () => {
     role: "",
     profile: null,
   });
-  console.log(profile)
-  useEffect(()=>{
-    dispatch(AdminProfileData())
-  },[dispatch])
 
   const handleChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
