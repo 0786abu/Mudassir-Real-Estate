@@ -53,7 +53,7 @@ const goToPage = (page)=>{
                   allusers.map((item, i) => {
                     return (
                       <Col md='12' xl='6' key={i}>
-                        <PropertyBoxFour data={item} label={false} />
+                        <PropertyBoxFour data={item} label={false} fromCard="AllUsers" />
                       </Col>
                     );
                   })}

@@ -3,20 +3,22 @@ import { Fragment, useState } from "react";
 import Img from "../../utils/Img";
 import SocialAccounts from "../SocialAccounts";
 
-const PropertyBoxFour = ({ data, from }) => {
+const PropertyBoxFour = ({ data, from, fromCard }) => {
   const [show, setShow] = useState();
   return (
     <Fragment>
       <div className='property-box'>
         <div className='agent-image'>
-          <div>
-            <Img src={data?.profile ? data?.profile?.url : data?.agencyProfile?.url} className='bg-img' alt='' />
+          <Img src={data?.profile ? data?.profile?.url : data?.agencyProfile?.url} className='bg-img' alt='' />
+          {fromCard==="AllUsers" || fromCard==="AllAdmins" ? "" : (
+            <div>
             <div className='agent-overlay'></div>
             <div className='overlay-content'>
-              <SocialAccounts />
+              {data?.socialMedia ? <SocialAccounts data={data?.socialMedia} /> : <h6 style={{color:"white",fontSize:"14px"}}>No Social Networks yet</h6>}
               <span>Connect</span>
             </div>
           </div>
+          )}
         </div>
         <div className='agent-content'>
           <h3>

@@ -1,24 +1,25 @@
+import Link from "next/link";
 import React from "react";
 
-const SocialAccounts = () => {
+const SocialAccounts = ({data}) => {
     return (
-        <ul>
-            <li>
-                <a href="https://accounts.google.com/">
-                    <img src="/assets/images/about/icon-1.png" alt="" />
-                </a>
-            </li>
-            <li>
-                <a href="https://twitter.com/">
-                    <img src="/assets/images/about/icon-2.png" alt="" />
-                </a>
-            </li>
-            <li>
-                <a href="https://www.facebook.com/">
-                    <img src="/assets/images/about/icon-3.png" alt="" />
-                </a>
-            </li>
-        </ul>
+         <ul className="agent-social mt-2">
+                                    {data?.facebook && (
+                                        <li><Link target="_blank" href={data?.facebook} style={{background:"#0866FF"}}><i className="fab fa-facebook-f" /></Link></li>
+                                    )}
+                                    {data?.instagram && (
+                                        <li><Link target="_blank" href={data?.instagram} className=" bg-danger"><i className="fab fa-instagram" /></Link></li>
+                                    )}
+                                    {data?.website && (
+                                        <li><Link target="_blank" href={data?.website} className=" bg-light"><i className="fas fa-globe text-black" /></Link></li>
+                                    )}
+                                    {data?.linkedin && (
+                                        <li><Link target="_blank" href={data?.linkedin} style={{background:"#0A66C2"}}><i className="fab fa-linkedin-in" /></Link></li>
+                                    )}
+                                    {data?.youtube && (
+                                        <li><Link target="_blank" href={data?.youtube} className="bg-danger"><i className="fab fa-youtube" /></Link></li>
+                                    )}
+                                </ul>
     );
 };
 

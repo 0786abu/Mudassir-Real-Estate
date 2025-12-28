@@ -54,7 +54,7 @@ const goToPage = (page)=>{
                   alladmins.map((item, i) => {
                     return (
                       <Col md='12' xl='6' key={i}>
-                        <PropertyBoxFour data={item} label={false} from="admin" />
+                        <PropertyBoxFour data={item} label={false} from="admin" fromCard="AllAdmins" />
                       </Col>
                     );
                   })}
