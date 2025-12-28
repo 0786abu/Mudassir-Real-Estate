@@ -40,7 +40,7 @@ export const SidebarMenuItem = [
         ]
     },
     {
-        title: 'Manage users',
+        title: 'Users',
         icon: <Users />,
         type: 'sub',
         children: [

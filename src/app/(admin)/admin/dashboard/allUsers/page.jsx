@@ -42,7 +42,7 @@ const goToPage = (page)=>{
 
   return (
     <Fragment>
-      <Breadcrumb title='All Users' titleText='Welcome To Admin panel' parent='Manage users' />
+      <Breadcrumb title='All Users' titleText='Welcome To Admin panel' parent='Users' />
       {userloading ? (<ProfileLoader/>) : (
         <Container fluid={true}>
         <Row className='agent-section property-section user-lists'>
