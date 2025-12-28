@@ -1,9 +1,10 @@
 "use client"
 import Listview from '@/adminComponents/components/myproperties/PropertyList/Listview';
 import { AdminProperties } from '@/redux-toolkit/action/propertyAction';
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import ProfileLoader from '../common/Loader';
+import { Col, Container, Row } from 'reactstrap';
 
 const HotProperties = () => {
     const {adminProperties,totalAdminProperties,totalAdminPropertiesPages,adminpropertyloading} = useSelector((state)=>state.Property);
@@ -38,11 +39,55 @@ const goToPage = (page)=>{
         dispatch(AdminProperties(currentPage));
     },[dispatch,currentPage])
   return (
-    <div className=' mx-auto' style={{maxWidth:"1280px",marginTop:"100px",padding:"0px 20px"}}>
-        {adminpropertyloading ? <ProfileLoader/> : (
-          <Listview data={adminProperties}/>
-        )}
-        {totalAdminProperties>12 && (
+    // <div className=' mx-auto' style={{maxWidth:"1280px",marginTop:"100px",padding:"0px 20px"}}>
+    //     <Row>
+    //         {adminpropertyloading ? <ProfileLoader/> : (
+    //       <Col lg="12">
+    //         <div className='property-admin'>
+    //           <div className='property-section section-sm'>
+    //         <Listview data={adminProperties}/>
+    //         </div>
+    //         </div>
+    //       </Col>
+    //     )}
+    //     </Row>
+    //     {totalAdminProperties>12 && (
+    //                  <nav className="theme-pagination">
+    //   <ul className="pagination">
+    //     <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+    //       <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(1)}>«</div>
+    //     </li>
+    //     <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+    //       <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage - 1)}>{"<"}</div>
+    //     </li>
+
+    //     {pages.map((p,index) => (
+    //       <li key={index} className={`page-item `}>
+    //         <button style={{background:p===currentPage ? "#108a00" : "",color:p===currentPage ? "white" : "black"}} disabled={p === currentPage || adminpropertyloading} className="page-link" onClick={() => goToPage(p)}>{adminpropertyloading && p===currentPage ? "...": p}</button>
+    //       </li>
+    //     ))}
+
+    //     <li className={`page-item ${currentPage === totalAdminPropertiesPages ? "disabled" : ""}`}>
+    //       <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage + 1)}>{">"}</div>
+    //     </li>
+    //     <li className={`page-item ${currentPage === totalAdminPropertiesPages ? "disabled" : ""}`}>
+    //       <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(totalAdminPropertiesPages)}>»</div>
+    //     </li>
+    //   </ul>
+    // </nav>
+    //               )}
+    // </div>
+    <Fragment>
+        <Container fluid={true}>
+                <Row style={{marginTop:"20px",maxWidth:"1280px",padding:"0px 20px"}} className='mx-auto'>
+                  <Col lg='12'>
+                    <div className='property-admin'>
+                      <div className='property-section section-sm'>
+                        <Row className='ratio_55 property-grid-2 property-map map-with-back'>
+                          {adminpropertyloading ? <ProfileLoader/> : (
+                            <Listview data={adminProperties}/>
+                          )}
+                          {totalAdminProperties>12 && (
                      <nav className="theme-pagination">
       <ul className="pagination">
         <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
@@ -67,7 +112,13 @@ const goToPage = (page)=>{
       </ul>
     </nav>
                   )}
-    </div>
+                        </Row>
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+    </Fragment>
   )
 }
 
