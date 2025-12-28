@@ -21,12 +21,12 @@ const AgentContent = ({agents}) => {
             <ul>
           <li onClick={()=>handleChangeView("grid-view")} className={`grid-btn`}>
                 <a className="grid-layout-view me-2">
-                  <Grid style={{color:"#108a00"}}/>
+                  <Grid style={{color:gridStyle==="grid-view" ? "#108a00" : "gray"}}/>
                 </a>
               </li>
               <li onClick={()=>handleChangeView("list-view")} className={`list-btn `}>
                 <a className="list-layout-view">
-                  <List style={{color:"#108a00"}}/>
+                  <List style={{color:gridStyle==="list-view" ? "#108a00" : "gray"}}/>
                 </a>
               </li>
         </ul>

@@ -14,16 +14,18 @@ const BodyContent = async({baseURL,searchParams}) => {
     method:"GET"
   });
   const data = await res.json();
-  const {agents, totalPages, page} = data;
+  const {agents, totalPages, page, totalAgents} = data;
   return (
     <Col xl="9" lg="8" className="property-grid-3 agent-grids">
       
     <section className="agent-section property-section">
             {/* <Header title={"Agency Listing"} /> */}
             <AgentContent agents={agents}/>
-    <div>
+    {totalAgents>12 && (
+      <div>
       <Pagination totalPages={totalPages} currentPage={page} searchParams={searchParams} from={"agents"}/>
     </div>
+    )}
     </section>
           </Col>
   );

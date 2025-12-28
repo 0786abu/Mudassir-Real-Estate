@@ -2,6 +2,7 @@ import axios from "axios";
 import { setCreatePropertyLoading, setFeaturedProperties, setFeaturedPropertyLoading, setLatestproeprtyloading, setLatestsproperties, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 import { setLatestProeprty } from "../slice/agentSlice";
+import { setSingleProperty as setsingleproperty } from "../slice/adminSlice";
 
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL
@@ -109,7 +110,7 @@ export const RemovePropertyImage = ({public_id,slug,setPublicID,setCurrentImageI
         dispatch(setRemovePropertyImageLoading(false));
     }
 }
-export const UpdateFloorPlanImage = ({formData,slug,setFloorPlanImage})=>async(dispatch)=>{
+export const UpdateFloorPlanImage = ({formData,slug,setFloorPlanImage,from})=>async(dispatch)=>{
     dispatch(setCreatePropertyLoading())
     try {
         const {data} = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/create-property/${slug}`,formData,{
@@ -118,7 +119,11 @@ export const UpdateFloorPlanImage = ({formData,slug,setFloorPlanImage})=>async(d
             },
             withCredentials:true
         });
-        dispatch(setMyProperty(data.data));
+        if(from==="admin"){
+            dispatch(setsingleproperty(data.data))
+        }else{
+            dispatch(setMyProperty(data.data));
+        }
         toast.success(data.message);
         setFloorPlanImage(null)
     } catch (error) {

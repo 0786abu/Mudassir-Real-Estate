@@ -9,7 +9,7 @@ export async function GET(req) {
         // Get page from query params
         const searchParams = new URL(req.url).searchParams;
         const page = parseInt(searchParams.get("page")) || 1;
-        const limit = 6;
+        const limit = 12;
         const skip = (page - 1) * limit;
 
         // Fetch agents with pagination

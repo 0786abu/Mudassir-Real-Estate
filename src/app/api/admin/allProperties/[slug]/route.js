@@ -1,5 +1,6 @@
 import { DataBase } from "@/backend/config/database";
 import Property from "@/backend/model/propertyModel";
+import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthorized } from "@/backend/utils/middlewere";
 import { DeletePropertyMail, FreePropertyApprovedMail, RejectPropertyApprovedMail } from "@/backend/utils/NodeMailer";
 import { NextResponse } from "next/server";
@@ -150,6 +151,19 @@ export async function DELETE(req,{params}) {
                 message:"property not found"
             },{status:401})
         }
+        if (property.floorPlanImage?.public_id) {
+      await cloudinary.uploader.destroy(property.floorPlanImage.public_id);
+    }
+
+    // Gallery Images
+    if (property.images?.length > 0) {
+      for (const img of property.images) {
+        if (img.public_id) {
+          await cloudinary.uploader.destroy(img.public_id);
+        }
+      }
+    }
+
         await DeletePropertyMail({name:property?.createdBy?.name,email:property?.createdBy?.email,reason,propertyType:property?.type,propertyCategory:property?.category,propertyTitle:property?.title})
         await Property.deleteOne({slug});
         return NextResponse.json({

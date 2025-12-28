@@ -17,7 +17,6 @@ const AgentGrid = ({searchParams}) => {
   
   return (
     <div>
-      <Breadcrumb />
       <Container>
       <Row>
       <Suspense key={JSON.stringify(searchParams)} fallback={

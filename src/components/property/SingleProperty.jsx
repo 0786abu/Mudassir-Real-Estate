@@ -21,6 +21,7 @@ import { AdminFetchSingleProeprty, ApprovedToggle, FeaturedToggle, UploadMoreIma
 import ProfileLoader from "../common/Loader";
 import { Plus, Trash } from "react-feather";
 import { useRouter } from "next/navigation";
+import { UpdateFloorPlanImage } from "@/redux-toolkit/action/propertyAction";
 
 const AdminPropertyDetail = ({slug}) => {
     const {propertyloading,singleProperty,featuredloading,approvedloading,delpropertyloading} = useSelector((state)=>state.Admin);
@@ -35,8 +36,11 @@ const AdminPropertyDetail = ({slug}) => {
     const toggleFeatured = ()=>{
         dispatch(FeaturedToggle(singleProperty?.slug))
     }
+    const [floorPlanImage, setFloorPlanImage] = useState(null);
     const [reason, setReason] = useState("");
      const fileInputRef = useRef(null);
+     const floorfileInputRef = useRef(null);
+     const floorfileInputRef2 = useRef(null);
     const handleRemoveImage = (public_id)=>{
         setPublicID(public_id)
         const slug = singleProperty?.slug
@@ -46,9 +50,24 @@ const AdminPropertyDetail = ({slug}) => {
         const status = e.target.value;
         dispatch(ApprovedToggle(slug,status))
     }
+    const handleFloorChange = (e)=>{
+      const file = e.target.files[0];
+      setFloorPlanImage(file);
+    }
     const handleClick = () => {
     fileInputRef.current.click();
   };
+    const handlefloorClick = () => {
+    floorfileInputRef.current.click();
+  };
+    const handlefloorClick2 = () => {
+    floorfileInputRef2.current.click();
+  };
+  const handleUploadFloorPlanImage = ()=>{
+      const formData = new FormData();
+      formData.append("floorPlanImage", floorPlanImage);
+      dispatch(UpdateFloorPlanImage({formData,slug:singleProperty?.slug,setFloorPlanImage,from:"admin"}))
+    }
     const handleFileChange = (e) => {
     const files = e.target.files;
     setImages(files);
@@ -376,16 +395,37 @@ const AdminPropertyDetail = ({slug}) => {
       </Row>
       {/* EXTRA DETAILS */}
       <Row className="g-2">
-        
 
-        <Col lg="6">
-          <Card className="shadow-sm border-0">
-            <CardBody>
-              <h5 className="fw-bold mb-3">Property Brief</h5>
-        <div className=" mb-4">{singleProperty?.description}</div>
-        <div className="white-space-pre-line">{singleProperty?.aboutProperty}</div>
-            </CardBody>
-          </Card>
+        <Col lg="6" className=" position-relative">
+        {singleProperty?.floorPlanImage && (
+          <div className=" position-absolute" style={{top:"10px",right:"10px"}}>
+          {floorPlanImage!==null ? <Button color="light" onClick={handleUploadFloorPlanImage}>{createpropertyloading ? "Submitting..." : "Submit"}</Button> : <Button onClick={handlefloorClick2} disabled={createpropertyloading} color="light">Change Image</Button>}
+          <input
+                                    type="file"
+                                    accept="image/*"
+                                    ref={floorfileInputRef2}
+                                    multiple
+                                    onChange={handleFloorChange}
+                                    style={{ display: "none" }}
+                                  />
+        </div>
+        )}
+        {!singleProperty?.floorPlanImage && (
+          <div style={{height:"300px"}} className=" shadow-sm rounded-2 d-flex justify-content-center align-items-center">
+          {floorPlanImage !==null ? <Button color="success" onClick={handleUploadFloorPlanImage}>{createpropertyloading ? "SUbmitting..." : "Submit"}</Button> : <Button color="success" onClick={handlefloorClick}>Upload floor plan image</Button>}
+             <input
+                                    type="file"
+                                    accept="image/*"
+                                    ref={floorfileInputRef}
+                                    multiple
+                                    onChange={handleFloorChange}
+                                    style={{ display: "none" }}
+                                  />
+        </div>
+        )}
+          {singleProperty?.floorPlanImage && (
+            <img src={singleProperty?.floorPlanImage?.url} alt="floor plan image" style={{width:"100%",height:"300px" ,borderRadius:"10px"}}/>
+          )}
         </Col>
         <Col lg="6">
           <Card className="shadow-sm border-0">
@@ -413,6 +453,15 @@ const AdminPropertyDetail = ({slug}) => {
               </div>
                 </ListGroupItem>
               </ListGroup>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg="6">
+          <Card className="shadow-sm border-0">
+            <CardBody>
+              <h5 className="fw-bold mb-3">Property Brief</h5>
+        <div className=" mb-4">{singleProperty?.description}</div>
+        <div className="white-space-pre-line">{singleProperty?.aboutProperty}</div>
             </CardBody>
           </Card>
         </Col>
