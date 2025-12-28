@@ -8,7 +8,11 @@ const initialState = {
     latestProperties:[],
     latestsproperties:[],
     featuredProperties:[],
+    adminProperties:[],
+    totalAdminProperties:null,
+    totalAdminPropertiesPages:null,
     latestpropertyloading:false,
+    adminpropertyloading:false,
     featurepropertyloading:false,
     myAvailableProeprtiesChartData:{},
     myTypeChartData:[],
@@ -87,6 +91,13 @@ const propertySice = createSlice({
         state.error = null
         state.myProperties = state.myProperties.map((item)=>item._id === action.payload._id ? action.payload : item)
        },
+       setAdminProeprties:(state,action)=>{
+        state.adminpropertyloading = false
+        state.error = null
+        state.adminProperties = action.payload.properties
+        state.totalAdminProperties = action.payload.totalProperties
+        state.totalAdminPropertiesPages = action.payload.totalPages
+       },
        setViewsChartDataLoading:(state,action)=>{
         state.viewsdataloading = action.payload
        },
@@ -102,12 +113,15 @@ const propertySice = createSlice({
        setMyPropertyLoading:(state,action)=>{
         state.mypropertyloading = action.payload
        },
+       setAdminPropertiesLoading:(state,action)=>{
+        state.adminpropertyloading = action.payload
+       },
        setPropertyError:(state,action)=>{
         state.error = action.payload
        }
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData,setLatestproeprtyloading,setLatestsproperties,setFeaturedProperties,setFeaturedPropertyLoading} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData,setLatestproeprtyloading,setLatestsproperties,setFeaturedProperties,setFeaturedPropertyLoading,setAdminProeprties,setAdminPropertiesLoading} = propertySice.actions;
 
 export default propertySice.reducer;

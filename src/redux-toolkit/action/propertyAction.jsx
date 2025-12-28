@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCreatePropertyLoading, setFeaturedProperties, setFeaturedPropertyLoading, setLatestproeprtyloading, setLatestsproperties, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
+import { setAdminProeprties, setAdminPropertiesLoading, setCreatePropertyLoading, setFeaturedProperties, setFeaturedPropertyLoading, setLatestproeprtyloading, setLatestsproperties, setMyAvailableProeprtiesChartData, setMyChartData, setMyProperties, setMyProperty, setMyPropertyLoading, setMyTypeChartData, setPagesContent, setPropertyError, setRemovePropertyImageLoading, setSingleProperty, setSinglePropertyLoading, setUpdateProeprty, setViewsChartDataLoading } from "../slice/propertySlice";
 import { toast } from "react-toastify";
 import { setLatestProeprty } from "../slice/agentSlice";
 import { setSingleProperty as setsingleproperty } from "../slice/adminSlice";
@@ -154,6 +154,21 @@ export const MyProperties = ({category,location,type,city,currentPage})=>async(d
         dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
     }finally {
         dispatch(setMyPropertyLoading(false))
+    }
+}
+export const AdminProperties = (currentPage)=>async(dispatch)=>{
+    dispatch(setAdminPropertiesLoading(true))
+    try {
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/adminProperties?page=${currentPage}`,{
+            headers:{
+                "Content-Type":"application/json"
+            },
+            withCredentials:true
+        });
+        dispatch(setAdminProeprties({properties:data.properties,totalProperties:data.totalProperties,totalPages:data.totalPages}))
+        // dispatch(setPagesContent({totalPages:data.totalPages,currentPage:data.currentPage}));
+    } catch (error) {
+        dispatch(setPropertyError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }
 export const LatestProperties = ()=>async(dispatch)=>{

@@ -63,8 +63,6 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
       router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/admin/dashboard/allProperties/${data.slug}/edit`)
   };
 
-  
-
   return (
     <>
     {data?.propertyID  ? (

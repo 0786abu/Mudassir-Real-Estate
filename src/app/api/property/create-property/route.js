@@ -11,6 +11,11 @@ function getOptional(formData, key) {
   const value = formData.get(key);
   return value === null || value === "" ? undefined : value;
 }
+const toBoolean = (value) => {
+  if (value === "yes") return true;
+  if (value === "no") return false;
+  return undefined;
+};
 
 
 export async function POST(req) {
@@ -240,6 +245,8 @@ export async function GET(req) {
         const maxsquareSize = searchParams.get('maxsquareSize');
         const location = searchParams.get('location');
         const city = searchParams.get('city');
+        const featured = toBoolean(searchParams.get('featured'));
+        console.log(featured)
         const minPrice = searchParams.get('minPrice');
         const maxPrice = searchParams.get('maxPrice');
         const filter = {isApproved:"Approved"};
@@ -247,6 +254,7 @@ export async function GET(req) {
         if (category) filter.category = category;
         if (type) filter.type = type;
         if (location) filter.location = location;
+        if (featured !== null) filter.isFeatured = featured;
         if (beds) filter.beds = beds;
         if (city) filter.city = city;
         if (minsquareSize || maxsquareSize) {

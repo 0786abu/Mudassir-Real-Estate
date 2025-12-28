@@ -4,7 +4,7 @@
  */
 import React, { useState } from "react";
 import Slider from "react-slick";
-import { Col, Container, Row } from "reactstrap";
+import { Button, Col, Container, Row } from "reactstrap";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import Link from "next/link";
 import { useSelector } from "react-redux";
@@ -15,15 +15,21 @@ import NoSsr from "@/utils/NoSsr";
 import { formatPK } from "@/utils/Formatter";
 import ProfileLoader from "@/components/common/Loader";
 import { Bath, Bed } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const FeaturedPropertySection = ({ value,loading }) => {
   const [isHover, setIsHover] = useState(false);
+  const router = useRouter();
+  const handleClick = ()=>{
+    router.push("/properties?featured=yes")
+  }
   return (
     <section className='feature-section ratio_landscape bg-half zoom-gallery'>
       {loading ? (<ProfileLoader/>) : (
         <Container>
         <Row>
           <Col>
+          
             <NoSsr>
               <Slider className='feature-4 modern-feature arrow-gradient1' {...feature4}>
                 {value &&
@@ -104,6 +110,9 @@ const FeaturedPropertySection = ({ value,loading }) => {
               </Slider>
             </NoSsr>
           </Col>
+          <div className="d-flex justify-content-center" style={{marginTop:"60px"}}>
+            <Button size="sm" onClick={handleClick} style={{background:"#108A00"}}>See all</Button>
+          </div>
         </Row>
       </Container>
       )}
