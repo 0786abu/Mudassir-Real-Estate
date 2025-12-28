@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'reactstrap';
 import dynamic from 'next/dynamic';
 import Breadcrumb from '@/adminComponents/components/Common/Breadcrumb';
 import { useDispatch, useSelector } from 'react-redux';
-import { AdminFetchAllAboutUser } from '@/redux-toolkit/action/adminAction';
+import { AdminFetchAdmins, AdminFetchAllAboutAdmin, AdminFetchAllAboutUser } from '@/redux-toolkit/action/adminAction';
 import ProfileLoader from '@/components/common/Loader';
 import SalesOverview from '@/components/pages/userPanel/userDashboardTab/SalesOverview';
 import SalesByAgent from '@/components/pages/userPanel/userDashboardTab/SalesByAgent';
@@ -19,25 +19,25 @@ const RecentProperty = dynamic(() => import('@/adminComponents/components/manage
 const ProfileDetail = dynamic(() => import('@/adminComponents/components/manageuser/profile/ProfileDetail'), { ssr: false });
 
 const Profile = ({_id}) => {
-    const {aboutUser,userloading} = useSelector((state)=>state.Admin);
+    const {aboutAdmin,userloading} = useSelector((state)=>state.Admin);
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(AdminFetchAllAboutUser(_id))
+        dispatch(AdminFetchAllAboutAdmin(_id))
     },[dispatch,_id])
     return (
         <Fragment>
-            <Breadcrumb title="User Profile" titleText="Welcome To Admin Panel" parent="Manage Users" />
+            <Breadcrumb title="Admin Profile" titleText="Welcome To Admin Panel" parent="Admins" />
            {userloading ? (<ProfileLoader/>) : (
              <Container fluid={true}>
                 <Row>
                     <Col lg="12">
                         <Row className="user-info">
-                            <ProfileDetail aboutUser={aboutUser?.user} />
+                            <ProfileDetail aboutUser={aboutAdmin?.admin} />
                             <Col sm="12">
-                                <RecentProperty properties={aboutUser?.recentProperties} />
-                                <SalesOverview data={aboutUser?.viewsData} from="admin"/>
-                                    <SalesByAgent data={aboutUser?.typedData} from="admin"/>
-                                <AvailableProperty data={aboutUser?.availablePropertiesPercent} from="admin"/>
+                                <RecentProperty properties={aboutAdmin?.recentProperties} />
+                                <SalesOverview data={aboutAdmin?.viewsData} from="admin"/>
+                                    <SalesByAgent data={aboutAdmin?.typedData} from="admin"/>
+                                <AvailableProperty data={aboutAdmin?.availablePropertiesPercent} from="admin"/>
                             </Col>
                         </Row>
                     </Col>

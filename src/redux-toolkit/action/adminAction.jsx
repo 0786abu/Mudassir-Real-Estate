@@ -1,5 +1,5 @@
 import axios from "axios"
-import { setAboutAgent, setAboutUser, setAdminError, setAgentLoading, setAllAgents, setAllProperties, setAllusers, setApprovedLoading, setFeaturedLoading, setPaymentAction, setPaymentActionLoading, setPaymentLoading, setPayments, setPropertyLoading, setSingleProperty, setToggleApproved, setToggleFeatured, setUserLoading } from "../slice/adminSlice"
+import { setAboutAdmin, setAboutAgent, setAboutUser, setAdminError, setAgentLoading, setAllAdmins, setAllAgents, setAllProperties, setAllusers, setApprovedLoading, setFeaturedLoading, setPaymentAction, setPaymentActionLoading, setPaymentLoading, setPayments, setPropertyLoading, setSingleProperty, setToggleApproved, setToggleFeatured, setUserLoading } from "../slice/adminSlice"
 import { toast } from "react-toastify"
 import { setCreatePropertyLoading, setPropertyError, setRemovePropertyImageLoading } from "../slice/propertySlice"
 import { setAuthError, setRegisterloading } from "../slice/authSlice"
@@ -188,6 +188,19 @@ export const AdminFetchAgents = ()=>async(dispatch)=>{
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
     }
 }
+export const AdminFetchAdmins = ()=>async(dispatch)=>{
+    dispatch(setUserLoading())
+    try {
+        const {data} = await axios.get(`${baseURL}/api/admin/all-admins`,{
+            contentType:"application/json",
+            withCredentials:true
+        })
+        dispatch(setAllAdmins(data.admins))
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    }
+}
 export const AdminFetchAllAboutUser = (id)=>async(dispatch)=>{
     dispatch(setUserLoading())
     try {
@@ -195,7 +208,20 @@ export const AdminFetchAllAboutUser = (id)=>async(dispatch)=>{
             contentType:"application/json",
             withCredentials:true
         })
-        dispatch(setAboutUser({user:data.user,recentProperties:data.recentProperties,recentPayments:data.recentPayments}))
+        dispatch(setAboutUser({user:data.user,recentProperties:data.recentProperties,recentPayments:data.recentPayments,viewsData:data.data,typedData:data.typeData,availablePropertiesPercent:data.availablePropertiesPercent}))
+    } catch (error) {
+        toast.error(error?.response?.data?.message || error?.response?.data?.error);
+        dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));
+    }
+}
+export const AdminFetchAllAboutAdmin = (id)=>async(dispatch)=>{
+    dispatch(setUserLoading())
+    try {
+        const {data} = await axios.get(`${baseURL}/api/admin/all-admins/${id}`,{
+            contentType:"application/json",
+            withCredentials:true
+        })
+        dispatch(setAboutAdmin({admin:data.admin,recentProperties:data.recentProperties,recentPayments:data.recentPayments,viewsData:data.data,typedData:data.typeData,availablePropertiesPercent:data.availablePropertiesPercent}))
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));

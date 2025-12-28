@@ -4,7 +4,9 @@ const initialState = {
     allproperties:[],
     allusers:[],
     allagents:[],
+    alladmins:[],
     payments:[],
+    aboutAdmin:null,
     aboutUser:null,
     aboutAgent:null,
     singleProperty:null,
@@ -41,6 +43,11 @@ const adminSlice = createSlice({
             state.error = null
             state.aboutAgent = action.payload
         },
+        setAboutAdmin:(state,action)=>{
+            state.userloading = false
+            state.error = null
+            state.aboutAdmin = action.payload
+        },
         setSingleProperty:(state,action)=>{
             state.propertyloading = false
             state.error = null
@@ -55,6 +62,11 @@ const adminSlice = createSlice({
             state.userloading = false
             state.error = null
             state.allusers = action.payload
+        },
+        setAllAdmins:(state,action)=>{
+            state.userloading = false
+            state.error = null
+            state.alladmins = action.payload
         },
         setAllAgents:(state,action)=>{
             state.agentloading = false
@@ -113,6 +125,6 @@ const adminSlice = createSlice({
     }
 });
 
-export const {setAdminError,setAllProperties,setPropertyLoading,setSingleProperty,setToggleFeatured,setFeaturedLoading,setApprovedLoading,setToggleApproved,setPaymentLoading,setPayments,setPaymentAction,setPaymentActionLoading,setAllusers,setUserLoading,setAboutUser,setAgentLoading,setAllAgents,setAboutAgent} = adminSlice.actions;
+export const {setAdminError,setAllProperties,setPropertyLoading,setSingleProperty,setToggleFeatured,setFeaturedLoading,setApprovedLoading,setToggleApproved,setPaymentLoading,setPayments,setPaymentAction,setPaymentActionLoading,setAllusers,setUserLoading,setAboutUser,setAgentLoading,setAllAgents,setAboutAgent,setAllAdmins,setAboutAdmin} = adminSlice.actions;
 
 export default adminSlice.reducer;

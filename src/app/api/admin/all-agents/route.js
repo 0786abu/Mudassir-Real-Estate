@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt"
 import { uploadToCloudinary } from "@/backend/utils/cloudinaryUploader";
 import User from "@/backend/model/authModel";
+import Admin from "@/backend/model/adminModel";
 
 export async function GET(req) {
     try {
@@ -104,12 +105,12 @@ export async function POST(req) {
       },
     };
     }
-    const Model = from==="agent" ? Agent : User
+    const Model = from==="agent" ? Agent : from==="admin" ? Admin : User
     await Model.create(userData)
 
     return NextResponse.json({
         success:true,
-        message:`${from==="agent" ? "Agent" : "User"} Created SuccessFull`
+        message:`${from==="agent" ? "Agent" : from==="admin" ? "Admin" : "User"} Created SuccessFull`
     },{status:200})
     } catch (error) {
        return NextResponse.json({

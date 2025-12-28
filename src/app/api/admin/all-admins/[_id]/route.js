@@ -1,5 +1,5 @@
 import { DataBase } from "@/backend/config/database";
-import User from "@/backend/model/authModel";
+import Admin from "@/backend/model/adminModel";
 import Payment from "@/backend/model/paymentModel";
 import Property from "@/backend/model/propertyModel";
 import { isAuthorized } from "@/backend/utils/middlewere";
@@ -16,15 +16,15 @@ export async function GET(req,{params}) {
             },{sttaus:401})
         }
         const {_id} = await params;
-        const user = await User.findById(_id);
-        if(!user){
+        const admin = await Admin.findById(_id);
+        if(!admin){
             return NextResponse.json({
                 success:false,
-                message:"user not found"
+                message:"admin not found"
             },{sttaus:401})
         }
         const recentProperties = await Property.find({createdBy:_id}).limit(3).sort({createdAt:-1});
-        const recentPayments = await Payment.find({user:_id}).limit(3).sort({createdAt:-1})
+        const recentPayments = await Payment.find({admin:_id}).limit(3).sort({createdAt:-1})
         const now = new Date();
         
             // Current year start (Jan 1)
@@ -41,7 +41,7 @@ export async function GET(req,{params}) {
                 const result = await Property.aggregate([
                       {
                         $match: {
-                          createdBy:user?._id,
+                          createdBy:admin?._id,
                           createdAt: {
                             $gte: startOfYear,
                             $lte: endOfCurrentMonth,
@@ -66,7 +66,7 @@ export async function GET(req,{params}) {
                     const typeData = await Property.aggregate([
                           {
                             $match: {
-                              createdBy: user._id, // 👈 sirf apni properties
+                              createdBy: admin._id, // 👈 sirf apni properties
                             },
                           },
                           {
@@ -88,7 +88,7 @@ export async function GET(req,{params}) {
                         const availablePropertiesPercent = await Property.aggregate([
                       {
                         $match: {
-                          createdBy: user._id, // 👈 sirf user ki properties
+                          createdBy: admin._id, // 👈 sirf admin ki properties
                         },
                       },
                       {
@@ -144,7 +144,7 @@ export async function GET(req,{params}) {
                     }
         return NextResponse.json({
             success:true,
-            user,
+            admin,
             recentPayments,
             recentProperties,
             data:formattedData,

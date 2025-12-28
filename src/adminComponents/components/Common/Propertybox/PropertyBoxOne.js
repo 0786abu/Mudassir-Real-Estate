@@ -45,7 +45,7 @@ const PropertyBoxFour = ({ data, from }) => {
               <i className='fas fa-envelope'></i> {data?.email}
             </li>
           </ul>
-          <Link href={from && from==="agent" ? `/admin/dashboard/allAgents/${data._id}` : `/admin/dashboard/allUsers/${data._id}`}>
+          <Link href={from && from==="agent" ? `/admin/dashboard/allAgents/${data._id}` : from==="admin" ? `/admin/dashboard/allAdmins/${data._id}` : `/admin/dashboard/allUsers/${data._id}`}>
             View profile <i className='fas fa-arrow-right'></i>
           </Link>
         </div>
