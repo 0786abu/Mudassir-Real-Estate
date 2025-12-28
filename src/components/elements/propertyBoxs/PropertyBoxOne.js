@@ -19,7 +19,7 @@ const PropertyBoxOne = ({ data }) => {
             <a>
               <Img src={data?.images[0].url} className="bg-img" />
               <div className="labels-left">
-                <PropertyLabel labels={data?.label} />
+                <PropertyLabel labels={data?.type} />
               </div>
             </a>
             <div className="bottom-property">
