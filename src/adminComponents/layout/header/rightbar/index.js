@@ -1,11 +1,11 @@
 "use client"
 import React, { useEffect } from 'react'
-import Attachment from './Attachment'
-import Mailbox from './Mailbox'
 import Notification from './Notification'
 import UserProfile from './UserProfile'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdminProfileData } from '@/redux-toolkit/action/authAction'
+import { Home } from 'react-feather'
+import { useRouter } from 'next/navigation'
 
 const Rightbar = () => {
     const {userloading,user} = useSelector((state)=>state.Auth);
@@ -14,11 +14,11 @@ const Rightbar = () => {
           useEffect(()=>{
         dispatch(AdminProfileData())
       },[dispatch])
+      const router = useRouter();
     return (
         <>
-            <Attachment />
+          <span title='back home' onClick={()=>router.push("/")} className='mb-1'><Home/></span>
             <Notification />
-            <Mailbox />
             <UserProfile user={user} loading={userloading} />
         </>
     )
