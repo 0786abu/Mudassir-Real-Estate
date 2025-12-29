@@ -108,7 +108,7 @@ const goToPage = (page)=>{
         <Button color="info" size="sm" className="text-white" onClick={()=>handleMessage(contact.message)}>View Message</Button>
       </td>
       <td>
-        <Button size="sm" color="danger" onClick={()=>handleDelete(contact._id)}>{createcontactloading && contactID===contact._id ? <><span className=" spinner-border" role="status" style={{width:"16px",height:"16px"}}></span> Dekete</> : "Delete"}</Button>
+        <Button size="sm" color="danger" onClick={()=>handleDelete(contact._id)}>{createcontactloading && contactID===contact._id ? <><span className=" spinner-border" role="status" style={{width:"16px",height:"16px"}}></span> Delete</> : "Delete"}</Button>
       </td>
     </tr>
       )
