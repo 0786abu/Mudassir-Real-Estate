@@ -1,9 +1,14 @@
+import ProfileLoader from '@/components/common/Loader'
 import HotProperties from '@/components/property/HotProperties'
-import React from 'react'
+import React, { Suspense } from 'react'
 
-const page = () => {
+const page = ({searchParams}) => {
   return (
-    <div><HotProperties/></div>
+    <div>
+      <Suspense fallback={<ProfileLoader/>} key={JSON.stringify(searchParams)}>
+        <HotProperties searchParams={searchParams}/>
+      </Suspense>
+      </div>
   )
 }
 

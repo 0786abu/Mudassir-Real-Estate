@@ -3,14 +3,14 @@
  * @returns A React component
  */
 import React, { Fragment } from "react";
-import DownloadAppSection from "./DownloadApp";
+// import DownloadAppSection from "./DownloadApp";
 import GetInTouchSection from "./GetInTouch";
 
 const BodyContent = () => {
   return (
     <Fragment>
       <GetInTouchSection />
-      <DownloadAppSection />
+      {/* <DownloadAppSection /> */}
     </Fragment>
   );
 };

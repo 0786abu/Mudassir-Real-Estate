@@ -23,7 +23,7 @@ const About = () => {
   const [isHover, setIsHover] = useState(false);
 
   useEffect(()=>{
-    dispatch(FetchAgents())
+    dispatch(FetchAgents());
   },[dispatch])
   return (
     <section className="about-section slick-between">

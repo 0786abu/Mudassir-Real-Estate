@@ -20,7 +20,7 @@ const CategorySection = () => {
       <Container>
         <div className="d-flex justify-content-between align-items-center">
           <h4 className="section-title">Search by Property Type</h4>
-          <button type="button" className="btn btn-dark">See all</button>
+          {/* <button type="button" className="btn btn-dark">See all</button> */}
         </div>
         <div className="category-grid">
           {propertyTypes.slice(0,18).map((item, index) => (

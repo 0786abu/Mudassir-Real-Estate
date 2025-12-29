@@ -16,11 +16,12 @@ const Pagination = ({ totalPages, currentPage, searchParams, from, agentID }) =>
     setLoading(true);
     const newParams = new URLSearchParams(searchParams);
     newParams.set("page", page);
-    
     if(from==="agents"){
       router.push(`/agents?page=${page}`);
     }else if(from==="agentDetail" && agentID){
       router.push(`/agents/${agentID}?page=${page}`);
+    }else if(from==="hotProperties"){
+      router.push(`/hot-properties?page=${page}`);
     }else{
       {
         router.push(`/properties?${newParams.toString()}`);

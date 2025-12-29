@@ -17,7 +17,8 @@ export async function GET(req) {
             success:true,
             properties,
             totalPages,
-            totalProperties
+            totalProperties,
+            page
         },{status:200})
     } catch (error) {
         return NextResponse.json({

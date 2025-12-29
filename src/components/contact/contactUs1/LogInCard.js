@@ -10,16 +10,32 @@
  * contains an InputGroup with a
  * @returns The return statement is used to return a value from a function.
  */
+"use client";
+import { CreateContact } from "@/redux-toolkit/action/contactAction";
+import { useState } from "react";
 import { Mail, Phone, User } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Form, FormGroup, Input, InputGroup, InputGroupText, Row } from "reactstrap";
 
 const LogInCard = () => {
+  const {createcontactloading} = useSelector((state)=>state.Contact)
+  const [contactData, setContactData] = useState({
+    name:"",
+    email:"",
+    phone:"",
+    message:""
+  });
+  const dispatch = useDispatch();
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    dispatch(CreateContact(contactData,setContactData))
+  }
   return (
     <div className='log-in theme-card'>
       <div className='title-3 text-start'>
         <h2>Let's Get In Touch</h2>
       </div>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row className='gx-3'>
           <FormGroup className='form-group'>
             <Col md='12'>
@@ -29,7 +45,7 @@ const LogInCard = () => {
                     <User />
                   </InputGroupText>
                 </div>
-                <Input type='text' className='form-control' required maxLength='20' placeholder='Enter your name' name='userName' />
+                <Input type='text' value={contactData.name} onChange={(e)=>setContactData({...contactData, name:e.target.value})} className='form-control' required maxLength='20' placeholder='Enter your name' name='user' />
               </InputGroup>
             </Col>
           </FormGroup>
@@ -43,9 +59,11 @@ const LogInCard = () => {
               <Input
                 placeholder='phone number'
                 className='form-control'
-                name='mobnumber'
+                name='phone'
                 id='tbNumbers'
                 type='tel'
+                 value={contactData.phone}
+                 onChange={(e)=>setContactData({...contactData, phone:+e.target.value})}
                 maxLength='9'
                 onKeyPress={(event) => {
                   if (!/[0-9]/.test(event.key)) {
@@ -63,11 +81,11 @@ const LogInCard = () => {
                   <Mail />
                 </div>
               </div>
-              <Input type='email' className='form-control' placeholder='email address' required />
+              <Input type='email' value={contactData.email} onChange={(e)=>setContactData({...contactData, email:e.target.value})} className='form-control' placeholder='email address' required />
             </InputGroup>
           </FormGroup>
           <div className='form-group col-md-12'>
-            <Input type='textarea' className='form-control' id='exampleFormControlTextarea1' rows='3' placeholder='Write here something' />
+            <Input type='textarea' name="message" value={contactData.message} onChange={(e)=>setContactData({...contactData, message:e.target.value})} className='form-control' id='exampleFormControlTextarea1' rows='3' placeholder='Write here something' />
           </div>
           <div className='submit-btn with-captcha'>
             <div className='captcha'>
@@ -87,8 +105,8 @@ const LogInCard = () => {
               </div>
             </div>
             <div></div>
-            <Button className='btn btn-gradient btn-flat' type='submit'>
-              Send Your Message
+            <Button disabled={createcontactloading} className='btn btn-gradient btn-flat' type='submit'>
+              {createcontactloading ? "Submitting..." : "Send Your Message"}
             </Button>
           </div>
         </Row>

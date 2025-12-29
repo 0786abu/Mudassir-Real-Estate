@@ -1,4 +1,4 @@
-import { AdminDeleteProperty, ApprovedFreeProperty, ApprovedPayment, ForGotTemplate, OTPTEMPLATE, RejectedFreeProperty, RejectPayment, ResetPasswordTemplate } from "./Templates";
+import { AdminDeleteProperty, AdminTeamMailForContactInquiry, ApprovedFreeProperty, ApprovedPayment, ForGotTemplate, OTPTEMPLATE, RejectedFreeProperty, RejectPayment, ResetPasswordTemplate } from "./Templates";
 import nodemailer from "nodemailer"
 
 
@@ -112,6 +112,22 @@ export const DeletePropertyMail = async({email,name,reason,propertyType,property
             to:email,
             subject:"Your Property Has Been Removed | Real Estate Project",
             html:AdminDeleteProperty({name,reason,propertyTitle,propertyCategory,propertyType})
+        }
+        await transporter.sendMail(mailOptions);
+}
+export const SendemailToAdminTeamForContactForm = async({email,name,phone})=>{
+    const transporter = nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:process.env.EMAIL,
+                pass:process.env.PASSWORD
+            }
+        })
+        const mailOptions = {
+            from:`"Real Estate Platform" <${process.env.EMAIL}>`,
+            to:process.env.ADMIN_TEAM_EMAIL,
+            subject:"Some one contact you | Real Estate Project",
+            html:AdminTeamMailForContactInquiry({name,email,phone})
         }
         await transporter.sendMail(mailOptions);
 }

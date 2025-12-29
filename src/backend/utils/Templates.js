@@ -768,3 +768,102 @@ body {
 </body>
 </html>
 `
+
+export const AdminTeamMailForContactInquiry = ({name,email,phone})=>`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Contact Request</title>
+</head>
+
+<body style="margin:0; padding:0; background-color:#f4f6f8; font-family:Arial, Helvetica, sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f8; padding:20px 0;">
+    <tr>
+      <td align="center">
+
+        <!-- Main Container -->
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background:#0d6efd; padding:20px; text-align:center;">
+              <h2 style="margin:0; color:#ffffff; font-size:22px;">
+                📩 New Contact Form Submission
+              </h2>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:24px;">
+              <p style="margin:0 0 16px; font-size:15px; color:#333;">
+                Hello Admin Team,
+              </p>
+
+              <p style="margin:0 0 20px; font-size:14px; color:#555;">
+                A new user has submitted the contact form on <strong>PakEarth</strong>.
+                Below are the details:
+              </p>
+
+              <!-- Details Table -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                <tr>
+                  <td style="padding:10px; background:#f1f3f5; font-weight:bold; font-size:14px;">
+                    Name
+                  </td>
+                  <td style="padding:10px; font-size:14px;">
+                    ${name}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:10px; background:#f1f3f5; font-weight:bold; font-size:14px;">
+                    Email
+                  </td>
+                  <td style="padding:10px; font-size:14px;">
+                    ${email}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:10px; background:#f1f3f5; font-weight:bold; font-size:14px;">
+                    Phone
+                  </td>
+                  <td style="padding:10px; font-size:14px;">
+                    ${phone}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:10px; background:#f1f3f5; font-weight:bold; font-size:14px;">
+                    Message
+                  </td>
+                  <td style="padding:10px; font-size:14px;">
+                    <a target="_blank" href="${process.env.NEXT_PUBLIC_BASE_URL}/admin/dashboard/contacts">See Contacts</a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Footer Text -->
+              <p style="margin:24px 0 0; font-size:13px; color:#777;">
+                Please respond to this inquiry as soon as possible.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f8f9fa; padding:16px; text-align:center; font-size:12px; color:#777;">
+              © 2025 PakEarth.com — All Rights Reserved
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+`
