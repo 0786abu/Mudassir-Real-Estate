@@ -22,7 +22,6 @@ const page = async({params}) => {
   return (
       <div>
       <BodyContent property={propertyDetails.data} relatedProperties={propertyDetails.relatedProperties} side={"right"} />
-      <FooterThree />
       </div>
   );
 };

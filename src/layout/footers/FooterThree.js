@@ -35,7 +35,7 @@ const FooterThree = () => {
                       </span>
                     </h5>
                     <div className={`footer-content ${isActive === "subscribe" ? "d-block" : "d-none d-md-block"}`}>
-                      <p className="mb-0">Real estate investing involves the purchase, Improvement of realty, management and sale or rental of real estate for profit.</p>
+                      <p className="mb-0">PakEarth  is a dedicated platform for property ads, created to bridge the gap between property seller and buyer. With an extensive network and a user-friendly interface, we provide a space where individuals and businesses can post Free Classified Ad and find residential plots, apartments, commercial spaces and agricultural lands efficiently. </p>
                       <form>
                         <div className="input-group">
                           <input type="email" className="form-control" placeholder="Email Address" required />
@@ -50,7 +50,7 @@ const FooterThree = () => {
                   </div>
                 </Col>
               </Row>
-              <FooterBlog />
+              {/* <FooterBlog /> */}
             </Col>
           </Row>
         </Container>

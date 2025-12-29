@@ -3,87 +3,82 @@ import React, { Fragment, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
 import FooterThree from "@/layout/footers/FooterThree";
-import NavbarThree from "@/layout/headers/NavbarThree";
 
 const TermsAndConditions = () => {
-  const [active, setActive] = useState("1");
   return (
     <Fragment>
       <Breadcrumb />
       <section className='user-dashboard terms-section'>
         <Container>
           <Row className='log-in'>
-            <Col xl='3' lg='4'>
-              <div className='sidebar-user sticky-cls'>
-                <div className='dashboard-list'>
-                  <h5>Related Topics</h5>
-                  <ul className='nav nav-tabs right-line-tab'>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "1" ? "active" : ""}`} href='#intro' onClick={() => setActive("1")}>
-                        Introduction
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "2" ? "active" : ""}`} href='#restriction' onClick={() => setActive("2")}>
-                        Restrictions
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "3" ? "active" : ""}`} href='#limitation' onClick={() => setActive("3")}>
-                        Limitation
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "4" ? "active" : ""}`} href='#reservation' onClick={() => setActive("4")}>
-                        Reservation of Rights
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "5" ? "active" : ""}`} href='#disclaimer' onClick={() => setActive("5")}>
-                        Disclaimer
-                      </a>
-                    </li>
-                  </ul>
-                  <div className='terms-bottom-content'>
-                    <img src='/assets/images/others/1.svg' alt='' className='img-fluid' />
-                    <a href='text.txt' className='btn btn-gradient btn-pill' download>
-                      Download Doc
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </Col>
-            <Col xl='9' lg='8' sm='12'>
+            <Col sm='10'>
               <div className='theme-card'>
                 <h2>Terms & Conditions</h2>
                 <div className='terms-wrap'>
                   <div className='terms-wrapper' id='intro'>
                     <h4>Introduction</h4>
-                    <p>These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Sheltos accessible at sheltos.com.</p>
-                    <p>These Terms will be applied fully and affect to your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions.</p>
+                    <p>Welcome to PakEarth! Utilizing or accessing our property advertisement platform requires your adherence to the accompanying terms and conditions. If you disagree with any part of these terms, we advise you not to use our services. PakEarth maintains the authority to modify these terms when necessary without providing advance notification.</p>
                   </div>
                   <div className='terms-wrapper' id='restriction'>
-                    <h4>Restrictions</h4>
-                    <p>You are specifically restricted from all of the following:</p>
-                    <ul>
-                      <li>selling, sublicensing and/or otherwise commercializing any Website material;</li>
-                      <li>publishing any Website material in any other media;</li>
-                      <li>using this Website in any way that is or may be damaging to this Website;</li>
-                      <li>using this Website to engage in any advertising or marketing.</li>
+                    <h4>General Disclaimer</h4>
+                    <ul className="term-list mt-2">
+                      <li>PakEarth is a property ad posting platform and does not verify or authenticate the accuracy of advertisements posted by users.</li>
+                      <li>Users must verify any advertised property or project authenticity through independent checks including physical inspections.</li>
+                      <li>We are not liable for any inaccuracies, omissions, or misrepresentations in property listings or for the outcomes of transactions conducted through the platform.</li>
+                      <li>Links to external websites may be provided, but PakEarth is not responsible for their content or accuracy.</li>
+                      <li>The security, confidentiality, and accuracy of user account details are the sole responsibility of the user.</li>
+                    </ul>
+                  </div>
+                  <div className='terms-wrapper' id='restriction'>
+                    <h4>General Terms and Conditions</h4>
+                    <ul className="term-list mt-2">
+                      <li>We provides a platform for property advertisements and does not act as a property broker or agent.</li>
+                      <li>Our users must comply with all applicable laws of the Islamic Republic of Pakistan while using our services.</li>
+                      <li>Advertisements and listings may include promotions, and some services may require payment of fees.</li>
+                      <li>Users are prohibited from uploading harmful material, including malware, viruses, spam, or fraudulent content.</li>
+                      <li>Our users must not reproduce, copy, or redistribute PakEarth’s content without prior permission.</li>
+                    </ul>
+                  </div>
+                  <div className='terms-wrapper' id='restriction'>
+                    <h4>Property Advertisement Terms</h4>
+                    <ul className="term-list mt-2">
+                      <li>Users must own or be authorized by the owner to post property ads on PakEarth.</li>
+                      <li>Advertisements must include accurate and truthful property details. Users will indemnify PakEarth against any claims arising from inaccurate or false information.</li>
+                      <li>We may refuse, modify, or remove advertisements at its discretion, without obligation to provide a reason.</li>
+                      <li>Advertisements must remain active for a minimum of one week unless removed by PakEarth due to a policy violation.</li>
+                      <li>Pak Earth does not guarantee specific responses or outcomes from property advertisements, and any payments made are solely for ad display purposes.</li>
+                    </ul>
+                  </div>
+                  <div className='terms-wrapper' id='restriction'>
+                    <h4>Prohibited Use Policy</h4>
+                    <ul className="term-list mt-2">
+                      <li>Users must not engage in illegal activities or post content that infringes intellectual property rights or violates copyright laws.</li>
+                      <li>Impersonating others, misrepresenting property details, or uploading unauthorized or harmful content is strictly prohibited.</li>
+                      <li>PakEarth reserves the right to suspend accounts or restrict access without liability in case of prohibited use or violations.</li>
+                    </ul>
+                  </div>
+                  <div className='terms-wrapper' id='restriction'>
+                    <h4>Intellectual Property</h4>
+                    <ul className="term-list mt-2">
+                      <li>All content on our website, including text, images, logos, and software, is the intellectual property of our website and protected by copyright laws.</li>
+                      <li>Unauthorized use, reproduction, or modification of PakEarth content is prohibited.</li>
                     </ul>
                   </div>
                   <div className='terms-wrapper' id='limitation'>
-                    <h4>Limitation of liability</h4>
-                    <p>In no event shall Pixelstrap, nor any of its officers, directors and employees, shall be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract. Pixelstrap, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.</p>
+                    <h4>Indemnification</h4>
+                    <p>Users agree to indemnify and hold harmless PakEarth, its employees, and representatives from any claims, damages, or losses arising from their use of the platform or violation of these terms.</p>
                   </div>
-                  <div className='terms-wrapper' id='reservation'>
-                    <h4>Reservation of Rights</h4>
-                    <p>We reserve the right to request that you remove all links or any particular link to our Website. You approve to immediately remove all links to our Website upon request. We also reserve the right to amen these terms and conditions and it's linking policy at any time. By continuously linking to our Website, you agree to be bound to and follow these linking terms and conditions.</p>
+                  <div className='terms-wrapper' id='restriction'>
+                    <h4>Limitation of Liability</h4>
+                    <ul className="term-list mt-2">
+                      <li>PakEarth is not responsible for any direct, indirect, or consequential damages resulting from the use or inability to use the platform.</li>
+                      <li>The platform assumes no responsibility for the accuracy, completeness, or reliability of user-generated content.</li>
+                    </ul>
                   </div>
                   <div className='terms-wrapper' id='disclaimer'>
-                    <h4>Disclaimer</h4>
-                    <p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
-                    <p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
+                    <h4>No Warranties</h4>
+                    <p>Our platform provides its services on an "as is" basis and makes no guarantees regarding the success, accuracy, or reliability of property advertisements.</p>
+                    <p>By using PakEarth, you agree to these Terms and Conditions. For any questions or concerns, please contact us at [info@pakearth.com].</p>
                   </div>
                 </div>
               </div>
@@ -91,7 +86,6 @@ const TermsAndConditions = () => {
           </Row>
         </Container>
       </section>
-      <FooterThree />
     </Fragment>
   );
 };

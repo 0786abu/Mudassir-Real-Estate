@@ -15,7 +15,6 @@ const RightSidebar = () => {
     <Fragment>
       <Breadcrumb />
       <BodyContent side={"right"} />
-      <FooterThree />
     </Fragment>
   );
 };

@@ -33,21 +33,20 @@ export const FooterData = {
   usefulLinks: {
     title: "Useful Links",
     children: [
-      { title: "About us", link: "/pages/other-pages/about-us-2" },
-      { title: "New Arrivals", link: "/listing/grid-view/2-grid/left-sidebar" },
-      { title: "Agency", link: "/pages/agency/agency-grid" },
-      { title: "Faq", link: "/pages/other-pages/faq" },
-      { title: "Contact", link: "/contact/contact-us-2" },
+      { title: "About us", link: "/about" },
+      { title: "Properties", link: "/properties" },
+      { title: "Agencies", link: "/agents" },
+      { title: "Faq", link: "/faq" },
+      { title: "Contact", link: "/contact" },
     ],
   },
   feature: {
     title: "Feature",
     children: [
-      { title: "Services", link: "/pages/other-pages/services" },
-      { title: "Agency", link: "/pages/agency/agency-list" },
-      { title: "Agents", link: "/agent/agent-grid" },
-      { title: "Pricing", link: "/pages/other-pages/pricing" },
-      { title: "Favorites", link: "/pages/user-panel/favourites" },
+      { title: "Services", link: "/services" },
+      { title: "Forgot Password", link: "/forgot-password" },
+      { title: "Hot Properties", link: "/hot-properties" },
+      { title: "Our Features", link: "/our-features" }
     ],
   },
   social: {

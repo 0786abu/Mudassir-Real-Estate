@@ -15,7 +15,6 @@ const page = async({params,searchParams}) => {
     <div>
       <Breadcrumb page={"agent"} agentName={agent?.name} />
       <BodyContent agent={agent} agentProperties={agentProperties} totalPages={totalPages} totalProperties={totalProperties} page={page} searchParams={searchParams} />
-      <FooterThree />
     </div>
   );
 };

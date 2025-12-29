@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { AppPropertyData } from "@/data/appPropertyData";
 import { getData } from "@/utils/getData";
 import FeaturedPropertySection from "../classic/FeaturedProperty";
-import LatestPropertySection from "../classic/LatestProperty";
+// import LatestPropertySection from "../classic/LatestProperty";
 import PropertyServicesSection from "../classic/PropertyServices";
-import SubscribeSection from "../classic/Subscribe";
-import TestimonialSection from "../classic/Testimonial";
-import VideoSection from "../classic/Video";
+// import SubscribeSection from "../classic/Subscribe";
+// import TestimonialSection from "../classic/Testimonial";
+// import VideoSection from "../classic/Video";
 import SalePropertySection from "../slider-filter-search/SaleProperty";
 import AboutSection from "../classic/About";
 import BrandSection from "../classic/Brand";
@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AdminProperties, FeaturedProperties, LatestProperties } from "@/redux-toolkit/action/propertyAction";
 
 const BodyContent = () => {
-  const [value, setValue] = useState();
   const [clientData, setClientData] = useState();
   const {latestsproperties,latestpropertyloading,featuredProperties,featurepropertyloading,adminProperties,adminpropertyloading} = useSelector((state)=>state.Property);
   const dispatch = useDispatch();

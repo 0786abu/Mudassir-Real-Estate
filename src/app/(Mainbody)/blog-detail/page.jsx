@@ -14,7 +14,6 @@ const RightSidebar = () => {
           <Img src="/assets/images/parallax/4.jpg" className="bg-img img-fluid" alt="" />
         </div>
       </BodyContent>
-      <FooterThree />
     </Fragment>
   );
 };

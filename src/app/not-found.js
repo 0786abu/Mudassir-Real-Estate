@@ -1,5 +1,5 @@
+import Page404 from "@/components/Page404";
 import React from "react";
-import Page404 from "./(Mainbody)/pages/other-pages/404/page";
 
 const NotFound = () => {
   return (

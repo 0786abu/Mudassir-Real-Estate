@@ -28,10 +28,10 @@ const BodyContent = () => {
       <AboutUsSection />
       <ServiceSection value={AppPropertyData.ProvidedServices} />
       <AboutSection value={clientData?.MeetOurAgent} />
-      <div className='bg-light'>
+      {/* <div className='bg-light'>
         <TestimonialSection value={clientData?.WhatPeopleSay} />
-      </div>
-      <BlogSection value={value?.LatestBlogInCorporate} />
+      </div> */}
+      {/* <BlogSection value={value?.LatestBlogInCorporate} /> */}
     </Fragment>
   );
 };

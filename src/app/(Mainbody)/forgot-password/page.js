@@ -48,7 +48,6 @@ const ForgotPassword = () => {
           </div>
         </Container>
       </section>
-      <FooterThree />
     </Fragment>
   );
 };

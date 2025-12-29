@@ -9,7 +9,6 @@ const ResetPassword = async({params}) => {
     <div>
       <Breadcrumb page="Reset" />
       <ResetPasswordSection token={token}/>
-      <FooterThree />
     </div>
   );
 };

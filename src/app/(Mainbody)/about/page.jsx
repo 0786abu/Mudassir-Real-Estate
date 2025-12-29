@@ -9,7 +9,6 @@ const AboutUs2 = () => {
     <Fragment>
       <BreadCrumb2 />
       <BodyContent />
-      <FooterThree />
     </Fragment>
   );
 };

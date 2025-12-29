@@ -10,7 +10,7 @@ import { LatestPropertyDetail, providerServices } from "@/constValues/constValue
 
 const ServiceSection = ({ value }) => {
   return (
-    <section className="service-section service-2 pb-0">
+    <section style={{padding:"40px 0px"}} className="service-section service-2 pb-0">
       <Container>
         <Row>
           <Col>

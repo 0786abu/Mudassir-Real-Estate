@@ -913,3 +913,34 @@ p {
   font-size: 22px;
   margin-bottom: 4px;
 }
+.term-list {
+  list-style: none;           /* default bullets remove */
+  padding-left: 0;
+  margin: 0;
+}
+
+.term-list li {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 14px;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #6c757d;             /* Bootstrap text-muted */
+}
+
+/* Custom bullet */
+.term-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  background-color: #108A00;  /* Bootstrap primary */
+  border-radius: 50%;
+}
+
+/* Hover effect (optional) */
+// .term-list li:hover::before {
+//   background-color: #084298;
+// }

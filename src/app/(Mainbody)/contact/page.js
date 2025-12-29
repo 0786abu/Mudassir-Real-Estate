@@ -14,7 +14,6 @@ const ContactUs1 = () => {
     <Fragment>
       <Breadcrumb />
       <BodyContent />
-      <FooterThree />
     </Fragment>
   );
 };

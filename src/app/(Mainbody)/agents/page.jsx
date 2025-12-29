@@ -1,13 +1,10 @@
 import BodyContent from "@/components/pages/agency/agencyGrid";
-import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
-import FooterThree from "@/layout/footers/FooterThree";
 import { Col, Container, Row } from "reactstrap";
 import Sidebar from "@/layout/sidebarLayout/Sidebar";
 import Exploration from "@/layout/sidebarLayout/Exploration";
 import RecentlyAdded from "@/layout/sidebarLayout/RecentlyAdded";
 import Featured from "@/layout/sidebarLayout/Featured";
 import { Suspense } from "react";
-import ProfileLoader from "@/components/common/Loader";
 import ContentLoader from "react-content-loader";
 
 
@@ -45,7 +42,7 @@ const AgentGrid = ({searchParams}) => {
           </Sidebar>
       </Row>
       </Container>
-      <FooterThree />
+      
     </div>
   );
 };

@@ -22,9 +22,10 @@ const GetInTouchSection = () => {
             <div className='row contact-detail theme-card'>
               <Col lg='12' className='p-0'>
                 <div className='contact-content'>
-                  <h2>Welcome to sheltos !!</h2>
+                  <h2>Welcome to Pak Earth !!</h2>
                   <p className='font-roboto'>
-                    Connected residences might be owned by a single entity and leased out, or owned separately with an agreement covering the relationship between units and common areas and concerns.
+                    Our support team is available to assist you during business hours. Please allow up to Monday To Saturday (9AM - 5PM) for a response.
+
                   </p>
                 </div>
               </Col>
@@ -33,9 +34,9 @@ const GetInTouchSection = () => {
                   <MapPin />
                   <h4>Where ?</h4>
                   <p className='font-roboto'>
-                    549 Sulphur Springs Road <br />
-                    Downers Grove, IL 60515 <br />
-                    United state <br />
+                    E-28, Block B, Architects <br/>
+                    Engineers Housing Society, <br/>
+                    Lahore, 54000 <br />
                     +91 361264100
                   </p>
                 </div>
@@ -45,10 +46,9 @@ const GetInTouchSection = () => {
                   <Mail />
                   <h4>Online service</h4>
                   <ul>
-                    <li>Inquiries: sheltos@.in</li>
-                    <li>Support: help@.in</li>
-                    <li>www.test.com</li>
-                    <li>+86 163 - 451 - 7894</li>
+                    <li>Support: Admin@pakearth.com</li>
+                    <li>www.PakEarth.com</li>
+                    <li>03164249126</li>
                   </ul>
                 </div>
               </Col>

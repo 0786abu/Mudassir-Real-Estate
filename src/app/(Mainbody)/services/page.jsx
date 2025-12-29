@@ -9,7 +9,6 @@ const Services = () => {
     <Fragment>
       <Breadcrumb />
       <BodyContent />
-      <FooterThree />
     </Fragment>
   );
 };

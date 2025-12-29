@@ -5,7 +5,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { Button } from "reactstrap";
-import ContentLoader from "react-content-loader";
+// import ContentLoader from "react-content-loader";
 import Img from "@/utils/BackgroundImageRatio";
 import PropertyLabel from "../PropertyLabel";
 import { formatPK } from "@/utils/Formatter";
