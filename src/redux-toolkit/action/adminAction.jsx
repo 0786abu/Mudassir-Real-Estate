@@ -164,17 +164,18 @@ export const ApprovedPaymentToggle = (id,paymentData,setActionModal)=>async(disp
     }
 }
 
-export const AdminFetchPayments = ({selectedStatus,selectedPaymentMethod})=>async(dispatch)=>{
+export const AdminFetchPayments = ({selectedStatus,selectedPaymentMethod,currentPage})=>async(dispatch)=>{
     dispatch(setPaymentLoading())
     try {
         const searchparams = new URLSearchParams();
         if(selectedStatus) searchparams.append("status", selectedStatus)
+        if(currentPage) searchparams.append("page", currentPage)
         if(selectedPaymentMethod) searchparams.append("paymentMethod", selectedPaymentMethod)
         const {data} = await axios.get(`${baseURL}/api/admin/payments?${searchparams.toString()}`,{
             contentType:"application/json",
             withCredentials:true
         })
-        dispatch(setPayments(data.payments))
+        dispatch(setPayments({payments:data.payments,totalPages:data.totalPages,totalPaymentsLists:data.totalPaymentsList}))
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);
         dispatch(setAdminError(error?.response?.data?.message || error?.response?.data?.error));

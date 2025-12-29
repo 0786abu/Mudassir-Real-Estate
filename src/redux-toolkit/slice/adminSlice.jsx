@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { act } from "react";
 
 const initialState = {
     allproperties:[],
@@ -6,6 +7,8 @@ const initialState = {
     allagents:[],
     alladmins:[],
     payments:[],
+    totalPaymentPages:null,
+    totalPaymentLists:null,
     aboutAdmin:null,
     aboutUser:null,
     aboutAgent:null,
@@ -124,7 +127,9 @@ const adminSlice = createSlice({
         setPayments:(state,action)=>{
             state.paymentloading = false
             state.error = null
-            state.payments = action.payload
+            state.payments = action.payload.payments
+            state.totalPaymentPages = action.payload.totalPages
+            state.totalPaymentLists = action.payload.totalPaymentsLists
         },
         setPaymentLoading:(state)=>{
             state.paymentloading = true

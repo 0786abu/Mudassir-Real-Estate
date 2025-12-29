@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Badge, Button, Card, CardBody, CardHeader, Col, Container, Form, Input, Modal, ModalBody, ModalHeader, Row, Table } from "reactstrap";
 
 const Payments = () => {
-  const {payments,paymentloading,paymentactionloading} = useSelector((state)=>state.Admin);
+  const {payments,paymentloading,paymentactionloading,totalPaymentPages,totalPaymentLists} = useSelector((state)=>state.Admin);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [actionModal, setActionModal] = useState(false);
@@ -23,6 +23,8 @@ const Payments = () => {
   const [paymentid, setPaymentId] = useState("");
   const [selectedStatus,setSelectedStatus] = useState("");
   const [selectedPaymentMethod,setSelectedPaymentMethod] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleScreenshotToggle = (ss)=>{
     setScreenshotModal(!screenshotModal);
@@ -51,14 +53,37 @@ const Payments = () => {
     setSelectedPaymentMethod("")
     setSelectedStatus("")
   }
+  const getPages = () => {
+    const maxVisible = 4;
+    let start = Math.max(1, currentPage - 1); // sliding window
+    let end = Math.min(totalPaymentPages, start + maxVisible - 1);
+
+    // Adjust start if less than maxVisible pages at end
+    if (end - start + 1 < maxVisible) {
+      start = Math.max(1, end - maxVisible + 1);
+    }
+
+    const pages = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  };
+
+  const pages = getPages();
+
+   
+const goToPage = (page)=>{
+  setCurrentPage(page);
+}
 
   const handlePush = (slug)=>{
     router.push(`/admin/dashboard/allProperties/${slug}`)
   }
 
   useEffect(()=>{
-    dispatch(AdminFetchPayments({selectedStatus,selectedPaymentMethod}))
-  },[dispatch,selectedStatus,selectedPaymentMethod])
+    dispatch(AdminFetchPayments({selectedStatus,selectedPaymentMethod,currentPage}))
+  },[dispatch,selectedStatus,selectedPaymentMethod,currentPage])
   return (
     <Fragment>
       <Breadcrumb title='Payments' titleText='Welcome to admin panel' parent='Payments' />
@@ -203,9 +228,35 @@ const Payments = () => {
                 </div>
               </CardBody>
               )}
+               {totalPaymentLists>12 && (
+               <nav className="theme-pagination mb-4 me-4">
+<ul className="pagination">
+  <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(1)}>«</div>
+  </li>
+  <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage - 1)}>{"<"}</div>
+  </li>
+
+  {pages.map((p,index) => (
+    <li key={index} className={`page-item `}>
+      <button style={{background:p===currentPage ? "#108a00" : "",color:p===currentPage ? "white" : "black"}} disabled={p === currentPage || paymentloading} className="page-link" onClick={() => goToPage(p)}>{paymentloading && p===currentPage ? "...": p}</button>
+    </li>
+  ))}
+
+  <li className={`page-item ${currentPage === totalPaymentPages ? "disabled" : ""}`}>
+    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage + 1)}>{">"}</div>
+  </li>
+  <li className={`page-item ${currentPage === totalPaymentPages ? "disabled" : ""}`}>
+    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(totalPaymentPages)}>»</div>
+  </li>
+</ul>
+</nav>
+             )}
             </Card>
           </Col>
         </Row>
+         
       </Container>
     </Fragment>
   );
