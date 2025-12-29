@@ -6,9 +6,18 @@ import FooterLink from "./elements/FooterLink";
 import FooterBlog from "./footerThreeElements/FooterBlog";
 import FooterContactUsDetails from "./footerThreeElements/FooterContactUsDetails";
 import SubFooterTwo from "./elements/SubFooterTwo";
+import { useDispatch, useSelector } from "react-redux";
+import { CreateSubscribeEmail } from "@/redux-toolkit/action/emailAction";
 
 const FooterThree = () => {
+  const {createemailloading} = useSelector((state)=>state.Email);
   const [isActive, setIsActive] = useState();
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+    dispatch(CreateSubscribeEmail(email,setEmail))
+  }
   return (
     <footer>
       <div className="footer footer-bg">
@@ -36,12 +45,12 @@ const FooterThree = () => {
                     </h5>
                     <div className={`footer-content ${isActive === "subscribe" ? "d-block" : "d-none d-md-block"}`}>
                       <p className="mb-0">PakEarth  is a dedicated platform for property ads, created to bridge the gap between property seller and buyer. With an extensive network and a user-friendly interface, we provide a space where individuals and businesses can post Free Classified Ad and find residential plots, apartments, commercial spaces and agricultural lands efficiently. </p>
-                      <form>
+                      <form onSubmit={handleSubmit}>
                         <div className="input-group">
-                          <input type="email" className="form-control" placeholder="Email Address" required />
+                          <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control" placeholder="Email Address" required />
                           <span className="input-group-apend">
                             <button type="submit" className="input-group-text" id="basic-addon2">
-                              <i className="fas fa-paper-plane"></i>
+                              {createemailloading ? <span className=" spinner-border" style={{width:"16px",height:"16px"}} role="status"></span> : <i className="fas fa-paper-plane"></i>}
                             </button>
                           </span>
                         </div>

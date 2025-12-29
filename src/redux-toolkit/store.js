@@ -12,6 +12,7 @@ import Payment from "./slice/paymentSlice"
 import Lead from "./slice/leadSlice"
 import Admin from "./slice/adminSlice"
 import Contact from "./slice/contactSlice"
+import Email from "./slice/emailSlice"
 
 export const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ export const store = configureStore({
     Payment,
     Lead,
     Admin,
-    Contact
+    Contact,
+    Email
   },
 });
