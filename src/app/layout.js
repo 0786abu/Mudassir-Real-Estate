@@ -8,7 +8,7 @@ import { I18nProvider } from "./i18n/i18n-context";
 import BootstrapClient from "@/layout/headers/Bootstrap";
 import { ToastContainer } from "react-toastify";
 import ConditionalNavbar from "@/utils/shoulShowNavbar";
-import FooterThree from "@/layout/footers/FooterThree";
+import ConditionalFooter from "@/utils/shouldShowFooter";
 
 export const metadata = {
   title: "Sheltos - Real Estate Next 15",
@@ -38,7 +38,7 @@ export default async function RootLayout({ children }) {
               <BootstrapClient/>
               <ConditionalNavbar/>
               {children}
-              <FooterThree />
+              <ConditionalFooter />
               <ToastContainer/>
               </MainProvider>
         </body>

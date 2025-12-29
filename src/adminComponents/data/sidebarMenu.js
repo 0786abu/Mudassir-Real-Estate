@@ -1,4 +1,4 @@
-import { Airplay, BarChart, CreditCard, Grid, Layout, Lock, MapPin, UserPlus, Users } from "react-feather";
+import { Airplay, BarChart, CreditCard, Grid, Layout, Lock, Mail, MapPin, UserPlus, Users } from "react-feather";
 
 export const SidebarMenuItem = [
     {
@@ -68,12 +68,7 @@ export const SidebarMenuItem = [
             }
         ]
     },
-    // {
-    //     title: 'Map',
-    //     icon: <MapPin />,
-    //     type: 'link',
-    //     path: "/map"
-    // },
+    
     // {
     //     title: 'Types',
     //     icon: <Layout />,
@@ -123,7 +118,13 @@ export const SidebarMenuItem = [
         icon: <CreditCard />,
         type: 'link',
         path: "/admin/dashboard/payments"
-    }
+    },
+    {
+        title: 'Contacts',
+        icon: <Mail />,
+        type: 'link',
+        path: "/admin/dashboard/contacts"
+    },
     // {
     //     title: 'Authentication',
     //     icon: <Lock />,
