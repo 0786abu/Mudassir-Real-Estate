@@ -43,7 +43,11 @@ export default function AdminNotifications() {
       <div className="mb-2">
         <Button onClick={handleRead}>{markedloading ? <div className="d-flex align-items-center gap-1"><span className=" spinner-border" role="status" style={{width:"16px",height:"16px"}}></span> Wait...</div> : "Marked all as read"}</Button>
       </div>
-      {notificationloading ? (
+      {notifications?.length===0 ? (
+        <div className="d-flex justify-content-center align-items-center" style={{height:"60vh"}}>
+          <h2>No Notifications yet</h2>
+        </div>
+      ) : notificationloading ? (
         <ProfileLoader/>
       ) : (
         <ListGroup>
