@@ -28,7 +28,7 @@ const notificationsSlice = createSlice({
             state.notificationerror = null
             state.notifications = state.notifications.map((noti)=>({...noti,isRead:true}))
         },
-        setMarkSingleAsRead:(state)=>{
+        setMarkSingleAsRead:(state,action)=>{
             state.notifications = state.notifications.map((noti)=>noti._id === action.payload ? {...noti, isRead:true} : noti);
         },
         setNotificationError:(state,action)=>{
