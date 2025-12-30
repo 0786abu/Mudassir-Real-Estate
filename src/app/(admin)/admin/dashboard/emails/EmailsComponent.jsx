@@ -45,8 +45,8 @@ const goToPage = (page)=>{
 
   return (
     <div>
-        <Breadcrumb/>
-        <h2>Subcribe Emails</h2>
+                <Breadcrumb title='Emails' titleText='Welcome To Admin Panel' parent='Email' />
+
         {emailloading ? <ProfileLoader/> : (
             <div className=' d-flex align-items-center flex-wrap gap-4'>
                 {emails?.map((email,index)=>{
