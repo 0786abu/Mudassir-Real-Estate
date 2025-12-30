@@ -1,3 +1,4 @@
+import { MailCheck } from "lucide-react";
 import { Airplay, BarChart, CreditCard, Grid, Layout, Lock, Mail, MapPin, UserPlus, Users } from "react-feather";
 
 export const SidebarMenuItem = [
@@ -124,6 +125,12 @@ export const SidebarMenuItem = [
         icon: <Mail />,
         type: 'link',
         path: "/admin/dashboard/contacts"
+    },
+    {
+        title: 'Emails',
+        icon: <MailCheck />,
+        type: 'link',
+        path: "/admin/dashboard/emails"
     },
     // {
     //     title: 'Authentication',

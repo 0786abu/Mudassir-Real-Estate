@@ -6,6 +6,7 @@ import { isAuthenticated } from "@/backend/utils/middlewere";
 import cloudinary from "@/backend/utils/cloudinary";
 import { NextResponse } from "next/server";
 import Admin from "@/backend/model/adminModel";
+import { NotificationCreate } from "@/utils/NotificationCreate";
 
 function getOptional(formData, key) {
   const value = formData.get(key);
@@ -215,6 +216,14 @@ if (!user) {
 
     // ✅ Save property to DB
     const property = await Property.create(data);
+    if(createdByModel !== "Admin"){
+      const Notitype= "proeprty_created"
+    const message = `${isFree 
+  ? "A free property has just been added! You can check it in the admin panel and mark it as Approved or Rejected." 
+  : "A new property has been added, but payment is pending. You can view it in the admin panel and wait for the payment to complete."}`;
+    const link = `${process.env.NEXT_PUBLIC_BASE_URL}/admin/dashboard/allProperties/${slug}`
+    await NotificationCreate({type:Notitype,message,link,createdBy:isUser._id})
+    }
 
     return NextResponse.json({
       success: true,
