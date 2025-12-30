@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Property from "@/backend/model/propertyModel";
 import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthenticated } from "@/backend/utils/middlewere";
+import { NotificationCreate } from "@/utils/NotificationCreate";
 import { NextResponse } from "next/server";
 
 export async function DELETE(req,{params}) {
