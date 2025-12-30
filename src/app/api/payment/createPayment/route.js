@@ -76,7 +76,11 @@ export async function POST(req) {
       createdByModel:isUser?.role==="agent" ? "Agent" : "User"
     };
 
-    const payment = await Payment.create(paymentData)
+    const payment = await Payment.create(paymentData);
+          const Notitype= "payment_created"
+        const message = `User create a payment for this property ${property.title} so you can go on payments page and see payment detals and approve payment and property`;
+        const link = `${process.env.NEXT_PUBLIC_BASE_URL}/admin/dashboard/payments`
+        await NotificationCreate({type:Notitype,message,link,createdBy:isUser._id,createdByModel:isUser.role==="individual" ? "User" : "Agent"})
 
     return NextResponse.json({
       success: true,

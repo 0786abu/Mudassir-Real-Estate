@@ -36,6 +36,11 @@ export async function DELETE(req,{params}) {
       }
     }
         const property = await Property.deleteOne({_id:_id,createdBy:isUser._id})
+          if(isUser.role !== "admin"){
+            const Notitype= "property_deleted"
+        const message = `Property delete by ${isUser.name}`;
+        await NotificationCreate({type:Notitype,message,createdBy:isUser._id,createdByModel:isUser.role==="individual" ? "User" : "Agent"})
+          }
         return NextResponse.json({
             success:true,
             message:"Property Delete Successfull",
