@@ -1,10 +1,10 @@
 import { AdminFetchNotifications } from '@/redux-toolkit/action/notificationsAction'
-import dayjs from 'dayjs'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { Bell } from 'react-feather'
 import { useDispatch, useSelector } from 'react-redux'
 import { Media } from 'reactstrap'
+import dayjs from "@/utils/DAYJS"
 
 const Notification = () => {
     const {notifications,notificationloading} = useSelector((state)=>state.Notifications);
@@ -15,7 +15,7 @@ const Notification = () => {
     return (
         <li className="onhover-dropdown notification-box">
             {notificationloading ? <span className=' spinner-border' role='status' style={{width:"18px",height:"18px"}}></span> : <Bell />}
-            <span className="label label-shadow label-pill notification-badge">3</span>
+            <span className="label label-shadow label-pill notification-badge">{notifications?.filter((item)=>item.isRead===false)?.length}</span>
             <div className="notification-dropdown onhover-show-div">
                 <div className="dropdown-title">
                     <h6>Notifications</h6>

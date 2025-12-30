@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ListGroup, ListGroupItem, Badge, Spinner, Button } from "reactstrap";
-import dayjs from "dayjs";
+import dayjs from "@/utils/DAYJS";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
