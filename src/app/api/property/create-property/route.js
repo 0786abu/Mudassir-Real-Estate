@@ -222,7 +222,7 @@ if (!user) {
   ? "A free property has just been added! You can check it in the admin panel and mark it as Approved or Rejected." 
   : "A new property has been added, but payment is pending. You can view it in the admin panel and wait for the payment to complete."}`;
     const link = `${process.env.NEXT_PUBLIC_BASE_URL}/admin/dashboard/allProperties/${slug}`
-    await NotificationCreate({type:Notitype,message,link,createdBy:isUser._id})
+    await NotificationCreate({type:Notitype,message,link,createdBy:isUser._id,createdByModel})
     }
 
     return NextResponse.json({
