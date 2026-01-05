@@ -1,45 +1,44 @@
 import Link from 'next/link'
 import React from 'react'
 import { Media } from 'reactstrap'
-import { Propertydata } from '../../data/dashboard/data'
 
-const Properylist = () => {
+const Properylist = ({data}) => {
     return (
         <div className="col-xl-3 xl-6 col-lg-12 col-md-6">
             <div className="card">
                 <div className="card-header pb-0">
                     <div className="d-flex">
                         <h5>My properties</h5>
-                        <a href="add-property.html">+ New</a>
+                        <Link href="/admin/dashboard/create-property">+ New</Link>
                     </div>
                 </div>
                 <div className="card-body properties-list">
                     {
-                        Propertydata && Propertydata.map((item, i) => {
+                        data && data.map((item, i) => {
                             return (
                                 <Media key={i}>
-                                    <img src={item.img} className="img-fluid" alt='' />
+                                    <img src={item.images[0]?.url} className="img-fluid" alt='' />
                                     <Media body>
-                                        <Link href='/myproperties/propertylist'>
-                                            <h6>{item.name}</h6>
+                                        <Link target='_blank' href={`/admin/dashboard/myProperties/${item.slug}`}>
+                                            <h6>{item.type}</h6>
                                         </Link>
                                         <ul>
                                             <li>
                                                 <img src="/assets/images/svg/icon/double-bed.svg" className="img-fluid" alt='' />
-                                                <span>{item.bad}</span>
+                                                <span>{item.beds}</span>
                                             </li>
                                             <li>
                                                 <img src="/assets/images/svg/icon/bathroom.svg" className="img-fluid" alt='' />
-                                                <span>{item.bath}</span>
+                                                <span>{item.baths}</span>
                                             </li>
-                                            <li>
+                                            {/* <li>
                                                 <img src="/assets/images/svg/icon/sofa.svg" className="img-fluid" alt='' />
                                                 <span>{item.sofa}</span>
-                                            </li>
+                                            </li> */}
                                         </ul>
                                         <div>
                                             <span className="light-font">Status: </span>
-                                            <span className={`label label-light-${item.class}`}>{item.status}</span>
+                                            <span className={`label label-light-success`}>{item.category}</span>
                                         </div>
                                     </Media>
                                 </Media>

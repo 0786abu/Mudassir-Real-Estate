@@ -73,46 +73,43 @@ export async function GET(req) {
         message:"you are unauthorized ot access this route, please first login"
       },{status:401})
     }
-    const now = new Date();
+    // const now = new Date();
 
-    // Current year start (Jan 1)
-    const startOfYear = new Date(now.getFullYear(), 0, 1);
-    // Current month end
-    const endOfCurrentMonth = new Date(
-      now.getFullYear(),
-      now.getMonth() + 1,
-      0,
-      23,
-      59,
-      59
-    );
+    // // Current year start (Jan 1)
+    // const startOfYear = new Date(now.getFullYear(), 0, 1);
+    // // Current month end
+    // const endOfCurrentMonth = new Date(
+    //   now.getFullYear(),
+    //   now.getMonth() + 1,
+    //   0,
+    //   23,
+    //   59,
+    //   59
+    // );
     const properties = await Property.find({createdBy:isUser._id}).limit(3).sort({createdAt:-1});
 
     const result = await Property.aggregate([
-      {
-        $match: {
-          createdBy:isUser?._id,
-          createdAt: {
-            $gte: startOfYear,
-            $lte: endOfCurrentMonth,
-          },
-        },
-      },
-      {
-        $group: {
-          _id: { month: { $month: "$createdAt" } },
-          totalViews: { $sum: "$views" },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          month: "$_id.month",
-          views: "$totalViews",
-        },
-      },
-      { $sort: { month: 1 } },
-    ]);
+  {
+    $match: {
+      createdBy: isUser?._id
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      totalViews: {
+        $sum: { $ifNull: ["$views", 0] }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      totalViews: 1
+    }
+  }
+]);
+
     const typeData = await Property.aggregate([
           {
             $match: {
@@ -178,24 +175,24 @@ export async function GET(req) {
       },
     ]);
     // Month names
-    const months = [
-      "Jan","Feb","Mar","Apr","May","Jun",
-      "Jul","Aug","Sep","Oct","Nov","Dec"
-    ];
+    // const months = [
+    //   "Jan","Feb","Mar","Apr","May","Jun",
+    //   "Jul","Aug","Sep","Oct","Nov","Dec"
+    // ];
 
     // 🔥 Only Jan → current month
-    const formattedData = [];
-    for (let i = 0; i <= now.getMonth(); i++) {
-      const found = result.find(r => r.month === i + 1);
-      formattedData.push({
-        month: months[i],
-        views: found ? found.views : 0, // 👈 no data = 0
-      });
-    }
+    // const formattedData = [];
+    // for (let i = 0; i <= now.getMonth(); i++) {
+    //   const found = result.find(r => r.month === i + 1);
+    //   formattedData.push({
+    //     month: months[i],
+    //     views: found ? found.views : 0, // 👈 no data = 0
+    //   });
+    // }
     return NextResponse.json({
       success: true,
-      year: now.getFullYear(),
-      data: formattedData,
+      // year: now.getFullYear(),
+      totalViews: result[0]?.totalViews,
       typedData:typeData,
       availablePropertiesPercent:availablePropertiesPercent[0] || {
         totalProperties: 0,

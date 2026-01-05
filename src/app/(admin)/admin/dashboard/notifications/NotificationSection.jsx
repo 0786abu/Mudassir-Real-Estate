@@ -31,8 +31,11 @@ export default function AdminNotifications() {
   const handleRead = ()=>{
     dispatch(MarkedAsRead())
   }
-  const handleassingleRead = (id)=>{
-    dispatch(MarkedAsSingleRead(id))
+  const handleassingleRead = (item)=>{
+    if(item.isRead===false){
+      return;
+    }
+    dispatch(MarkedAsSingleRead(item._id))
   }
   const handleDelete = (id)=>{
     setID(id)
@@ -59,7 +62,7 @@ export default function AdminNotifications() {
                 borderLeft: n.isRead ? undefined : "5px solid #198754",
                 cursor: "pointer",
               }}
-              onClick={n.isRead===false ? ()=>handleassingleRead(n._id) : null} 
+              onClick={()=>handleassingleRead(n)} 
             >
               <div style={{position:"absolute",top:"2px",right:"2px"}}>
                 {deleteloading && ID===n._id ? <span className=" spinner-border" role="status" style={{width:"16px",height:"16px"}}></span> : <Trash style={{color:"red",width:"16px",height:"16px"}} onClick={()=>handleDelete(n._id)}/>}

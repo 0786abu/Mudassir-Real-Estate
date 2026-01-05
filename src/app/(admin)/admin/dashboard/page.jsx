@@ -1,41 +1,26 @@
-"use client";
-import React, { Fragment } from 'react';
-import dynamic from 'next/dynamic';
-import { Container } from 'reactstrap';
-import Breadcrumb from '@/adminComponents/components/Common/Breadcrumb';
+import React, { Suspense } from 'react'
+import Dashboard from './DashboardComponent'
 import ProfileLoader from '@/components/common/Loader';
+import { cookies } from 'next/headers';
 
-// Dynamically import components with SSR disabled
-const Assigness = dynamic(() => import('@/adminComponents/components/dashboard/Assigness'), { ssr: false });
-const Management = dynamic(() => import('@/adminComponents/components/dashboard/Management'), { ssr: false });
-const ProjectTimeline = dynamic(() => import('@/adminComponents/components/dashboard/ProjectTimeline'), { ssr: false });
-const Properies = dynamic(() => import('@/adminComponents/components/dashboard/Properies'), { ssr: false });
-const Properylist = dynamic(() => import('@/adminComponents/components/dashboard/Properylist'), { ssr: false });
-const SalaryChart = dynamic(() => import('@/adminComponents/components/dashboard/SalaryChart'), { ssr: false });
-const Soldout = dynamic(() => import('@/adminComponents/components/dashboard/Soldout'), { ssr: false });
-const Status = dynamic(() => import('@/adminComponents/components/dashboard/Status'), { ssr: false });
-
-const Dashboard = () => {
-    
-    return (
-        <Fragment>
-            <Breadcrumb title='Dashboard' titleText='Welcome To Admin Panel' parent='Dashboard' />
-            {/* {userloading ? <ProfileLoader/> : ( */}
-                <Container fluid={true}>
-                <div className="row">
-                    <Properies />
-                    <SalaryChart />
-                    <Status />
-                    <ProjectTimeline />
-                    <Assigness />
-                    <Properylist />
-                    <Management />
-                    <Soldout />
-                </div>
-            </Container>
-            {/* )} */}
-        </Fragment>
-    )
+const page = async() => {
+     const cookieStore = await cookies();
+     
+    const statsData = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/dashboard_stats`,{
+            cache:"no-store",
+           headers: {
+      Cookie: cookieStore.toString(), // ✅ MOST IMPORTANT
+    },
+        });
+        const data = await statsData.json();
+        const { firstStat, secondStat,typeStats,paymentStats,recentProperties,myProperties} = data;
+  return (
+    <div>
+        <Suspense fallback={<ProfileLoader/>}>
+          <Dashboard firstStat={firstStat} secondStat={secondStat} typeStats={typeStats} paymentStats={paymentStats} recentProperties={recentProperties} myProperties={myProperties} />
+        </Suspense>
+    </div>
+  )
 }
 
-export default Dashboard;
+export default page

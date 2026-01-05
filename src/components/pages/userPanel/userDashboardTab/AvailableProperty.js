@@ -61,7 +61,7 @@ const AvailableProperty = ({ loading, data, from }) => {
   };
 
   return (
-    <div className={` ${from==="admin" ? "p-2 rounded-2 shadow-sm col-md-12 mt-4" : "col-xl-4 xl-40 col-md-6"}`}>
+    <div className={` ${from==="admin" ? "p-2 rounded-2 shadow-sm col-md-12 mt-4" : "col-xl-4 xl-40"}`}>
       <div className="common-card available-property">
         <div className="common-header">
           <h5>Available property</h5>

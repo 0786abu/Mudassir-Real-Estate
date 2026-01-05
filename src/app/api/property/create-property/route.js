@@ -216,6 +216,7 @@ if (!user) {
 
     // ✅ Save property to DB
     const property = await Property.create(data);
+    
     if(createdByModel !== "Admin"){
       const Notitype= "proeprty_created"
     const message = `${isFree 
@@ -225,6 +226,7 @@ if (!user) {
     await NotificationCreate({type:Notitype,message,link,createdBy:isUser._id,createdByModel})
     }
 
+    
     return NextResponse.json({
       success: true,
       message: "Property created successfully",

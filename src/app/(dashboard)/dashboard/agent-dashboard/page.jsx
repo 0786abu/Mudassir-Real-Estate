@@ -12,7 +12,6 @@ const UserDashboard = () => {
     <Fragment>
       <Breadcrumb />
       <BodyContent active={"Dashboard"} role={"agent"} />
-      <FooterThree />
     </Fragment>
   );
 };

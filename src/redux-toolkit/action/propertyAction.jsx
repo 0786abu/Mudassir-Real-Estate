@@ -58,7 +58,7 @@ export const ViewsChartData = ()=>async(dispatch)=>{
             },
             withCredentials:true
         });
-        dispatch(setMyChartData({year:data.year,data:data.data}));
+        dispatch(setMyChartData({data:data.totalViews}));
         dispatch(setMyTypeChartData(data.typedData));
         dispatch(setMyAvailableProeprtiesChartData(data.availablePropertiesPercent));
         dispatch(setLatestProeprty(data.properties));

@@ -3,6 +3,7 @@ import Property from "@/backend/model/propertyModel";
 import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthorized } from "@/backend/utils/middlewere";
 import { DeletePropertyMail, FreePropertyApprovedMail, RejectPropertyApprovedMail } from "@/backend/utils/NodeMailer";
+import { emailQueue } from "@/utils/Queue";
 import { NextResponse } from "next/server";
 
 export async function GET(req,{params}){
@@ -111,6 +112,20 @@ export async function POST(req,{params}){
         }
         property.isApproved = status;
         await property.save();
+        if(status==="Approved"){
+            await emailQueue.add("PROPERTY_CREATED", {
+        property,
+        
+      },{
+    attempts: 5, // max 5 tries
+    backoff: {
+      type: "exponential",
+      delay: 3000, // 3 sec
+    },
+    removeOnComplete: { age: 3600 },
+    removeOnFail: { age: 86400 },
+  });
+        }
         return NextResponse.json({
             success: true,
             message:`Mark property as ${status} successfull`,

@@ -5,9 +5,9 @@ import ReactApexChart from "react-apexcharts";
 import { formatKK } from "@/utils/Formatter";
 
 const SmallBarCard = ({viewsData,availableProperties}) => {
-  const totalViews = viewsData?.data?.reduce((sum, item) => {
-  return sum + (item.views || 0);
-}, 0);
+//   const totalViews = viewsData?.data?.reduce((sum, item) => {
+//   return sum + (item.views || 0);
+// }, 0);
   return (
     <Fragment>
       <Col md='4'>
@@ -46,7 +46,7 @@ const SmallBarCard = ({viewsData,availableProperties}) => {
             <div className='media'>
               <div className='media-body'>
                 <p>Total Views of this Year</p>
-                <h5>{formatKK(totalViews)}+</h5>
+                <h5>{formatKK(viewsData)}+</h5>
               </div>
               {/* <div className='small-bar'>
                 <ReactApexChart options={{ ...smallChartData1.options, colors: [`var(--theme-default)`] }} series={smallChartData1.series} type='bar' className='small-chart' />

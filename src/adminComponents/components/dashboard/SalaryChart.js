@@ -1,16 +1,89 @@
 import React from "react";
 import { TrendingUp } from "react-feather";
 import { Card, CardBody, Col, Row } from "reactstrap";
-import { chartoptions, chartseries } from "../../data/dashboard/data";
+// import { chartoptions, chartseries } from "../../data/dashboard/data";
 import ReactApexChart from "react-apexcharts";
+// import { formatKK } from "@/utils/Formatter";
 
-const SalaryChart = () => {
+const SalaryChart = ({data}) => {
+ const options = {
+      chart: {
+        type: "bar",
+        toolbar: {
+          show: false,
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          barHeight: "40%",
+        },
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            borderColor: "transparent",
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            borderColor: "transparent",
+            show: false,
+          },
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      responsive: [
+        {
+          breakpoint: 1199,
+          options: {
+            chart: {
+              height: 270,
+            },
+          },
+        },
+      ],
+      colors: ["#108A00"],
+      fill: {
+        type: "gradient",
+        gradient: {
+          shade: "dark",
+          shadeIntensity: 1,
+          type: "horizontal",
+          gradientToColors: ["#108A00"],
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100],
+        },
+      },
+  
+      xaxis: {
+        categories: data?.map((item)=>item.type),
+        axisBorder: {
+          low: 0,
+          offsetX: 0,
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+      },
+    }
+    const series = [
+      {
+        name: "Num of properties in this type",
+        data: data?.map((item)=>item.total),
+      },
+    ]
   return (
     <Col xl='8 large-12'>
       <Card className='sales-details'>
         <CardBody>
           <Row>
-            <Col sm='4'>
+            {/* <Col sm='4'>
               <div className='sales-status'>
                 <h5 className='light-font'>Sales summary</h5>
                 <div className='status-price'>
@@ -40,20 +113,14 @@ const SalaryChart = () => {
                 <span>Last updated</span>
                 <h5>Dec 26, 2022</h5>
               </div>
-            </Col>
-            <Col sm='8'>
+            </Col> */}
+            <Col sm='12'>
               <div className='monthly-sales'>
-                <div className='icon-box'>
-                  <i className='fas fa-chevron-left light-font' />
-                </div>
-                <h6>Octobar, 2022</h6>
-                <div className='icon-box'>
-                  <i className='fas fa-chevron-right light-font' />
-                </div>
+                <h4>Properties types data</h4>
               </div>
               <div className='bar-sales'>
                 <div id='sale-chart'>
-                  <ReactApexChart options={chartoptions} series={chartseries} type='bar' height={350} />
+                  <ReactApexChart options={options} series={series} type='bar' height={400} id='agent-sales' />
                 </div>
               </div>
             </Col>

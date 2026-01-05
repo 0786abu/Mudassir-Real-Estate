@@ -6,7 +6,6 @@ import Breadcrumb from '@/adminComponents/components/Common/Breadcrumb';
 import { useDispatch, useSelector } from 'react-redux';
 import { AdminFetchAllAboutUser } from '@/redux-toolkit/action/adminAction';
 import ProfileLoader from '@/components/common/Loader';
-import SalesOverview from '@/components/pages/userPanel/userDashboardTab/SalesOverview';
 import SalesByAgent from '@/components/pages/userPanel/userDashboardTab/SalesByAgent';
 import AvailableProperty from '@/components/pages/userPanel/userDashboardTab/AvailableProperty';
 // import RecentPayment from '@/adminComponents/components/manageuser/profile/RecentPayments';
@@ -35,7 +34,6 @@ const Profile = ({_id}) => {
                             <ProfileDetail aboutUser={aboutUser?.user} />
                             <Col sm="12">
                                 <RecentProperty properties={aboutUser?.recentProperties} />
-                                <SalesOverview data={aboutUser?.viewsData} from="admin"/>
                                     <SalesByAgent data={aboutUser?.typedData} from="admin"/>
                                 <AvailableProperty data={aboutUser?.availablePropertiesPercent} from="admin"/>
                             </Col>

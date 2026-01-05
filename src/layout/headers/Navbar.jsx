@@ -121,7 +121,7 @@ const router = useRouter();
               <li className="nav-item"><Link href="/properties" className="nav-link nav-anchors fw-medium">Properties</Link></li>
               <li className="nav-item"><Link href="/services" className="nav-link nav-anchors fw-medium">Services</Link></li>
               <li className="nav-item"><Link href="/agents" className="nav-link nav-anchors fw-medium">Agents</Link></li>
-              <li className="nav-item"><Link href="/blogs" className="nav-link nav-anchors fw-medium">Blogs</Link></li>
+              <li className="nav-item"><Link target="_blank" href="http://blog.pakearth.com" className="nav-link nav-anchors fw-medium">Blogs</Link></li>
               <li className="nav-item"><Link href="/about" className="nav-link nav-anchors fw-medium">About</Link></li>
               <li className="nav-item"><Link href="/contact" className="nav-link nav-anchors fw-medium">Contact</Link></li>
             </ul>
