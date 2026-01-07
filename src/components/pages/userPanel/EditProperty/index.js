@@ -168,6 +168,7 @@ useEffect(()=>{
                         type="button"
                         className=" bg-black text-white rounded-1"
                         onClick={handleAddKeyword}
+                        style={{background:"transparent",border:"none"}}
                         disabled={!keywordInput.trim() || keywords.includes(keywordInput.trim())}
                       >
                         <Plus className="h-75 w-75" />
@@ -381,6 +382,7 @@ useEffect(()=>{
                         type="button"
                         className=" bg-black text-white rounded-1"
                         onClick={handleAddAmenity}
+                        style={{background:"transparent",border:"none"}}
                         disabled={!amenityInput.trim() || amenities.includes(amenityInput.trim())}
                       >
                         <Plus className="h-75 w-75" />
