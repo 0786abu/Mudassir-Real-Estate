@@ -12,6 +12,7 @@ const EditProperty = ({setActivetab,adminSlug,from}) => {
   const {createpropertyloading,myProperty,singlepropertyloading,selectedSlug} = useSelector((state)=>state.Property)
  const [keywords, setKeywords] = useState([])
   const [keywordInput, setKeywordInput] = useState("");
+  const [hovered, setHovered] = useState(false);
  const [amenities, setAmenities] = useState([])
   const [amenityInput, setAmenityInput] = useState("");
   const dispatch = useDispatch();
@@ -133,10 +134,10 @@ useEffect(()=>{
     <NoSsr>
           <div className="dashboard-content">
             {singlepropertyloading ? (<ProfileLoader/>) : (
-              <div className="create-tab" id="create-property">
+              <div className="create-tab my-4" id="create-property">
               <div className="property-wizard common-card">
                 <div className="common-header">
-                  <h5>Create property</h5>
+                  <h5>Update property</h5>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="create-property-form">
@@ -411,7 +412,7 @@ useEffect(()=>{
                     </Row>
                   </div>
                   <div className="text-end">
-                    <Button disabled={createpropertyloading} type="submit" className="btn btn-gradient color-2 btn-pill">
+                    <Button onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} disabled={createpropertyloading} type="submit" className="btn btn-pill" style={{backgroundColor:hovered ? "#108a00" : "#14a800"}}>
                       {createpropertyloading ? (<div className="d-flex align-items-center gap-2">
                       <span className="spinner-border text-success spinner-border-sm"></span> <span>Update property</span>
                       </div>) : "Update property"}
