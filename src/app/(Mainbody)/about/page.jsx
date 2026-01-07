@@ -1,6 +1,5 @@
 "use client";
 import React, { Fragment } from "react";
-import FooterThree from "@/layout/footers/FooterThree";
 import BreadCrumb2 from "@/layout/Breadcrumb/BreadCrumb2";
 import BodyContent from "@/components/pages/other-pages/aboutUs2";
 

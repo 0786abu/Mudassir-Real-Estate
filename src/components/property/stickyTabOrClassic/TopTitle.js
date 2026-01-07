@@ -95,7 +95,7 @@ const TopTitle = ({ property, favourites }) => {
             </ul>
             <div className="share-buttons">
               <div className="d-inline-block">
-                <a className="btn share-anchor" style={{background:"#108a00",color:"white"}}>
+                <a className="btn share-anchor" style={{background:"#14a800",color:"white"}}>
                   <i className="fas fa-share-square"></i>
                   share
                 </a>

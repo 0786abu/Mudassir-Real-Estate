@@ -9,24 +9,24 @@
     .page-item {
       .page-link {
         cursor: pointer;
-        color: #108A00;
+        color: #14a800;
         border-radius: 4px;
-        font-weight: 500;
+        font-weight: 500; 
         padding: 6px 13px;
         &:focus {
           box-shadow: none;
         }
         &:hover,
         &:focus {
-          background-color: #108a00;
-          border-color: #108a00;
+          background-color: #14a800;
+          border-color: #14a800;
           color: white;
         }
       }
       &.active {
         .page-link {
-          background-color: #108A00;
-          border-color: #108A00;
+          background-color: #14a800;
+          border-color: #14a800;
           color: $white;
           z-index: 1;
         }

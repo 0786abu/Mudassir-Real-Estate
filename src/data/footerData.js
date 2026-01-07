@@ -43,7 +43,7 @@ export const FooterData = {
   feature: {
     title: "Feature",
     children: [
-      { title: "Services", link: "/services" },
+      { title: "Projects", link: "/projects" },
       { title: "Forgot Password", link: "/forgot-password" },
       { title: "Hot Properties", link: "/hot-properties" },
       { title: "Our Features", link: "/our-features" }

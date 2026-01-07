@@ -243,7 +243,7 @@ const PropertyDetailDashboard = ({setActivetab}) => {
         <span style={{ marginLeft: "8px" }}>
           <b>{bank.bankName}</b> <br />
           Account Title: {bank.accountTitle} <br />
-          Account #: {bank.accountNumber} <br />
+          Account No#: {bank.accountNumber} <br />
           IBAN: {bank.iban}
         </span>
       </label>

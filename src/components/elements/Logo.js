@@ -26,7 +26,7 @@ const Logo3 = () => {
   return (
     <div className="brand-logo">
       <Link href="/">
-        <img src="/assets/images/logo/2.png" alt="" className="img-fluid" />
+        <img src="/assets/images/final-logo.png" alt="" className="img-fluid rounded-2" />
       </Link>
     </div>
   );

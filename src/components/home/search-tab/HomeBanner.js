@@ -70,8 +70,8 @@ professionals
     background:
       filterValues.category === "Sale"
         ? hovered === "Sale"
-          ? "#14a800"
-          : "#108a00"
+          ? "#108a00"
+          : "#14a800"
         : "#F8F9FA",
     color: filterValues.category === "Sale" ? "white" : "black",
     transition: "background 0.3s ease-in-out",
@@ -91,8 +91,8 @@ professionals
     background:
       filterValues.category === "Rent"
         ? hovered === "Rent"
-          ? "#14a800"
-          : "#108a00"
+          ? "#108a00"
+          : "#14a800"
         : "#F8F9FA",
     color: filterValues.category === "Rent" ? "white" : "black",
     transition: "background 0.3s ease-in-out",
@@ -128,8 +128,8 @@ professionals
                   <option value="">Property Type</option>
                    {propertyTypesData.map((item) => (
                       <optgroup key={item.mainType} label={item.mainType}>
-                        {item.types.map((sub) => (
-                          <option key={sub} value={sub}>
+                        {item.types.map((sub,index) => (
+                          <option key={index} value={sub}>
                             {sub}
                           </option>
                         ))}
@@ -220,7 +220,7 @@ professionals
               <button
               onMouseEnter={()=>setIsHover(true)}
               onMouseLeave={()=>setIsHover(false)}
-              style={{background:isHover ? "#14a800" : "#108a00",color:"white"}}
+              style={{background:isHover ? "#108a00" : "#14a800",color:"white"}}
                 className="btn w-100 py-2"
                 onClick={handleSearch}
               >

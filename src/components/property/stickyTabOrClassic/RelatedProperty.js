@@ -34,7 +34,7 @@ const RelatedProperty = ({relatedProperties}) => {
         </div>
         <Row className=" ratio_55">
           <Col sm="12" className=" property-grid-3">
-            <Row className="property-2  column-sm zoom-gallery property-label property-grid">
+            <Row className=" column-sm zoom-gallery property-label property-grid">
               {relatedProperties?.length===0 ? (
                  <Col xs={12} className="text-center py-5">
               <div className="no-properties d-flex flex-column align-items-center justify-content-center">

@@ -106,10 +106,10 @@ export default function FilterSidebar() {
           onChange={(e) => updateFilter("type", e.target.value)}
         >
           <option value="">Property Type</option>
-         {propertyTypesData.map((item) => (
-    <optgroup key={item.mainType} label={item.mainType}>
-      {item.types.map((sub) => (
-        <option key={sub} value={sub}>
+         {propertyTypesData.map((item,index) => (
+    <optgroup key={index} label={item.mainType}>
+      {item.types.map((sub,index) => (
+        <option key={index} value={sub}>
           {sub}
         </option>
       ))}
@@ -150,10 +150,10 @@ export default function FilterSidebar() {
 >
   <option value="">Select Location</option>
 
-  {citiesLocationsData.map((item) => (
-    <optgroup key={item.city} label={item.city}>
-      {item.subCities.map((sub) => (
-        <option key={sub} value={sub}>
+  {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
+    <optgroup key={index} label={item.city}>
+      {item.subCities.map((sub,index) => (
+        <option key={index} value={sub}>
           {sub}
         </option>
       ))}
@@ -187,7 +187,7 @@ export default function FilterSidebar() {
                 borderRadius: "4px",
                 background: getTrackBackground({
                   values: priceRange,
-                  colors: ["#ccc", "#108a00", "#ccc"],
+                  colors: ["#ccc", "#14a800", "#ccc"],
                   min: MIN,
                   max: MAX,
                 }),
@@ -209,7 +209,7 @@ export default function FilterSidebar() {
                 height: "20px",
                 width: "20px",
                 borderRadius: "50%",
-                backgroundColor: "#108a00",
+                backgroundColor: "#14a800",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -252,7 +252,7 @@ export default function FilterSidebar() {
                 borderRadius: "4px",
                 background: getTrackBackground({
                   values: squareRange,
-                  colors: ["#ccc", "#108a00", "#ccc"],
+                  colors: ["#ccc", "#14a800", "#ccc"],
                   min: MINFits,
                   max: MAXFits,
                 }),
@@ -274,7 +274,7 @@ export default function FilterSidebar() {
                 height: "20px",
                 width: "20px",
                 borderRadius: "50%",
-                backgroundColor: "#108a00",
+                backgroundColor: "#14a800",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -299,7 +299,7 @@ export default function FilterSidebar() {
      onMouseEnter={()=>setIsHover(true)}
      onMouseLeave={()=>setIsHover(false)}
         className="btn w-100 py-2 rounded-3 fw-semibold shadow-sm"
-        style={{background:isHover ? "#14a800" : "#108a00",color:"white"}}
+        style={{background:isHover ? "#108a00" : "#14a800",color:"white"}}
         onClick={resetFilters}
       >
         Reset Filters

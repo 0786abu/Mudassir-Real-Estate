@@ -18,7 +18,7 @@ import { Bath, Bed } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const FeaturedPropertySection = ({ value,loading }) => {
-  const [isHover, setIsHover] = useState(false);
+  const [isHover, setIsHover] = useState("detail");
   const router = useRouter();
   const handleClick = ()=>{
     router.push("/properties?featured=yes")
@@ -47,7 +47,7 @@ const FeaturedPropertySection = ({ value,loading }) => {
                                       <span style={{color:"#108a00"}}>+</span>
                                     </div>
 
-                                    <span className='label label-gradient label-lg' style={{background:"#108a00"}}>{FeaturedProperty}</span>
+                                    <span className='label label-gradient label-lg' style={{background:"#14a800"}}>{FeaturedProperty}</span>
                                   </div>
                                 )}
                               </Item>
@@ -95,7 +95,7 @@ const FeaturedPropertySection = ({ value,loading }) => {
                                 <li>
                                   
                                   <Link href={`/properties/${data.slug}`}>
-                                    <button style={{background:isHover ? "#14a800" : "#108a00",color:"white"}} onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} type='button' className='btn btn-lg'>
+                                    <button style={{background:isHover==="detail" ? "#108a00" : "#14a800",color:"white"}} onMouseEnter={()=>setIsHover("detail")} onMouseLeave={()=>setIsHover("")} type='button' className='btn btn-lg'>
                                       View Detail
                                     </button>
                                   </Link>
@@ -111,7 +111,7 @@ const FeaturedPropertySection = ({ value,loading }) => {
             </NoSsr>
           </Col>
           <div className="d-flex justify-content-center" style={{marginTop:"60px"}}>
-            <Button size="sm" onClick={handleClick} style={{background:"#108A00"}}>See all</Button>
+            <Button size="sm" onMouseEnter={()=>setIsHover("all")} onMouseLeave={()=>setIsHover("")} onClick={handleClick} style={{background:isHover==="all" ? "#108a00" : "#14a800"}}>See all</Button>
           </div>
         </Row>
       </Container>

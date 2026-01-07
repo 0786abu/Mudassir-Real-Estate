@@ -232,23 +232,25 @@ const goToPage = (page)=>{
                <nav className="theme-pagination mb-4 me-4">
 <ul className="pagination">
   <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(1)}>«</div>
+    <div className="page-link" onClick={() => goToPage(1)}>«</div>
   </li>
   <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage - 1)}>{"<"}</div>
+    <div className="page-link" onClick={() => goToPage(currentPage - 1)}>{"<"}</div>
   </li>
 
   {pages.map((p,index) => (
     <li key={index} className={`page-item `}>
-      <button style={{background:p===currentPage ? "#108a00" : "",color:p===currentPage ? "white" : "black"}} disabled={p === currentPage || paymentloading} className="page-link" onClick={() => goToPage(p)}>{paymentloading && p===currentPage ? "...": p}</button>
+      <button style={{background:"transparent",border:"none"}} disabled={p === currentPage || paymentloading} className={`page-item ${p === currentPage ? "active" : ""}`} onClick={() => goToPage(p)}>
+        <div className="page-link">{paymentloading && p===currentPage ? "...": p}</div>
+      </button>
     </li>
   ))}
 
   <li className={`page-item ${currentPage === totalPaymentPages ? "disabled" : ""}`}>
-    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(currentPage + 1)}>{">"}</div>
+    <div className="page-link" onClick={() => goToPage(currentPage + 1)}>{">"}</div>
   </li>
   <li className={`page-item ${currentPage === totalPaymentPages ? "disabled" : ""}`}>
-    <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(totalPaymentPages)}>»</div>
+    <div className="page-link" onClick={() => goToPage(totalPaymentPages)}>»</div>
   </li>
 </ul>
 </nav>

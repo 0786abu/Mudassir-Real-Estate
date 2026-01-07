@@ -45,7 +45,6 @@ const About = () => {
                         <div className="bg-size agent-image">
                           <Img src={data.agencyProfile?.url} className="bg-img" />
                           <div className="overlay-agent">
-                          <div style={{position:"absolute", bottom:"4px",right:"4px"}}><Link2/> </div>
                             <div className="agent-details">
                               <Link href="/agent/agent-profile">
                                 <h6 className="d-flex" style={{color:"#108A00"}}>
@@ -60,7 +59,7 @@ const About = () => {
                               <span className="font-roboto">{data.email}</span>
                               <SocialAccounts socialMedia={data.socialMedia} />
                               <Link href={`/agents/${data._id}`}>
-                              <Button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{background:isHover ? "#14a800" : "#108A00",color:"white"}} className="mt-2">View detail</Button>
+                              <Button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{background:isHover ? "#108A00" : "#14a800",color:"white"}} className="mt-2">View detail</Button>
                               </Link>
                             </div>
                           </div>

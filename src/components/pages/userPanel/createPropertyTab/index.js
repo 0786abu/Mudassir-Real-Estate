@@ -11,6 +11,7 @@ const CreatePropertyTab = ({from}) => {
  const [keywords, setKeywords] = useState([])
   const [keywordInput, setKeywordInput] = useState("");
  const [amenities, setAmenities] = useState([])
+ const [hovered, setHovered] = useState(false);
   const [amenityInput, setAmenityInput] = useState("");
   const dispatch = useDispatch();
   const [propertyData, setPropertyData] = useState({
@@ -167,6 +168,7 @@ if (floorImage !==null) {
                         type="button"
                         className=" bg-black text-white rounded-1"
                         onClick={handleAddKeyword}
+                        style={{background:"#14a800"}}
                         disabled={!keywordInput.trim() || keywords.includes(keywordInput.trim())}
                       >
                         <Plus className="h-75 w-75" />
@@ -237,10 +239,10 @@ if (floorImage !==null) {
                                 //  value={type}
                                >
                                  <option value="">Property Type</option>
-                                {propertyTypesData.map((item) => (
-                           <optgroup key={item.mainType} label={item.mainType}>
-                             {item.types.map((sub) => (
-                               <option key={sub} value={sub}>
+                                {propertyTypesData.map((item,index) => (
+                           <optgroup key={index} label={item.mainType}>
+                             {item.types.map((sub,index) => (
+                               <option key={index} value={sub}>
                                  {sub}
                                </option>
                              ))}
@@ -335,10 +337,10 @@ if (floorImage !==null) {
                        className="form-control h-100"
                        >
                          <option value="">Select Location</option>
-                         {citiesLocationsData.map((item) => (
-                           <optgroup key={item.city} label={item.city}>
-                             {item.subCities.map((sub) => (
-                               <option key={sub} value={sub}>
+                         {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
+                           <optgroup key={index} label={item.city}>
+                             {item.subCities.map((sub,index) => (
+                               <option key={index} value={sub}>
                                  {sub}
                                </option>
                              ))}
@@ -375,7 +377,7 @@ if (floorImage !==null) {
   />
 
   <label htmlFor="multiFileUpload" className="dropzone-box">
-    <i className="fas fa-cloud-upload-alt upload-icon"></i>
+    <i className="fas fa-cloud-upload-alt upload-icon" style={{color:"#14a800"}}></i>
     <h6 className="mb-1">Drag & Drop images here</h6>
     <p className="text-muted mb-0">or click to browse</p>
   </label>
@@ -394,7 +396,7 @@ if (floorImage !==null) {
   />
 
   <label htmlFor="multiFileUpload" className="dropzone-box">
-    <i className="fas fa-cloud-upload-alt upload-icon"></i>
+    <i className="fas fa-cloud-upload-alt upload-icon" style={{color:"#14a800"}}></i>
     <h6 className="mb-1">Drag & Drop images here</h6>
     <p className="text-muted mb-0">or click to browse</p>
   </label>
@@ -421,7 +423,8 @@ if (floorImage !==null) {
                       />
                       <button
                         type="button"
-                        className=" bg-black text-white rounded-1"
+                        className=" text-white rounded-1"
+                         style={{background:"#14a800"}}
                         onClick={handleAddAmenity}
                         disabled={!amenityInput.trim() || amenities.includes(amenityInput.trim())}
                       >
@@ -454,7 +457,7 @@ if (floorImage !==null) {
                     </Row>
                   </div>
                   <div className="text-end">
-                    <Button disabled={createpropertyloading} type="submit" className="btn btn-gradient color-2 btn-pill">
+                    <Button onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} disabled={createpropertyloading} type="submit" className="btn btn-pill" style={{backgroundColor:hovered ? "#108a00" : "#14a800"}}>
                       {createpropertyloading ? (<div className="d-flex align-items-center gap-2">
                       <span className="spinner-border text-success spinner-border-sm"></span> <span>Add property</span>
                       </div>) : "Add property"}

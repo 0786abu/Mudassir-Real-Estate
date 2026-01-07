@@ -77,10 +77,10 @@ const [isHover, setIsHover] = useState(false);
                     onChange={(e)=>setType(e.target.value)}
                   >
                     <option value="">Property Type</option>
-                   {propertyTypesData.map((item) => (
-              <optgroup key={item.mainType} label={item.mainType}>
-                {item.types.map((sub) => (
-                  <option key={sub} value={sub}>
+                   {propertyTypesData.map((item,index) => (
+              <optgroup key={index} label={item.mainType}>
+                {item.types.map((sub,index) => (
+                  <option key={index} value={sub}>
                     {sub}
                   </option>
                 ))}
@@ -115,10 +115,10 @@ const [isHover, setIsHover] = useState(false);
 >
   <option value="">Select Location</option>
 
-  {citiesLocationsData.map((item) => (
-    <optgroup key={item.city} label={item.city}>
-      {item.subCities.map((sub) => (
-        <option key={sub} value={sub}>
+  {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
+    <optgroup key={index} label={item.city}>
+      {item.subCities.map((sub,index) => (
+        <option key={index} value={sub}>
           {sub}
         </option>
       ))}

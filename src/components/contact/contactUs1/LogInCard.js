@@ -25,6 +25,7 @@ const LogInCard = () => {
     phone:"",
     message:""
   });
+  const [hovered, setHovered] = useState(false);
   const dispatch = useDispatch();
   const handleSubmit = (e)=>{
     e.preventDefault();
@@ -105,7 +106,7 @@ const LogInCard = () => {
               </div>
             </div>
             <div></div>
-            <Button disabled={createcontactloading} className='btn btn-gradient btn-flat' type='submit'>
+            <Button disabled={createcontactloading} className='btn' onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)} style={{background:hovered ? "#108a00" : "#14a800"}} type='submit'>
               {createcontactloading ? "Submitting..." : "Send Your Message"}
             </Button>
           </div>

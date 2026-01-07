@@ -1,10 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { AppPropertyData } from "@/data/appPropertyData";
 import { getData } from "@/utils/getData";
 import FeaturedPropertySection from "../classic/FeaturedProperty";
 // import LatestPropertySection from "../classic/LatestProperty";
-import PropertyServicesSection from "../classic/PropertyServices";
 // import SubscribeSection from "../classic/Subscribe";
 // import TestimonialSection from "../classic/Testimonial";
 // import VideoSection from "../classic/Video";
@@ -45,7 +43,6 @@ const BodyContent = () => {
       <CategorySection/>
       <SalePropertySection value={latestsproperties} loading={latestpropertyloading} />
       <FeaturedPropertySection value={featuredProperties} loading={featurepropertyloading} />
-      <PropertyServicesSection value={AppPropertyData.PropertyServicesInClassic} />
       <SalePropertySection value={adminProperties} loading={adminpropertyloading} from="adminProperties" />
       {/* <VideoSection /> */}
       {/* <TestimonialSection value={clientData?.OurHappyClientInClassicLayout} /> */}

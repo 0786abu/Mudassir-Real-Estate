@@ -8,7 +8,7 @@ const SetShowPhone = ({phone}) => {
                 <i className="fas fa-phone-alt"></i>
                   <span className="character">+92 {phone == show ? phone : phone.slice(0, 5) + "*****"}</span>
                 <span
-                style={{background:"#9fd398",color:"#108A00"}}
+                style={{background:"#14a800",color:"#fff"}}
                   className="label label-light label-flat"
                   onClick={() => {
                     setShow(phone);

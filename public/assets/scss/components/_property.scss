@@ -14,7 +14,7 @@
     width: 6px;
     height: 6px;
     top: 20px;
-    color: $white;
+    color: $white; 
     filter: brightness(1) invert(1);
   }
 }
@@ -31,7 +31,7 @@
   }
 }
 .property-wrapper-grid {
-  .col-xl-4 {
+  .col-xl-4 { 
     .property-details {
       padding: 15px;
       ul {
@@ -77,7 +77,7 @@
     }
   }
 }
-.property-details {
+.property-details{
   padding: 30px;
   position: relative;
 
@@ -99,11 +99,11 @@
     margin-bottom: 10px;
     font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
   }
-  &:hover{
-    h3{
-      color: #108a00 !important;
-    }
-  }
+  // &:hover{
+  //   h3{
+  //     color: #108a00 !important;
+  //   }
+  // }
 
   p {
     line-height: 1.6;
@@ -112,7 +112,7 @@
   }
 
   ul {
-    margin-bottom: 18px;
+    margin-bottom: 10px;
 
     li {
       padding-left: 15px;
@@ -509,11 +509,15 @@
       }
     }
 
-    .property-details {
+    .property-details{
       h6 {
         font-weight: 600;
         font-size: 17px;
-        color: #108A00;      
+        color: #fff;  
+        background-color: #14a800;
+        display: inline-block;
+        padding: 4px;
+        border-radius: 6px;
       }
       .icon-property {
         display: flex;
@@ -599,11 +603,11 @@
         }
       }
 
-      .property-details {
+      .property-details{
         > a {
           h3 {
-            color: #108A00;
-            transition: 0.8s;
+            color: black;
+            // transition: 0.8s;
           }
         }
       }
@@ -714,11 +718,11 @@
 
   .property-1,
   .property-2 {
-    .property-details {
+    .property-details{
       padding: 30px;
       > span {
         display: block;
-        margin-top: -3px;
+        margin-top: 3px;
       }
     }
 

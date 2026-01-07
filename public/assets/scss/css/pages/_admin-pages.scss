@@ -867,14 +867,16 @@ footer {
         .pagination {
             .page-item {
                 .page-link {
-                    color: var(--theme-default2);
+                    color: #14a800;
+                    &:hover{
+                        color: $white;
+                    }
                 }
-
                 &.active {
                     .page-link {
-                        background-color: var(--theme-default2);
-                        border-color: var(--theme-default2);
-                        color: $white;
+                        background-color: #14a800;
+                        border-color: #14a800;
+                        color: white;
                     }
                 }
             }

@@ -87,7 +87,18 @@ const router = useRouter();
         <div className="container">
 
           {/* Logo */}
-          <Link href="/" className="navbar-brand fw-bold fs-4 order-lg-1 order-1">LOGO</Link>
+          <Link href="/" style={{aspectRatio:"16/9",width:"100px"}} className="navbar-brand position-relative fw-bold fs-4 order-lg-1 order-1">
+          <Image 
+          src={"/assets/images/final-logo.png"}
+          alt="Pak Earth Logo"
+          // width={100}
+          // height={50}
+          fill
+          className=" object-fit-cover"
+          style={{width:"100%"}}
+          priority
+          />
+          </Link>
 
           {/* Right section */}
           <div className="d-flex align-items-center gap-2 ms-auto order-lg-3 order-2">
@@ -119,7 +130,7 @@ const router = useRouter();
             <ul className="navbar-nav mx-auto gap-lg-3 md mt-3 p-lg-2 mt-lg-0">
               <li className="nav-item"><Link href="/" className="nav-link nav-anchors fw-medium">Home</Link></li>
               <li className="nav-item"><Link href="/properties" className="nav-link nav-anchors fw-medium">Properties</Link></li>
-              <li className="nav-item"><Link href="/services" className="nav-link nav-anchors fw-medium">Services</Link></li>
+              <li className="nav-item"><Link href="/services" className="nav-link nav-anchors fw-medium">Projects</Link></li>
               <li className="nav-item"><Link href="/agents" className="nav-link nav-anchors fw-medium">Agents</Link></li>
               <li className="nav-item"><Link target="_blank" href="http://blog.pakearth.com" className="nav-link nav-anchors fw-medium">Blogs</Link></li>
               <li className="nav-item"><Link href="/about" className="nav-link nav-anchors fw-medium">About</Link></li>

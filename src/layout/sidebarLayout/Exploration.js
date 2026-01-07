@@ -63,7 +63,7 @@ const Exploration = ({owner,property}) => {
           onMouseEnter={()=>setIsHover(true)}
           onMouseLeave={()=>setIsHover(false)}
           style={{
-            background:isHover ? "#14a800" : "#108a00"
+            background:isHover ? "#108a00" : "#14a800"
           }}
           type="submit"  className="btn btn-block">
             {sendInquiryLoading ? (

@@ -2,7 +2,7 @@
  * It takes in an array of objects and returns a row of property boxes
  * @returns A section with a container, row, and col.
  */
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, Row } from "reactstrap";
 import { LatestForSale, Sale } from "@/constValues/constValues";
 import PropertyBoxOne from "../../elements/propertyBoxs/PropertyBoxOne";
@@ -10,6 +10,7 @@ import ContentLoader from "react-content-loader";
 import { useRouter } from "next/navigation";
 
 const SalePropertySection = ({ value,loading, from }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
   const handlePush = ()=>{
     router.push("/hot-properties")
@@ -58,7 +59,7 @@ const SalePropertySection = ({ value,loading, from }) => {
         </Row>
         {from==="adminProperties" && value?.length>4 && (
           <div className="d-flex justify-content-center" style={{marginTop:"60px"}}>
-          <Button onClick={handlePush} size="sm" style={{background:"#108a00"}}>See all</Button>
+          <Button onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} onClick={handlePush} size="sm" style={{background:isHovered ? "#108a00" : "#14A800"}}>See all</Button>
         </div>
         )}
       </Container>

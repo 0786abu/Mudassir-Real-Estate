@@ -156,10 +156,10 @@ const handleResetFilters = ()=>{
           onChange={(e) => setFilters({ ...filters, type: e.target.value })}
         >
           <option value="">select type</option>
-           {propertyTypesData.map((item) => (
-              <optgroup key={item.mainType} label={item.mainType}>
-                {item.types.map((sub) => (
-                  <option key={sub} value={sub}>
+           {propertyTypesData.map((item,index) => (
+              <optgroup key={index} label={item.mainType}>
+                {item.types.map((sub,index) => (
+                  <option key={index} value={sub}>
                     {sub}
                   </option>
                 ))}
@@ -242,10 +242,10 @@ const handleResetFilters = ()=>{
         >
             <option value={""}>select Location</option>
             
-  {citiesLocationsData.map((item) => (
-    <optgroup key={item.city} label={item.city}>
-      {item.subCities.map((sub) => (
-        <option key={sub} value={sub}>
+  {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
+    <optgroup key={index} label={item.city}>
+      {item.subCities.map((sub,index) => (
+        <option key={index} value={sub}>
           {sub}
         </option>
       ))}
@@ -369,30 +369,36 @@ const handleResetFilters = ()=>{
 
                     </div>
                   </Col>
-                  {propertyloading ? <ProfileLoader/> : (
+                  { propertyloading ? <ProfileLoader/> : allproperties?.length===0 ? (
+                    <div className=" d-flex justify-content-center align-items-center" style={{height:"40vh"}}>
+                    <h5 className="text-center">No Properties Found</h5>
+                    </div>
+                  ) : (
                     <Listview data={allproperties} from="admin"/>
                   )}
                   {totalProperties>12 && (
                      <nav className="theme-pagination">
       <ul className="pagination">
         <li className={`page-item ${filters.page === 1 ? "disabled" : ""}`}>
-          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(1)}>«</div>
+          <div className="page-link" onClick={() => goToPage(1)}>«</div>
         </li>
         <li className={`page-item ${filters.page === 1 ? "disabled" : ""}`}>
-          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(filters.page - 1)}>{"<"}</div>
+          <div className="page-link" onClick={() => goToPage(filters.page - 1)}>{"<"}</div>
         </li>
 
         {pages.map((p,index) => (
           <li key={index} className={`page-item `}>
-            <button style={{background:p===filters.page ? "#108a00" : "",color:p===filters.page ? "white" : "black"}} disabled={p === filters.page || propertyloading} className="page-link" onClick={() => goToPage(p)}>{propertyloading && p===filters.page ? "...": p}</button>
+            <button style={{background:"transparent",border:"none"}} disabled={p === filters.page || propertyloading} className={`page-item ${p === filters.page ? "active" : ""}`} onClick={() => goToPage(p)}>
+               <div className="page-link">{propertyloading && p===filters.page ? "...": p}</div>
+            </button>
           </li>
         ))}
 
         <li className={`page-item ${filters.page === totalPages ? "disabled" : ""}`}>
-          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(filters.page + 1)}>{">"}</div>
+          <div className="page-link" onClick={() => goToPage(filters.page + 1)}>{">"}</div>
         </li>
         <li className={`page-item ${filters.page === totalPages ? "disabled" : ""}`}>
-          <div style={{background:"#108a00",color:"white"}} className="page-link" onClick={() => goToPage(totalPages)}>»</div>
+          <div className="page-link" onClick={() => goToPage(totalPages)}>»</div>
         </li>
       </ul>
     </nav>

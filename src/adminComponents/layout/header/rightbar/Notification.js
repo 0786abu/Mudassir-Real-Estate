@@ -24,7 +24,7 @@ const Notification = () => {
                 <ul>
                     {notifications?.slice(0,4)?.map((notification)=>{
                         return (
-                    <li key={notification._id}>
+                    <li key={notification._id} className={`${!notification.isRead ? "" : "border-2 border-info"}`}>
                         <Media className="media">
                             <div className="icon-notification bg-success-light">
                                 <i className="fas fa-file-invoice-dollar" />

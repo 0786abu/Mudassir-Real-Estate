@@ -336,10 +336,10 @@ useEffect(()=>{
                        className="form-control h-100"
                        >
                          <option value="">Select Location</option>
-                         {citiesLocationsData.map((item) => (
-                           <optgroup key={item.city} label={item.city}>
-                             {item.subCities.map((sub) => (
-                               <option key={sub} value={sub}>
+                         {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
+                           <optgroup key={index} label={item.city}>
+                             {item.subCities.map((sub,index) => (
+                               <option key={index} value={sub}>
                                  {sub}
                                </option>
                              ))}

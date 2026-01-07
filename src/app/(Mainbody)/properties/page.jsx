@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import Filter from "@/layout/sidebarLayout/Filter";
-import RecentlyAdded from "@/layout/sidebarLayout/RecentlyAdded";
 import SkeletonPropertyCard from "@/components/elements/propertyBoxs/GridSkeleton";
 import ListingSection from "@/components/listing/gridView/ListingSection";
 import { Col, Container, Row } from "reactstrap";
@@ -15,7 +14,6 @@ const Page = ({ searchParams })=> {
           {/* ✅ Sidebar stays static */}
           <Sidebar side="right">
             <Filter />
-            <RecentlyAdded />
           </Sidebar>
 
           {/* ✅ ONLY listing suspense */}

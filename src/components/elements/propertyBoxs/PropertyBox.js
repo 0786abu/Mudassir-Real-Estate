@@ -19,7 +19,6 @@ import { SendPropertyDataToMyProperty } from "@/redux-toolkit/action/propertyAct
 import AddToWhishList from "../AddToWhishList";
 import { setSelectedSlug } from "@/redux-toolkit/slice/propertySlice";
 import { useRouter } from "next/navigation";
-
 const ImageSlider = dynamic(() => import("../ImageSlider"),{ssr:false});
 
 export const formatDatenew = (dateString) => {
@@ -102,7 +101,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
         <span className="font-roboto">{data.propertyID.location} </span>
 
         <Link href={`/properties/${data.propertyID.slug}`}>
-          <h3 >{data.propertyID.title}</h3>
+          <h3>{data.propertyID.title}</h3>
         </Link>
 
         <h6>
@@ -187,14 +186,13 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
       </div>
 
       <div className="property-details">
-        <span className="font-roboto">{data.location} </span>
 
-        <Link href={`/properties/${data.slug}`}>
+        <Link href={`/properties/${data.slug}`} className="property-card-title">
           <h3>{data.title}</h3>
         </Link>
 
         <h6>
-          Rs. {" "}
+          PKR {" "}
           {formatPK(data.price)}
         </h6>
 
@@ -213,6 +211,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           <li>Sq Ft: {data.squareFits || 5}</li>
         </ul>
 
+          <span className="font-roboto">{data.location} </span>
         <div className="property-btn d-flex">
           <span>{formatDatenew(data.createdAt)}</span>
            {fromPanel ? (
@@ -220,7 +219,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           onClick={from==="admin" ? handleAdminViewDetail : handleViewDetails}
           className="btn rounded-pill border border-1"
            onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
-              background:isHover ? "#14A800" : "",
+             background:isHover ? "#14A800" : "",
               color:isHover ? "white" : "black"
             }}
         >
