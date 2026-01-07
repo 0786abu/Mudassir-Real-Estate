@@ -1,10 +1,25 @@
+"use client";
+import { Logout_User } from '@/redux-toolkit/action/authAction';
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import { FileText, LogIn, User } from 'react-feather'
+import { useDispatch, useSelector } from 'react-redux';
 
 const UserProfile = ({user,loading}) => {
+    const {logoutloading} = useSelector((state)=>state.Auth);
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const handleLogout = ()=>{
+        dispatch(Logout_User(router));
+    }
     return (
         <li className="profile-avatar onhover-dropdown">
+            {logoutloading && (
+          <div className="logout-loading">
+          <span>Loading...</span>
+        </div>
+        )}
             <div>
                {loading ? (
                 <div className="spinner-border" role="status" style={{width:"20px",height:"20px"}}>
@@ -19,16 +34,16 @@ const UserProfile = ({user,loading}) => {
                     </Link>
                 </li>
                 <li>
-                    <Link href='/myproperties/propertylist'>
+                    <Link href='/admin/dashboard/myProperties'>
                         <span>Listing</span>
                         <FileText />
                     </Link>
                 </li>
                 <li>
-                    <Link href='/authentication/login'>
+                    <div onClick={handleLogout}style={{cursor:"pointer"}}>
                         <span>Log in</span>
                         <LogIn />
-                    </Link>
+                    </div>
                 </li>
             </ul>
         </li>
