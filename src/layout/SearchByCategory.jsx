@@ -39,12 +39,12 @@ const propertyTypes = [
   },
   {
     id:7,
-    type:"FarmHouse",
+    type:"Farmhouse",
     img:"/assets/images/filters/FarmHouse.png"
   },
   {
     id:8,
-    type:"plot file",
+    type:"Plot File",
     img:"/assets/images/filters/Files plot.png"
   },
   {
@@ -74,12 +74,12 @@ const propertyTypes = [
   },
   {
     id:14,
-    type:"PentHouse",
+    type:"Penthouse",
     img:"/assets/images/filters/PentHouse.png"
   },
   {
     id:15,
-    type:"Portions & Floors",
+    type:"Portions and Floors",
     img:"/assets/images/filters/Portions and Floors.png"
   },
   {
@@ -94,7 +94,7 @@ const propertyTypes = [
   },
   {
     id:18,
-    type:"WareHouse",
+    type:"Warehouse Land",
     img:"/assets/images/filters/WareHouse.png"
   },
 ]
