@@ -944,3 +944,23 @@ p {
 // .term-list li:hover::before {
 //   background-color: #084298;
 // }
+/* globals.css ya component ke sath */
+/* globals.css ya editor component ke sath */
+// .fr-view ul {
+//   list-style-type: disc;  /* bullet circles */
+//   padding-left: 30px;
+//   margin: 0;
+// }
+
+// .fr-view ol {
+//   list-style-type: decimal; /* numbered list */
+//   padding-left: 30px;
+//   margin: 0;
+// }
+
+// .fr-view li {
+//   line-height: 1.5;
+// }
+.fr-view li {
+    display: list-item;
+}

@@ -3,6 +3,8 @@ import Breadcrumb from "@/adminComponents/components/Common/Breadcrumb";
 import ProfileLoader from "@/components/common/Loader";
 import { formatDatenew } from "@/components/elements/propertyBoxs/PropertyBox";
 import { AdminFetchPayments, ApprovedPaymentToggle } from "@/redux-toolkit/action/adminAction";
+import { DeletePayment } from "@/redux-toolkit/action/paymentAction";
+import { DeleteIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
@@ -11,9 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Badge, Button, Card, CardBody, CardHeader, Col, Container, Form, Input, Modal, ModalBody, ModalHeader, Row, Table } from "reactstrap";
 
 const Payments = () => {
-  const {payments,paymentloading,paymentactionloading,totalPaymentPages,totalPaymentLists} = useSelector((state)=>state.Admin);
+  const {payments,paymentloading,paymentactionloading,totalPaymentPages,totalPaymentLists,deletepaymentloading} = useSelector((state)=>state.Admin);
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [paymentID, setPaymentID] = useState("");
   const [actionModal, setActionModal] = useState(false);
   const [note, setNote] = useState("");
   const [screenshotModal, setScreenshotModal] = useState("");
@@ -30,6 +33,12 @@ const Payments = () => {
     setScreenshotModal(!screenshotModal);
     setScreenshot(ss);
   }
+  const handleDelete = (id)=>{
+    setPaymentID(id);
+    if(window.confirm("Are you sure you want to delete this payment?")){
+      dispatch(DeletePayment(id));
+    }
+  }
   const handleSubmitAction = (e)=>{
     e.preventDefault();
     const data = {status,adminNote};
@@ -45,8 +54,8 @@ const Payments = () => {
   }
   const toggle = ()=>setModal(!modal);
   const actionToggle = ()=>setActionModal(!actionModal);
-  const handleActionToggle = (paymentID)=>{
-    setPaymentId(paymentID);
+  const handleActionToggle = (paymentidd)=>{
+    setPaymentId(paymentidd);
     setActionModal(!actionModal);
   }
   const resetFilter = ()=>{
@@ -189,6 +198,7 @@ const goToPage = (page)=>{
                         <th>Status</th>
                         <th>Amount</th>
                         <th>Screenshot</th>
+                        <th>Payment Type</th>
                         <th>Note</th>
                         <th>Date</th>
                         <th>Action</th>
@@ -213,12 +223,26 @@ const goToPage = (page)=>{
                               </td>
                               <td>Rs. {item.amount}</td>
                               <td><Button onClick={()=>handleScreenshotToggle(item.paymentScreenshot)} color="success" size="sm">View Screenshot</Button></td>
+                              <td>{item.paymentMethod==="bank_transfer" ? (
+                                <div className=" d-flex flex-column gap-2 border p-1 rounded-1">
+                                  <span>Bank</span>
+                                  <span>{item.bankDetails?.bankName}</span>
+                                </div>
+                              ) : item.paymentMethod}</td>
                               <td>{item.adminNote ? (<Button onClick={()=>handleNote(item.adminNote)} color="success" size="sm">View Note</Button>) : ("Not yet")}</td>
                               
                               
                                <td>{formatDatenew(item.createdAt)}</td>
-                              <td>
+                              <td className="d-flex align-items-center gap-2">
                                {item.status === "Pending" ? (<Button onClick={()=>handleActionToggle(item._id)} color="success" size="sm">Take action</Button>) : (<Button disabled color={item.status==="Approved" ? "success" : "danger"} size="sm">{item.status}</Button>)}
+                               {item.status !== "Pending" && (
+                                <Button 
+                                disabled={deletepaymentloading && item._id === paymentID}
+                                onClick={()=>handleDelete(item._id)}
+                                color="danger"
+                                size="sm"
+                              >{deletepaymentloading && item._id === paymentID ? <span className=" spinner-border" role="status" style={{width:"16px",height:"16px"}}></span> : <DeleteIcon/>}</Button>
+                              )}
                               </td>
                             </tr>
                           );

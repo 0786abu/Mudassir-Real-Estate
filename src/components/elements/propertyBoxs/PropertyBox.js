@@ -15,7 +15,6 @@ import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
 import { RemoveFavouriteProperty } from "@/redux-toolkit/action/favouritesAction";
 import { useState } from "react";
-import { SendPropertyDataToMyProperty } from "@/redux-toolkit/action/propertyAction";
 import AddToWhishList from "../AddToWhishList";
 import { setSelectedSlug } from "@/redux-toolkit/slice/propertySlice";
 import { useRouter } from "next/navigation";

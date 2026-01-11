@@ -1,8 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
-import { propertySlider } from "../../data/slickSlider";
 import Img from "../../utils/BackgroundImageRatio";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
 // const Slider = dynamic(() => import("react-slick"), { ssr: false });
 

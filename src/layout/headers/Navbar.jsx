@@ -130,7 +130,7 @@ const router = useRouter();
             <ul className="navbar-nav mx-auto gap-lg-3 md mt-3 p-lg-2 mt-lg-0">
               <li className="nav-item"><Link href="/" className="nav-link nav-anchors fw-medium">Home</Link></li>
               <li className="nav-item"><Link href="/properties" className="nav-link nav-anchors fw-medium">Properties</Link></li>
-              <li className="nav-item"><Link href="/services" className="nav-link nav-anchors fw-medium">Projects</Link></li>
+              <li className="nav-item"><Link href="/projects" className="nav-link nav-anchors fw-medium">Projects</Link></li>
               <li className="nav-item"><Link href="/agents" className="nav-link nav-anchors fw-medium">Agents</Link></li>
               <li className="nav-item"><Link target="_blank" href="http://blog.pakearth.com" className="nav-link nav-anchors fw-medium">Blogs</Link></li>
               <li className="nav-item"><Link href="/about" className="nav-link nav-anchors fw-medium">About</Link></li>

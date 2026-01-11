@@ -14,6 +14,7 @@ import Admin from "./slice/adminSlice"
 import Contact from "./slice/contactSlice"
 import Email from "./slice/emailSlice"
 import Notifications from "./slice/notificationsSlice"
+import Project from "./slice/projectSlice"
 
 export const store = configureStore({
   reducer: {
@@ -33,6 +34,7 @@ export const store = configureStore({
     Admin,
     Contact,
     Email,
-    Notifications
+    Notifications,
+    Project
   },
 });

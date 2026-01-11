@@ -110,8 +110,14 @@ const PropertyDetailDashboard = ({setActivetab}) => {
     formData.append("amount", amount);
     formData.append("screenshot", screenShot ?? "");
     if(selectedBank !==null && selectedMethod?.type==="bank"){
-      formData.append("bankDetails", selectedBank);
+      formData.append("bankDetails", JSON.stringify(selectedBank));
     };
+    console.log(
+  "bankDetails before append:",
+  selectedBank,
+  typeof selectedBank
+);
+
     dispatch(CreatePayment({formData,setMakePayment,setPaidModal}))
   }
 
@@ -123,7 +129,9 @@ const PropertyDetailDashboard = ({setActivetab}) => {
     dispatch(DeleteProperty({id:myProperty?._id,setDeleteModal,setActivetab}))
   }
   const paidToggle = () => {
-    setPaidModal(!paidModal);
+    if(myProperty?.isPaid===false && myProperty?.isFree===false && myProperty?.isRequestedForPayment===false){
+      setPaidModal(!paidModal);
+    }
   }
 
   const handleFileChange = (e) => {

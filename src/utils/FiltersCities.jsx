@@ -2819,7 +2819,7 @@ export const propertyTypesData = [
     types: [
       "All Residence",
       "House",
-      "Apartment - Flat ",
+      "Apartment - Flat",
       "Portion (Upper)",
       "Portion (Lower)",
       "Portions & Floors",
@@ -2850,7 +2850,8 @@ export const propertyTypesData = [
     types: [
       "Office",
       "Shop",
-      "Plaza / Building",
+      "Plaza",
+      "Building",
       "Retail Space",
       "Showroom",
       "Warehouse",
@@ -2872,7 +2873,6 @@ export const propertyTypesData = [
       "Factory",
       "Mill",
       "Workshop",
-      "Building",
       "Portions and Floors",
       "Warehouse Land",
       "Commercial Unit",

@@ -25,7 +25,8 @@ const initialState = {
     totalAuthPages:null,
     totalAuths:null,
     propertyloading:false,
-    error:null
+    error:null,
+    deletepaymentloading:false
 }
 
 const adminSlice = createSlice({
@@ -44,6 +45,11 @@ const adminSlice = createSlice({
             state.error = null
             state.aboutUser = action.payload
         },
+        setDeletePayment:(state,action)=>{
+                    state.deletepaymentloading = false
+                    state.error = null
+                    state.payments = state.payments.filter(payment=>payment._id !== action.payload)
+                },
         setAboutAgent:(state,action)=>{
             state.agentloading = false
             state.error = null
@@ -90,6 +96,13 @@ const adminSlice = createSlice({
                 state.paymentactionloading = true
             }else{
                 state.paymentactionloading = action.payload
+            }
+        },
+        setDeletePaymentLoading:(state,action)=>{
+            if(action.payload===undefined){
+                state.deletepaymentloading = true
+            }else{
+                state.deletepaymentloading = action.payload
             }
         },
         setFeaturedLoading:(state,action)=>{
@@ -146,6 +159,6 @@ const adminSlice = createSlice({
     }
 });
 
-export const {setAdminError,setAllProperties,setPropertyLoading,setSingleProperty,setToggleFeatured,setFeaturedLoading,setApprovedLoading,setToggleApproved,setPaymentLoading,setPayments,setPaymentAction,setPaymentActionLoading,setAllusers,setUserLoading,setAboutUser,setAgentLoading,setAllAgents,setAboutAgent,setAllAdmins,setAboutAdmin,setDelPropertyLoading} = adminSlice.actions;
+export const {setAdminError,setAllProperties,setPropertyLoading,setSingleProperty,setToggleFeatured,setFeaturedLoading,setApprovedLoading,setToggleApproved,setPaymentLoading,setPayments,setPaymentAction,setPaymentActionLoading,setAllusers,setUserLoading,setAboutUser,setAgentLoading,setAllAgents,setAboutAgent,setAllAdmins,setAboutAdmin,setDelPropertyLoading,setDeletePaymentLoading,setDeletePayment} = adminSlice.actions;
 
 export default adminSlice.reducer;

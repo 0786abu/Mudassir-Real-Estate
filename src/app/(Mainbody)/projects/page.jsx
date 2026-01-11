@@ -1,9 +1,34 @@
-import React from 'react'
+import { Suspense } from "react";
+// import Filter from "@/layout/sidebarLayout/Filter";
+import SkeletonPropertyCard from "@/components/elements/propertyBoxs/GridSkeleton";
+import { Col, Container, Row } from "reactstrap";
+import Sidebar from "@/layout/sidebarLayout/Sidebar";
+import ListingSection from "./ListingSection";
 
-const page = () => {
+const Page = ({ searchParams })=> {
   return (
-    <div>Projects</div>
-  )
-}
+    <section className="property-section">
+      <Container>
+        <Row>
 
-export default page
+          {/* ✅ Sidebar stays static */}
+          <Sidebar side="right">
+            Filter
+          </Sidebar>
+
+          {/* ✅ ONLY listing suspense */}
+          <Col xl="9" lg="8" className={`property-grid-2 property-grid-slider`}>
+            <Suspense
+              key={JSON.stringify(searchParams)}
+              fallback={<SkeletonPropertyCard />}
+            >
+              <ListingSection searchParams={searchParams} />
+            </Suspense>
+          </Col>
+
+        </Row>
+      </Container>
+    </section>
+  );
+}
+export default Page

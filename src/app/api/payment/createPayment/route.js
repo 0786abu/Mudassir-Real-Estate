@@ -9,6 +9,7 @@ import { NextResponse } from "next/server";
 
 function getOptional(formData, key) {
   const value = formData.get(key);
+
   return value === null || value === "" ? undefined : value;
 }
 
@@ -31,7 +32,11 @@ export async function POST(req) {
     const propertyID = formData.get("propertyID");
     const paymentMethod = formData.get("paymentMethod");
     const screenshot = formData.get("screenshot");
-    const bankDetails = getOptional(formData, "bankDetails");
+    const rawBankDetails = getOptional(formData, "bankDetails");
+const bankDetails = rawBankDetails
+  ? JSON.parse(rawBankDetails)
+  : undefined;
+    console.log(bankDetails)
     if(!propertyID){
         return NextResponse.json(
         { success: false, message: "PropertyID required, please try again" },
@@ -76,6 +81,7 @@ export async function POST(req) {
       },
       createdByModel:isUser?.role==="agent" ? "Agent" : "User"
     };
+    console.log("paymentData",paymentData)
 
     const payment = await Payment.create(paymentData);
           const Notitype= "payment_created"
