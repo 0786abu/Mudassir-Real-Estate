@@ -1,5 +1,6 @@
 import { DataBase } from "@/backend/config/database";
 import ProjectLead from "@/backend/model/projectContacts";
+import Project from "@/backend/model/projectSchema";
 import { isAuthorized } from "@/backend/utils/middlewere";
 import { NextResponse } from "next/server";
 
