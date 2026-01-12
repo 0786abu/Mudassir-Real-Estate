@@ -61,6 +61,13 @@ const paymentPlanImages = formData.getAll("paymentPlanImages");
     const developedByLogoFile = formData.get("developedByLogo");
     const marketingByLogoFile = formData.get("marketingByLogo");
     const imagesFiles = formData.getAll("images");
+    const exist = await Project.findOne({slug});
+    if(exist){
+      return NextResponse.json({
+        success:false,
+        message:"please change your slug, slug already exist"
+      },{status:401})
+    }
     // ---------- Validations ----------
     if (!projectTitle || !city || !location || !type || !minItemPrice || !maxItemPrice || items.length===0 || !detailedDescription || !map || !features || !projectOwnerPhone || !projectOwnerEmail || !projectOwnerWhatsappAPI) {
       return NextResponse.json({ success: false, message: "All Fields are required" }, { status: 401 });

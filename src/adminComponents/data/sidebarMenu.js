@@ -1,4 +1,4 @@
-import { MailCheck } from "lucide-react";
+import { Building2, MailCheck } from "lucide-react";
 import { Airplay, BarChart, CreditCard, Grid, Layout, Lock, Mail, MapPin, UserPlus, Users } from "react-feather";
 
 export const SidebarMenuItem = [
@@ -110,6 +110,23 @@ export const SidebarMenuItem = [
             {
                 path: "/admin/dashboard/add-admin",
                 title: 'Add Admin',
+                type: 'link'
+            }
+        ]
+    },
+    {
+        title: 'Project',
+        icon: <Building2 />,
+        type: 'sub',
+        children: [
+            {
+                path: "/admin/dashboard/addProject",
+                title: 'Add Project',
+                type: 'link'
+            },
+            {
+                path: "/admin/dashboard/projectLeads",
+                title: 'Project Leads',
                 type: 'link'
             }
         ]

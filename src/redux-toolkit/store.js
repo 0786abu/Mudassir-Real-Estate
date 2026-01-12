@@ -15,6 +15,7 @@ import Contact from "./slice/contactSlice"
 import Email from "./slice/emailSlice"
 import Notifications from "./slice/notificationsSlice"
 import Project from "./slice/projectSlice"
+import ProjectLead from "./slice/projectLeadSlice"
 
 export const store = configureStore({
   reducer: {
@@ -35,6 +36,7 @@ export const store = configureStore({
     Contact,
     Email,
     Notifications,
-    Project
+    Project,
+    ProjectLead
   },
 });

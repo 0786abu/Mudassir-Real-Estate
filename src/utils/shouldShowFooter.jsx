@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import useHasMounted from "./Mounted";
 import FooterThree from "@/layout/footers/FooterThree";
 
-const hideNavbarRoutes = ["/admin/dashboard","/admin/dashboard/user-profile","/admin/dashboard/payments","/admin/dashboard/create-property","/admin-login","/admin/dashboard/profile","/admin/dashboard/allProperties","/admin/dashboard/singleProperty","/admin/dashboard/allUsers","/admin/dashboard/allAgents","/admin/dashboard/favouriteProperties","/admin/dashboard/myProperties","/admin/dashboard/add-user","/admin/dashboard/add-agent","/admin/dashboard/add-admin","/admin/dashboard/allAdmins","/admin/dashboard/contacts","/admin/dashboard/emails","/admin/dashboard/notifications","/admin/dashboard/addProject"];
+const hideNavbarRoutes = ["/admin/dashboard","/admin/dashboard/user-profile","/admin/dashboard/payments","/admin/dashboard/create-property","/admin-login","/admin/dashboard/profile","/admin/dashboard/allProperties","/admin/dashboard/singleProperty","/admin/dashboard/allUsers","/admin/dashboard/allAgents","/admin/dashboard/favouriteProperties","/admin/dashboard/myProperties","/admin/dashboard/add-user","/admin/dashboard/add-agent","/admin/dashboard/add-admin","/admin/dashboard/allAdmins","/admin/dashboard/contacts","/admin/dashboard/emails","/admin/dashboard/notifications","/admin/dashboard/addProject","/admin/dashboard/projectLeads"];
 
 const dynamicRoutePatterns = [
   /^\/admin-dashboard-doctor\/.+$/,
