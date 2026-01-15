@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import ProjectDetail from './Project';
 import ProfileLoader from '@/components/common/Loader';
+import ProjectCTA from '@/components/property/Have_Project';
 
 const page = async({params}) => {
   const {slug} = await params;
@@ -14,6 +15,7 @@ const page = async({params}) => {
       <Suspense fallback={<ProfileLoader/>}>
         <ProjectDetail project={data?.project}/>
       </Suspense>
+      <ProjectCTA/>
     </div>
   )
 }

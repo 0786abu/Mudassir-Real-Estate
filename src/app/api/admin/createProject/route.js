@@ -228,9 +228,40 @@ export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get("page")) || 1;
     const isFeatured = searchParams.get("featured")
-    const isSponsored = searchParams.get("sponsored")
+    const isSponsored = searchParams.get("sponsored");
+    const developer = searchParams.get("developer")?.trim()
     const type = searchParams.get("type")
+    const city = searchParams.get("city")
+    const minPrice = searchParams.get("minPrice")
+  ? Number(searchParams.get("minPrice"))
+  : null;
+
+const maxPrice = searchParams.get("maxPrice")
+  ? Number(searchParams.get("maxPrice"))
+  : null;
+    
     const query = {};
+if (minPrice !== null || maxPrice !== null) {
+
+  // BELOW (only maxPrice)
+  if (minPrice === null && maxPrice !== null) {
+    query.minItemPrice = { $lte: maxPrice };
+  }
+
+  // ABOVE (only minPrice)
+  else if (minPrice !== null && maxPrice === null) {
+    query.maxItemPrice = { $gte: minPrice };
+  }
+
+  // BETWEEN (both)
+  else if (minPrice !== null && maxPrice !== null) {
+    query.$and = [
+      { maxItemPrice: { $gte: minPrice } },
+      { minItemPrice: { $lte: maxPrice } },
+    ];
+  }
+}
+
     if(isFeatured){
       if (isFeatured === "true") {
       query.isFeatured = true;
@@ -245,15 +276,29 @@ export async function GET(req) {
       query.isSponsored = false
     }
     }
+    if (developer) {
+  const words = developer.split(" ").join("|");
+  query["developedBy.developer"] = {
+    $regex: words,
+    $options: "i",
+  };
+}
 
     if (type) {
       query.type = type;
+    }
+    if (city) {
+      query.city = city;
     }
     const limit = 12;
     const skip = (page - 1) * limit;
     const totalProjects = await Project.countDocuments();
     const totalPages = Math.ceil(totalProjects / limit);
-    const projects = await Project.find(query).skip(skip).limit(limit).sort({ createdAt: -1 });
+    const projects = await Project.find(query).skip(skip).limit(limit).sort({
+  isSponsored: -1,
+  isFeatured: -1,
+  createdAt: -1
+});
     return NextResponse.json({
       success: true,
       projects,

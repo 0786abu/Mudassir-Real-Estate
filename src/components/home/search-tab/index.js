@@ -9,6 +9,7 @@ import HomeBannerSection from "./HomeBanner";
 import CategorySection from "@/layout/SearchByCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminProperties, FeaturedProperties, LatestProperties } from "@/redux-toolkit/action/propertyAction";
+import BudgetSection from "@/components/property/BudgetSection";
 
 const BodyContent = () => {
   const {latestsproperties,latestpropertyloading,featuredProperties,featurepropertyloading,adminProperties,adminpropertyloading} = useSelector((state)=>state.Property);
@@ -35,6 +36,7 @@ const BodyContent = () => {
       {/* <TestimonialSection value={clientData?.OurHappyClientInClassicLayout} /> */}
       {/* <SubscribeSection /> */}
       <AboutSection />
+      <BudgetSection/>
       <BrandSection />
     </>
   );

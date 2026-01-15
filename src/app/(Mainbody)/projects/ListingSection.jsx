@@ -28,11 +28,16 @@ export default async function ListingSection({ searchParams }) {
       <Header
         title="Projects Listing"
         totalProperties={totalProjects}
+        from="projects"
       />
 
       {/* ✅ Grid */}
       <div className="property-wrapper-grid list-view">
-        {projects?.map((project,index)=>{
+        {projects?.length===0 ? (
+          <div className="d-flex justify-content-center align-items-center" style={{height:"60vh"}}>
+            <h2>No Projects Found</h2>
+          </div>
+        ) : projects?.map((project,index)=>{
             return <div className="column-sm zoom-gallery property-grid list-view" key={index}>
                 <Projectbox data={project}/>
             </div>

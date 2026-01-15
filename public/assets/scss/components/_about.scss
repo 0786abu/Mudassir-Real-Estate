@@ -1501,3 +1501,148 @@ p {
 //     margin-top: 0px;
 //   }
 // }
+
+.cta-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.cta-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1d1d1d;
+  margin-bottom: 15px;
+}
+
+.cta-text {
+  font-size: 16px;
+  color: #6b7280;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.cta-buttons {
+  margin-bottom: 20px;
+}
+
+.btn-primary-custom {
+  background-color: #14a800;
+  border-color: #14a800;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-primary-custom:hover {
+  background-color: #118f00;
+  border-color: #118f00;
+}
+
+.btn-outline-custom {
+  color: #14a800;
+  border: 2px solid #14a800;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-outline-custom:hover {
+  background-color: #14a800;
+  color: #ffffff;
+}
+
+.cta-time {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 10px;
+}
+
+.project-filter-hero {
+  position: relative;
+  background: url("/assets/images/dashboard.webp") center/cover no-repeat;
+  padding: 60px 0 60px;
+}
+
+.project-filter-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.hero-text {
+  position: relative;
+  color: #fff;
+  margin-bottom: 40px;
+}
+
+.hero-text h1 {
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.hero-text p {
+  font-size: 16px;
+  opacity: 0.9;
+  color: white;
+}
+
+.filter-card {
+  position: relative;
+  border-radius: 14px;
+  padding: 25px;
+  background: #fff;
+}
+
+.filter-label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.filter-card input,
+.filter-card select {
+  height: 46px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.btn-search {
+  background: #14a800;
+  border: none;
+  height: 46px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.btn-search:hover {
+  background: #118f00;
+}
+
+.btn-reset {
+  height: 46px;
+  font-weight: 600;
+  border-radius: 8px;
+  color: #14a800;
+  border: 2px solid #14a800;
+}
+
+.btn-reset:hover {
+  background: #14a800;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 26px;
+  }
+
+  .project-filter-hero {
+    padding: 90px 0 70px;
+  }
+}

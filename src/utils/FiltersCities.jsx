@@ -2943,3 +2943,148 @@ export const paymentMethods = [
     ]
   }
 ];
+export const BUDGET_FILTERS = {
+  house: {
+    below_30: {
+      type: "House",
+      value:"below_30",
+      label:"House below 30 Lakh",
+      minPrice: 0,
+      maxPrice: 3000000,
+    },
+    between_30_80: {
+      type: "House",
+      value:"between_30_80",
+      label:"House between 30-80 Lakh",
+      minPrice: 3000000,
+      maxPrice: 8000000,
+    },
+    above_80: {
+      type: "House",
+      value:"above_80",
+      label:"House above 80 Lakh",
+      minPrice: 8000000,
+      maxPrice: null,
+    },
+  },
+
+  apartment: {
+    below_30: {
+      type: "Apartment",
+      value:"below_30",
+      label:"Apartment below 30 Lakh",
+      minPrice: 0,
+      maxPrice: 3000000,
+    },
+    between_30_80: {
+      type: "Apartment",
+      value:"between_30_80",
+      label:"House between 30-80 Lakh",
+      minPrice: 3000000,
+      maxPrice: 8000000,
+    },
+    above_80: {
+      type: "Apartment",
+      value:"above_80",
+      label:"House above 80 Lakh",
+      minPrice: 8000000,
+      maxPrice: null,
+    },
+  },
+  
+  residential_plot: {
+    below_15: {
+      value:"below_15",
+      type: "Residential Plot",
+      label:"Residential Plot below 15 Lakh",
+      minPrice: 0,
+      maxPrice: 1500000,
+    },
+    between_15_70: {
+      value:"between_15_70",
+      type: "Residential Plot",
+      label:"Residential Plot between 15-70 Lakh",
+      minPrice: 1500000,
+      maxPrice: 7000000,
+    },
+    above_70: {
+      value:"above_70",
+      type: "Residential Plot",
+      label:"Residential Plot above 70 Lakh",
+      minPrice: 7000000,
+      maxPrice: null,
+    },
+  },
+  
+  commercial_plot: {
+    below_20: {
+      value:"below_20",
+      type: "Commercial Plot",
+      label:"Commercial Plot below 20 Lakh",
+      minPrice: 0,
+      maxPrice: 2000000,
+    },
+    between_20_60: {
+      value:"between_20_60",
+      type: "Commercial Plot",
+      label:"Commercial Plot between 20-60 Lakh",
+      minPrice: 2000000,
+      maxPrice: 6000000,
+    },
+    above_60: {
+      value:"above_60",
+      type: "Commercial Plot",
+      label:"Commercial Plot above 60 Lakh",
+      minPrice: 6000000,
+      maxPrice: null,
+    },
+  },
+  
+  shop: {
+    below_20: {
+      value:"below_20",
+      type: "Shop",
+      label:"Shop below 20 Lakh",
+      minPrice: 0,
+      maxPrice: 2000000,
+    },
+    between_20_60: {
+      value:"between_20_60",
+      type: "Shop",
+      label:"Shop between 20-60 Lakh",
+      minPrice: 2000000,
+      maxPrice: 6000000,
+    },
+    above_60: {
+      value:"above_60",
+      type: "Shop",
+      label:"Shop above 60 Lakh",
+      minPrice: 6000000,
+      maxPrice: null,
+    },
+  },
+  
+  office: {
+    below_20: {
+      value:"below_20",
+      type: "Office",
+      label:"Office below 20 Lakh",
+      minPrice: 0,
+      maxPrice: 2000000,
+    },
+    between_20_60: {
+      value:"between_20_60",
+      type: "Office",
+      label:"Office between 20-60 Lakh",
+      minPrice: 2000000,
+      maxPrice: 6000000,
+    },
+    above_60: {
+      value:"above_60",
+      type: "Office",
+      label:"Office above 60 Lakh",
+      minPrice: 6000000,
+      maxPrice: null,
+    },
+  },
+};

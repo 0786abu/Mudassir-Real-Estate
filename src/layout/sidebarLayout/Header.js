@@ -41,11 +41,11 @@ const Header = ({ title, totalProperties, favProperties, from }) => {
         </ul>
        )}
       </div>
-     {!from && (
+     {!from || from!=="projects" && (
        <AdvancedSearch advancedSearchOpen={advancedSearchOpen} setAdvancedSearchOpen={setAdvancedSearchOpen} />
      )}
     </div>
-  );
+  ); 
 };
 
 export default Header;
