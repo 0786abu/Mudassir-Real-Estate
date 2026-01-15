@@ -81,7 +81,7 @@ const page = () => {
 
               {/* PROJECT INFO */}
               <td>
-                <Link href={`/projects/${item.project.slug}`}>
+                <Link href={`/admin/dashoard/allProjects/${item.project.slug}`}>
                   <div className="d-flex align-items-center gap-3">
                   <img
                     src={item.project.projectLogo.url}

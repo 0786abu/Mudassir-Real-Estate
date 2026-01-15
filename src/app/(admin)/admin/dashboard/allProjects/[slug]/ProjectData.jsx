@@ -21,6 +21,7 @@ import FloorPlansModal from "./FloorPlan";
 import PaymentPlans from "./paymentPlan";
 import Slider from "react-slick";
 import { Camera } from "react-feather";
+import Link from "next/link";
 
 export default function AdminProjectDetail({ slug }) {
     const {project,projectloading,updateItemsloading,delfloorplanloading,delpaymentplanloading} = useSelector((state)=>state.Project);
@@ -83,7 +84,10 @@ export default function AdminProjectDetail({ slug }) {
 
       {/* PROJECT MEDIA */}
       <Card className="mb-4 shadow-sm">
-        <CardHeader className="fw-semibold">Project Media</CardHeader>
+        <CardHeader className="fw- d-flex justify-content-between align-items-center gap-2">
+          <h4>Project Media</h4>
+          <Link target="_blank" href={`/projects/${project?.slug}`}><Button outline>View on Public</Button></Link>
+        </CardHeader>
         <CardBody>
           <div className="d-flex justify-content-between align-items-center gap-2">
             <img
