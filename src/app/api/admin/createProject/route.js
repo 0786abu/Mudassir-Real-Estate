@@ -212,7 +212,6 @@ for (let i = 0; i < paymentPlans.length; i++) {
       offering,
       createdBy: isAdmin._id,
     };
-    console.log(projectData)
     // ---------- Save to DB ----------
     const project = await Project.create(projectData);
     return NextResponse.json({ success: true, message: "Project created successfully", project }, { status: 201 });
@@ -228,11 +227,33 @@ export async function GET(req) {
     await DataBase();
     const { searchParams } = new URL(req.url);
     const page = parseInt(searchParams.get("page")) || 1;
-    const limit = 10;
+    const isFeatured = searchParams.get("featured")
+    const isSponsored = searchParams.get("sponsored")
+    const type = searchParams.get("type")
+    const query = {};
+    if(isFeatured){
+      if (isFeatured === "true") {
+      query.isFeatured = true;
+    }else{
+      query.isFeatured = false
+    }
+    }
+    if(isSponsored){
+      if (isSponsored === "true") {
+      query.isSponsored = true;
+    }else{
+      query.isSponsored = false
+    }
+    }
+
+    if (type) {
+      query.type = type;
+    }
+    const limit = 12;
     const skip = (page - 1) * limit;
     const totalProjects = await Project.countDocuments();
     const totalPages = Math.ceil(totalProjects / limit);
-    const projects = await Project.find().skip(skip).limit(limit).sort({ createdAt: -1 });
+    const projects = await Project.find(query).skip(skip).limit(limit).sort({ createdAt: -1 });
     return NextResponse.json({
       success: true,
       projects,

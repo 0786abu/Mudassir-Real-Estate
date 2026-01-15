@@ -40,7 +40,7 @@ export default async function ListingSection({ searchParams }) {
       </div>
 
       {/* ✅ Pagination */}
-      {totalProjects > 4 && (
+      {totalProjects > 12 && (
         <Pagination
           totalPages={totalPages}
           currentPage={currentPage}

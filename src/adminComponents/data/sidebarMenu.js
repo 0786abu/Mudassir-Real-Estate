@@ -125,6 +125,11 @@ export const SidebarMenuItem = [
                 type: 'link'
             },
             {
+                path: "/admin/dashboard/allProjects",
+                title: 'All Projects',
+                type: 'link'
+            },
+            {
                 path: "/admin/dashboard/projectLeads",
                 title: 'Project Leads',
                 type: 'link'

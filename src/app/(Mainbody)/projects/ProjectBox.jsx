@@ -25,7 +25,7 @@ export const formatDatenew = (dateString) => {
   }
 
 
-const Projectbox = ({ data }) => {
+const Projectbox = ({ data, from }) => {
   const [isHover, setIsHover] = useState(false);
   const [callHover, setCallHover] = useState(false);
   const [WhatsAppHover, setWhatsAppHover] = useState(false);
@@ -76,11 +76,11 @@ const Projectbox = ({ data }) => {
           </div>
         <div className="property-btn d-flex">
           <span>{formatDatenew(data.createdAt)}</span>
-        <Link href={`/projects/${data.slug}`}>
+        <Link href={`${from==="admin" ? `/admin/dashboard/allProjects/${data.slug}` : `/projects/${data.slug}`}`}>
           <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
               background:isHover ? "#14A800" : "",
               color:isHover ? "white" : "black"
-            }} className="btn rounded-pill border border-1">Details</button>
+            }} className="btn rounded-pill border border-1">{from==="admin" ? "View Detail" : "Details"}</button>
         </Link>
         </div>
       </div>
