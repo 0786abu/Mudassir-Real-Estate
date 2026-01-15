@@ -10,6 +10,7 @@ import CategorySection from "@/layout/SearchByCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminProperties, FeaturedProperties, LatestProperties } from "@/redux-toolkit/action/propertyAction";
 import BudgetSection from "@/components/property/BudgetSection";
+import SponsoredProjects from "@/components/property/SponsoredProjects";
 
 const BodyContent = () => {
   const {latestsproperties,latestpropertyloading,featuredProperties,featurepropertyloading,adminProperties,adminpropertyloading} = useSelector((state)=>state.Property);
@@ -35,6 +36,7 @@ const BodyContent = () => {
       {/* <VideoSection /> */}
       {/* <TestimonialSection value={clientData?.OurHappyClientInClassicLayout} /> */}
       {/* <SubscribeSection /> */}
+      <SponsoredProjects/>
       <AboutSection />
       <BudgetSection/>
       <BrandSection />
