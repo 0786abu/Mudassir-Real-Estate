@@ -15,7 +15,7 @@ const SponsoredProjects = () => {
       <div className="col-xl-3 col-lg-4 col-md-6">
         <div className="project-card">
           <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" alt />
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" alt="project image" />
           <div className="card-body">
             <h5>Green Heights</h5>
             <p className="price">PKR 2.5 Crore – 5.2 Crore</p>
@@ -28,7 +28,7 @@ const SponsoredProjects = () => {
       <div className="col-xl-3 col-lg-4 col-md-6">
         <div className="project-card">
           <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471" alt />
+          <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471" alt="project image" />
           <div className="card-body">
             <h5>Skyline Tower</h5>
             <p className="price">PKR 3.1 Crore – 8.6 Crore</p>
@@ -41,7 +41,7 @@ const SponsoredProjects = () => {
       <div className="col-xl-3 col-lg-4 col-md-6">
         <div className="project-card">
           <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt />
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="project image" />
           <div className="card-body">
             <h5>Emerald Mall</h5>
             <p className="price">PKR 1.2 Crore – 4.9 Crore</p>
@@ -53,7 +53,7 @@ const SponsoredProjects = () => {
       <div className="col-xl-3 col-lg-4 col-md-6">
         <div className="project-card">
           <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt />
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="project image" />
           <div className="card-body">
             <h5>Emerald Mall</h5>
             <p className="price">PKR 1.2 Crore – 4.9 Crore</p>
