@@ -8,7 +8,7 @@ const SponsoredProjects = () => {
   <div className="container">
     <div className="d-flex justify-content-between align-items-center mb-4">
       <h2 className="section-title">Sponsored Projects</h2>
-      <Link href="/projects?sponsored=yes" className="view-all">View All →</Link>
+      <Link href="/projects?sponsored=true" className="view-all">View All →</Link>
     </div>
     <div className="row g-4">
       {/* Card 1 */}
