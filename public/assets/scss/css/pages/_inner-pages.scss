@@ -2772,7 +2772,7 @@
 .property-section {
   .property-wrapper-grid.list-view,
   .property-grid-slider {
-    .property-box {
+    .property-box-admin {
       .property-details {
         ul {
           li {
@@ -2796,7 +2796,7 @@
 
   .property-grid-3 {
     .property-wrapper-grid.list-view {
-      .property-box {
+      .property-box-admin {
         .property-image {
           width: 50%;
         }
@@ -2812,7 +2812,7 @@
     .property-grid {
       > [class*='col-lg-4'],
       > .col-xl-4 {
-        .property-box {
+        .property-box-admin {
           .property-details {
             padding: 20px;
             ul {
@@ -2830,7 +2830,7 @@
       }
       > [class*='col-xl-3'],
       > .col-xl-3 {
-        .property-box {
+        .property-box-admin {
           .property-details {
             padding: 15px 8px;
             .property-btn {

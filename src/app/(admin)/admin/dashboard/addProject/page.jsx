@@ -81,7 +81,8 @@ const CreateProject = () => {
     projectLogo:null
   });
   const [keywords, setKeywords] = useState([])
-  const [keywordInput, setKeywordInput] = useState("")
+  const [keywordInput, setKeywordInput] = useState("");
+  const [cityData, setCityData] = useState(null);
   function handleAddKeyword() {
     if (keywordInput.trim() && !keywords.includes(keywordInput.trim())) {
       setKeywords([...keywords, keywordInput.trim()])
@@ -91,6 +92,12 @@ const CreateProject = () => {
 
   function handleRemoveKeyword(index) {
     setKeywords(keywords.filter((_, i) => i !== index))
+  }
+  const handleCityChange = (e)=>{
+    const {name,value} = e.target;
+    setFormData((prev)=>({...prev, [name]:value}))
+    const checkCity = citiesLocationsData?.filter((city)=>city.city === value);
+    setCityData(checkCity)
   }
 
   function handleKeywordKeyPress(event) {
@@ -398,7 +405,8 @@ dispatch(CreateProjectAdmin({formData:payload}))
               <FormGroup><Label>City</Label>
               <Input
               type="select"
-              onChange={(e)=>setFormData({...formData, city:e.target.value})}
+              name="city"
+              onChange={handleCityChange}
               value={formData.city}
               className="form-control"
               >
@@ -412,14 +420,36 @@ dispatch(CreateProjectAdmin({formData:payload}))
               <Col lg="6">
               <FormGroup>
                 <Label>Address</Label>
-              <Input
-              type="text"
-              onChange={(e)=>setFormData({...formData, location:e.target.value})}
-              value={formData.location}
-              name="location"
-              className="form-control"
-              placeholder="Enter Address"
-              />
+             
+               {(cityData === null || cityData && cityData[0]?.subCities?.length>0) ? (
+                 <Input
+                   type="select"
+                   name="location"
+                   value={formData.location}
+                   onChange={(e) =>
+                     setFormData({ ...formData, location: e.target.value })
+                   }
+                   className="form-control"
+                 >
+                   <option value="">Select Location</option>
+                   {cityData[0].subCities.map((city, index) => (
+                     <option key={index} value={city}>
+                       {city}
+                     </option>
+                   ))}
+                 </Input>
+               ) : (
+                 <Input
+                   type="text"
+                   name="location"
+                   value={formData.location}
+                   onChange={(e) =>
+                     setFormData({ ...formData, location: e.target.value })
+                   }
+                   placeholder="Enter Address"
+                   className="form-control"
+                 />
+               )}
               </FormGroup>
               </Col>
             </Row>

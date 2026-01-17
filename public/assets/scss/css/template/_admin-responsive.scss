@@ -340,7 +340,7 @@
 
         .property-2,
         .property-3 {
-            .property-box {
+            .property-box-admin {
                 .property-image {
                     .labels-left {
                         left: 15px;
@@ -384,7 +384,7 @@
 
     // property css
     .property-section {
-        .property-box {
+        .property-box-admin {
             .property-details {
                 padding: 20px;
 
@@ -633,7 +633,7 @@
     .property-grid-3 {
         .property-grid {
             &.list-view {
-                .property-box {
+                .property-box-admin {
                     .agent-image {
                         width: 78%;
                     }
@@ -871,7 +871,7 @@
 
     // property css
     .property-section {
-        .property-box {
+        .property-box-admin {
             .property-details {
                 .property-btn {
                     .btn {
@@ -1221,7 +1221,7 @@
     }
 
     .property-section {
-        .property-box {
+        .property-box-admin {
             .property-image {
                 .overlay-plus {
                     span {
@@ -1280,7 +1280,7 @@
     .property-grid-3 {
         .property-grid {
             &.list-view {
-                .property-box {
+                .property-box-admin {
                     .agent-image {
                         width: 100%;
                     }
@@ -1291,7 +1291,7 @@
 
     .property-grid {
         &.list-view {
-            .property-box {
+            .property-box-admin {
                 display: block;
             }
         }
@@ -1495,7 +1495,7 @@
     }
 
     .property-section {
-        .property-box {
+        .property-box-admin {
             .property-image {
                 .overlay-property-box {
                     .effect-round {

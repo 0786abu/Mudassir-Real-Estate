@@ -30,7 +30,7 @@ const PropertyBox = ({ data }) => {
       }
     return (
         <>
-            <div className="property-box">
+            <div className="property-box-admin">
                 <div className="property-image position-relative">
                     <ImageSlider images={data.propertyID.images} />
                     <div className="seen-data">

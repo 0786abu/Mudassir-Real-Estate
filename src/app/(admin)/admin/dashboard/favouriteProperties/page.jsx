@@ -1,10 +1,9 @@
 "use client";
-import Breadcrumb from '@/adminComponents/components/Common/Breadcrumb'
 import FavouriteProperties from '@/adminComponents/components/myproperties/favourites/FavouriteProperties'
 import { GetFavouritesData } from '@/redux-toolkit/action/favouritesAction';
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Container, Input, Label, Row } from 'reactstrap'
+import { Col, Container, Row } from 'reactstrap'
 
 const Favourites = () => {
     const {favProperties,favloading} = useSelector((state)=>state.Favourites)

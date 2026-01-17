@@ -849,7 +849,7 @@ footer {
 
     .property-section {
         .property-2 {
-            .property-box {
+            .property-box-admin {
                 &:hover {
                     .property-details {
                         >a {
@@ -2037,13 +2037,13 @@ body {
         }
 
         .property-section {
-            .property-box {
+            .property-box-admin {
                 background-color: $dark-bg3;
                 box-shadow: 3.346px 3.716px 22.5px rgba($dark-border-color, 0.07);
             }
 
             .property-2 {
-                .property-box {
+                .property-box-admin {
                     .property-details {
                         >a {
                             background: linear-gradient(to right, $white 0%, $white 100%);
@@ -2845,7 +2845,7 @@ body {
 
             .property-2,
             .property-3 {
-                .property-box {
+                .property-box-admin {
                     .property-image {
                         .labels-left {
                             left: unset;
@@ -2855,7 +2855,7 @@ body {
                 }
             }
 
-            .property-box {
+            .property-box-admin {
                 .property-image {
                     .overlay-plus {
 
@@ -3011,7 +3011,7 @@ body {
 
                 .property-2,
                 .property-3 {
-                    .property-box {
+                    .property-box-admin {
                         .property-image {
                             .labels-left {
                                 right: 15px;
