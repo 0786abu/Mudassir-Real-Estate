@@ -1,6 +1,6 @@
 "use client";
 import ProfileLoader from "@/components/common/Loader";
-import { AdminFetchProject, DeleteFloorPlan, DeletePaymentPlan } from "@/redux-toolkit/action/projectAction";
+import { AdminFetchProject, AdminProjectFeaturedToggle, AdminProjectSponsoredToggle, DeleteFloorPlan, DeletePaymentPlan } from "@/redux-toolkit/action/projectAction";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -15,20 +15,23 @@ import {
   Button
 } from "reactstrap";
 import Inventory from "./Inventory";
-import { Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 import { formatPK } from "@/utils/Formatter";
 import FloorPlansModal from "./FloorPlan";
 import PaymentPlans from "./paymentPlan";
 import Slider from "react-slick";
 import { Camera } from "react-feather";
 import Link from "next/link";
+import DevelopedBy from "./DevelopedBy";
+import MarketingBy from "./MarketingBy";
 
 export default function AdminProjectDetail({ slug }) {
-    const {project,projectloading,updateItemsloading,delfloorplanloading,delpaymentplanloading} = useSelector((state)=>state.Project);
+    const {project,projectloading,updateItemsloading,delfloorplanloading,delpaymentplanloading,toggleloading,devplatloading} = useSelector((state)=>state.Project);
      const [active, setActive] = useState({});
      const [paymentID, setPaymentID] = useState("");
      const [open,setOpen] = useState(false);
      const [open1,setOpen1] = useState(false);
+     const [toggleState, setToggleState] = useState("");
      const toggle = ()=>setOpen(!open)
      const toggle1 = ()=>setOpen1(!open1)
     const dispatch = useDispatch();
@@ -59,6 +62,14 @@ export default function AdminProjectDetail({ slug }) {
       setPaymentID(payment)
       dispatch(DeletePaymentPlan(slug,payment))
     }
+    const handleFeaturedToggle = ()=>{
+      setToggleState("featured");
+      dispatch(AdminProjectFeaturedToggle(slug))
+    }
+    const handleSponsoredToggle = ()=>{
+      setToggleState("sponsored");
+      dispatch(AdminProjectSponsoredToggle(slug))
+    }
   return (
    <>
     {projectloading ? <ProfileLoader/> : (
@@ -86,7 +97,10 @@ export default function AdminProjectDetail({ slug }) {
       <Card className="mb-4 shadow-sm">
         <CardHeader className="fw- d-flex justify-content-between align-items-center gap-2">
           <h4>Project Media</h4>
-          <Link target="_blank" href={`/projects/${project?.slug}`}><Button outline>View on Public</Button></Link>
+          <div className="d-flex align-items-center gap-2">
+            <Link target="_blank" size="sm" href={`/admin/dashboard/allProjects/${project?.slug}/edit`}><Button outline><Edit/></Button></Link>
+            <Link target="_blank" size="sm" href={`/projects/${project?.slug}`}><Button outline>View on Public</Button></Link>
+          </div>
         </CardHeader>
         <CardBody>
           <div className="d-flex justify-content-between align-items-center gap-2">
@@ -144,50 +158,21 @@ export default function AdminProjectDetail({ slug }) {
           </Table>
         </CardBody>
       </Card>
+      <Card className="mb-4 shadow-sm">
+        <CardHeader className="fw-semibold">Toggle Section</CardHeader>
+        <CardBody>
+          <div className=" d-md-flex align-items-center gap-4">
+            <Button style={{width:"100%"}} onClick={handleFeaturedToggle} color={project?.isFeatured===true ? "danger" : "success"}>{toggleloading && toggleState==="featured" && <span className=" spinner-border" role="status" style={{width:"16px",height:"16px"}}></span>}{" "}{project?.isFeatured===true ? "Mark as unFeatured" : "Mark as featured"}</Button>
+            <Button style={{width:"100%"}} onClick={handleSponsoredToggle} color={project?.isSponsored===true ? "danger" : "success"}>{toggleloading && toggleState==="sponsored" && <span className=" spinner-border" role="status" style={{width:"16px",height:"16px"}}></span>}{" "}{project?.isSponsored===true ? "Mark as unSponsored" : "Mark as sponsored"}</Button>
+          </div>
+        </CardBody>
+      </Card>
 
       {/* DEVELOPER */}
-      <Card className="mb-4 shadow-sm">
-        <CardHeader className="fw-semibold">Developed By</CardHeader>
-        <CardBody>
-          <Row>
-            <Col sm="4" md="2">
-              <img
-                src={project?.developedBy?.logo?.url}
-                className="img-fluid"
-                style={{width:"100%",aspectRatio:"1/1"}}
-              />
-            </Col>
-            <Col className="mt-sm-0 mt-2">
-              <h6 className="fw-bold">{project?.developedBy.developer}</h6>
-              <p className="text-muted mb-0">
-                {project?.developedBy?.description}
-              </p>
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
+      <DevelopedBy developedBy={project?.developedBy} slug={slug} loading={devplatloading} />
 
       {/* MARKETING */}
-      <Card className="mb-4 shadow-sm">
-        <CardHeader className="fw-semibold">Marketing By</CardHeader>
-        <CardBody>
-          <Row>
-            <Col sm="4" md="2">
-              <img
-                src={project?.marketingBy?.logo?.url}
-                className="img-fluid"
-                 style={{width:"100%",aspectRatio:"1/1"}}
-              />
-            </Col>
-            <Col className="mt-sm-0 mt-2">
-              <h6 className="fw-bold">{project?.marketingBy?.platform}</h6>
-              <p className="text-muted mb-0">
-                {project?.marketingBy?.description}
-              </p>
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
+     <MarketingBy marketingBy={project?.marketingBy} slug={slug} loading={devplatloading}/>
 
       {/* INVENTORY */}
       <Inventory mainItems={project?.items} slug={slug} loader={updateItemsloading}/>

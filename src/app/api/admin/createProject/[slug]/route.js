@@ -72,7 +72,7 @@ export async function PUT(req, { params }) {
   }
 }
 
-export const POST = async (req, { params }) => {
+export async function POST(req, { params }) {
   try {
     await DataBase();
 
@@ -130,3 +130,27 @@ export const POST = async (req, { params }) => {
     return NextResponse.json({ success: false, message: error.message }, { status: 500 });
   }
 };
+
+export async function DELETE(req,{params}) {
+  try {
+    await DataBase();
+     const isAdmin = await isAuthorized();
+    if (!isAdmin) {
+      return NextResponse.json({ success: false, message: "you are not authorized" }, { status: 401 });
+    }
+    const {slug} = await params;
+    const project = await Project.findOneAndDelete({slug});
+    if (!project) {
+      return NextResponse.json({ success: false, message: "project not found" }, { status: 401 });
+    }
+    return NextResponse.json({
+      success:true,
+      message:"Project delete successfull"
+    },{status:200})
+  } catch (error) {
+    return NextResponse.json({
+      success:false,
+      message:error.message
+    },{status:400})
+  }
+}

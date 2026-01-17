@@ -16,6 +16,7 @@ const dynamicRoutePatterns = [
  /^\/admin\/dashboard\/allAdmins\/[^\/]+$/,
  /^\/admin\/dashboard\/allProjects\/[^\/]+$/,
  /^\/admin\/dashboard\/allProperties\/[^\/]+\/edit$/,
+ /^\/admin\/dashboard\/allProjects\/[^\/]+\/edit$/,
 ];
 
 const shouldShowFooter = (pathname) => {
