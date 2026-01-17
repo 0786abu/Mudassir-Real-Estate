@@ -13,11 +13,11 @@ const page = async() => {
     },
         });
         const data = await statsData.json();
-        const { firstStat, secondStat,typeStats,paymentStats,recentProperties,myProperties} = data;
+        const { firstStat, secondStat,typeStats,paymentStats,recentProperties,myProperties,totalProjects} = data;
   return (
     <div>
         <Suspense fallback={<ProfileLoader/>}>
-          <Dashboard firstStat={firstStat} secondStat={secondStat} typeStats={typeStats} paymentStats={paymentStats} recentProperties={recentProperties} myProperties={myProperties} />
+          <Dashboard firstStat={firstStat} secondStat={secondStat} typeStats={typeStats} paymentStats={paymentStats} recentProperties={recentProperties} myProperties={myProperties} totalProjects={totalProjects} />
         </Suspense>
     </div>
   )

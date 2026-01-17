@@ -1,5 +1,6 @@
 import { DataBase } from "@/backend/config/database"
 import Payment from "@/backend/model/paymentModel";
+import Project from "@/backend/model/projectSchema";
 import Property from "@/backend/model/propertyModel";
 import { isAuthorized } from "@/backend/utils/middlewere";
 import { NextResponse } from "next/server";
@@ -181,6 +182,7 @@ const paymentStats = await Payment.aggregate([
 
 const recentProperties = await Property.find().limit(5).sort({createdAt:-1});
 const myProperties = await Property.find({createdBy:isAdmin._id}).limit(3).sort({createdAt:-1});
+const totalProjects = await Project.countDocuments()
 
 return NextResponse.json({
     success:true,
@@ -189,7 +191,8 @@ return NextResponse.json({
     typeStats,
     paymentStats,
     recentProperties,
-    myProperties
+    myProperties,
+    totalProjects
 },{status:200})
 
     } catch (error) {

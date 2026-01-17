@@ -2,7 +2,7 @@ import React from 'react'
 import { TrendingUp } from 'react-feather'
 import { Card, CardBody, Col, Media } from 'reactstrap'
 
-const Status = ({data}) => {
+const Status = ({data,totalProjects}) => {
     return (
         <>
             <Col xl='3 xl-6' md='6' className="project-widgets">
@@ -85,6 +85,29 @@ const Status = ({data}) => {
                                 </span> */}
                                 <h4>Rejected Properties</h4>
                                 <h4>{data[0]?.rejectedProperties || 0}</h4>
+                                <span className="status-history"> New project</span>
+                            </Media>
+                        </Media>
+                    </CardBody>
+                </Card>
+            </Col>
+            <Col sm="12" className="project-widgets">
+                <Card>
+                    <CardBody>
+                        <Media>
+                           <div className="widget-icon bg-success-light">
+                                <i className="fab fa-angellist" />
+                            </div>
+                            <Media body>
+                                {/* <span>
+                                    Monthly
+                                    <span className="font-success">
+                                        + 10%
+                                        <TrendingUp />
+                                    </span>
+                                </span> */}
+                                <h4>Total Projects</h4>
+                                <h4>{totalProjects || 0}</h4>
                                 <span className="status-history"> New project</span>
                             </Media>
                         </Media>
