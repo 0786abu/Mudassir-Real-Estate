@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
 import React from "react";
+import { ChevronsLeft } from "react-feather";
 import { Media } from "reactstrap";
 import SidebarMenu from "./SidebarMenu";
 import { useSelector } from "react-redux";
@@ -9,6 +10,11 @@ const Sidebar = ({ toggle, setToggle }) => {
   const {userloading,user} = useSelector((state)=>state.Auth);
   return (
     <div className={`page-sidebar ${!toggle ? 'close_icon' : ''}`}>
+      <div className="logo-wrap d-lg-none">
+        <div className="back-btn d-lg-none d-inline-block">
+          <ChevronsLeft onClick={() => { setToggle(!toggle) }} />
+        </div>
+      </div>
       <div className="main-sidebar">
         <div className="user-profile">
           {userloading ? "loading..." : (
