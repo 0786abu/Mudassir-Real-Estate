@@ -7,6 +7,10 @@ const projectSchema = new Schema({
   seo_title:{type:String,required:true},
   seo_description:{type:String,required:true},
   keywords:[String],
+  slug:{
+    type:String,
+    required:true
+  },
   projectTitle: { type: String, required: true },
   city: { type: String, required: true },
   location: { type: String, required: true },
