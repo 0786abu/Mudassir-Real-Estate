@@ -432,7 +432,8 @@ dispatch(CreateProjectAdmin({formData:payload}))
                    className="form-control"
                  >
                    <option value="">Select Location</option>
-                   {cityData[0].subCities.map((city, index) => (
+                   {cityData===null && <option value="">please select first city</option>}
+                   {cityData && cityData[0].subCities.map((city, index) => (
                      <option key={index} value={city}>
                        {city}
                      </option>

@@ -1,7 +1,6 @@
-import { properylistdata } from '@/adminComponents/data/manage-profile/profiledata'
 import { formatPK } from '@/utils/Formatter'
 import React from 'react'
-import { Badge, Card, CardBody, Col, Media, Table } from 'reactstrap'
+import { Badge, Card, CardBody, Media, Table } from 'reactstrap'
 import { formatDatenew } from '../../Common/Propertybox/PropertyBox'
 
 const RecentProperty = ({properties}) => {

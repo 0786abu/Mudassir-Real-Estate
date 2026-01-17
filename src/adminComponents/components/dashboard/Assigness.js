@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
 import { Badge, Media, Table } from 'reactstrap'
-import { Assignessdata } from '../../data/dashboard/data'
 import { formatPK } from '@/utils/Formatter'
 
 const Assigness = ({data}) => {
