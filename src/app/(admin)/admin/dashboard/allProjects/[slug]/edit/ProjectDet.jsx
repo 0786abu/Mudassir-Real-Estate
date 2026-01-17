@@ -118,7 +118,7 @@ useEffect(() => {
     offering: project.offering || [],
     features: project.features || {},
   });
-
+  setKeywords(project?.keywords)
   setDetailedDescription(project.detailedDescription || "");
 }, [project]);
 
