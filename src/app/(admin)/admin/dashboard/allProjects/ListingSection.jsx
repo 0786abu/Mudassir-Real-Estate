@@ -6,19 +6,21 @@ import { AdminFetchProjects } from "@/redux-toolkit/action/projectAction";
 import Projectbox from "@/app/(Mainbody)/projects/ProjectBox";
 import ProfileLoader from "@/components/common/Loader";
 import { Button, Col, Input, Row } from "reactstrap";
-import { propertyTypesData } from "@/utils/FiltersCities";
+import { citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
 
 const ListingSection = ()=> {
     const {projects,projectloading,totalPages,totalProjects} = useSelector((state)=>state.Project)
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const [type, setType] = useState("");
+    const [city, setCity] = useState("");
+    const [location, setLocation] = useState("");
     const [featured, setFeatured] = useState("");
     const [sponsored, setSponsored] = useState("");
 
     useEffect(()=>{
-        dispatch(AdminFetchProjects(currentPage,featured,sponsored,type))
-    },[dispatch,currentPage,featured,sponsored,type])
+        dispatch(AdminFetchProjects(currentPage,featured,sponsored,type,city,location))
+    },[dispatch,currentPage,featured,sponsored,type,city,location])
     const getPages = () => {
     const maxVisible = 4;
     let start = Math.max(1, currentPage- 1); // sliding window
@@ -47,6 +49,8 @@ const clearFilter = ()=>{
   setType("");
   setFeatured("");
   setSponsored("");
+  setCity("");
+  setLocation("");
   setCurrentPage(1);
 }
 
@@ -101,6 +105,36 @@ const clearFilter = ()=>{
   ))}
           </Input>
         </Col>
+         <Col lg="3" md="4" sm="6" className="my-2">
+                          <Input 
+                          type="select"
+                          value={city}
+                          onChange={(e)=>setCity(e.target.value)}
+                          >
+                            <option value={""}>select city</option>
+                            {citiesLocationsData.map((filt,index)=>{
+                                        return <option value={filt.city} key={index}>{filt.city}</option>
+                                      })}
+                          </Input>
+                        </Col>
+                        <Col lg="3" md="4" sm="6" className="my-2">
+                          <Input 
+                          type="select"
+                          value={location}
+                          onChange={(e)=>setLocation(e.target.value)}
+                          >
+                            <option value={""}>select location</option>
+                              {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
+                            <optgroup key={index} label={item.city}>
+                              {item.subCities.map((sub,index) => (
+                                <option key={index} value={sub}>
+                                  {sub}
+                                </option>
+                              ))}
+                            </optgroup>
+                          ))}
+                          </Input>
+                        </Col>
         <Col lg="3" md="4" sm="6" className="my-2">
           <Button onClick={clearFilter} style={{width:"100%"}}>Clear filter</Button>
         </Col>

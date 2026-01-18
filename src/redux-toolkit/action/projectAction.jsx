@@ -20,13 +20,15 @@ export const CreateProjectAdmin = ({formData})=>async(dispatch)=>{
         dispatch(setCreateProjectLoading(false));
     }
 }
-export const AdminFetchProjects = (page,featured,sponsored,type)=>async(dispatch)=>{
+export const AdminFetchProjects = (page,featured,sponsored,type,city,location)=>async(dispatch)=>{
     dispatch(setProjectLoading());
     try {
         const params = new URLSearchParams();
         if(page) params.append("page",page);
         if(featured) params.append("featured",featured);
-        if(sponsored) params.append("sponsored",sponsored);
+        if(sponsored) params.append("sponsored",sponsored); 
+        if(city) params.append("city",city); 
+        if(location) params.append("location",location); 
         if(type) params.append("type",type);
         const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/createProject?${params.toString()}`,{
             headers:{
