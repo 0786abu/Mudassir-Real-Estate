@@ -31,7 +31,7 @@ const Projectbox = ({ data, from }) => {
   const [WhatsAppHover, setWhatsAppHover] = useState(false);
   return (
     <>
-      <div className="property-box">
+      <div className="property-box my-5">
       <div className="property-image" style={{ position: "relative" }}>
           <ImageSlider images={data.images} />
 

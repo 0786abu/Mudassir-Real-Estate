@@ -2979,14 +2979,14 @@ export const BUDGET_FILTERS = {
     between_30_80: {
       type: "Apartment",
       value:"between_30_80",
-      label:"House between 30-80 Lakh",
+      label:"Apartment between 30-80 Lakh",
       minPrice: 3000000,
       maxPrice: 8000000,
     },
     above_80: {
       type: "Apartment",
       value:"above_80",
-      label:"House above 80 Lakh",
+      label:"Apartment above 80 Lakh",
       minPrice: 8000000,
       maxPrice: null,
     },

@@ -19,8 +19,10 @@ const ProjectFilter = () => {
   const params = useSearchParams();
    const searchedType = params.get("type")
   const searchedCity = params.get("city")
+  const searchedLocation = params.get("location")
   const searchedDeveloper = params.get("developer")
   const [city, setCity] = useState(searchedCity ? searchedCity : "");
+  const [location, setLocation] = useState(searchedLocation ? searchedLocation : "");
   const [type, setType] = useState(searchedType ? searchedType : "");
   const [developer, setDeveloper] = useState(searchedDeveloper ? searchedDeveloper : "");
 
@@ -35,12 +37,16 @@ const ProjectFilter = () => {
     if(type){
       newparams.set("type", type);
     }
+    if(location){
+      newparams.set("location", location);
+    }
     router.push(`/projects?${newparams.toString()}`);
   }
   const resetFilter = ()=>{
     setType("");
     setCity("");
     setDeveloper("");
+    setLocation("");
     router.push("/projects")
   }
   return (
@@ -93,6 +99,25 @@ const ProjectFilter = () => {
                     {citiesLocationsData.map((filt,index)=>{
                                 return <option value={filt.city} key={index}>{filt.city}</option>
                               })}
+                  </Input>
+                </Col>
+                <Col lg="3" md="6">
+                  <label className="filter-label">Location</label>
+                  <Input 
+                  type="select"
+                  value={location}
+                  onChange={(e)=>setLocation(e.target.value)}
+                  >
+                    <option value={""}>select location</option>
+                      {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
+                    <optgroup key={index} label={item.city}>
+                      {item.subCities.map((sub,index) => (
+                        <option key={index} value={sub}>
+                          {sub}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
                   </Input>
                 </Col>
 

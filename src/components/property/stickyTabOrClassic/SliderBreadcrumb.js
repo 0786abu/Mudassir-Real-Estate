@@ -12,7 +12,7 @@ import TopTitle from "./TopTitle";
 const SliderBreadcrumbSection = ({property,favourites}) => {
   // const breadcrumbBg = ["/assets/images/property-detail-1.webp","/assets/images/property-detail-2.webp","/assets/images/property-detail-3.webp"];
   return (
-    <section className="ratio_40 breadcrumb-section p-0 single-property-images">
+    <section className="ratio_40 breadcrumb-section p-0 single-property-images overflow-hidden">
       <NoSsr>
         <Slider className="main-property-slider arrow-image" {...mainPropertySlider}>
           {property?.images?.map((item, index) => (

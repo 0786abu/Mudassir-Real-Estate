@@ -2,18 +2,17 @@
  * It takes an array of objects and returns a slider with each object as a slide
  * @returns An array of objects.
  */
+"use client"
 import React, { useState } from "react";
 import Slider from "react-slick";
 import { Button, Col, Container, Row } from "reactstrap";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import Link from "next/link";
-import { useSelector } from "react-redux";
 import { feature4 } from "@/data/slickSlider";
 import Img from "@/utils/BackgroundImageRatio";
 import { FeaturedProperty } from "@/constValues/constValues";
 import NoSsr from "@/utils/NoSsr";
 import { formatPK } from "@/utils/Formatter";
-import ProfileLoader from "@/components/common/Loader";
 import { Bath, Bed } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +24,7 @@ const FeaturedPropertySection = ({ value,loading }) => {
   }
   return (
     <section className='feature-section ratio_landscape bg-half zoom-gallery'>
-      {loading ? (<ProfileLoader/>) : (
+      {/* {loading ? (<ProfileLoader/>) : ( */}
         <Container>
         <Row>
           <Col>
@@ -115,7 +114,7 @@ const FeaturedPropertySection = ({ value,loading }) => {
           </div>
         </Row>
       </Container>
-      )}
+      {/* )} */}
     </section>
   );
 };

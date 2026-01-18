@@ -1,8 +1,8 @@
 "use client";
-import { BUDGET_FILTERS } from '@/utils/FiltersCities'
+import { BUDGET_FILTERS, citiesLocationsData, popuarCities } from '@/utils/FiltersCities'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { Badge } from 'reactstrap'
+import { Badge, Col, Row } from 'reactstrap'
 
 const SubBudget = () => {
     const router = useRouter();
@@ -23,10 +23,22 @@ const applyBudgetFilter = ({ property, range }) => {
   router.push(`/projects?${params.toString()}`);
 };
 
+const handleLocation = (city)=>{
+  router.push(`/projects?city=${city}`)
+}
+
 
   return (
     <div>
-        <h3 className=' text-decoration-underline mt-2'>Search by budget</h3>
+      <div className='mb-4'>
+        <h4 className=' text-decoration-underline mt-2'>Nearby towns and cities</h4>
+        <Row>
+          {popuarCities.map((city,index)=>{
+            return <Col xs="6" className='my-1' onClick={()=>handleLocation(city)}><Badge color='light' className=' fw-semibold text-black' style={{cursor:"pointer",fontSize:"15px"}} key={index}>{city}</Badge></Col>
+          })}
+        </Row>
+      </div>
+        <h4 className=' text-decoration-underline mt-2'>Search by budget</h4>
         <div className='mt-4'>
             <div className='d-flex flex-column align-items-start gap-4'>
                 <Badge onClick={()=>applyBudgetFilter({property:"apartment",range:BUDGET_FILTERS.apartment.below_30.value})} color='light' className=' fw-semibold text-black' style={{cursor:"pointer",fontSize:"15px"}}>{BUDGET_FILTERS.apartment.below_30.label}</Badge>

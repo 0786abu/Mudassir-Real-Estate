@@ -1,7 +1,9 @@
+import { formatPK } from '@/utils/Formatter';
 import Link from 'next/link'
 import React from 'react'
 
-const SponsoredProjects = () => {
+const SponsoredProjects = ({projects}) => {
+ 
   return (
 
 <section className="projects-section py-5">
@@ -12,56 +14,30 @@ const SponsoredProjects = () => {
     </div>
     <div className="row g-4">
       {/* Card 1 */}
-      <div className="col-xl-3 col-lg-4 col-md-6">
-        <div className="project-card">
+      {projects?.map((project,index)=>{
+      return  <div key={index} className="col-xl-3 col-lg-4 col-md-6">
+             <Link className='text-black' href={`/projects/${project?.slug}`}>
+          <div className="project-card">
           <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" alt="project image" />
+          <img src={project?.images[0]?.url} alt="project image" />
           <div className="card-body">
-            <h5>Green Heights</h5>
-            <p className="price">PKR 2.5 Crore – 5.2 Crore</p>
-            <p className="location">Lahore, Gulberg</p>
-            <p className="meta">Flats • Offices • Commercial</p>
+            <h5>{project?.projectTitle}</h5>
+            <p className="price">PKR {formatPK(project?.minItemPrice)} – {formatPK(project?.maxItemPrice)}</p>
+            <p className="location">{project?.city}, {project?.location}</p>
+            <p className="meta">
+  {project?.offering?.slice(0,3)?.map((item, i) => (
+    <span key={i}>
+      {item}
+      {i !== project.offering.length - 1 && " • "}
+    </span>
+  ))}
+</p>
+
           </div>
         </div>
+  </Link>
       </div>
-      {/* Card 2 */}
-      <div className="col-xl-3 col-lg-4 col-md-6">
-        <div className="project-card">
-          <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1501183638710-841dd1904471" alt="project image" />
-          <div className="card-body">
-            <h5>Skyline Tower</h5>
-            <p className="price">PKR 3.1 Crore – 8.6 Crore</p>
-            <p className="location">Islamabad, Blue Area</p>
-            <p className="meta">Shops • Flats • Offices</p>
-          </div>
-        </div>
-      </div>
-      {/* Card 3 */}
-      <div className="col-xl-3 col-lg-4 col-md-6">
-        <div className="project-card">
-          <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="project image" />
-          <div className="card-body">
-            <h5>Emerald Mall</h5>
-            <p className="price">PKR 1.2 Crore – 4.9 Crore</p>
-            <p className="location">Karachi, DHA</p>
-            <p className="meta">Shops • Apartments</p>
-          </div>
-        </div>
-      </div>
-      <div className="col-xl-3 col-lg-4 col-md-6">
-        <div className="project-card">
-          <span className="badge-hot">HOT</span>
-          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267" alt="project image" />
-          <div className="card-body">
-            <h5>Emerald Mall</h5>
-            <p className="price">PKR 1.2 Crore – 4.9 Crore</p>
-            <p className="location">Karachi, DHA</p>
-            <p className="meta">Shops • Apartments</p>
-          </div>
-        </div>
-      </div>
+      })}
     </div>
   </div>
 </section>

@@ -3,6 +3,7 @@
  * logo-box with an image
  * @returns A function that returns a component.
  */
+"use client"
 import React from "react";
 import Slider from "react-slick";
 import { Col, Container, Row } from "reactstrap";

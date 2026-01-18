@@ -3,8 +3,9 @@
  * values of the keys being the values of the keys in the original array of objects
  * @returns An array of objects.
  */
+"use client"
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import { Button, Col, Container, Row } from "reactstrap";
 import { MeetOurAgent, PropertyServicesDetail } from "@/constValues/constValues";
@@ -12,22 +13,11 @@ import { about3 } from "@/data/slickSlider";
 import Img from "@/utils/BackgroundImageRatio";
 import NoSsr from "@/utils/NoSsr";
 import SocialAccounts from "../../elements/SocialAccounts";
-import { useDispatch, useSelector } from "react-redux";
-import { FetchAgents } from "@/redux-toolkit/action/agentAction";
-import ProfileLoader from "@/components/common/Loader";
-import { Link2 } from "react-feather";
 
-const About = () => {
-  const {agents,agentloading} = useSelector((state)=>state.Agent);
-  const dispatch = useDispatch();
+const About = ({agents}) => {
   const [isHover, setIsHover] = useState(false);
-
-  useEffect(()=>{
-    dispatch(FetchAgents());
-  },[dispatch])
   return (
     <section className="about-section slick-between">
-      {agentloading ? (<ProfileLoader/>) : (
         <Container>
         <Row className="ratio_asos">
           <Col>
@@ -72,7 +62,6 @@ const About = () => {
           </Col>
         </Row>
       </Container>
-      )}
     </section>
   );
 };

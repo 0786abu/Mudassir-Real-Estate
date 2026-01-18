@@ -232,6 +232,7 @@ export async function GET(req) {
     const developer = searchParams.get("developer")?.trim()
     const type = searchParams.get("type")
     const city = searchParams.get("city")
+    const location = searchParams.get("location")
     const minPrice = searchParams.get("minPrice")
   ? Number(searchParams.get("minPrice"))
   : null;
@@ -289,6 +290,9 @@ if (minPrice !== null || maxPrice !== null) {
     }
     if (city) {
       query.city = city;
+    }
+    if (location) {
+      query.location = location;
     }
     const limit = 12;
     const skip = (page - 1) * limit;
