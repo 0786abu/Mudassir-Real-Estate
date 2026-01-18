@@ -6,57 +6,30 @@ import HomeBannerSection from "./HomeBanner";
 import CategorySection from "@/layout/SearchByCategory";
 import BudgetSection from "@/components/property/BudgetSection";
 import SponsoredProjects from "@/components/property/SponsoredProjects";
-import { GetAdminProperties, GetAgents, GetFeaturedProperties, GetLatestProperties, GetSponsoredProjects } from "@/utils/HomePageValues";
 import { Suspense } from "react";
 import ProfileLoader from "@/components/common/Loader";
-import ContentLoader from "react-content-loader";
+import AdminProperties from "../slider-filter-search/AdminProperties";
+import SkeletonLoader from "@/components/common/SkeletonLoader";
 
 const BodyContent = async() => {  
-  const projects = await GetSponsoredProjects();
-     const properties = await GetLatestProperties();
-     const featuredProperties = await GetFeaturedProperties();
-     const adminProperties = await GetAdminProperties();
-     const Agents = await GetAgents();
-      
   return (
     <>
       <HomeBannerSection />
       <CategorySection/>
-      <Suspense fallback={ Array.from({ length: 4 }).map((_, index) => (
-         <div className=" col-xl-3 col-lg-4 col-md-6 col-12" key={index}>
-           <ContentLoader className="skeleton-svg">
-             <rect className="skeleton-img" />
-             <rect className="skeleton-c1" />
-             <rect className="skeleton-c2" />
-             <rect className="skeleton-c3" />
-           </ContentLoader>
-         </div>
-       ))}>
-        <SalePropertySection value={properties}/>
+      <Suspense fallback={ <SkeletonLoader/>}>
+        <SalePropertySection/>
       </Suspense>
       <Suspense fallback={<ProfileLoader/>}>
-        <FeaturedPropertySection value={featuredProperties}/>
+        <FeaturedPropertySection/>
       </Suspense>
-      <Suspense fallback={ Array.from({ length: 4 }).map((_, index) => (
-         <div className=" col-xl-3 col-lg-4 col-md-6 col-12" key={index}>
-           <ContentLoader className="skeleton-svg">
-             <rect className="skeleton-img" />
-             <rect className="skeleton-c1" />
-             <rect className="skeleton-c2" />
-             <rect className="skeleton-c3" />
-           </ContentLoader>
-         </div>
-       ))}>
-        <SalePropertySection properties={adminProperties} from="adminProperties" />
-      </Suspense>
-      {/* <VideoSection /> */}
-      {/* <TestimonialSection value={clientData?.OurHappyClientInClassicLayout} /> */}
-      {/* <SubscribeSection /> */}
-      <Suspense fallback={<ProfileLoader/>}>
-        <SponsoredProjects projects={projects}/>
+      <Suspense fallback={ <SkeletonLoader/>}>
+        <AdminProperties />
       </Suspense>
       <Suspense fallback={<ProfileLoader/>}>
-        <AboutSection agents={Agents} />
+        <SponsoredProjects/>
+      </Suspense>
+      <Suspense fallback={<ProfileLoader/>}>
+        <AboutSection/>
       </Suspense>
       <BudgetSection/>
       <BrandSection />

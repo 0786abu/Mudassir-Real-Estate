@@ -1,9 +1,10 @@
 import { formatPK } from '@/utils/Formatter';
+import { GetSponsoredProjects } from '@/utils/HomePageValues';
 import Link from 'next/link'
 import React from 'react'
 
-const SponsoredProjects = ({projects}) => {
- 
+const SponsoredProjects = async() => {
+  const projects = await GetSponsoredProjects();
   return (
 
 <section className="projects-section py-5">
