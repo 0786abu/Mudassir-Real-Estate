@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
   const project = data?.project;
 
   const title = project
-    ? `${project.title} | Pak Earth`
+    ? `${project.projectTitle} | Pak Earth`
     : `Project Details | Pak Earth`;
 
   const description = project
