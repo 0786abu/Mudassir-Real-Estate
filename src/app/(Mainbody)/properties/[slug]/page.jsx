@@ -14,11 +14,11 @@ export async function generateMetadata({ params }) {
 
   // Fallbacks
   const title = property
-    ? `${property.title} in ${property.city} | Pak Earth`
+    ? `${property.seo_title} in ${property.city} | Pak Earth`
     : `Property Details | Pak Earth`;
 
   const description = property
-    ? `Explore the ${property.title} property by Pak Earth in ${property.city}. Features include ${property.features?.join(
+    ? `Explore the ${property.seo_title} property by Pak Earth in ${property.city}. Features include ${property.features?.join(
         ", "
       )}. Find residential or commercial properties for sale or rent with modern amenities and investment opportunities in Pakistan.`
     : `Detailed information about this Pak Earth property. Learn about location, amenities, price, and investment options in Pakistan.`;
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
           "Real estate Pakistan",
           "Properties for sale Pakistan",
           "Properties for rent Pakistan",
-          property.title,
+          property.seo_title,
           property.city,
           "Pak Earth",
           ...(property.keywords || []),

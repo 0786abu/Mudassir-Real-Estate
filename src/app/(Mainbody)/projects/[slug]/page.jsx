@@ -15,11 +15,11 @@ export async function generateMetadata({ params }) {
   const project = data?.project;
 
   const title = project
-    ? `${project.projectTitle} | Pak Earth`
+    ? `${project.seo_title} | Pak Earth`
     : `Project Details | Pak Earth`;
 
   const description = project
-    ? `Explore the ${project.projectTitle} project by Pak Earth in ${project?.location}. Features include ${project?.features?.plotFeatures?.join(
+    ? `Explore the ${project.seo_title} project by Pak Earth in ${project?.location}. Features include ${project?.features?.plotFeatures?.join(
         ", "
       )}. Discover investment opportunities and modern real estate developments in Pakistan.`
     : `Detailed information about this Pak Earth real estate project. Learn about location, amenities, and investment options in Pakistan.`;
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
           "Real estate Pakistan",
           "Residential project",
           "Commercial project",
-          project.projectTitle,
+          project.seo_title,
           project.location,
           ...(project.keywords || []),
           "Property investment Pakistan",
