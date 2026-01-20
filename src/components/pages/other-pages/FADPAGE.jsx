@@ -3,8 +3,9 @@ import React, { Fragment, useState } from "react";
 import { ChevronDown, ChevronRight } from "react-feather";
 import { Button, Container, Row } from "reactstrap";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
-import FooterThree from "@/layout/footers/FooterThree";
 import { useRouter } from "next/navigation";
+
+
 
 const Faq = () => {
   const [active, setActive] = useState(0);

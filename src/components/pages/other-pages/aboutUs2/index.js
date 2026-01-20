@@ -1,3 +1,4 @@
+"use client"
 import React, { Fragment, useEffect, useState } from "react";
 import { getData } from "@/utils/getData";
 import AboutSection from "../../../home/slider-filter-search/About";

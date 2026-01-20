@@ -1,52 +1,15 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Container } from "reactstrap";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
-import FooterThree from "@/layout/footers/FooterThree";
-import NavbarThree from "@/layout/headers/NavbarThree";
 
 const PrivacyPolicy = () => {
-  const [active, setActive] = useState("1");
   return (
     <Fragment>
       <Breadcrumb />
       <section className='user-dashboard terms-section'>
         <Container>
           <div className='row log-in'>
-            {/* <div className='col-xl-3 col-lg-4'>
-              <div className='sidebar-user sticky-cls'>
-                <div className='dashboard-list'>
-                  <h5>Related Topics</h5>
-                  <ul className='nav nav-tabs right-line-tab'>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "1" ? "active" : ""}`} onClick={() => setActive("1")} href='#intro'>
-                        Information
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "2" ? "active" : ""}`} href='#howuse' onClick={() => setActive("2")}>
-                        How We Use
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "3" ? "active" : ""}`} href='#thirdparty' onClick={() => setActive("3")}>
-                        Third-Party Privacy
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "4" ? "active" : ""}`} href='#advertising' onClick={() => setActive("4")}>
-                        Advertising
-                      </a>
-                    </li>
-                    <li className='nav-item'>
-                      <a className={`nav-link ${active === "5" ? "active" : ""}`} href='#dpr' onClick={() => setActive("5")}>
-                        GDPR Privacy
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div> */}
             <div className='col-xl-9 col-lg-8 col-12'>
               <div className='theme-card'>
                 <h2>Privacy policy</h2>

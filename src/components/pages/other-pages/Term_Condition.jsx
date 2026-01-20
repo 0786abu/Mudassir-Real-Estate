@@ -2,7 +2,6 @@
 import React, { Fragment, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
-import FooterThree from "@/layout/footers/FooterThree";
 
 const TermsAndConditions = () => {
   return (

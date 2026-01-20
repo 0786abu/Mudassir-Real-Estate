@@ -11,9 +11,14 @@ import ConditionalNavbar from "@/utils/shoulShowNavbar";
 import ConditionalFooter from "@/utils/shouldShowFooter";
 
 export const metadata = {
-  title: "Sheltos - Real Estate Next 15",
-  description: "Sheltos - Real Estate Next 15",
+  title: "Pak Earth",
+  description: "Pak Earth – Real Estate & Property Platform Pakistan",
+ icons: {
+  icon: { url: "/logo.png", type: "image/png" },
+}
+
 };
+
 
 export default async function RootLayout({ children }) {
   const lng = await detectLanguage();
@@ -21,7 +26,7 @@ export default async function RootLayout({ children }) {
     <I18nProvider language={lng}>
       <html lang={lng}>
         <head>
-          <link rel='icon' href='/assets/images/favicon.png' type='image/x-icon' />
+          <link rel='icon' href='/logo.png' type='image/x-icon' />
           <link rel='manifest' href='/manifest.json' />
           <link rel='apple-touch-icon' href='/icon.png'></link>
           <link rel='preconnect' href='https://fonts.googleapis.com' />

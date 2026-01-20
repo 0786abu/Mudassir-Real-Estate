@@ -1,7 +1,15 @@
 
 import ResetPasswordSection from "@/components/screen/ResetPasswordSection";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
-import FooterThree from "@/layout/footers/FooterThree";
+
+
+export const metadata = {
+  title: "Reset Password | Pak Earth",
+  description: "Set a new password for your Pak Earth account securely. Keep your account safe and protected.",
+  alternates: { canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password` },
+  robots: { index: false, follow: false }, // Don't index
+};
+
 
 const ResetPassword = async({params}) => {
     const {token} = await params;

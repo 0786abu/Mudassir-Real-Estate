@@ -2,6 +2,38 @@ import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
 import React from "react";
 import { Container, Row, Col, Card, CardBody } from "reactstrap";
 
+
+export const metadata = {
+  title: "Our Real Estate Features | Services & Amenities in Pak Earth Pakistan",
+  description:
+    "Explore the unique features and services offered by our real estate company in Pakistan – from modern amenities in residential complexes to commercial facilities and client support services.",
+  keywords: [
+    "Real estate features Pakistan",
+    "Property amenities Pakistan",
+    "Residential services Pakistan",
+    "Commercial property services",
+    "Client support real estate Pakistan"
+  ].join(", "),
+  alternates: { canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/features` },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: "Our Real Estate Features | Services & Amenities in Pakistan",
+    description: "Learn about the services, amenities, and features in our real estate projects across Pakistan.",
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/features`,
+    siteName: "Pak Earth",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/assets/images/features-og-image.webp`,
+        width: 1200,
+        height: 630,
+        alt: "Pak Earth Features Pakistan",
+      },
+    ],
+    type: "website",
+  }
+};
+
+
 const page = () => {
   return (
        <>
