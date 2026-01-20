@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "photoswipe/dist/photoswipe.css";
 import { detectLanguage } from "./i18n/server";
 import { I18nProvider } from "./i18n/i18n-context";
-// import Navbar from "@/layout/headers/Navbar";
 import BootstrapClient from "@/layout/headers/Bootstrap";
 import { ToastContainer } from "react-toastify";
 import ConditionalNavbar from "@/utils/shoulShowNavbar";
@@ -13,10 +12,15 @@ import ConditionalFooter from "@/utils/shouldShowFooter";
 export const metadata = {
   title: "Pak Earth",
   description: "Pak Earth – Real Estate & Property Platform Pakistan",
- icons: {
-  icon: { url: "/logo.png", type: "image/png" },
-}
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.ico", sizes: "16x16" },
+    ],
+    apple: [{ url: "/favicon.ico", sizes: "180x180" }],
+  },
 };
+
 
 
 export default async function RootLayout({ children }) {
@@ -25,9 +29,6 @@ export default async function RootLayout({ children }) {
     <I18nProvider language={lng}>
       <html lang={lng}>
         <head>
-          <link rel='icon' href='/logo.png' type='image/x-icon' />
-          <link rel='manifest' href='/manifest.json' />
-          <link rel='apple-touch-icon' href='/logo.png'></link>
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link href='https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap' rel='stylesheet'></link>
