@@ -16,7 +16,6 @@ export const metadata = {
  icons: {
   icon: { url: "/logo.png", type: "image/png" },
 }
-
 };
 
 
@@ -28,7 +27,7 @@ export default async function RootLayout({ children }) {
         <head>
           <link rel='icon' href='/logo.png' type='image/x-icon' />
           <link rel='manifest' href='/manifest.json' />
-          <link rel='apple-touch-icon' href='/icon.png'></link>
+          <link rel='apple-touch-icon' href='/logo.png'></link>
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
           <link href='https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap' rel='stylesheet'></link>
