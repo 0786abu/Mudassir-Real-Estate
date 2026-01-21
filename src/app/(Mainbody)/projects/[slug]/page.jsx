@@ -58,7 +58,7 @@ export async function generateMetadata({ params }) {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: project?.title || "Pak Earth Real Estate Project",
+          alt: project?.seo_title || "Pak Earth Real Estate Project",
         },
       ],
       type: "website",
