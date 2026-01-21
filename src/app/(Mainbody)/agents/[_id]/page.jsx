@@ -2,13 +2,12 @@ import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
 import BodyContent from "@/components/agent/agentProfile";
 
 export async function generateMetadata({ params }) {
-  const { _id } = params;
-
+  const { _id } = await params;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/agents/${_id}`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/agents/getAgents/${_id}`,
     { cache: "no-cache" }
   );
-
+  console.log(_id)
   const data = await res.json();
   const agent = data?.agent;
 
