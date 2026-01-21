@@ -73,7 +73,6 @@ const page = async({params}) => {
     cache:"no-cache"
   });
   const data = await res.json()
-  console.log(data)
   return (
     <div>
       <Suspense fallback={<ProfileLoader/>}>
