@@ -54,9 +54,7 @@ export const FooterData = {
     children: [
       { title: "Facebook", link: "https://www.facebook.com/" },
       { title: "Instagram", link: "https://www.instagram.com/" },
-      { title: "Twitter", link: "https://twitter.com/" },
-      { title: "Mail chimp", link: "https://login.mailchimp.com/" },
-      { title: "Gmail", link: "https://myaccount.google.com/." },
+      { title: "Twitter", link: "https://twitter.com/" }
     ],
   },
   buy: {
