@@ -138,7 +138,7 @@ const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,sear
             </div>
             <div>
             <GridView properties={agentProperties} from={"agentDetail"} />
-            {totalProperties>2 && (
+            {totalProperties>4 && (
               <Pagination 
               totalPages={totalPages}
               currentPage={page}

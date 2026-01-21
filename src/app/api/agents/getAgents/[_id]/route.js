@@ -9,7 +9,7 @@ export async function GET(req,{params}) {
         const {_id} = params;
         const url = new URL(req.url);
         const page = parseInt(url.searchParams.get("page")) || 1;
-        const limit = 2;
+        const limit = 4;
         const skip = (page - 1) * limit;
         const agent = await Agent.findById(_id);
         if(!agent){
