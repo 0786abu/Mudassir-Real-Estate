@@ -13,7 +13,7 @@ import Pagination from "@/layout/Pagination";
 const BodyContent = ({agent,agentProperties,totalProperties,totalPages,page,searchParams}) => {
   const isFirstRender = useRef(true);
 
-  useEffect(() => {
+  useEffect(() => { 
     // 👇 pehli dafa skip karo
     if (isFirstRender.current) {
       isFirstRender.current = false;
