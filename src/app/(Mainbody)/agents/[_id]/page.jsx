@@ -7,7 +7,6 @@ export async function generateMetadata({ params }) {
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/agents/getAgents/${_id}`,
     { cache: "no-cache" }
   );
-  console.log(_id)
   const data = await res.json();
   const agent = data?.agent;
 
@@ -16,8 +15,8 @@ export async function generateMetadata({ params }) {
   const city = agent?.city;
 
   // 👉 Name + City SEO (only if city exists)
-  const nameWithCity = city
-    ? `${agentName} in ${city}`
+  const nameWithCity = agent?.agencyName
+    ? `${agencyName} in ${city}`
     : agentName;
 
   const title = agent
