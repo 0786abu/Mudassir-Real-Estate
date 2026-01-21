@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
     : agentName;
 
   const title = agent
-    ? `${nameWithCity} | Real Estate Agent at ${agencyName}`
+    ? `${nameWithCity} | Real Estate Agent at Pak Earth`
     : `Real Estate Agent | Pak Earth`;
 
   const description = agent
