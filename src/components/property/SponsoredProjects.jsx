@@ -13,7 +13,7 @@ const SponsoredProjects = async() => {
       <h2 className="section-title">Sponsored Projects</h2>
       <Link href="/projects?sponsored=true" className="view-all">View All →</Link>
     </div>
-    <div className="row g-4">
+    <div className="row g-4"> 
       {/* Card 1 */}
       {projects?.map((project,index)=>{
       return  <div key={index} className="col-xl-3 col-lg-4 col-md-6">
