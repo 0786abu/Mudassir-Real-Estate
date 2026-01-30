@@ -389,7 +389,8 @@ footer {
 }
 
 .footer-bg {
-    background-image: url(../../images/footer-bg.jpg);
+    background-color: rgba($black, 0.9);
+    background-image: url(../../images/footer-img.png);
     @extend %background-common;
 
     p {

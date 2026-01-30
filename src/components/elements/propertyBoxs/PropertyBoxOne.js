@@ -3,77 +3,45 @@
  * @returns A React component.
  */
 import Link from "next/link";
-import React, { useState } from "react";
-import { Button } from "reactstrap";
-// import ContentLoader from "react-content-loader";
 import Img from "@/utils/BackgroundImageRatio";
-import PropertyLabel from "../PropertyLabel";
 import { formatPK } from "@/utils/Formatter";
 
 const PropertyBoxOne = ({ data }) => {
-  const [isHover, setIsHover] = useState(false);
   return (
-    <>
-        <div className="property-box">
-          <div className="property-image">
-            <a>
-              <Img src={data?.images[0].url} className="bg-img" />
-              <div className="labels-left">
-                <PropertyLabel labels={data?.type} />
-              </div>
-            </a>
-            <div className="bottom-property">
-              <div className="d-flex">
-                <div>
-                  <h5>
-                    <Link href={`/properties/${data.slug}`}>{data?.title}</Link>
-                  </h5>
-                  <h6>
-                    {formatPK(data.price)} <small>/ start from</small>
-                  </h6>
-                </div>
-                
-                <Link href={`/properties/${data.slug}`}>
-                  <Button style={{background:isHover ? "#108a00" : "#14a800"}} onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} className="btn mt-3">Details</Button>
-                </Link>
-              </div>
-              <div className="overlay-option">
-                <ul>
-                  {data.beds>0 ? (
-                    <li>
-                    <span>Beds</span>
-                    <h6>{data?.beds}</h6>
-                  </li>
-                  ):(
-                    <li>
-                    <span>SQFT</span>
-                    <h6>{data?.squareFits}</h6>
-                  </li>
-                  )}
-                  {data.baths>0 && (
-                    <li>
-                    <span>Baths</span>
-                    <h6>{data?.baths}</h6>
-                  </li>
-                  )}
-                  {data.rooms>0 && (
-                    <li>
-                    <span>Rooms</span>
-                    <h6>{data?.rooms}</h6>
-                  </li>
-                  )}
-                  <li>
-                    <h6>
-                      {data?.areaSize}
-                    </h6>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+    <div className="property-card">
+      <div className="image-wrapper">
+        <Img src={data?.images[0]?.url} className="bg-img" />
+
+        <span className="tag">{data?.type}</span>
+
+        <div className="price-badge">
+         PKR {formatPK(data?.price)}
         </div>
-      {/* )} */}
-    </>
+      </div>
+
+      <div className="card-body">
+        <h4>
+          <Link href={`/properties/${data.slug}`}>
+            {data?.title}
+          </Link>
+        </h4>
+
+        <p className="location">
+          {data?.city}, {data?.location}
+        </p>
+
+        <div className="features">
+          {data?.beds > 0 && <span>🛏 {data.beds}</span>}
+          {data?.baths > 0 && <span>🛁 {data.baths}</span>}
+          {data?.rooms > 0 && <span>🚪 {data.rooms}</span>}
+          {data?.squareFits && <span>📐 {data.squareFits} sqft</span>}
+        </div>
+
+        <Link href={`/properties/${data.slug}`} className="details-btn">
+          View Details →
+        </Link>
+      </div>
+    </div>
   );
 };
 

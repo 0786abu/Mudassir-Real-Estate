@@ -104,7 +104,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
         </Link>
 
         <h6>
-          Rs. {" "}
+          PKR {" "}
           {formatPK(data.propertyID.price)}
         </h6>
 
@@ -190,7 +190,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           <h3>{data.title}</h3>
         </Link>
 
-        <h6>
+        <h6 style={{fontSize:"13px"}}>
           PKR {" "}
           {formatPK(data.price)}
         </h6>

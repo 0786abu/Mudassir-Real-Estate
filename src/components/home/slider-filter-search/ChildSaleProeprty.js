@@ -1,28 +1,28 @@
 "use client"
-import React, { useState } from "react";
-import { Button, Col, Container, Row } from "reactstrap";
+import { Col, Container, Row } from "reactstrap";
 import { LatestForSale, Sale } from "@/constValues/constValues";
-import { useRouter } from "next/navigation";
 import PropertyBoxOne from "@/components/elements/propertyBoxs/PropertyBoxOne";
+import Link from "next/link";
 
 const ChildSaleProeprty = ({from,value,properties}) => {
-    const [isHovered, setIsHovered] = useState(false);
-  const router = useRouter();
-  const handlePush = ()=>{
-    router.push("/hot-properties")
-  }
   return (
-    <section className='property-section slick-between slick-shadow'>
+    <section style={{marginTop:from==="adminProperties" ? "-80px" : undefined}} className='property-section slick-between slick-shadow'>
       <Container>
         <Row className=' ratio_landscape'>
           <Col>
             <div className='title-1'>
-              {from!=="adminProperties" && (
-                <span className='label label-gradient'>{Sale}</span>
-              )}
               <h2>{from==="adminProperties" ? "Hot Properties" : LatestForSale}</h2>
               <hr />
             </div>
+              {from==="adminProperties" ? (
+                <div className=" d-flex justify-content-end" style={{marginTop:"-80px",marginBottom:"40px"}}>
+                  <Link href="/hot-properties" className="view-all">View All →</Link>
+                </div>
+              ) : (
+                <div className=" d-flex justify-content-end" style={{marginTop:"-80px",marginBottom:"40px"}}>
+                  <Link href="/properties?isLatest=latest" className="view-all">View All →</Link>
+                </div>
+              )}
             <Row className='listing-hover-property'>
               { from==="adminProperties" ? (
                 properties &&
@@ -42,11 +42,6 @@ const ChildSaleProeprty = ({from,value,properties}) => {
             </Row>
           </Col>
         </Row>
-        {from==="adminProperties" && properties?.length>4 && (
-          <div className="d-flex justify-content-center" style={{marginTop:"60px"}}>
-          <Button onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} onClick={handlePush} size="sm" style={{background:isHovered ? "#108a00" : "#14A800"}}>See all</Button>
-        </div>
-        )}
       </Container>
     </section>
   )

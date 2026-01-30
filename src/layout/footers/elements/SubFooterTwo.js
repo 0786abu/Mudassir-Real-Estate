@@ -9,13 +9,13 @@ const SubFooterTwo = () => {
         <Row>
           <div className="col-xl-6 col-md-6">
             <div className="copy-right">
-              <p className="mb-0">Copyright 2022, All Right Reserved Sheltos</p>
+              <p className="mb-0">Copyright 2022, All Right Reserved PakEarth</p>
             </div>
           </div>
           <div className="col-xl-6 col-md-6 text-end">
             <ul className="sub-footer-link">
               <li>
-                <Link href="/">Home</Link>
+                <Link href="/faq">FAQ</Link>
               </li>
               <li>
                 <Link href="/terms-&-conditions">Terms</Link>
@@ -24,7 +24,7 @@ const SubFooterTwo = () => {
                 <Link href="/privacy-policy">Privacy policy</Link>
               </li>
               <li>
-                <Link href="/contact">Contact</Link>
+                <Link href="/pricing">Pricing</Link>
               </li>
             </ul>
           </div>

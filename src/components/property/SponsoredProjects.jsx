@@ -22,8 +22,8 @@ const SponsoredProjects = async() => {
           <span className="badge-hot">HOT</span>
           <img src={project?.images[0]?.url} alt="project image" />
           <div className="card-body">
-            <h5>{project?.projectTitle}</h5>
-            <p className="price">PKR {formatPK(project?.minItemPrice)} – {formatPK(project?.maxItemPrice)}</p>
+            <h5 className='line-clamp-1'>{project?.projectTitle}</h5>
+            <p className="price rounded-2 d-inline-block" style={{fontSize:"13px"}}>PKR {formatPK(project?.minItemPrice)} – {formatPK(project?.maxItemPrice)}</p>
             <p className="location">{project?.city}, {project?.location}</p>
             <p className="meta">
   {project?.offering?.slice(0,3)?.map((item, i) => (

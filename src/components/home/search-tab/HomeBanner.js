@@ -16,20 +16,28 @@ const HomeBannerSection = () => {
     areaSize: "",
     beds: "",
     minPrice: "",
+    developer:""
   });
 
   const handleSearch = () => {
   const query = new URLSearchParams();
 
   // Yeh optional values hain → sirf value ho tabhi URL mein add hongi
-  if (filterValues.category) query.set("category", filterValues.category);
+  if (filterValues.category && filterValues.category !== "Project") {
+    query.set("category", filterValues.category);
+  }
   if (filterValues.type) query.set("type", filterValues.type);
   if (filterValues.city) query.set("city", filterValues.city);
   if (filterValues.areaSize) query.set("areaSize", filterValues.areaSize);
   if (filterValues.beds) query.set("beds", filterValues.beds);
   if (filterValues.minPrice) query.set("minPrice", filterValues.minPrice);
+  if (filterValues.developer) query.set("developer", filterValues.developer);
 
-  router.push(`/properties?${query.toString()}`);
+  if(filterValues.category==="Project"){
+    router.push(`/projects?${query.toString()}`)
+  }else{
+    router.push(`/properties?${query.toString()}`)
+  }
 };
 
 
@@ -74,13 +82,16 @@ professionals
           : "#14a800"
         : "#F8F9FA",
     color: filterValues.category === "Sale" ? "white" : "black",
-    transition: "background 0.3s ease-in-out",
+    transition: "background 0.3s ease-in-out"
   }}
-  className="btn"
+  className="btn d-flex align-items-center"
   onClick={() =>
     setFilterValues({ ...filterValues, category: "Sale" })
   }
 >
+  <span style={{marginRight:"6px"}} className={`check-icon ${filterValues.category==="Sale" ? "checked" : "unchecked"}`}>
+          {filterValues.category==="Sale" ? "✔" : ""}
+        </span>
   Sale
 </button>
 
@@ -97,12 +108,38 @@ professionals
     color: filterValues.category === "Rent" ? "white" : "black",
     transition: "background 0.3s ease-in-out",
   }}
-  className="btn"
+  className="btn d-flex align-items-center"
   onClick={() =>
     setFilterValues({ ...filterValues, category: "Rent" })
   }
 >
+   <span style={{marginRight:"6px"}} className={`check-icon ${filterValues.category==="Rent" ? "checked" : "unchecked"}`}>
+          {filterValues.category==="Rent" ? "✔" : ""}
+        </span>
   Rent
+</button>
+<button
+  onMouseEnter={() => setHovered("Project")}
+  onMouseLeave={() => setHovered(null)}
+  style={{
+    background:
+      filterValues.category === "Project"
+        ? hovered === "Project"
+          ? "#108a00"
+          : "#14a800"
+        : "#F8F9FA",
+    color: filterValues.category === "Project" ? "white" : "black",
+    transition: "background 0.3s ease-in-out",
+  }}
+  className="btn d-flex align-items-center"
+  onClick={() =>
+    setFilterValues({ ...filterValues, category: "Project" })
+  }
+>
+   <span style={{marginRight:"6px"}} className={`check-icon ${filterValues.category==="Project" ? "checked" : "unchecked"}`}>
+          {filterValues.category==="Project" ? "✔" : ""}
+        </span>
+  Project
 </button>
 
             </div>
@@ -125,7 +162,7 @@ professionals
                     })
                   }
                 >
-                  <option value="">Property Type</option>
+                  <option value="">{filterValues.category==="Project" ? "Project type" : "Property Type"}</option>
                    {propertyTypesData.map((item) => (
                       <optgroup key={item.mainType} label={item.mainType}>
                         {item.types.map((sub,index) => (
@@ -157,7 +194,8 @@ professionals
             </div>
 
             {/* Area */}
-            <div className="col-md-2 col-6">
+           {filterValues.category !=="Project" && (
+             <div className="col-md-2 col-6">
               <div className="border rounded p-2">
                 <select
                   className="form-select border-0"
@@ -176,9 +214,11 @@ professionals
                 </select>
               </div>
             </div>
+           )}
 
             {/* Beds */}
-            <div className="col-md-2 col-6">
+            {filterValues.category !== "Project" && (
+              <div className="col-md-2 col-6">
               <div className="border rounded p-2">
                 <select
                   className="form-select border-0"
@@ -196,9 +236,11 @@ professionals
                 </select>
               </div>
             </div>
+            )}
 
             {/* Price */}
-            <div className="col-md-2 col-6">
+            {filterValues.category !== "Project" && (
+              <div className="col-md-2 col-6">
               <div className="border rounded p-2">
                 <input
                   type="number"
@@ -213,6 +255,24 @@ professionals
                 />
               </div>
             </div>
+            )}
+            {filterValues.category==="Project" && (
+              <div className="col-md-2 col-6">
+              <div className="border rounded p-2">
+                <input
+                  type="text"
+                  className="form-control border-0"
+                  placeholder="Enter developer name"
+                  onChange={(e) =>
+                    setFilterValues({
+                      ...filterValues,
+                      developer: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </div>
+            )}
             
 
             {/* Search Button */}

@@ -56,7 +56,7 @@ const Projectbox = ({ data, from }) => {
           <h3>{data.projectTitle}</h3>
         </Link>
 
-        <h6>
+        <h6 style={{fontSize:"13px"}}>
           PKR {" "}
           {formatPK(data.minItemPrice)} - {formatPK(data.maxItemPrice)}
         </h6>

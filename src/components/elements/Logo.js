@@ -24,7 +24,7 @@ const Logo2 = () => {
 
 const Logo3 = () => {
   return (
-    <div className="brand-logo">
+    <div className="brand-logo m-auto text-center">
       <Link href="/">
         <img src="/assets/images/final-logo.png" alt="" className="img-fluid rounded-2" />
       </Link>

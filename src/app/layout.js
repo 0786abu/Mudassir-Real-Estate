@@ -8,6 +8,7 @@ import BootstrapClient from "@/layout/headers/Bootstrap";
 import { ToastContainer } from "react-toastify";
 import ConditionalNavbar from "@/utils/shoulShowNavbar";
 import ConditionalFooter from "@/utils/shouldShowFooter";
+import TapToTop from "@/layout/TapToTop";
 
 export const metadata = {
   title: "Pak Earth",
@@ -40,6 +41,7 @@ export default async function RootLayout({ children }) {
         </head>
         <body>
             <MainProvider>
+              <TapToTop/>
               <BootstrapClient/>
               <ConditionalNavbar/>
               {children}

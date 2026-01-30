@@ -259,7 +259,7 @@
             width: 80px;
             margin: 20px auto 0;
             height: 2px;
-            color: var(--theme-default);
+            color: #14a800;
             opacity: 1;
             transition: all 0.5s;
         }
@@ -1663,6 +1663,45 @@ p {
   text-decoration: none;
   color: #14a800;
   font-weight: 600;
+  &:hover{
+    color: #108a00 !important;
+  }
+}
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-6 {
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .project-card {
@@ -1691,9 +1730,12 @@ p {
 }
 
 .price {
-  color: #14a800;
+  background-color: #14a800;
+  padding: 2px 4px;
+  color: white;
   font-weight: 600;
   margin-bottom: 4px;
+  font-size:medium;
 }
 
 .location {
@@ -1717,4 +1759,40 @@ p {
   font-size: 12px;
   font-weight: 600;
   border-radius: 6px;
+}
+.filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.filter-btn.active {
+  background: #14a800;
+  color: white;
+}
+
+.check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #14a800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* checked */
+.check-icon.checked {
+  background: white;
+  color: #14a800;
+}
+
+/* unchecked */
+.check-icon.unchecked {
+  background: transparent;
 }

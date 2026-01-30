@@ -251,6 +251,7 @@ export async function GET(req) {
         const skip = (page - 1) * limit;
         const areaSize = searchParams.get('areaSize');
         const category = searchParams.get('category');
+        const isLatest = searchParams.get('isLatest');
         const type = searchParams.get('type');
         const minsquareSize = searchParams.get('minsquareSize');
         const maxsquareSize = searchParams.get('maxsquareSize');
@@ -260,6 +261,11 @@ export async function GET(req) {
         const minPrice = searchParams.get('minPrice');
         const maxPrice = searchParams.get('maxPrice');
         const filter = {isApproved:"Approved"};
+         if (isLatest && isLatest.toLowerCase() === "latest") {
+      const twoDaysAgo = new Date();
+      twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+      query.createdAt = { $gte: twoDaysAgo };
+    }
         if (areaSize) filter.areaSize = areaSize;
         if (category) filter.category = category;
         if (type) filter.type = type;

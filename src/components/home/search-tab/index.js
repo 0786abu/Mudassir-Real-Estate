@@ -19,20 +19,14 @@ const BodyContent = async() => {
       <Suspense fallback={ <SkeletonLoader/>}>
         <SalePropertySection/>
       </Suspense>
-      <Suspense fallback={<ProfileLoader/>}>
-        <FeaturedPropertySection/>
-      </Suspense>
       <Suspense fallback={ <SkeletonLoader/>}>
         <AdminProperties />
       </Suspense>
       <Suspense fallback={<ProfileLoader/>}>
         <SponsoredProjects/>
       </Suspense>
-      <Suspense fallback={<ProfileLoader/>}>
-        <AboutSection/>
-      </Suspense>
       <BudgetSection/>
-      <BrandSection />
+      {/* <BrandSection /> */}
     </>
   );
 };

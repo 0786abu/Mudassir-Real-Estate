@@ -23,7 +23,7 @@ const TapToTop = () => {
     });
   };
   return (
-    <div className={`tap-top ${goingUp ? "top" : ""}`} onClick={tapToTop}>
+    <div className={`tap-top1 ${goingUp ? "top" : ""}`} onClick={tapToTop}>
       <div>
         <i className='fas fa-arrow-up'></i>
       </div>

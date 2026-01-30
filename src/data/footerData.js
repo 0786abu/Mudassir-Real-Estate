@@ -33,10 +33,12 @@ export const FooterData = {
   usefulLinks: {
     title: "Useful Links",
     children: [
-      { title: "About us", link: "/about" },
+      { title: "Home", link: "/" },
       { title: "Properties", link: "/properties" },
+      { title: "Projects", link: "/projects" },
       { title: "Agencies", link: "/agents" },
-      { title: "Faq", link: "/faq" },
+      { title: "Blog", link: "blog.pakearth.com" },
+      { title: "About us", link: "/about" },
       { title: "Contact", link: "/contact" },
     ],
   },

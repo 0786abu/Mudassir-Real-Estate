@@ -27,7 +27,7 @@ export default async function ListingSection({ searchParams }) {
       {/* ✅ Header gets data */}
       <Header
         title="Projects Listing"
-        totalProperties={totalProjects}
+        totalProperties={projects}
         from="projects"
       />
 

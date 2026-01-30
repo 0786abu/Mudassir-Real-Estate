@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import { FooterData } from "../../data/footerData";
 import FooterLink from "./elements/FooterLink";
-import FooterBlog from "./footerThreeElements/FooterBlog";
 import FooterContactUsDetails from "./footerThreeElements/FooterContactUsDetails";
 import SubFooterTwo from "./elements/SubFooterTwo";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,18 +43,40 @@ const FooterThree = () => {
                       </span>
                     </h5>
                     <div className={`footer-content ${isActive === "subscribe" ? "d-block" : "d-none d-md-block"}`}>
-                      <p className="mb-0">PakEarth  is a dedicated platform for property ads, created to bridge the gap between property seller and buyer. With an extensive network and a user-friendly interface, we provide a space where individuals and businesses can post Free Classified Ad and find residential plots, apartments, commercial spaces and agricultural lands efficiently. </p>
+                      
                       <form onSubmit={handleSubmit}>
                         <div className="input-group">
                           <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} className="form-control" placeholder="Email Address" required />
                           <span className="input-group-apend">
-                            <button type="submit" className="input-group-text" id="basic-addon2">
+                            <button type="submit" className="input-group-text" style={{background:"#14a800"}} id="basic-addon2">
                               {createemailloading ? <span className=" spinner-border" style={{width:"16px",height:"16px"}} role="status"></span> : <i className="fas fa-paper-plane"></i>}
                             </button>
                           </span>
                         </div>
                       </form>
                     </div>
+                       <ul className="agent-social">
+   <li>
+    <a href={"facebook.com"} className="facebook">
+      <i className="fab fa-facebook-f"></i>
+    </a>
+  </li>
+    <li>
+    <a href={"instagram.com"} className="instagram">
+      <i className="fab fa-instagram"></i>
+    </a>
+  </li>
+   <li>
+    <a href={"youtube.com"} className="google">
+      <i className="fab fa-youtube"></i>
+    </a>
+  </li>
+    {/* <li>
+    <a href={agent?.socialMedia?.linkedin} className="linkedin">
+      <i className="fab fa-linkedin-in"></i>
+    </a>
+  </li> */}
+</ul>
                   </div>
                 </Col>
               </Row>
