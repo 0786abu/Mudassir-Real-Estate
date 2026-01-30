@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 
-const PropertyLabel = ({ labels,color }) => {
+const PropertyLabel = ({ labels }) => {
   return (
     <>
               <div>
-                <span className={`label label-${color ? color : "success"}`}>{labels}</span>
+                <span className={`label bg-black`}>{labels}</span>
               </div>
     </>
   );

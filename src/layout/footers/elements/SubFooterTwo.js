@@ -9,7 +9,7 @@ const SubFooterTwo = () => {
         <Row>
           <div className="col-xl-6 col-md-6">
             <div className="copy-right">
-              <p className="mb-0">Copyright 2022, All Right Reserved PakEarth</p>
+              <p className="mb-0">Copyright 2012 - 2026, All Right Reserved PakEarth</p>
             </div>
           </div>
           <div className="col-xl-6 col-md-6 text-end">

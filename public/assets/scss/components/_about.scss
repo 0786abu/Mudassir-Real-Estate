@@ -1823,3 +1823,40 @@ p {
     }
   }
 }
+.homepagefiltercard{
+  background: linear-gradient(
+    135deg,
+    rgba(133, 227, 121, 0.12),
+    rgba(233, 255, 231, 0.03)
+  );
+}
+$primary: #108a00;
+
+.button-group1 {
+  display: inline-flex;
+  background: #fff;
+  padding: 4px;
+  border-radius: 30px;
+}
+
+.btnhome {
+  border: none;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 25px;
+  cursor: pointer;
+  background: transparent;
+  color: #333;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba($primary, 0.12);
+  }
+
+  &.active {
+    background: $primary;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba($primary, 0.35);
+  }
+}

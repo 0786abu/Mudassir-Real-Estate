@@ -466,7 +466,7 @@
     .details {
       h3 {
         span {
-          color: var(--theme-default);
+          color: #14a800;
         }
       }
     }
@@ -510,7 +510,7 @@
       content: '';
       width: 0;
       height: 3px;
-      background-color: var(--theme-default);
+      background-color: #14a800;
       transition: width 0.5s;
       bottom: 0;
       left: 0;
@@ -547,7 +547,7 @@
           left: 0;
           margin: 0 auto;
           transform: translateX(11px);
-          background-color: var(--theme-default);
+          background-color: #14a800;
         }
       }
 
@@ -601,7 +601,7 @@
             @extend %common-lightafter;
             opacity: 0.15;
             transition: 0.5s;
-            background-color: var(--theme-default);
+            background-color: #14a800;
           }         
         }
       }
@@ -621,7 +621,7 @@
 
       .price {
         .label-light {
-          background-color: var(--theme-default);
+          background-color: #14a800;
           color: $white;
           transition: 0.5s;
 
@@ -659,7 +659,7 @@
   &.pricing-inner {
     .pricing-box {
       &::after {
-        background-color: var(--theme-default);
+        background-color: #14a800;
       }
     }
     .title-2 {
@@ -769,7 +769,7 @@
   .btn-close {
     position: absolute;
     right: 0;
-    background-color: var(--theme-default);
+    background-color: #14a800;
     background-image: unset;
     opacity: 1;
     top: 0;
@@ -829,7 +829,7 @@
       padding: 5px;
       width: 25px;
       height: 25px;
-      color: var(--theme-default)
+      color: #14a800
     }
   }
   h2 {
@@ -871,11 +871,11 @@
         text-align: center;
         opacity: 0.7;
         padding: 15px 20px 13px;
-        color: var(--theme-default);
+        color: #14a800;
         font-weight: 300;
 
         &::placeholder {
-          color: var(--theme-default);
+          color: #14a800;
           font-family: $font_0, $font_3;
           font-weight: 300;
         }
@@ -885,7 +885,7 @@
         @extend %common-lightafter;
         opacity: 0.6;
         width: 75%;
-        background-color: var(--theme-default);
+        background-color: #14a800;
         right: 0;
         margin: 0 auto;
         border-radius: 4px;
@@ -1099,8 +1099,8 @@
 
       &.active {
         a {
-          color: var(--theme-default);
-          border-color: var(--theme-default);
+          color: #14a800;
+          border-color: #14a800;
           transition: 0.5s;
         }
       }
@@ -1122,7 +1122,7 @@
     color: $gray-60;
 
     span {
-      color: var(--theme-default);
+      color: #14a800;
     }
   }
 
@@ -1225,7 +1225,7 @@
       margin-bottom: 15px;
       border-bottom: 1px solid $light-border;
       font-weight: 600;
-      color: var(--theme-default);
+      color: #14a800;
       cursor: pointer;
     }
 
@@ -1238,7 +1238,7 @@
       font-size: 16px;
       &::before {
         @extend %comman-before-line;
-        background: var(--theme-default);
+        background: #14a800;
       }
     }
 
@@ -1275,7 +1275,7 @@
 
             &:hover,
             &:focus {
-              color: var(--theme-default);
+              color: #14a800;
             }
 
             i {
@@ -1337,7 +1337,7 @@
               }
 
               span {
-                color: var(--theme-default);
+                color: #14a800;
                 font-size: 13px;
 
                 span {
@@ -2189,7 +2189,7 @@
             &.active {
               .media {
                 .step-icon {
-                  background-color: var(--theme-default);
+                  background-color: #14a800;
                   span {
                     color: $white;
                   }
@@ -2198,7 +2198,7 @@
                 .media-body {
                   h5,
                   h6 {
-                    color: var(--theme-default);
+                    color: #14a800;
                   }
 
                   h6 {
@@ -2468,7 +2468,7 @@
             content: '';
             width: 30px;
             height: 2px;
-            background-color: var(--theme-default);
+            background-color: #14a800;
             left: 0;
             bottom: -8px;
           }
@@ -2878,14 +2878,14 @@
       text-transform: capitalize;
       font-weight: 500;
       &.active {
-        border-left-color: var(--theme-default);
-        color: var(--theme-default);
+        border-left-color: #14a800;
+        color: #14a800;
       }
     }
 
     &.show {
       .nav-link {
-        border-right-color: var(--theme-default);
+        border-right-color: #14a800;
       }
     }
   }
@@ -2978,7 +2978,7 @@
           content: '';
           width: 30px;
           height: 2px;
-          background-color: var(--theme-default);
+          background-color: #14a800;
           left: 0;
           bottom: 0;
         }
@@ -3062,7 +3062,7 @@
           }
 
           a {
-            color: var(--theme-default);
+            color: #14a800;
           }
 
           p {
@@ -3237,15 +3237,15 @@ input[type='date'] {
 
         &.today {
           div {
-            color: var(--theme-default);
+            color: #14a800;
           }
         }
 
         &.selected {
           &.gj-cursor-pointer {
             div {
-              background-color: var(--theme-default);
-              border-color: var(--theme-default);
+              background-color: #14a800;
+              border-color: #14a800;
             }
           }
         }
@@ -3373,7 +3373,7 @@ input[type='date'] {
         text-transform: capitalize;
 
         &:hover {
-          color: var(--theme-default);
+          color: #14a800;
         }
 
         + a {
@@ -3540,7 +3540,7 @@ input[type='date'] {
 
   .provide-details {
     h2 {
-      color: var(--theme-default);
+      color: #14a800;
       line-height: 1.3;
     }
 
@@ -3592,7 +3592,7 @@ input[type='date'] {
       line-height: 1.7;
       font-size: 16px;
       a {
-        color: var(--theme-default);
+        color: #14a800;
       }
       &:last-child {
         margin-bottom: 0;

@@ -81,7 +81,6 @@ export default function FilterSidebar() {
 
   return (
     <div className="p-1">
-      <h5 className="mb-3 border-bottom pb-2">Filter</h5>
 
       {/* Property Status */}
       <div className="mb-3">

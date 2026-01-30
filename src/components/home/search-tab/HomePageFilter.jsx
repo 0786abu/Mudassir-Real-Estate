@@ -13,39 +13,31 @@ const HomePageFilter = () => {
     <div className="container my-5" style={{ maxWidth: "1280px" }}>
       <h2 className="fs-5 fw-semibold mb-2">Popular Locations</h2>
 
-      <div className="d-flex gap-4 border-bottom">
-        <span
-          onClick={() => setCategory("sale")}
-          className={`pb-2 cursor-pointer ${
-            category === "sale"
-              ? "text-success border-bottom border-2 border-success fw-medium"
-              : "text-secondary"
-          }`}
-          style={{ cursor: "pointer" }}
-        >
-          For Sale
-        </span>
+       <div className=" border-bottom pb-1">
+        <div className="button-group1 shadow-sm">
+      <button
+        className={`btnhome me-1 ${category === "sale" ? "active" : ""}`}
+        onClick={() => setCategory("sale")}
+      >
+        For Sale
+      </button>
 
-        <span
-          onClick={() => setCategory("rent")}
-          className={`pb-2 cursor-pointer ${
-            category === "rent"
-              ? "text-success border-bottom border-2 border-success fw-medium"
-              : "text-secondary"
-          }`}
-          style={{ cursor: "pointer" }}
-        >
-          To Rent
-        </span>
-      </div>
+      <button
+        className={`btnhome ${category === "rent" ? "active" : ""}`}
+        onClick={() => setCategory("rent")}
+      >
+        To Rent
+      </button>
+    </div>
+       </div>
 
       {category==="sale" && (
       <div>
           <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Cities to Buy Properties in Pakistan</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Cities to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Buy</span> Properties in Pakistan</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter1.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.type}</h6>
@@ -69,10 +61,10 @@ const HomePageFilter = () => {
         </div>
       </div>
         <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to Buy for Houses</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Buy</span> for Houses</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter2.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.city}</h6>
@@ -96,10 +88,10 @@ const HomePageFilter = () => {
         </div>
       </div>
         <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to Buy for Plots</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Buy</span> for Plots</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter3.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.city}</h6>
@@ -123,10 +115,10 @@ const HomePageFilter = () => {
         </div>
       </div>
         <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famouse Locations to Sale for Apartments</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famouse Locations to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Buy</span> for Apartments</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter4.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.city}</h6>
@@ -154,10 +146,10 @@ const HomePageFilter = () => {
       {category==="rent" && (
         <div>
           <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Cities to Rent Properties in Pakistan</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Cities to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Rent</span> Properties in Pakistan</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter5.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.type}</h6>
@@ -181,10 +173,10 @@ const HomePageFilter = () => {
         </div>
       </div>
         <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to Rent for Houses</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Rent</span> for Houses</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter6.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.city}</h6>
@@ -208,10 +200,10 @@ const HomePageFilter = () => {
         </div>
       </div>
         <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to Rent for Plots</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famous Locations to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Rent</span> for Plots</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter7.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.city}</h6>
@@ -235,10 +227,10 @@ const HomePageFilter = () => {
         </div>
       </div>
         <div className="mt-4">
-        <span style={{fontSize:"15px", fontWeight:"bold"}}>Most Famouse Locations to Rent for Apartments</span>
+        <p className=" text-center" style={{fontSize:"15px", fontWeight:"bold"}}>Most Famouse Locations to <span style={{color:"#14a800",fontSize:"15px",fontWeight:"bold"}}>Rent</span> for Apartments</p>
         <div>
 
-          <div className="row mt-2">
+          <div className="row mt-2 homepagefiltercard p-4 rounded-4 shadow-sm">
             {HomePageFilter8.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="col-lg-3 col-md-4">
                     <h6 className=" fw-bold">{section.city}</h6>
