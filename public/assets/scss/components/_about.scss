@@ -1796,3 +1796,30 @@ p {
 .check-icon.unchecked {
   background: transparent;
 }
+
+.homefilterli {
+  color: #000 !important;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+
+  .link-icon {
+    color: #14a800;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+  }
+
+  &.active {
+    color: #14a800 !important;
+    font-weight: 500;
+
+    .link-icon {
+      color: #14a800;
+    }
+  }
+}

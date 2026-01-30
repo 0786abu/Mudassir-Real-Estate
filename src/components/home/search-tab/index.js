@@ -10,6 +10,7 @@ import { Suspense } from "react";
 import ProfileLoader from "@/components/common/Loader";
 import AdminProperties from "../slider-filter-search/AdminProperties";
 import SkeletonLoader from "@/components/common/SkeletonLoader";
+import HomePageFilter from "./HomePageFilter";
 
 const BodyContent = async() => {  
   return (
@@ -25,6 +26,7 @@ const BodyContent = async() => {
       <Suspense fallback={<ProfileLoader/>}>
         <SponsoredProjects/>
       </Suspense>
+      <HomePageFilter/>
       <BudgetSection/>
       {/* <BrandSection /> */}
     </>
