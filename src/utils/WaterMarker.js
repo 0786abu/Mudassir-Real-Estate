@@ -1,35 +1,34 @@
 import sharp from "sharp";
-import fs from "fs";
-import path from "path";
 
-const addWatermark = async (imageBuffer) => {
-  const logoPath = path.resolve(
-    process.cwd(),
-    "public/assets/images/favicon-48-siz3.png"
-  );
-
-  const logoBuffer = fs.readFileSync(logoPath);
-
-  // 🔹 Resize logo (recommended)
-  const resizedLogo = await sharp(logoBuffer)
-    .resize(180) // size control
-    .png()
-    .toBuffer();
-
+const addTextWatermark = async (imageBuffer) => {
   const image = sharp(imageBuffer);
-  const metadata = await image.metadata();
+  const meta = await image.metadata();
+
+  // Create SVG for text watermark
+  const fontSize = Math.floor(meta.width * 0.08); // adjust size relative to image width
+  const svg = `
+    <svg width="${meta.width}" height="${meta.height}">
+      <text x="50%" y="50%" 
+            font-size="${fontSize}" 
+            font-family="Arial, sans-serif" 
+            font-weight="bold" 
+            fill="rgba(255, 255, 255, 0.3)" 
+            text-anchor="middle" 
+            dominant-baseline="middle">
+        PakEarth.com
+      </text>
+    </svg>
+  `;
 
   return image
     .composite([
       {
-        input: resizedLogo,
-        top: metadata.height - 180 - 40, // ⬅️ 40px upar
-        left: metadata.width - 180 - 30, // ⬅️ right se thora gap
-        opacity: 0.5
-      }
+        input: Buffer.from(svg),
+        gravity: "center",
+      },
     ])
-    .jpeg({ quality: 90 })
+    .webp({ quality: 90 })
     .toBuffer();
 };
 
-export default addWatermark;
+export default addTextWatermark;
