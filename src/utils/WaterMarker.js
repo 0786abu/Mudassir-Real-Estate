@@ -8,7 +8,7 @@ const addTextWatermark = async (imageBuffer) => {
   const fontSize = Math.floor(meta.width * 0.08);
 
   // Fetch font from deployed public folder
-  const fontUrl = `public/fonts/Roboto-Bold.ttf`;
+  const fontUrl = path.join(process.cwd(), "public/fonts/Roboto-Bold.ttf")
   const fontBuffer = await fetch(fontUrl).then(res => res.arrayBuffer());
   const fontData = Buffer.from(fontBuffer).toString("base64");
 
