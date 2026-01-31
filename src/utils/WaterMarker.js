@@ -12,7 +12,7 @@ const addTextWatermark = async (imageBuffer) => {
             font-size="${fontSize}" 
             font-family="Arial, sans-serif" 
             font-weight="bold" 
-            fill="rgba(255, 255, 255, 0.3)" 
+            fill="rgba(255, 255, 255, 0.35)" 
             text-anchor="middle" 
             dominant-baseline="middle">
         PakEarth.com
