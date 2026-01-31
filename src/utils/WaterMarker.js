@@ -15,28 +15,19 @@ const addTextWatermark = async (imageBuffer) => {
 
   const svg = `
 <svg width="${meta.width}" height="${meta.height}">
-  <defs>
-    <style>
-      @font-face {
-        font-family: 'Roboto';
-        src: url('data:font/ttf;base64,${fontData}') format('truetype');
-        font-weight: bold;
-      }
-    </style>
-  </defs>
-
-  <text
-    x="50%"
-    y="50%"
-    font-size="${fontSize}"
-    font-family="Roboto"
-    font-weight="bold"
-    fill="rgba(255,255,255,0.35)"
-    text-anchor="middle"
-    dominant-baseline="middle"
-  >
-    PakEarth.com
-  </text>
+  <g transform="rotate(-30 ${meta.width/2} ${meta.height/2})">
+    <text
+      x="50%"
+      y="50%"
+      font-size="${fontSize}"
+      font-family="sans-serif"
+      font-weight="700"
+      fill="rgba(255,255,255,0.25)"
+      text-anchor="middle"
+    >
+      PakEarth.com
+    </text>
+  </g>
 </svg>
 `;
 
