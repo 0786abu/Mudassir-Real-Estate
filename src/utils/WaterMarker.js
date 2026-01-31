@@ -8,17 +8,18 @@ const addTextWatermark = async (imageBuffer) => {
 
   const fontSize = Math.floor(meta.width * 0.08);
 
-  // ✅ Local font read (NO fetch)
-  // const fontPath = path.join(process.cwd(), "public/fonts/Roboto-Bold.ttf");
-  // const fontBuffer = fs.readFileSync(fontPath);
-  // const fontData = fontBuffer.toString("base64");
+  const fontPath = path.join(process.cwd(), "public/fonts/Roboto-Bold.ttf");
+const fontBuffer = fs.readFileSync(fontPath);
+const fontBase64 = fontBuffer.toString("base64");
+
 
   const svg = `
 <svg width="${meta.width}" height="${meta.height}">
   <defs>
     <style>
       @font-face {
-        font-family="Arial, Helvetica, sans-serif"
+        font-family: 'Roboto';
+        src: url(data:font/ttf;base64,${fontBase64}) format('truetype');
         font-weight: bold;
       }
     </style>
@@ -39,10 +40,12 @@ const addTextWatermark = async (imageBuffer) => {
 </svg>
 `;
 
+
   return image
-    .composite([{ input: Buffer.from(svg) }])
-    .webp({ quality: 90 })
-    .toBuffer();
+  .composite([{ input: Buffer.from(svg) }])
+  .webp({ quality: 90 })
+  .toBuffer();
+
 };
 
 export default addTextWatermark;
