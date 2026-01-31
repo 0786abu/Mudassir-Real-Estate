@@ -18,7 +18,7 @@ const addTextWatermark = async (imageBuffer) => {
   <defs>
     <style>
       @font-face {
-        font-family: 'Roboto';
+        font-family="Arial, Helvetica, sans-serif"
         font-weight: bold;
       }
     </style>
