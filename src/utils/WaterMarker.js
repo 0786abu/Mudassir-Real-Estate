@@ -21,9 +21,7 @@ const addWatermark = async (imageBuffer) => {
         src: url(data:font/ttf;base64,${fontBase64}) format('truetype');
         font-weight: bold;
       }
-      text {
-        font-family: 'Roboto';
-      }
+      text { font-family: 'Roboto'; }
     </style>
   </defs>
 
@@ -44,11 +42,13 @@ const addWatermark = async (imageBuffer) => {
   const svgBuffer = Buffer.from(svg);
 
   const watermark = await sharp(svgBuffer, {
-    density: 300,
-  }).toBuffer();
+    density: 96, // ✅ safe
+  })
+    .resize(meta.width, meta.height)
+    .toBuffer();
 
   return image
-    .composite([{ input: watermark, gravity: "center" }])
+    .composite([{ input: watermark }])
     .webp({ quality: 90 })
     .toBuffer();
 };
