@@ -1,4 +1,5 @@
 import sharp from "sharp";
+import fs from "fs";
 
 const addTextWatermark = async (imageBuffer) => {
   const image = sharp(imageBuffer);
