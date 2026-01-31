@@ -1,5 +1,6 @@
 import fetch from "node-fetch"; // npm i node-fetch
 import sharp from "sharp";
+import path from "path";
 
 const addTextWatermark = async (imageBuffer) => {
   const image = sharp(imageBuffer);
