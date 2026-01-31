@@ -1,13 +1,17 @@
+import fetch from "node-fetch"; // npm i node-fetch
 import sharp from "sharp";
-import fs from "fs";
 
 const addTextWatermark = async (imageBuffer) => {
   const image = sharp(imageBuffer);
   const meta = await image.metadata();
 
-  // Create SVG for text watermark
-  const fontSize = Math.floor(meta.width * 0.08); // adjust size relative to image width
-  const fontData = fs.readFileSync("fonts/Roboto-Bold.ttf").toString("base64");
+  const fontSize = Math.floor(meta.width * 0.08);
+
+  // Fetch font from deployed public folder
+  const fontUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/fonts/Roboto-Bold.ttf`;
+  const fontBuffer = await fetch(fontUrl).then(res => res.arrayBuffer());
+  const fontData = Buffer.from(fontBuffer).toString("base64");
+
   const svg = `
 <svg width="${meta.width}" height="${meta.height}">
   <defs>
@@ -32,12 +36,7 @@ const addTextWatermark = async (imageBuffer) => {
 `;
 
   return image
-    .composite([
-      {
-        input: Buffer.from(svg),
-        gravity: "center",
-      },
-    ])
+    .composite([{ input: Buffer.from(svg), gravity: "center" }])
     .webp({ quality: 90 })
     .toBuffer();
 };
