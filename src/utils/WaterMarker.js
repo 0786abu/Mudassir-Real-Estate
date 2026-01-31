@@ -1,5 +1,5 @@
-import fetch from "node-fetch"; // npm i node-fetch
 import sharp from "sharp";
+import fs from "fs";
 import path from "path";
 
 const addTextWatermark = async (imageBuffer) => {
@@ -8,15 +8,15 @@ const addTextWatermark = async (imageBuffer) => {
 
   const fontSize = Math.floor(meta.width * 0.08);
 
-  // Fetch font from deployed public folder
-  const fontUrl = path.join(process.cwd(), "public/fonts/Roboto-Bold.ttf")
-  const fontBuffer = await fetch(fontUrl).then(res => res.arrayBuffer());
-  const fontData = Buffer.from(fontBuffer).toString("base64");
+  // ✅ Local font read (NO fetch)
+  const fontPath = path.join(process.cwd(), "public/fonts/Roboto-Bold.ttf");
+  const fontBuffer = fs.readFileSync(fontPath);
+  const fontData = fontBuffer.toString("base64");
 
   const svg = `
 <svg width="${meta.width}" height="${meta.height}">
   <defs>
-    <style type="text/css">
+    <style>
       @font-face {
         font-family: 'Roboto';
         src: url('data:font/ttf;base64,${fontData}') format('truetype');
@@ -24,20 +24,24 @@ const addTextWatermark = async (imageBuffer) => {
       }
     </style>
   </defs>
-  <text x="50%" y="50%" 
-        font-size="${fontSize}" 
-        font-family="Roboto" 
-        font-weight="bold" 
-        fill="rgba(255, 255, 255, 0.35)" 
-        text-anchor="middle" 
-        dominant-baseline="middle">
+
+  <text
+    x="50%"
+    y="50%"
+    font-size="${fontSize}"
+    font-family="Roboto"
+    font-weight="bold"
+    fill="rgba(255,255,255,0.35)"
+    text-anchor="middle"
+    dominant-baseline="middle"
+  >
     PakEarth.com
   </text>
 </svg>
 `;
 
   return image
-    .composite([{ input: Buffer.from(svg), gravity: "center" }])
+    .composite([{ input: Buffer.from(svg) }])
     .webp({ quality: 90 })
     .toBuffer();
 };
