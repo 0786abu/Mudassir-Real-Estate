@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Property from "@/backend/model/propertyModel";
 import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthenticated } from "@/backend/utils/middlewere";
+import addWatermark from "@/utils/WaterMarker";
 import { NextResponse } from "next/server";
 
 
@@ -52,6 +53,7 @@ export async function POST(req, { params }) {
     for (const file of files) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
+      const watermarkbuffer = await addWatermark(buffer)
 
       const uploadResult = await new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
@@ -60,7 +62,7 @@ export async function POST(req, { params }) {
             if (error) reject(error);
             else resolve(result);
           }
-        ).end(buffer);
+        ).end(watermarkbuffer);
       });
 
       uploadedImages.push({

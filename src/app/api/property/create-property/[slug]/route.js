@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Property from "@/backend/model/propertyModel";
 import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthenticated } from "@/backend/utils/middlewere";
+import addWatermark from "@/utils/WaterMarker";
 import { NextResponse } from "next/server";
 
 export async function GET(req,{params}){
@@ -125,15 +126,12 @@ export async function DELETE(req, { params }) {
 
     // Auth check
     const user = await isAuthenticated();
-    console.log(user)
     if (!user) {
       return NextResponse.json(
         { success: false, message: "Unauthorized" },
         { status: 401 }
       );
     }
-    console.log("hi delete")
-
 
     // Find property by slug
     const property = await Property.findOne({ slug }).populate("createdBy","name email profile agencyProfile agencyName");
@@ -227,6 +225,7 @@ export async function POST(req, { params }) {
     // Convert file → buffer
     const arrayBuffer = await imageFile.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
+    const watermarkbuffer = await addWatermark(buffer)
 
     // ⭐ Delete old image from Cloudinary
     if (existingProperty.floorPlanImage?.public_id) {
@@ -247,7 +246,7 @@ export async function POST(req, { params }) {
             else resolve(result);
           }
         )
-        .end(buffer);
+        .end(watermarkbuffer);
     });
 
     // ⭐ Update DB with new image

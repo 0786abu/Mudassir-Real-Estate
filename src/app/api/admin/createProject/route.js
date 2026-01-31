@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Project from "@/backend/model/projectSchema";
 import { uploadToCloudinary2 } from "@/backend/utils/cloudinaryUploader";
 import { isAuthorized } from "@/backend/utils/middlewere";
+import addWatermark from "@/utils/WaterMarker";
 import { NextResponse } from "next/server";
 
 
@@ -103,14 +104,16 @@ const paymentPlanImages = formData.getAll("paymentPlanImages");
 
     // ---------- Upload projectLogo ----------
     const projectLogoBuffer = await projectLogoFile.arrayBuffer();
-    const projectLogoUpload = await uploadToCloudinary2({ buffer: projectLogoBuffer, folder: "properties/projects/logos" });
+    const watermarkprojectlogobuffer = await addWatermark(projectLogoBuffer)
+    const projectLogoUpload = await uploadToCloudinary2({ buffer: watermarkprojectlogobuffer, folder: "properties/projects/logos" });
     const projectLogo = { url: projectLogoUpload.secure_url, public_id: projectLogoUpload.public_id };
 
     // ---------- Upload images ----------
     const images = [];
     for (const img of imagesFiles) {
       const buffer = await img.arrayBuffer();
-      const uploadResult = await uploadToCloudinary2({ buffer, folder: "properties/projects/images" });
+      const watermarkbuffer = await addWatermark(buffer)
+      const uploadResult = await uploadToCloudinary2({ buffer:watermarkbuffer, folder: "properties/projects/images" });
       images.push({ url: uploadResult.secure_url, public_id: uploadResult.public_id });
     }
 
@@ -118,7 +121,8 @@ const paymentPlanImages = formData.getAll("paymentPlanImages");
     let developerLogo = null;
     if (developedByLogoFile) {
       const buffer = await developedByLogoFile.arrayBuffer();
-      const uploadResult = await uploadToCloudinary2({ buffer, folder: "properties/projects/developerLogo" });
+      const developedBywatermarkbuffer = await addWatermark(buffer);
+      const uploadResult = await uploadToCloudinary2({ buffer:developedBywatermarkbuffer, folder: "properties/projects/developerLogo" });
       developerLogo = { url: uploadResult.secure_url, public_id: uploadResult.public_id };
     }
 
@@ -126,7 +130,8 @@ const paymentPlanImages = formData.getAll("paymentPlanImages");
     let marketingLogo = null;
     if (marketingByLogoFile) {
       const buffer = await marketingByLogoFile.arrayBuffer();
-      const uploadResult = await uploadToCloudinary2({ buffer, folder: "properties/projects/marketingLogo" });
+      const marketingwatermarkbuffer = await addWatermark(buffer)
+      const uploadResult = await uploadToCloudinary2({ buffer:marketingwatermarkbuffer, folder: "properties/projects/marketingLogo" });
       marketingLogo = { url: uploadResult.secure_url, public_id: uploadResult.public_id };
     }
 
@@ -138,8 +143,9 @@ for (let i = 0; i < floorPlans.length; i++) {
 
   if (floorPlanImages[i]) {
     const buffer = await floorPlanImages[i].arrayBuffer();
+    const floorbuffer = await addWatermark(buffer);
     const upload = await uploadToCloudinary2({
-      buffer,
+      buffer:floorbuffer,
       folder: "properties/projects/floorPlans",
     });
 
@@ -164,8 +170,9 @@ for (let i = 0; i < paymentPlans.length; i++) {
 
   if (paymentPlanImages[i]) {
     const buffer = await paymentPlanImages[i].arrayBuffer();
+    const paymentwatermarkbuffer = await addWatermark(buffer);
     const upload = await uploadToCloudinary2({
-      buffer,
+      buffer:paymentwatermarkbuffer,
       folder: "properties/projects/paymentPlans",
     });
 

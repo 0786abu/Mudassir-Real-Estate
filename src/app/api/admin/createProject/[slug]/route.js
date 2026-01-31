@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Project from "@/backend/model/projectSchema";
 import { uploadToCloudinary2 } from "@/backend/utils/cloudinaryUploader";
 import { isAuthorized } from "@/backend/utils/middlewere";
+import addWatermark from "@/utils/WaterMarker";
 import { NextResponse } from "next/server";
 
 export async function GET(req,{params}) {
@@ -103,8 +104,9 @@ export async function POST(req, { params }) {
     for (let i = 0; i < floorNames.length; i++) {
       const file = floorImages[i];
       const buffer = await file.arrayBuffer();
+      const watermarkbuffer = await addWatermark(buffer);
 
-      const uploaded = await uploadToCloudinary2({buffer,folder:"properties/projects/floorPlans"});
+      const uploaded = await uploadToCloudinary2({buffer:watermarkbuffer,folder:"properties/projects/floorPlans"});
 
       newFloorPlans.push({
         floorName: floorNames[i],

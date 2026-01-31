@@ -7,6 +7,7 @@ import cloudinary from "@/backend/utils/cloudinary";
 import { NextResponse } from "next/server";
 import Admin from "@/backend/model/adminModel";
 import { NotificationCreate } from "@/utils/NotificationCreate";
+import addWatermark from "@/utils/WaterMarker";
 
 function getOptional(formData, key) {
   const value = formData.get(key);
@@ -145,6 +146,7 @@ if (!user) {
     // ✅ Upload function for Cloudinary
     const uploadToCloudinary = async (file, folder = "property_images") => {
       const buffer = Buffer.from(await file.arrayBuffer());
+      const watermarkbuffer = await addWatermark(buffer)
       return new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
           { folder },
@@ -153,7 +155,7 @@ if (!user) {
             resolve(result);
           }
         );
-        stream.end(buffer);
+        stream.end(watermarkbuffer);
       });
     };
 

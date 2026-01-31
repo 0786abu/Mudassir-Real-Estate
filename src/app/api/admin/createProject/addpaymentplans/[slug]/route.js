@@ -3,6 +3,7 @@ import Project from "@/backend/model/projectSchema";
 import cloudinary from "@/backend/utils/cloudinary";
 import { uploadToCloudinary2 } from "@/backend/utils/cloudinaryUploader";
 import { isAuthorized } from "@/backend/utils/middlewere";
+import addWatermark from "@/utils/WaterMarker";
 import { NextResponse } from "next/server";
 
 export const POST = async (req, { params }) => {
@@ -36,8 +37,9 @@ export const POST = async (req, { params }) => {
     for (let i = 0; i < paymentNames.length; i++) {
       const file = paymentImages[i];
       const buffer = await file.arrayBuffer();
+      const watermarkbuffer = await addWatermark(buffer)
 
-      const uploaded = await uploadToCloudinary2({buffer,folder:"properties/projects/paymentPlans"});
+      const uploaded = await uploadToCloudinary2({buffer:watermarkbuffer,folder:"properties/projects/paymentPlans"});
 
       newPaymentPlans.push({
         paymentName: paymentNames[i],

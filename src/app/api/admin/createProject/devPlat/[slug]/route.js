@@ -2,6 +2,7 @@ import { DataBase } from "@/backend/config/database";
 import Project from "@/backend/model/projectSchema";
 import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthorized } from "@/backend/utils/middlewere";
+import addWatermark from "@/utils/WaterMarker";
 import { NextResponse } from "next/server";
 
 export async function POST(req, { params }) {
@@ -44,7 +45,7 @@ export async function POST(req, { params }) {
       // 2️⃣ new image upload
       const bytes = await logo.arrayBuffer();
       const buffer = Buffer.from(bytes);
-
+      const devwatermarkbuffer = await addWatermark(buffer);
       const uploadResult = await new Promise((resolve, reject) => {
         cloudinary.uploader
           .upload_stream(
@@ -56,7 +57,7 @@ export async function POST(req, { params }) {
               resolve(result);
             }
           )
-          .end(buffer);
+          .end(devwatermarkbuffer);
       });
 
       logoData = {
@@ -124,6 +125,7 @@ export async function PUT(req, { params }) {
       // 2️⃣ new image upload
       const bytes = await logo.arrayBuffer();
       const buffer = Buffer.from(bytes);
+      const marketingwatermarkbuffer = await addWatermark(buffer);
 
       const uploadResult = await new Promise((resolve, reject) => {
         cloudinary.uploader
@@ -136,7 +138,7 @@ export async function PUT(req, { params }) {
               resolve(result);
             }
           )
-          .end(buffer);
+          .end(marketingwatermarkbuffer);
       });
 
       logoData = {
