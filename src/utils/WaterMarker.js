@@ -9,9 +9,8 @@ const addWatermark = async (imageBuffer) => {
   const fontSize = Math.floor(meta.width * 0.08);
 
   const fontPath = path.join(process.cwd(), "public/fonts/Roboto-Bold.ttf");
-const fontBuffer = fs.readFileSync(fontPath);
-const fontBase64 = fontBuffer.toString("base64");
-
+  const fontBuffer = fs.readFileSync(fontPath);
+  const fontBase64 = fontBuffer.toString("base64");
 
   const svg = `
 <svg width="${meta.width}" height="${meta.height}">
@@ -22,6 +21,9 @@ const fontBase64 = fontBuffer.toString("base64");
         src: url(data:font/ttf;base64,${fontBase64}) format('truetype');
         font-weight: bold;
       }
+      text {
+        font-family: 'Roboto';
+      }
     </style>
   </defs>
 
@@ -29,7 +31,6 @@ const fontBase64 = fontBuffer.toString("base64");
     x="50%"
     y="50%"
     font-size="${fontSize}"
-    font-family="Roboto"
     font-weight="bold"
     fill="rgba(255,255,255,0.35)"
     text-anchor="middle"
@@ -40,12 +41,16 @@ const fontBase64 = fontBuffer.toString("base64");
 </svg>
 `;
 
+  const svgBuffer = Buffer.from(svg);
+
+  const watermark = await sharp(svgBuffer, {
+    density: 300,
+  }).toBuffer();
 
   return image
-  .composite([{ input: Buffer.from(svg) }])
-  .webp({ quality: 90 })
-  .toBuffer();
-
+    .composite([{ input: watermark, gravity: "center" }])
+    .webp({ quality: 90 })
+    .toBuffer();
 };
 
 export default addWatermark;
