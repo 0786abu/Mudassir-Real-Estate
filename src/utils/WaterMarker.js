@@ -2,7 +2,7 @@ import sharp from "sharp";
 import fs from "fs";
 import path from "path";
 
-const addTextWatermark = async (imageBuffer) => {
+const addWatermark = async (imageBuffer) => {
   const image = sharp(imageBuffer);
   const meta = await image.metadata();
 
@@ -48,4 +48,4 @@ const fontBase64 = fontBuffer.toString("base64");
 
 };
 
-export default addTextWatermark;
+export default addWatermark;
