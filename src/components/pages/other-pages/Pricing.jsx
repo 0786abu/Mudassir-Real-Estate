@@ -87,7 +87,7 @@ export default function PricingPage() {
                 )}
                 <CardHeader className="text-center bg-transparent border-0">
                   <h4 className="fw-bold">{plan.name}</h4>
-                  <h3 className="price mt-2">{plan.price}</h3>
+                  <h3 className="text-black mt-2 fs-6">{plan.price}</h3>
                   {plan.validity && <p className="text-muted">Validity: {plan.validity}</p>}
                 </CardHeader>
                 <CardBody>

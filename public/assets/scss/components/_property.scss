@@ -607,7 +607,10 @@
         > a {
           h3 {
             color: black;
-            // transition: 0.8s;
+            transition: 0.8s;
+            &:hover{
+              color: #14a800;
+            }
           }
         }
       }

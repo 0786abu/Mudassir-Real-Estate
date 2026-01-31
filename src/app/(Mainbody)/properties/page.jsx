@@ -4,47 +4,77 @@ import SkeletonPropertyCard from "@/components/elements/propertyBoxs/GridSkeleto
 import ListingSection from "@/components/listing/gridView/ListingSection";
 import { Col, Container, Row } from "reactstrap";
 import Sidebar from "@/layout/sidebarLayout/Sidebar";
+import { formatPK } from "@/utils/Formatter";
 
-export const metadata = {
-  title: "Explore Properties in Pakistan | Real Estate Listings – Buy, Rent, or Sell",
-  description:
-    "Find your dream home or property in Pakistan with our comprehensive listings. Browse residential, commercial, and rental properties across major cities like Karachi, Lahore, Islamabad, and more. Filter by price, type, or location to discover the perfect property.",
-  keywords: [
-    "Real estate Pakistan",
-    "Properties for sale Pakistan",
-    "Properties for rent Pakistan",
-    "Karachi real estate",
-    "Lahore property listings",
-    "Islamabad homes for sale",
-    "Pakistan property portal",
-    "Buy property Pakistan",
-    "Rent property Pakistan",
-    "Property filter Pakistan",
-  ].join(", "),
-  alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/properties`,
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
-    title: "Explore Properties in Pakistan | Real Estate Portal",
-    description:
-      "Browse Pakistan's top real estate listings – from homes, apartments, and commercial properties to rentals. Use our filters to find properties in Karachi, Lahore, Islamabad, and other major cities.",
-    url: `${process.env.NEXT_PUBLIC_BASE_URL}/properties`,
-    siteName: "Pak Earth", // Change to your actual site name
-    images: [
-      {
-        url: `${process.env.NEXT_PUBLIC_BASE_URL}/assets/images/properties-og-image.webp`, 
-        width: 1200,
-        height: 630,
-        alt: "Real Estate Listings in Pakistan",
-      },
-    ],
-    type: "website",
+export async function generateMetadata({ searchParams }) {
+  const city = searchParams?.city;
+  const location = searchParams?.location;
+  const type = searchParams?.type; // house | apartment | commercial
+  const category = searchParams?.category; // sale | rent
+  const minPrice = searchParams?.minPrice;
+  const maxPrice = searchParams?.maxPrice;
+
+  let title = "Explore Properties in Pakistan | Buy, Rent, or Sell Real Estate";
+  let description =
+    "Browse property listings in Pakistan. Find houses, apartments, commercial properties for sale or rent in major cities.";
+
+  // 🔹 City
+  if (city || type) {
+    title = `${city ? `Properties in ${city}` : `${type} properties`} | Buy & Rent at Pak Earth`;
+    description = `Explore houses, apartments, and commercial properties for sale or rent in ${city}.`;
   }
-};
+
+  // 🔹 City + Location
+  if (city && location) {
+    title = `Properties in ${location}, ${city} | Buy & Rent`;
+    description = `Find properties for sale or rent in ${location}, ${city}. Updated listings with best prices.`;
+  }
+
+  // 🔹 Sale / Rent
+  if (category && city) {
+    title = `${category === "sale" ? "Buy" : "Rent"} Properties in ${city}`;
+    description = `Browse ${category === "sale" ? "properties for sale" : "rental properties"} in ${city}. Verified real estate listings.`;
+  }
+
+  // 🔹 Type (House, Apartment, Commercial)
+  if (type && city) {
+    title = `${type.charAt(0).toUpperCase() + type.slice(1)} for ${category || "Sale"} in ${city}`;
+    description = `Find ${type} for ${category || "sale"} in ${city}. Compare prices, locations, and features.`;
+  }
+
+  // 🔹 Pricing filter
+  if (minPrice || maxPrice) {
+    title = `Properties in Pakistan ${formatPK(minPrice) ? `from ${formatPK(minPrice)}` : ""} ${formatPK(maxPrice) ? `to ${formatPK(maxPrice)}` : ""}`;
+    description = `Browse properties in Pakistan within your budget ${formatPK(minPrice) ? `starting from ${formatPK(minPrice)}` : ""} ${formatPK(maxPrice) ? `up to ${maxPrice}` : ""}.`;
+  }
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/properties`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/properties`,
+      siteName: "Pak Earth",
+      images: [
+        {
+          url: `${process.env.NEXT_PUBLIC_BASE_URL}/assets/images/properties-og-image.webp`,
+          width: 1200,
+          height: 630,
+          alt: "Real Estate Listings in Pakistan",
+        },
+      ],
+      type: "website",
+    },
+  };
+}
 
 
 const Page = ({ searchParams })=> {

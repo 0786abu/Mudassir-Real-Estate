@@ -1743,6 +1743,13 @@ p {
   color: #666;
   margin-bottom: 4px;
 }
+// .property-card-title{
+//   color: #000 !important;
+//   text-decoration: none;
+// }
+// .property-card-title:hover{
+//   color: #14a800 !important;
+// }
 
 .meta {
   font-size: 13px;
@@ -1798,7 +1805,7 @@ p {
 }
 
 .homefilterli {
-  color: #000 !important;
+  color: #000;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1815,7 +1822,7 @@ p {
   }
 
   &.active {
-    color: #14a800 !important;
+    color: #14a800;
     font-weight: 500;
 
     .link-icon {
