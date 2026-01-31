@@ -7,7 +7,7 @@ const addTextWatermark = async (imageBuffer) => {
 
   // Create SVG for text watermark
   const fontSize = Math.floor(meta.width * 0.08); // adjust size relative to image width
-  const fontData = fs.readFileSync("public/fonts/Roboto-Bold.ttf").toString("base64");
+  const fontData = fs.readFileSync("public/assets/images/Roboto-Bold.ttf").toString("base64");
   const svg = `
 <svg width="${meta.width}" height="${meta.height}">
   <defs>
