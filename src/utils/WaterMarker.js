@@ -1,19 +1,30 @@
 import sharp from "sharp";
 
-const addWatermark = async (imageBuffer) => {
+const escapeXML = (str) =>
+  str.replace(/&/g, "&amp;")
+     .replace(/</g, "&lt;")
+     .replace(/>/g, "&gt;")
+     .replace(/"/g, "&quot;")
+     .replace(/'/g, "&apos;");
+
+const addWatermark = async (imageBuffer, text = "PakEarth.com") => {
   const metadata = await sharp(imageBuffer).metadata();
 
-  const fontSize = Math.floor(metadata.width * 0.08);
+  const width = metadata.width || 800;
+  const height = metadata.height || 600;
+  const fontSize = Math.floor(width * 0.08);
+
+  const safeText = escapeXML(text);
 
   const svg = `
-    <svg width="${metadata.width}" height="${metadata.height}">
+    <svg width="${width}" height="${height}">
       <style>
         .text {
           fill: white;
           font-size: ${fontSize}px;
           font-weight: bold;
           opacity: 0.35;
-          font-family: Arial, sans-serif;
+          font-family: sans-serif;
         }
       </style>
       <text
@@ -23,13 +34,13 @@ const addWatermark = async (imageBuffer) => {
         text-anchor="middle"
         class="text"
       >
-        PakEarth.com
+        ${safeText}
       </text>
     </svg>
   `;
 
   return sharp(imageBuffer)
-    .composite([{ input: Buffer.from(svg), gravity: "center" }])
+    .composite([{ input: Buffer.from(svg) }])
     .webp({ quality: 90 })
     .toBuffer();
 };
