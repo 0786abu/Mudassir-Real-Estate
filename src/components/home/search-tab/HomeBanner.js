@@ -1,5 +1,5 @@
 "use client"
-import { areaSizes, bedsFilterData, citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
+import { areaSizes, bedsFilterData, popuarCities, propertyTypesData } from "@/utils/FiltersCities";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Container } from "reactstrap";
@@ -92,7 +92,7 @@ professionals
   <span style={{marginRight:"6px"}} className={`check-icon ${filterValues.category==="Sale" ? "checked" : "unchecked"}`}>
           {filterValues.category==="Sale" ? "✔" : ""}
         </span>
-  Sale
+  Buy
 </button>
 
 <button
@@ -185,9 +185,9 @@ professionals
                           value={filterValues.city}
                           onChange={(e) => setFilterValues({...filterValues, city:e.target.value })}
                         >
-                          <option value="">Select City</option>
-                          {citiesLocationsData.map((filt,index)=>{
-                            return <option value={filt.city} key={index}>{filt.city}</option>
+                          <option value="">Popular cities</option>
+                          {popuarCities.map((filt,index)=>{
+                            return <option value={filt} key={index}>{filt}</option>
                           })}
                         </select>
               </div>
