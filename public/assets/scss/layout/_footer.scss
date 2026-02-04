@@ -389,9 +389,25 @@ footer {
 }
 
 .footer-bg {
-    background-color: rgba($black, 0.9);
+    position: relative;
+  background-color: rgba($black, 0.9);
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background-image: url(../../images/footer-img.png);
-    @extend %background-common;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2; // 👈 yahan opacity control karo
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1; // content upar rahe
+  }
 
     p {
         color: $gray-30;

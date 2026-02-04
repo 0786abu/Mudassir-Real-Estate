@@ -9,7 +9,7 @@ const BodyContent = () => {
   return (
     <Fragment>
       <Container fluid={true}>
-        <Row>
+        <Row> 
           <Col sm="12">
             <div className="card-header bg-transparent">
               <h5 className="f-w-600 mt-3 text-center"> Dark footer with image as background</h5>

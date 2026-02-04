@@ -80,7 +80,6 @@ const FooterThree = () => {
                   </div>
                 </Col>
               </Row>
-              {/* <FooterBlog /> */}
             </Col>
           </Row>
         </Container>
