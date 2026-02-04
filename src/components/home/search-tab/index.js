@@ -1,7 +1,4 @@
-import FeaturedPropertySection from "../classic/FeaturedProperty";
 import SalePropertySection from "../slider-filter-search/SaleProperty";
-import AboutSection from "../classic/About";
-import BrandSection from "../classic/Brand";
 import HomeBannerSection from "./HomeBanner";
 import CategorySection from "@/layout/SearchByCategory";
 import BudgetSection from "@/components/property/BudgetSection";
