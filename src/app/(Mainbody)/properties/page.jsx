@@ -51,6 +51,18 @@ export async function generateMetadata({ searchParams }) {
   return {
     title,
     description,
+    keywords: [
+    "Real estate Pakistan",
+    "Properties for sale Pakistan",
+    "Properties for rent Pakistan",
+    "Karachi real estate",
+    "Lahore property listings",
+    "Islamabad homes for sale",
+    "Pakistan property portal",
+    "Buy property Pakistan",
+    "Rent property Pakistan",
+    "Property filter Pakistan",
+  ].join(", "),
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/properties`,
     },

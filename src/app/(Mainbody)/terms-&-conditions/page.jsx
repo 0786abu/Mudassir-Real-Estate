@@ -2,9 +2,9 @@ import TermsAndConditions from '@/components/pages/other-pages/Term_Condition'
 import React from 'react'
 
 export const metadata = {
-  title: "Terms & Conditions | Pak Earth Services Pakistan",
+  title: "Terms & Conditions | PakEarth.com | Best Real Estate Marketplace",
   description:
-    "Read the terms and conditions of using our Pak Earth website in Pakistan. Covers property listings, client interactions, and platform usage policies.",
+    " Read PakEarth’s Real Estate terms and conditions in Pakistan, including rules for listings, Ad Posting, platform use and Projects engagement.",
   keywords: [
     "Terms and conditions real estate Pakistan",
     "Property website rules",
@@ -14,7 +14,7 @@ export const metadata = {
   alternates: { canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/terms` },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Terms & Conditions | Pak Earth Services Pakistan",
+    title: " Terms & Conditions | PakEarth.com | Best Real Estate Marketplace",
     description: "Review the terms and conditions for using our real estate services and platform in Pakistan.",
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/terms`,
     siteName: "Pak Earth",

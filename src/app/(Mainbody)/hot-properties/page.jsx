@@ -3,9 +3,9 @@ import HotProperties from '@/components/property/HotProperties'
 import React, { Suspense } from 'react'
 
 export const metadata = {
-  title: "Hot Properties in Pakistan | Trending Real Estate Listings in Pak Earth",
+  title: "Browse Hot Property Listings in Pakistan | PakEarth.com",
   description:
-    "Check out the hottest properties in Pakistan – including top residential, commercial, and rental listings. Discover trending real estate opportunities in Karachi, Lahore, Islamabad, and beyond.",
+    "Check out the hottest properties in Pakistan – including top residential, commercial and rental listings. Browse trending real estate opportunities in Karachi, Lahore, Islamabad and beyond.",
   keywords: [
     "Hot properties Pakistan",
     "Trending real estate Pakistan",

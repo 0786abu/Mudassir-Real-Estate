@@ -2,24 +2,47 @@ import BodyContent from "@/components/home/search-tab";
 import { Fragment } from "react";
 
 export const metadata = {
-  title: "Pak Earth | Pakistan’s Trusted Real Estate & Property Portal",
+  title: "PakEarth.com | Buy, Sell & Rent or Invest in Property on Pakistan",
   description:
-    "Pak Earth is Pakistan’s trusted real estate platform to buy, sell, and invest in properties and projects across Karachi, Lahore, Islamabad, and major cities. Explore residential, commercial, and investment opportunities with verified listings.",
+    " PakEarth is the 1st Real Estate online platform in Pakistan to Buy, Sell and Rent houses, plots, shops and flats across Lahore and Karachi or others cities.",
   keywords: [
-    "Pak Earth",
-    "Real estate Pakistan",
-    "Property portal Pakistan",
-    "Buy property in Pakistan",
-    "Sell property Pakistan",
-    "Pakistan real estate projects",
-    "Residential properties Pakistan",
-    "Commercial real estate Pakistan",
-    "Karachi real estate",
-    "Lahore property",
-    "Islamabad real estate",
-    "Property investment Pakistan",
-    "Housing projects Pakistan",
-    "Plots and houses Pakistan"
+"Pak Earth",
+"Pak Earth real estate",
+"Pak Earth property portal",
+"Pak Earth Pakistan",
+"Real estate Pakistan",
+"Pakistan real estate",
+"Property in Pakistan",
+"Property portal Pakistan",
+"Online property portal Pakistan",
+"Best property website Pakistan",
+"Buy property in Pakistan",
+"Sell property in Pakistan",
+"Houses for sale in Pakistan",
+"Plots for sale in Pakistan",
+"Apartments for sale in Pakistan",
+"Pakistan real estate projects",
+"New real estate projects in Pakistan",
+"Housing projects Pakistan",
+"Residential housing projects Pakistan",
+"Approved housing societies Pakistan",
+"Residential properties Pakistan",
+"Commercial real estate Pakistan",
+"Commercial property for sale Pakistan",
+"Karachi real estate",
+"Karachi property for sale",
+"Karachi housing projects",
+"Lahore property",
+"Lahore real estate",
+"Lahore property for sale",
+"Islamabad real estate",
+"Islamabad property",
+"Islamabad housing projects",
+"Property investment Pakistan",
+"Real estate investment Pakistan",
+"Best property investment Pakistan",
+"Plots and houses Pakistan",
+"Plots and houses for sale in Pakistan"
   ],
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_BASE_URL}`,
@@ -29,9 +52,9 @@ export const metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Pak Earth | Pakistan’s Leading Real Estate & Property Platform",
+    title: "PakEarth.com | Buy, Sell & Rent or Invest in Property on Pakistan",
     description:
-      "Discover verified properties and real estate projects across Pakistan with Pak Earth. Buy, sell, or invest in residential and commercial properties nationwide.",
+      "Find out verified properties and Real Estate projects across Pakistan with PakEarth. Buy, sell or invest in residential and commercial properties nationwide.",
     url: `${process.env.NEXT_PUBLIC_BASE_URL}`,
     siteName: "Pak Earth",
     images: [
@@ -45,6 +68,7 @@ export const metadata = {
     type: "website",
   }
 };
+
 
 
 const SearchTab = async() => {

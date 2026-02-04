@@ -1806,7 +1806,7 @@ p {
 
 .homefilterli {
   color: #000;
-  display: flex;
+  display: flex; 
   align-items: center;
   gap: 6px;
   text-decoration: none;
@@ -1819,6 +1819,7 @@ p {
     text-decoration: underline;
     text-underline-offset: 4px;
     cursor: pointer;
+    color: #14a800;
   }
 
   &.active {

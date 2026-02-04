@@ -2,7 +2,7 @@ import PrivacyPolicy from '@/components/pages/other-pages/Privacy_Policy'
 import React from 'react'
 
 export const metadata = {
-  title: "Privacy Policy | Pak Earth Company Pakistan",
+  title: " PakEarth - Privacy Policy & Data Protection - Property Platform",
   description:
     "Read our privacy policy to understand how we handle personal data, inquiries, and client information on our Pak Earth website in Pakistan.",
   keywords: [
@@ -14,8 +14,8 @@ export const metadata = {
   alternates: { canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/privacy-policy` },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Privacy Policy | Pak Earth Company Pakistan",
-    description: "Understand how we protect client information and data on our Pak Earth platform in Pakistan.",
+    title: " PakEarth - Privacy Policy & Data Protection - Property Platform",
+    description: "Read PakEarth’s privacy policy explaining how user data and inquiries are managed securely on our real estate platform in Pakistan.",
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/privacy-policy`,
     siteName: "Pak Earth",
     images: [
@@ -29,6 +29,7 @@ export const metadata = {
     type: "website",
   }
 };
+
 
 
 const page = () => {

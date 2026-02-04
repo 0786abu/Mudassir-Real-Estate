@@ -8,9 +8,9 @@ import { Suspense } from "react";
 import ContentLoader from "react-content-loader";
 
 export const metadata = {
-  title: "Our Real Estate Agents | Find Property Experts in Pak Earth",
+  title: "Real Estate Experts at PakEarth.com | Property Agents in Pakistan",
   description:
-    "Meet our professional real estate agents in Pakistan. Get expert guidance on buying, selling, or renting properties across Karachi, Lahore, Islamabad, and other cities.",
+    "Find best Property Dealers/Agents in Pakistan. Get expert guidance on Buying, Selling or Renting property as Lahore, Karachi, Islamabad and other cities.",
   keywords: [
     "Real estate agents Pakistan",
     "Property experts Pakistan",
@@ -21,8 +21,8 @@ export const metadata = {
   alternates: { canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/agents` },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Our Real Estate Agents | Property Experts in Pakistan",
-    description: "Connect with our real estate agents for expert guidance on properties across Pakistan.",
+    title: "Property Experts at PakEarth.com | Real Estate Agents in Pakistan",
+    description: "Find verified real estate agents in Pakistan offering expert guidance for Buying, Selling and Renting property across major cities and others regions.",
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/agents`,
     siteName: "Pak Earth",
     images: [

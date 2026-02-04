@@ -4,9 +4,9 @@ import BodyContent from "@/components/pages/other-pages/aboutUs2";
 
 
 export const metadata = {
-  title: "About Us | Leading Real Estate Company in Pakistan",
+  title: "About | PakEarth – Pakistan Real Estate Ads & Property Listings",
   description:
-    "Learn about our real estate company in Pakistan – delivering premium residential and commercial projects across Karachi, Lahore, Islamabad, and other cities. Discover our vision, mission, and commitment to quality construction and client satisfaction.",
+    "PakEarth is a Pakistan-based Real Estate platform where users can post property ads and explore houses, plots and commercial Real Estate nationwide.",
   keywords: [
     "Real estate company Pakistan",
     "About real estate developers",
@@ -19,9 +19,9 @@ export const metadata = {
   },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "About Us | Leading Real Estate Company in Pakistan",
+    title: " About | PakEarth – Pakistan Real Estate Ads & Property Listings ",
     description:
-      "Discover our vision, mission, and premium real estate projects across Pakistan. Learn why we are a trusted real estate developer.",
+      "Explore our vision and mission while discovering premium trusted Real Estate Projects across Pakistan, backed by trust, quality and long-term value.",
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/about`,
     siteName: "Pak Earth",
     images: [
@@ -35,6 +35,7 @@ export const metadata = {
     type: "website",
   }
 };
+
 
 const AboutUs2 = () => {
   return (

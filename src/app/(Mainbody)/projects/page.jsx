@@ -10,9 +10,9 @@ import SubBudget from "@/components/property/SubBudget";
 
 
 export const metadata = {
-  title: "Real Estate Projects in Pakistan | Residential & Commercial Developments",
+  title: " Real Estate Projects in Pakistan - Residential & Commercial",
   description:
-    "Explore our premium real estate projects across Pakistan – from residential apartments and housing societies to commercial complexes. Browse detailed project info, locations, amenities, and investment opportunities in Karachi, Lahore, Islamabad, and other major cities.",
+    " Find Best Property projects in Karachi, Lahore, Islamabad and other cities, featuring residential and commercial developments with full project details.",
   keywords: [
     "Real estate projects Pakistan",
     "Residential buildings Pakistan",
@@ -33,9 +33,9 @@ export const metadata = {
     follow: true,
   },
   openGraph: {
-    title: "Real Estate Projects in Pakistan | Residential & Commercial",
+    title: "Real Estate Projects in Pakistan - Residential & Commercial",
     description:
-      "Discover top real estate developments in Pakistan. View residential apartments, housing societies, and commercial projects with detailed amenities, locations, and investment options.",
+      "Browse top real estate developments in Pakistan. View residential apartments, housing societies and commercial projects with detailed amenities, locations and investment options.",
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/projects`,
     siteName: "Pak Earth", // Change to your actual company/site name
     images: [
@@ -49,6 +49,7 @@ export const metadata = {
     type: "website",
   }
 };
+
 
 
 const Page = ({ searchParams })=> {
