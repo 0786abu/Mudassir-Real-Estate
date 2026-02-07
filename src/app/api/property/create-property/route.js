@@ -262,6 +262,7 @@ export async function GET(req) {
         const featured = toBoolean(searchParams.get('featured'));
         const minPrice = searchParams.get('minPrice');
         const maxPrice = searchParams.get('maxPrice');
+        const furnished = searchParams.get('furnished');
         const filter = {isApproved:"Approved"};
          if (isLatest && isLatest.toLowerCase() === "latest") {
       const twoDaysAgo = new Date();
@@ -271,6 +272,7 @@ export async function GET(req) {
         if (areaSize) filter.areaSize = areaSize;
         if (category) filter.category = category;
         if (type) filter.type = type;
+          if (furnished) filter.furnished = furnished === "true";
         if (location) filter.location = location;
         if (featured !== undefined) filter.isFeatured = featured;
         if (beds) filter.beds = beds;

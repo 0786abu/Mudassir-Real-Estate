@@ -1868,3 +1868,25 @@ $primary: #108a00;
     box-shadow: 0 4px 10px rgba($primary, 0.35);
   }
 }
+
+.btn-outline-custom {
+  border: 1px solid #14a800;
+  color: #14a800;
+  background-color: transparent;
+}
+
+.btn-outline-custom:hover {
+  background-color: #14a800;
+  color: white;
+}
+.green{
+  color: #14a800;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #108A00;
+}
+.tr{
+  color: black;
+  background-color: transparent;
+  border: none;
+}

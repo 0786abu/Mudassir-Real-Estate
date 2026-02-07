@@ -8,11 +8,13 @@ import ProfileLoader from "@/components/common/Loader";
 import AdminProperties from "../slider-filter-search/AdminProperties";
 import SkeletonLoader from "@/components/common/SkeletonLoader";
 import HomePageFilter from "./HomePageFilter";
+import PropertyFilter from "../slider-filter-search/BoxFilterHOmePage";
 
 const BodyContent = async() => {  
   return (
     <>
       <HomeBannerSection />
+      <PropertyFilter/>
       <CategorySection/>
       <Suspense fallback={ <SkeletonLoader/>}>
         <SalePropertySection/>

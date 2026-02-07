@@ -1,3 +1,4 @@
+import { Briefcase, Building, Building2, CreditCard, Factory, Fuel, HandCoins, Home, Hotel, HousePlug, LandPlot, PencilRuler, Ruler, SquareRoundCorner, Store, Theater, Trees, Utensils, Warehouse } from "lucide-react";
 
 export const popuarCities =[
       "Lahore",
@@ -3233,3 +3234,213 @@ export const SalepropertyTypesData = [
     ]
   }
 ];
+export const NewFilterForHomePageSaleBase = {
+  residential: {
+    type: [
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>House</span></div>, query:{type:"House",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Apartment - Flat</span></div>, query:{type:"Apartment - Flat",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building2 size={16}/> <span>Upper Portion</span></div>, query:{type:"Upper Portion",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building2 size={16}/> <span>Lower Portion</span></div>, query:{type:"Lower Portion",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Warehouse size={16}/> <span>Farmhouse</span></div>, query:{type:"Farmhouse",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>Penthouse</span></div>, query:{type:"Penthouse",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><SquareRoundCorner size={16}/> <span>Corner House</span></div>, query:{type:"Corner House",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Trees size={16}/> <span>Facing Park House</span></div>, query:{type:"Facing Park House",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HousePlug size={16}/> <span>Basement House</span></div>, query:{type:"Basement House",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><CreditCard size={16}/> <span>On Installments</span></div>, query:{type:"On Installments",category:"Sale"}}
+    ],
+    areaSize: [
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>2 Marla House</span></div>, query:{areaSize:"2 Marla", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>2.5 Marla House</span></div>, query:{areaSize:"2.5 Marla", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>3 Marla House</span></div>, query:{areaSize:"3 Marla", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>4 Marla House</span></div>, query:{areaSize:"4 Marla", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>5 Marla House</span></div>, query:{areaSize:"5 Marla", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>7 Marla House</span></div>, query:{areaSize:"7 Marla", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>10 Marla House</span></div>, query:{areaSize:"10 Marla", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>1 Kanal House</span></div>, query:{areaSize:"1 Kanal", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>2 Kanal House</span></div>, query:{areaSize:"2 Kanal", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>4 Kanal House</span></div>, query:{areaSize:"4 Kanal", type:"House"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>8 Kanal House</span></div>, query:{areaSize:"8 Kanal", type:"House"}},
+    ],
+    budget: [
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Below 10 Lakh</span></div>, query:{minPrice:null, maxPrice:1000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>15 - 20 Lakh</span></div>, query:{minPrice:1000000, maxPrice:2000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>20 - 30 Lakh</span></div>, query:{minPrice:2000000, maxPrice:3000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>30 - 60 Lakh</span></div>, query:{minPrice:3000000, maxPrice:6000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>65 - 75 Lakh</span></div>, query:{minPrice:6500000, maxPrice:7500000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>75 - 95 Lakh</span></div>, query:{minPrice:7500000, maxPrice:9500000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>90 - 1 Crore</span></div>, query:{minPrice:9000000, maxPrice:10000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1 - 1.20 Crore</span></div>, query:{minPrice:10000000, maxPrice:12000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1.2 - 1.5 Crore</span></div>, query:{minPrice:12000000, maxPrice:15000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1.5 - 1.9 Crore</span></div>, query:{minPrice:15000000, maxPrice:19000000, type:"House", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Above 2 Crore</span></div>, query:{minPrice:20000000, maxPrice:null, type:"House", category:"Sale"}},
+    ]
+  },
+
+  plot: {
+    type: [
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>Residential Plot</span></div>, query:{type:"Residential Plot",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>Commercial Plot</span></div>, query:{type:"Commercial Plot",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>Industrial Land</span></div>, query:{type:"Industrial Land",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>Agricultural Land</span></div>, query:{type:"Agricultural Land",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Warehouse size={16}/> <span>FarmHouse Plot</span></div>, query:{type:"FarmHouse Plot",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Trees size={16}/> <span>Park Facing</span></div>, query:{type:"Park Facing",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>Plot File</span></div>, query:{type:"Plot File",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>Plot Form</span></div>, query:{type:"Plot Form",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><LandPlot size={16}/> <span>With Possession</span></div>, query:{type:"With Possession",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><CreditCard size={16}/> <span>On Installments</span></div>, query:{type:"On Installments",category:"Sale"}}
+    ],
+    areaSize: [
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>2 Marla Plot</span></div>, query:{areaSize:"2 Marla", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>2.5 Marla Plot</span></div>, query:{areaSize:"2.5 Marla", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>3 Marla Plot</span></div>, query:{areaSize:"3 Marla", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>4 Marla Plot</span></div>, query:{areaSize:"4 Marla", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>5 Marla Plot</span></div>, query:{areaSize:"5 Marla", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>7 Marla Plot</span></div>, query:{areaSize:"7 Marla", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>10 Marla Plot</span></div>, query:{areaSize:"10 Marla", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>1 Kanal Plot</span></div>, query:{areaSize:"1 Kanal", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>2 Kanal Plot</span></div>, query:{areaSize:"2 Kanal", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>4 Kanal Plot</span></div>, query:{areaSize:"4 Kanal", type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><PencilRuler size={16}/> <span>8 Kanal Plot</span></div>, query:{areaSize:"8 Kanal", type:"Plot", category:"Sale"}}
+    ],
+    budget: [
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Below 10 Lakh</span></div>, query:{minPrice:null, maxPrice:1000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>15 - 20 Lakh</span></div>, query:{minPrice:1500000, maxPrice:2000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>20 - 30 Lakh</span></div>, query:{minPrice:2000000, maxPrice:3000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>30 - 60 Lakh</span></div>, query:{minPrice:3000000, maxPrice:6000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>65 - 75 Lakh</span></div>, query:{minPrice:6500000, maxPrice:7500000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>75 - 95 Lakh</span></div>, query:{minPrice:7500000, maxPrice:9500000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>95 Lakh - 1 Crore</span></div>, query:{minPrice:9500000, maxPrice:10000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1 - 1.20 Crore</span></div>, query:{minPrice:10000000, maxPrice:12000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1.20 - 1.50 Crore</span></div>, query:{minPrice:12000000, maxPrice:15000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1.5 - 1.9 Crore</span></div>, query:{minPrice:15000000, maxPrice:19000000, type:"Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Above 2+ Crore</span></div>, query:{minPrice:20000000, maxPrice:null, type:"Plot", category:"Sale"}}
+    ]
+  },
+
+  commercial: {
+    type: [
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>Office</span></div>, query:{type:"Office",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Store size={16}/> <span>Shop</span></div>, query:{type:"Shop",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Factory size={16}/> <span>Factory</span></div>, query:{type:"Factory",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Utensils size={16}/> <span>Food Court</span></div>, query:{type:"Food Court",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Hall</span></div>, query:{type:"Hall",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Fuel size={16}/> <span>Petrol Pump</span></div>, query:{type:"Petrol Pump",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Hotel size={16}/> <span>Hotel</span></div>, query:{type:"Hotel",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Briefcase size={16}/> <span>Running Business</span></div>, query:{type:"Running Business",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Store size={16}/> <span>Plaza</span></div>, query:{type:"Plaza",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><Warehouse size={16}/> <span>Warehouse</span></div>, query:{type:"Warehouse",category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><CreditCard size={16}/> <span>On Installments</span></div>, query:{type:"On Installments",category:"Sale"}},
+    ],
+    areaSize: [
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>Below 100 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:null, maxsquareSize:100}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>100 - 200 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:100, maxsquareSize:200}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>200 - 300 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:200, maxsquareSize:300}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>300 - 400 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:300, maxsquareSize:400}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>400 - 500 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:400, maxsquareSize:500}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>600 - 700 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:600, maxsquareSize:700}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>700 - 800 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:700, maxsquareSize:800}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>800 - 900 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:800, maxsquareSize:900}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>900 - 1000 sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:900, maxsquareSize:1000}},
+      {label:<div className="d-flex align-items-center gap-1"> <Ruler size={16}/> <span>Above 1000+ sq ft</span></div>, query:{ type:"Commercial Plot",category:"Sale",minsquareSize:1000, maxsquareSize:null}}
+    ],
+    budget: [
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Below 10 Lakh</span></div>, query:{minPrice:null, maxPrice:1000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>15 - 20 Lakh</span></div>, query:{minPrice:1500000, maxPrice:2000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>20 - 30 Lakh</span></div>, query:{minPrice:2000000, maxPrice:3000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>30 - 60 Lakh</span></div>, query:{minPrice:3000000, maxPrice:6000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>65 - 75 Lakh</span></div>, query:{minPrice:6500000, maxPrice:7500000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>75 - 95 Lakh</span></div>, query:{minPrice:7500000, maxPrice:9500000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>95 - 1 Crore</span></div>, query:{minPrice:9500000, maxPrice:10000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1 - 1.20 Crore</span></div>, query:{minPrice:10000000, maxPrice:12000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1.20 - 1.50 Crore</span></div>, query:{minPrice:12000001, maxPrice:15000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1.5 - 1.9 Crore</span></div>, query:{minPrice:15000000, maxPrice:19000000, type:"Commercial Plot", category:"Sale"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Above 2+ Crore</span></div>, query:{minPrice:20000000, maxPrice:null, type:"Commercial Plot", category:"Sale"}}
+    ]
+  }
+};
+export const NewFilterForHomePageRentBase = {
+  residential: {
+    type: [
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>House</span></div>, query:{type:"House",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Apartment - Flat</span></div>, query:{type:"Apartment - Flat",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building2 size={16}/> <span>Upper Portion</span></div>, query:{type:"Upper Portion",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building2 size={16}/> <span>Lower Portion</span></div>, query:{type:"Lower Portion",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Warehouse size={16}/> <span>Farmhouse</span></div>, query:{type:"Farmhouse",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Theater size={16}/> <span>Penthouse</span></div>, query:{type:"Penthouse",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>Corner House</span></div>, query:{type:"Corner House",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>Facing Park House</span></div>, query:{type:"Facing Park House",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>Furnished House</span></div>, query:{type:"House",category:"Rent",isFurnished:true}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>Independent House</span></div>, query:{type:"Independent House",category:"Rent"}}
+    ],
+
+    areaSize: [
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>2 Marla House</span></div>, query:{areaSize:"2 Marla", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>2.5 Marla House</span></div>, query:{areaSize:"2.5 Marla", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>3 Marla House</span></div>, query:{areaSize:"3 Marla", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>4 Marla House</span></div>, query:{areaSize:"4 Marla", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>5 Marla House</span></div>, query:{areaSize:"5 Marla", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>7 Marla House</span></div>, query:{areaSize:"7 Marla", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>10 Marla House</span></div>, query:{areaSize:"10 Marla", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>1 Kanal House</span></div>, query:{areaSize:"1 Kanal", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>2 Kanal House</span></div>, query:{areaSize:"2 Kanal", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>4 Kanal House</span></div>, query:{areaSize:"4 Kanal", type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Home size={16}/> <span>8 Kanal House</span></div>, query:{areaSize:"8 Kanal", type:"House", category:"Rent"}}
+    ],
+
+    budget: [
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Below 10k</span></div>, query:{minPrice:null, maxPrice:10000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>10k - 20k</span></div>, query:{minPrice:10000, maxPrice:20000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>20k - 30k</span></div>, query:{minPrice:20000, maxPrice:30000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>30k - 40k</span></div>, query:{minPrice:30000, maxPrice:40000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>40k - 60k</span></div>, query:{minPrice:40000, maxPrice:60000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>60k - 80k</span></div>, query:{minPrice:60000, maxPrice:80000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>80k - 1 Lakh</span></div>, query:{minPrice:80000, maxPrice:100000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1 - 1.3 Lakh</span></div>, query:{minPrice:100000, maxPrice:130000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>1.3 Lakh - 2 Lakh</span></div>, query:{minPrice:130000, maxPrice:200000, type:"House", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins size={16}/> <span>Above 2+ Lakh</span></div>, query:{minPrice:200000, maxPrice:null, type:"House", category:"Rent"}}
+    ]
+  },
+
+  commercial: {
+    type: [
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Office</span></div>, query:{type:"Office",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Shop</span></div>, query:{type:"Shop",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Working Space</span></div>, query:{type:"Working Space",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Furnished Office</span></div>, query:{type:"Office",category:"Rent", isFurnished:true}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Guest House</span></div>, query:{type:"Guest House",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Hostel</span></div>, query:{type:"Hostel",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Hotel size={16}/> <span>Hotel</span></div>, query:{type:"Hotel",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Running Business</span></div>, query:{type:"Running Business",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Building size={16}/> <span>Hall</span></div>, query:{type:"Hall",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Warehouse size={16}/> <span>Warehouse</span></div>, query:{type:"Warehouse",category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><Factory size={16}/> <span>Factory</span></div>, query:{type:"Factory",category:"Rent"}}
+    ],
+
+    areaSize: [
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> Below 100 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:null, maxsquareSize:200}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 100 - 200 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:100, maxsquareSize:200}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 200 - 300 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:200, maxsquareSize:300}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 300 - 400 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:300, maxsquareSize:400}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 400 - 500 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:400, maxsquareSize:500}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 500 - 600 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:500, maxsquareSize:600}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 659 - 719 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:659, maxsquareSize:719}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 719 - 819 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:719, maxsquareSize:819}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 800 - 900 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:800, maxsquareSize:900}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> 900 - 1000 sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:900, maxsquareSize:1000}},
+      {label:<div className="d-flex align-items-center gap-1"><Ruler/> Above 1000+ sq ft</div>, query:{ type:"Commercial Plot",category:"Rent",minsquareSize:1000, maxsquareSize:null}}
+    ],
+
+    budget: [
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> Below 10k</div>, query:{minPrice:null, maxPrice:10000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 10k - 20k</div>, query:{minPrice:10000, maxPrice:20000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 20k - 30k</div>, query:{minPrice:20000, maxPrice:30000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 30k - 40k</div>, query:{minPrice:30000, maxPrice:40000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 40k - 60k</div>, query:{minPrice:40000, maxPrice:60000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 60k - 90k</div>, query:{minPrice:60000, maxPrice:90000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 100k - 130k</div>, query:{minPrice:100000, maxPrice:130000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 130k - 160k</div>, query:{minPrice:130000, maxPrice:160000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> 165k - 190k</div>, query:{minPrice:165000, maxPrice:190000, type:"Commercial Plot", category:"Rent"}},
+      {label:<div className="d-flex align-items-center gap-1"><HandCoins/> Above 2+ Lakh</div>, query:{minPrice:200000,maxPrice:null,type:"Commercial Plot",category:"Rent"}}
+    ]
+  }
+};
