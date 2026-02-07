@@ -9,10 +9,10 @@ import { Range, getTrackBackground } from "react-range";
 export default function FilterSidebar() {
   const router = useRouter();
   const params = useSearchParams();
-  const searchedCategory = params.get("category")
-  const searchedType = params.get("type")
-  const searchedCity = params.get("city")
-  const searchedMinPrice = params.get("minPrice")
+  const searchedCategory = params.get("category");
+  const searchedType = params.get("type");
+  const searchedCity = params.get("city");
+  const searchedMinPrice = params.get("minPrice");
   const [isHover, setIsHover] = useState(false);
 
   const [category, setCategory] = useState(searchedCategory ? searchedCategory : "");
