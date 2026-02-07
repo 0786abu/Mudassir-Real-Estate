@@ -3,11 +3,17 @@
 import { HomePageFilter1, HomePageFilter2, HomePageFilter3, HomePageFilter4, HomePageFilter5, HomePageFilter6, HomePageFilter7, HomePageFilter8 } from "@/utils/HomePageFilters";
 import { ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const HomePageFilter = () => {
   const [category, setCategory] = useState("sale");
-  const [activeLink, setActiveLink] = useState(null)
+  const [activeLink, setActiveLink] = useState(null);
+  const {selectedFilterCategory} = useSelector((state)=>state.Property);
+
+  useEffect(()=>{
+    setCategory(selectedFilterCategory.toLowerCase())
+  }, [selectedFilterCategory])
 
   return (
     <div className="container my-5" style={{ maxWidth: "1280px" }}>

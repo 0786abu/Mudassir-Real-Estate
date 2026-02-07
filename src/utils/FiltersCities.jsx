@@ -3088,3 +3088,148 @@ export const BUDGET_FILTERS = {
     },
   },
 };
+export const RentedpropertyTypesData = [
+  {
+    mainType: " House & Flat Residential",
+    types: [
+      "All ",
+      "House",
+      "Apartment - Flat ",
+
+      "Portion (Upper)",
+      "Portion (Lower)",
+      "Room",
+      "Penthouse",
+      "Villa",
+      "Farmhouse",
+      "Shared Accommodation",
+      "Boys - Girls Hostel"
+
+    ]
+  },
+  {
+    mainType: "Plots & Lands",
+    types: [
+
+      "All",
+      "Residential Plot",
+      "Commercial Plot",
+      "Industrial Plot",
+      "Agricultural Land",
+      "Farmhouse Plot",
+      "Corner Plot",
+       
+      " Park Facing Plot ",
+
+       
+    ]
+  },
+  {
+    mainType: " Shops & Office Commercial",
+    types: [
+      "All",
+      "Office",
+      "Shop",
+      "Plaza / Building",
+      "Retail Space",
+      "Showroom",
+      "Warehouse",
+      "Co-working Space",
+      "Marriage Halls",
+
+      " Patrols Pumps ",
+
+      "Restaurant",
+
+      "Hotel",
+
+      "Guest House",
+
+      "Cold Storage",
+
+      "Running Business ",
+      "Others ",
+    ]
+  },
+  {
+    mainType: " Factory & Industrial",
+    types: [
+      "All",
+      "Factory",
+      "Mill",
+      "Workshop",
+      "Warehouse Land",   
+      "Commercial Unit",
+    ]
+  }
+];
+export const SalepropertyTypesData = [
+  {
+    mainType: " House & Flat Residential",
+    types: [
+      "All",
+      "House",
+      "Apartment - Flat ",
+      "Penthouse",
+      "Villa",
+      "Farmhouse",
+
+    ]
+  },
+  {
+    mainType: "Plots & Lands",
+    types: [
+      "All",
+      "Residential Plot",
+      "Commercial Plot",
+      "Industrial Plot",
+      "Agricultural Land",
+      "Farmhouse Plot",
+      "Corner Plot",
+       
+      " Park Facing Plot ",
+
+      " Plot File ",
+       
+    ]
+  },
+  {
+    mainType: " Shops & Office Commercial",
+    types: [
+      "All",
+      "Office",
+      "Shop",
+      "Plaza / Building",
+      "Retail Space",
+      "Showroom",
+      "Warehouse",
+      "Co-working Space",
+      "Marriage Halls",
+
+      " Patrols Pumps ",
+
+
+      "Restaurant",
+
+      "Hotel",
+
+      "Guest House",
+
+      "Cold Storage",
+
+      "Running Business ",
+      "Others ",
+    ]
+  },
+  {
+    mainType: " Factory & Industrial",
+    types: [
+      "All",
+      "Factory",
+      "Mill",
+      "Workshop",
+      "Warehouse Land"  ,
+      "Commercial Unit",
+    ]
+  }
+];

@@ -1,13 +1,16 @@
 "use client"
-import { areaSizes, bedsFilterData, popuarCities, propertyTypesData } from "@/utils/FiltersCities";
+import { setSelectedFilterCategory } from "@/redux-toolkit/slice/propertySlice";
+import { areaSizes, bedsFilterData, popuarCities, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Container } from "reactstrap";
 
 const HomeBannerSection = () => {
   const router = useRouter();
   const [hovered, setHovered] = useState(null);
   const [isHover, setIsHover] = useState(false);
+  const dispatch = useDispatch();
 
   const [filterValues, setFilterValues] = useState({
     category:"Sale",
@@ -39,6 +42,9 @@ const HomeBannerSection = () => {
     router.push(`/properties?${query.toString()}`)
   }
 };
+useEffect(()=>{
+  dispatch(setSelectedFilterCategory(filterValues.category))
+},[filterValues.category])
 
 
   return (
@@ -163,7 +169,15 @@ professionals
                   }
                 >
                   <option value="">{filterValues.category==="Project" ? "Project type" : "Property Type"}</option>
-                   {propertyTypesData.map((item) => (
+                   {filterValues.category==="Sale" ? SalepropertyTypesData.map((item) => (
+                      <optgroup key={item.mainType} label={item.mainType}>
+                        {item.types.map((sub,index) => (
+                          <option key={index} value={sub}>
+                            {sub}
+                          </option>
+                        ))}
+                      </optgroup>
+                    )) : RentedpropertyTypesData.map((item) => (
                       <optgroup key={item.mainType} label={item.mainType}>
                         {item.types.map((sub,index) => (
                           <option key={index} value={sub}>

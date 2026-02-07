@@ -23,6 +23,7 @@ const initialState = {
     removepropertyimageloading:false,
     viewsdataloading:false,
     totalPages:null,
+    selectedFilterCategory:"Sale",
     currentPage:null,
     error:null
 }
@@ -37,6 +38,9 @@ const propertySice = createSlice({
         }else{
             state.createpropertyloading = action.payload
         }
+       },
+       setSelectedFilterCategory:(state,action)=>{
+        state.selectedFilterCategory = action.payload
        },
        setRemovePropertyImageLoading:(state,action)=>{
         if(action.payload === undefined){
@@ -122,6 +126,6 @@ const propertySice = createSlice({
     }
 });
 
-export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData,setLatestproeprtyloading,setLatestsproperties,setFeaturedProperties,setFeaturedPropertyLoading,setAdminProeprties,setAdminPropertiesLoading} = propertySice.actions;
+export const {setCreatePropertyLoading,setPropertyError,setMyProperties,setMyPropertyLoading,setPagesContent,setMyProperty,setUpdateProeprty,setRemovePropertyImageLoading,setSelectedSlug, setSinglePropertyLoading,setSingleProperty,setMyChartData,setViewsChartDataLoading,setMyTypeChartData,setMyAvailableProeprtiesChartData,setLatestproeprtyloading,setLatestsproperties,setFeaturedProperties,setFeaturedPropertyLoading,setAdminProeprties,setAdminPropertiesLoading,setSelectedFilterCategory} = propertySice.actions;
 
 export default propertySice.reducer;

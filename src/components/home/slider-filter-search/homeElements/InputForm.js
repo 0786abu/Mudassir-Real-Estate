@@ -1,6 +1,6 @@
 "use client";
 
-import { citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
+import { citiesLocationsData, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
 import { formatPK } from "@/utils/Formatter";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -105,7 +105,23 @@ export default function FilterSidebar() {
           onChange={(e) => updateFilter("type", e.target.value)}
         >
           <option value="">Property Type</option>
-         {propertyTypesData.map((item,index) => (
+         {category==="" ? propertyTypesData.map((item,index) => (
+    <optgroup key={index} label={item.mainType}>
+      {item.types.map((sub,index) => (
+        <option key={index} value={sub}>
+          {sub}
+        </option>
+      ))}
+    </optgroup>
+  )) : category==="Sale" ? SalepropertyTypesData.map((item,index) => (
+    <optgroup key={index} label={item.mainType}>
+      {item.types.map((sub,index) => (
+        <option key={index} value={sub}>
+          {sub}
+        </option>
+      ))}
+    </optgroup>
+  )) : RentedpropertyTypesData.map((item,index) => (
     <optgroup key={index} label={item.mainType}>
       {item.types.map((sub,index) => (
         <option key={index} value={sub}>
