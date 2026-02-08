@@ -98,7 +98,7 @@ professionals
   <span style={{marginRight:"6px"}} className={`check-icon ${filterValues.category==="Sale" ? "checked" : "unchecked"}`}>
           {filterValues.category==="Sale" ? "✔" : ""}
         </span>
-  Buy
+  Sale
 </button>
 
 <button

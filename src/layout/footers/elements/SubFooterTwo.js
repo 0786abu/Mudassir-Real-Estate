@@ -26,6 +26,9 @@ const SubFooterTwo = () => {
               <li>
                 <Link href="/pricing">Pricing</Link>
               </li>
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
             </ul>
           </div>
         </Row>

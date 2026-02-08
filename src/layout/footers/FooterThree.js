@@ -7,6 +7,8 @@ import FooterContactUsDetails from "./footerThreeElements/FooterContactUsDetails
 import SubFooterTwo from "./elements/SubFooterTwo";
 import { useDispatch, useSelector } from "react-redux";
 import { CreateSubscribeEmail } from "@/redux-toolkit/action/emailAction";
+import Image from "next/image";
+import { MapPin } from "lucide-react";
 
 const FooterThree = () => {
   const {createemailloading} = useSelector((state)=>state.Email);
@@ -26,9 +28,26 @@ const FooterThree = () => {
             <Col xl="9">
               <Row>
                 <FooterLink value={FooterData.usefulLinks} isActive={isActive} setIsActive={setIsActive} />
-                <FooterLink value={FooterData.feature} isActive={isActive} setIsActive={setIsActive} />
-                <FooterLink value={FooterData.social} isActive={isActive} setIsActive={setIsActive} />
-                <Col lg="3" xl="4">
+                <Col lg="2" md="3" className="">
+                <div className="d-flex text-white flex-column gap-1">
+                  <h4 className=" fw-semibold">Offices</h4>
+                  <div className="officess">
+                    <h6 className=" text-decoration-underline">Head office</h6>
+                    <div className="d-flex align-items-start gap-1">
+                    <MapPin className="mt-1" size={20}/>
+                    <p>E-28 Architect society, Lahore</p>
+                  </div>
+                  </div>
+                  <div className="officess">
+                    <h6 className=" text-decoration-underline">Sub office</h6>
+                    <div className="d-flex align-items-start gap-1">
+                    <MapPin className="mt-1" size={20}/>
+                    <p>Block no 10 D, plat no 05, sector G 9/2, Islamabad</p>
+                  </div>
+                  </div>
+                </div>
+                </Col>
+                <Col lg="3" xl="6">
                   <div className="footer-links">
                     <h5
                       className={`footer-title ${isActive === "subscribe" ? "active" : ""}`}
@@ -57,25 +76,35 @@ const FooterThree = () => {
                     </div>
                        <ul className="agent-social">
    <li>
-    <a href={"facebook.com"} className="facebook">
-      <i className="fab fa-facebook-f"></i>
+    <a href={"#"}>
+      {/* <i className="fab fa-facebook-f"></i> */}
+      <Image src={"/assets/images/facebook.png"} alt="facebook" width={20} height={20} />
     </a>
   </li>
     <li>
-    <a href={"instagram.com"} className="instagram">
-      <i className="fab fa-instagram"></i>
+    <a href={"#"}>
+      {/* <i className="fab fa-instagram"></i> */}
+      <Image src={"/assets/images/Instagram.png"} alt="instagram" width={20} height={20} />
     </a>
   </li>
    <li>
-    <a href={"youtube.com"} className="google">
-      <i className="fab fa-youtube"></i>
+    <a href={"#"}>
+      {/* <i className="fab fa-youtube"></i> */}
+      <Image src={"/assets/images/Youtube.png"} alt="youtube" width={20} height={20} />
     </a>
   </li>
-    {/* <li>
-    <a href={agent?.socialMedia?.linkedin} className="linkedin">
-      <i className="fab fa-linkedin-in"></i>
+    <li>
+    <a href={"#"}>
+      {/* <i className="fab fa-linkedin-in"></i> */}
+      <Image src={"/assets/images/Linkedin.png"} alt="linkedin" width={20} height={20} />
     </a>
-  </li> */}
+  </li>
+    <li>
+    <a href={"#"}>
+      {/* <i className="fab fa-linkedin-in"></i> */}
+      <Image src={"/assets/images/Twitter.png"} alt="twitter" width={20} height={20} />
+    </a>
+  </li>
 </ul>
                   </div>
                 </Col>

@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode"
 import { GetFavouritesData } from "@/redux-toolkit/action/favouritesAction";
+import { User } from "lucide-react";
 
 export default function Navbar() { 
   const {sampleuser,logoutloading} = useSelector((state)=>state.Auth);
@@ -103,7 +104,7 @@ const router = useRouter();
           {/* Right section */}
           <div className="d-flex align-items-center gap-2 ms-auto order-lg-3 order-2">
             {!sampleuser && (
-              <button className="btn btn-dark rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal">Login</button>
+              <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><User size={16}/> Login</button>
             )}
 
              {sampleuser && (

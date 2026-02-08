@@ -37,9 +37,7 @@ export const FooterData = {
       { title: "Properties", link: "/properties" },
       { title: "Projects", link: "/projects" },
       { title: "Agencies", link: "/agents" },
-      { title: "Blog", link: "blog.pakearth.com" },
       { title: "About us", link: "/about" },
-      { title: "Contact", link: "/contact" },
     ],
   },
   feature: {

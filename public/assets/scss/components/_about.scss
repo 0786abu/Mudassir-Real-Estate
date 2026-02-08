@@ -1890,3 +1890,18 @@ $primary: #108a00;
   background-color: transparent;
   border: none;
 }
+.loginn{
+  background-color: #14a800;
+  color: white;
+  border: none;
+}
+.loginn:hover{
+  background-color: #108A00;
+  color: white;
+}
+@media (max-width:640px) {
+  .officess{
+    width: 150px;
+    margin: auto;
+  }
+}
