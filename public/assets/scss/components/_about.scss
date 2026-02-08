@@ -1905,3 +1905,39 @@ $primary: #108a00;
     margin: auto;
   }
 }
+.filter-card {
+  height: 285px;              /* 👈 apni need ke hisaab se */
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* 🔹 Minimal scrollbar (Chrome, Edge, Safari) */
+.filter-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.filter-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filter-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+/* 🔹 Firefox */
+.filter-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.3) transparent;
+}
+@media (max-width:768px) {
+  .filter-card {
+    height: auto;
+  }
+}

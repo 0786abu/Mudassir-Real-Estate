@@ -37,7 +37,7 @@ function PropertyFilter() {
   };
 
   const renderCard = (category, title) => (
-    <div className="card p-3 mb-3 shadow-sm border">
+    <div className="card p-3 mb-3 shadow-sm border filter-card">
       <h5>{title}</h5>
       <ul className="nav nav-tabs mb-2">
         {["type", "areaSize", "budget"].map((tab) => (
@@ -56,7 +56,7 @@ function PropertyFilter() {
         ))}
       </ul>
 
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap filter-scroll">
         {renderButtons(category, activeTab[category])}
       </div>
     </div>
@@ -101,7 +101,7 @@ function PropertyFilter2() {
   };
 
   const renderCard = (category, title) => (
-    <div className="card p-3 mb-3 shadow-sm border">
+    <div className="card p-3 mb-3 shadow-sm border filter-card">
       <h5>{title}</h5>
       <ul className="nav nav-tabs mb-2">
         {["type", "areaSize", "budget"].map((tab) => (
@@ -120,7 +120,7 @@ function PropertyFilter2() {
         ))}
       </ul>
 
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap filter-scroll">
         {renderButtons(category, activeTab[category])}
       </div>
     </div>
