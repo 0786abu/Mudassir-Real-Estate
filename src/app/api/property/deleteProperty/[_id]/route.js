@@ -36,6 +36,11 @@ export async function DELETE(req,{params}) {
         }
       }
     }
+    if(isUser.role === "agent"){
+        const user = await Agent.findById(isUser._id);
+        user.numOfProperties -=1;
+        await user.save();
+    }
         const property = await Property.deleteOne({_id:_id,createdBy:isUser._id})
           if(isUser.role !== "admin"){
             const Notitype= "property_deleted"

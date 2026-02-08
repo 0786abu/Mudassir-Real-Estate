@@ -85,6 +85,7 @@ if (!user) {
   );
 }
 
+
     const seo_title = formData.get("seo_title");
     const seo_description = formData.get("seo_description");
     const keywords = formData.getAll("keywords");
@@ -182,6 +183,10 @@ if (!user) {
       user.credits -= 1;
       await user.save();
     }
+    if(createdByModel==="Agent"){
+  user.numOfProperties +=1
+  await user.save();
+}
     const data = {
       seo_title,
       seo_description,

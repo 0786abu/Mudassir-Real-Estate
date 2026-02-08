@@ -159,7 +159,7 @@ export async function DELETE(req,{params}) {
                 message:"please add reason to delete property"
             },{status:401})
         }
-        const property = await Property.findOne({slug}).populate("createdBy","name email");
+        const property = await Property.findOne({slug}).populate("createdBy","name email role");
         if(!property){
             return NextResponse.json({
                 success:false,
@@ -178,7 +178,11 @@ export async function DELETE(req,{params}) {
         }
       }
     }
-
+    if(property?.createdBy?.role==="agent"){
+        const user = await Agent.findById(property.createdBy._id);
+        user.numOfProperties -=1;
+        await user.save();
+    }
         await DeletePropertyMail({name:property?.createdBy?.name,email:property?.createdBy?.email,reason,propertyType:property?.type,propertyCategory:property?.category,propertyTitle:property?.title})
         await Property.deleteOne({slug});
         return NextResponse.json({
