@@ -182,13 +182,13 @@ const CategorySection = () => {
  const {selectedFilterCategory} = useSelector((state)=>state.Property);
   
   const handlePush = (type)=>{
-    router.push(`/properties?type=${type}`)
+    router.push(`/properties?type=${type}&category=${selectedFilterCategory}`)
   }
   return (
     <section style={{padding:"0px", marginTop:"80px", marginBottom:"0px"}} className="category-section">
       <Container>
         <div className="d-flex justify-content-between align-items-center">
-          <h4 className="section-title">Search by Property Type</h4>
+          <h4 className="section-title">Search by Property Type {selectedFilterCategory==="Sale" ? "(Sale)" : "(Rent)"}</h4>
           {/* <button type="button" className="btn btn-dark">See all</button> */}
         </div>
         <div className="category-grid">
