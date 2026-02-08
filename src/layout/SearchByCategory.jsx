@@ -15,7 +15,7 @@ const RentedpropertyTypes = [
   },
   {
     id:2,
-    type:"Apartment & Flat",
+    type:"Apartment - Flat",
     img:"/assets/images/filters/Apartments and Flats.png"
   },
   {
@@ -107,7 +107,7 @@ const SalepropertyTypes = [
   },
   {
     id:2,
-    type:"Apartment & Flat",
+    type:"Apartment - Flat",
     img:"/assets/images/filters/Apartments and Flats.png"
   },
   {
