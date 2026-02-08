@@ -3,24 +3,19 @@
  * @returns The return statement is used to return a value from a function.
  */
 "use client"
-import React, { useEffect } from "react";
 import { Button, Container, Row } from "reactstrap";
 import ContactInfo from "../../../layout/sidebarLayout/ContactInfo";
 import Exploration from "../../../layout/sidebarLayout/Exploration";
 import Featured from "../../../layout/sidebarLayout/Featured";
-import Filter from "../../../layout/sidebarLayout/Filter";
-// import Mortgage from "../../../layout/sidebarLayout/Mortgage";
-import RecentlyAdded from "../../../layout/sidebarLayout/RecentlyAdded";
 import Sidebar from "../../../layout/sidebarLayout/Sidebar";
 import RelatedProperty from "./RelatedProperty";
 import SinglePropertySection from "./SingleProperty";
 import SliderBreadcrumbSection from "./SliderBreadcrumb";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Link from "next/link";
 
 const BodyContent = ({ side, property,relatedProperties }) => {
   const { favProperties } = useSelector((state) => state.Favourites);
-  const dispatch = useDispatch();
   return (
       <>
       {(property?.isApproved==="No Approved" || property?.isApproved==="Pending") ? (
