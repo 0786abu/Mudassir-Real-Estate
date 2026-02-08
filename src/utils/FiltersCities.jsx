@@ -390,7 +390,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Islamabad ",
+"city": "Islamabad",
     "subCities": [
 
 
@@ -680,7 +680,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Karachi ",
+"city": "Karachi",
     "subCities": [
 
 "Abbas Town: Karachi",
@@ -1340,7 +1340,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Rawalpindi ",
+"city": "walpindi",
     "subCities": [
 
 "AAA Akron: Rawalpindi",
@@ -1525,7 +1525,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Abbottabad",
+"city": "bbottabad",
 "subCities": [
 
 
@@ -1632,7 +1632,7 @@ export const citiesLocationsData = [
     ]
   },
   {
-"city": " Abdul Hakim",
+"city": "Abdul Hakim",
   },
   {
 
@@ -1646,7 +1646,7 @@ export const citiesLocationsData = [
 "city": "Ali Masjid",
   },
   {
-"city": "Alipur ",
+"city": "Alipur",
   },
   {
 "city": "Arifwala",
@@ -1658,12 +1658,12 @@ export const citiesLocationsData = [
   },
   {
 
-"city": " Attock ",
+"city": "Attock",
     "subCities": [
 
    " Kamra Road, Attock", 
-    " Air University Road, Attock ",
-    " Kamra, Attock ",
+    " Air University Road, Attock",
+    " Kamra, Attock",
 
     ]
   },
@@ -1679,11 +1679,11 @@ export const citiesLocationsData = [
 "city": "Bagh",
   },
   {
-"city": " Bahawalnagar ",
+"city": "Bahawalnagar",
   },
   {
 
-"city": " Bahawalpur ",
+"city": "Bahawalpur",
     "subCities": [
 "Al-Raheem Town: Bahawalpur",
 "Bahawalpur Avenue Housing Society: Bahawalpur",
@@ -1744,7 +1744,7 @@ export const citiesLocationsData = [
   },
   {
 
-"city": " Buner ",
+"city": "Buner",
     "subCities": [
 
 "Alpha Town, Buner",
@@ -1765,7 +1765,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Chakwal ",
+"city": "Chakwal",
 
     "subCities": [
 
@@ -1782,7 +1782,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Charsadda ",
+"city": "Charsadda",
 
     "subCities": [
 
@@ -1897,7 +1897,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Faisalabad ",
+"city": "Faisalabad",
 
     "subCities": [
 
@@ -2093,7 +2093,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Fateh Jang ",
+"city": "Fateh Jang",
 
     "subCities": [
 
@@ -2130,7 +2130,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Gharo ",
+"city": "Gharo",
 
     "subCities": [
 
@@ -2158,7 +2158,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Gujar Khan ",
+"city": "Gujar Khan",
 
     "subCities": [
 
@@ -2170,7 +2170,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Gujranwala ",
+"city": "Gujranwala",
 
     "subCities": [
 
@@ -2217,7 +2217,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Gujrat ",
+"city": "Gujrat",
 
     "subCities": [
 "Al Nabi Colony: Gujrat",
@@ -2257,7 +2257,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Haripur ",
+"city": "Haripur",
 
     "subCities": [
 
@@ -2292,7 +2292,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Hub Chowki",
+"city": "Hub Chowki",
 
     "subCities": [
 
@@ -2312,7 +2312,7 @@ export const citiesLocationsData = [
   },
   {
 
-"city": " Hyderabad ",
+"city": "Hyderabad",
     "subCities": [
 
 "Abdullah Garden: Hyderabad",
@@ -2394,7 +2394,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Jamshoro ",
+"city": "Jamshoro",
 
     "subCities": [
 
@@ -2428,7 +2428,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Jhang ",
+"city": "Jhang",
 
     "subCities": [
 
@@ -2442,7 +2442,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Jhelum ",
+"city": "Jhelum",
 
     "subCities": [
 
@@ -2506,7 +2506,7 @@ export const citiesLocationsData = [
   },
   {
 
-"city": " Khanewal ",
+"city": "Khanewal",
 "subCities": [
 
 "Civil Lines, Khanewal",
@@ -2517,7 +2517,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Khanpur ",
+"city": "Khanpur",
 
     "subCities": [
 
@@ -2689,7 +2689,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Multan ",
+"city": "Multan",
 
     "subCities": [
 
@@ -2740,7 +2740,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Murree ",
+"city": "Murree",
 
     "subCities": [
 "Abbasi Mohalla: Murree",
@@ -2821,7 +2821,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Peshawar ",
+"city": "Peshawar",
 
     "subCities": [
 
@@ -2906,7 +2906,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Quetta ",
+"city": "Quetta",
 
     "subCities": [
 
@@ -2920,7 +2920,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Rahim Yar Khan",
+"city": "Rahim Yar Khan",
     "subCities": [
 "Abbasia Town: Rahim Yar Khan",
 "Abu Dhabi Road: Rahim Yar Khan",
@@ -2971,7 +2971,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Sahiwal",
+"city": "Sahiwal",
     "subCities": [
 
 
@@ -3084,7 +3084,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Shikarpur ",
+"city": "Shikarpur",
     "subCities": [
 
 
@@ -3110,7 +3110,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Sialkot ",
+"city": "Sialkot",
     "subCities": [
 
 
@@ -3215,7 +3215,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Taxila ",
+"city": "Taxila",
     "subCities": [
 
 "Kohsar Colony, Taxila",
@@ -3252,7 +3252,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Upper Dir ",
+"city": "Upper Dir",
     "subCities": [
 
 "Kumrat Valley, Upper Dir",
@@ -3262,7 +3262,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Vehari ",
+"city": "Vehari",
     "subCities": [
 
 
@@ -3273,7 +3273,7 @@ export const citiesLocationsData = [
   {
 
 
-"city": " Wah ",
+"city": "Wah",
     "subCities": [
 
 

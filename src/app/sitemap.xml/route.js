@@ -44,7 +44,7 @@ export async function GET() {
   });
 
   projects.forEach(p => {
-    xml += `  <url><loc>${escapeXml(baseUrl + "/projects/" + p.city + "/" + p.slug)}</loc><lastmod>${formatDate(p.updatedAt)}</lastmod></url>\n`;
+    xml += `  <url><loc>${escapeXml(baseUrl + "/projects/" + p.slug)}</loc><lastmod>${formatDate(p.updatedAt)}</lastmod></url>\n`;
   });
 
   agents.forEach(a => {
