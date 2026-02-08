@@ -22,9 +22,9 @@ export default function FilterSidebar() {
 
   // Dynamic min/max for slider
   const MIN = 0;
-  const MAX = 100000000;
+  const MAX = 1000000000;
   const MINFits = 100;
-  const MAXFits = 40000;
+  const MAXFits = 100000;
 
   const [priceRange, setPriceRange] = useState([searchedMinPrice ? searchedMinPrice :MIN, MAX]);
   const [squareRange, setSquareRange] = useState([MINFits, MAXFits]);
@@ -245,7 +245,7 @@ export default function FilterSidebar() {
       </div>
       <div className="mb-4">
         <label className="form-label">
-          sqft: {squareRange[0]} - sqft. {squareRange[1]}
+          sqft: {formatPK(squareRange[0])} - sqft. {formatPK(squareRange[1])}
         </label>
         <Range
           step={100}
