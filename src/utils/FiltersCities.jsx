@@ -3596,7 +3596,7 @@ export const RentedpropertyTypesData = [
     types: [
       "All ",
       "House",
-      "Apartment - Flat ",
+      "Apartment - Flat",
 
       "Portion (Upper)",
       "Portion (Lower)",
@@ -3671,7 +3671,7 @@ export const SalepropertyTypesData = [
     types: [
       "All",
       "House",
-      "Apartment - Flat ",
+      "Apartment - Flat",
       "Penthouse",
       "Villa",
       "Farmhouse",
