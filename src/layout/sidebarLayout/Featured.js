@@ -19,7 +19,7 @@ const Featured = () => {
       <NoSsr>
         <Slider className="feature-slider" {...featureSlider}>
           <div>
-            <Img src="/assets/images/property/3.webp" className="bg-img" alt="" />
+            <Img src="/assets/images/about.webp" style={{height:"300px"}} className="bg-img" alt="" />
             <div className="bottom-feature">
               <h5>Neverland</h5>
               <h6>
@@ -47,9 +47,6 @@ const Featured = () => {
           </div>
         </Slider>
       </NoSsr>
-      <div className="labels-left">
-        <span className="label label-success">featured</span>
-      </div>
     </div>
   );
 };

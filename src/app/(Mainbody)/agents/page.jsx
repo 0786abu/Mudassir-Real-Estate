@@ -6,6 +6,7 @@ import RecentlyAdded from "@/layout/sidebarLayout/RecentlyAdded";
 import Featured from "@/layout/sidebarLayout/Featured";
 import { Suspense } from "react";
 import ContentLoader from "react-content-loader";
+import SubBudget from "@/components/property/SubBudget";
 
 export const metadata = {
   title: "Real Estate Experts at PakEarth.com | Property Agents in Pakistan",
@@ -67,9 +68,8 @@ const AgentGrid = ({searchParams}) => {
       <BodyContent baseURL={baseURL} searchParams={searchParams}/>
       </Suspense>
       <Sidebar top={"80px"}>
-            <Exploration />
-            <Featured />
-            <RecentlyAdded />
+        <h4 className="fw-bold mt-2">Search Projects</h4>
+        <SubBudget />
           </Sidebar>
       </Row>
       </Container>
