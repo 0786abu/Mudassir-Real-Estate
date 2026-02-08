@@ -1468,6 +1468,7 @@
 .single-property-section {
   position: absolute;
   bottom: -76px;
+  padding-bottom: 100px;
   width: 100%;
 
   .btn {
@@ -1597,7 +1598,6 @@
     }
   }
 }
-
 .icon-facebook {
   color: $facebook;
 }

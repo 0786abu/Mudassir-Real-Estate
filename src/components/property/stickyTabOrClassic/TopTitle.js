@@ -137,10 +137,10 @@ const TopTitle = ({ property, favourites }) => {
             {formatPK(property?.price)}
               <span>/ start From</span>
             </h2>
-            {/* <div className="feature-label">
+            <div className="feature-label">
               <span className="" style={{fontWeight:"bold"}}>Property Type: </span>
-              <span className="btn btn-dashed btn-pill">{property?.type}</span>
-            </div> */}
+              <span className="btn" style={{background:"#14a800", color:"white"}}>{property?.type}</span>
+            </div>
           </div>
         </div>
       </Container>

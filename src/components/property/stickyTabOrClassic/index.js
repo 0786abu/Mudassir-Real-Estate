@@ -41,7 +41,7 @@ const BodyContent = ({ side, property,relatedProperties }) => {
       ) : (
         <div>
           <SliderBreadcrumbSection property={property} favourites={favProperties} />
-      <section className="single-property">
+      <div className="single-property">
         <Container>
           <Row className=" ratio_65">
             <Sidebar mortgage={true} side={side} singleProperty={true}>
@@ -54,7 +54,7 @@ const BodyContent = ({ side, property,relatedProperties }) => {
             <SinglePropertySection property={property} />
           </Row>
         </Container>
-      </section>
+      </div>
       <RelatedProperty relatedProperties={relatedProperties} />
         </div>
       )}
