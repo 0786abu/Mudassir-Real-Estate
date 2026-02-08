@@ -3634,7 +3634,7 @@ export const RentedpropertyTypesData = [
       "Warehouse",
       "Co-working Space",
       "Marriage Halls",
-      "Patrols Pumps",
+      "Petrol Pump",
       "Restaurant",
       "Hotel",
 
@@ -3698,7 +3698,7 @@ export const SalepropertyTypesData = [
       "Co-working Space",
       "Marriage Halls",
 
-      "Patrols Pumps",
+      "Petrol Pump",
 
 
       "Restaurant",
