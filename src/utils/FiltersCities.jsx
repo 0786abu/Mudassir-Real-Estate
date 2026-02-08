@@ -3317,9 +3317,9 @@ export const citiesLocationsData = [
 ]
 export const propertyTypesData = [
   {
-    mainType: " House & Flat Residential",
+    mainType: "House & Flat Residential",
     types: [
-      "All Residence",
+      "All",
       "House",
       "Apartment - Flat",
       "Portion (Upper)",
@@ -3330,13 +3330,13 @@ export const propertyTypesData = [
       "Villa",
       "Farmhouse",
       "Shared Accommodation",
-      "Boys - Girls Hostel"
-
-    ]
+      "Boys - Girls Hostel",
+    ],
   },
   {
     mainType: "Plots & Lands",
     types: [
+      "All",
       "Residential Plot",
       "Commercial Plot",
       "Industrial Plot",
@@ -3345,42 +3345,42 @@ export const propertyTypesData = [
       "Corner Plot",
       "Park Facing Plot",
       "Plot File",
-    ]
+    ],
   },
   {
-    mainType: " Shops & Office Commercial",
+    mainType: "Shops & Office Commercial",
     types: [
+      "All",
       "Office",
       "Shop",
-      "Plaza",
-      "Building",
+      "Plaza / Building",
       "Retail Space",
       "Showroom",
       "Warehouse",
       "Co-working Space",
       "Marriage Halls",
-      "Patrols Pumps ",
-      "Patrols Pumps ",
+      "Petrol Pump",
       "Restaurant",
       "Hotel",
       "Guest House",
       "Cold Storage",
       "Running Business",
-      "Others ",
-    ]
+      "Others",
+    ],
   },
   {
-    mainType: " Factory & Industrial",
+    mainType: "Factory & Industrial",
     types: [
+      "All",
       "Factory",
       "Mill",
       "Workshop",
-      "Portions and Floors",
       "Warehouse Land",
       "Commercial Unit",
-    ]
-  }
+    ],
+  },
 ];
+
 export const areaSizes = [
   "2 Marla",
   "3 Marla",
@@ -3597,7 +3597,6 @@ export const RentedpropertyTypesData = [
       "All ",
       "House",
       "Apartment - Flat",
-
       "Portion (Upper)",
       "Portion (Lower)",
       "Room",
@@ -3620,10 +3619,7 @@ export const RentedpropertyTypesData = [
       "Agricultural Land",
       "Farmhouse Plot",
       "Corner Plot",
-       
-      " Park Facing Plot ",
-
-       
+      " Park Facing Plot",
     ]
   },
   {
@@ -3638,18 +3634,15 @@ export const RentedpropertyTypesData = [
       "Warehouse",
       "Co-working Space",
       "Marriage Halls",
-
-      " Patrols Pumps ",
-
+      "Patrols Pumps",
       "Restaurant",
-
       "Hotel",
 
       "Guest House",
 
       "Cold Storage",
 
-      "Running Business ",
+      "Running Business",
       "Others ",
     ]
   },
@@ -3675,7 +3668,6 @@ export const SalepropertyTypesData = [
       "Penthouse",
       "Villa",
       "Farmhouse",
-
     ]
   },
   {
@@ -3688,10 +3680,8 @@ export const SalepropertyTypesData = [
       "Agricultural Land",
       "Farmhouse Plot",
       "Corner Plot",
-       
-      " Park Facing Plot ",
-
-      " Plot File ",
+      "Park Facing Plot",
+      "Plot File",
        
     ]
   },
@@ -3708,7 +3698,7 @@ export const SalepropertyTypesData = [
       "Co-working Space",
       "Marriage Halls",
 
-      " Patrols Pumps ",
+      "Patrols Pumps",
 
 
       "Restaurant",
@@ -3719,7 +3709,7 @@ export const SalepropertyTypesData = [
 
       "Cold Storage",
 
-      "Running Business ",
+      "Running Business",
       "Others ",
     ]
   },
@@ -3730,7 +3720,7 @@ export const SalepropertyTypesData = [
       "Factory",
       "Mill",
       "Workshop",
-      "Warehouse Land"  ,
+      "Warehouse Land",
       "Commercial Unit",
     ]
   }
