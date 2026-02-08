@@ -302,7 +302,7 @@ footer {
 }
 
 // tap to top css
-.tap-top {
+.tap-top { 
     width: 35px;
     height: 35px;
     border-radius: 8px;
@@ -312,7 +312,7 @@ footer {
     z-index: 8;
     color: $white;
     text-align: center;
-    background-image: var(--theme-gradient2);
+    background-color: #14a800;
     border: none;
     font-size: 22px;
     padding: 6px 5px 5px 5px;
@@ -331,7 +331,7 @@ footer {
         @extend %common-lightafter;
         border-radius: 8px;
         opacity: 0.26;
-        box-shadow: 5.353px 5.945px 12px var(--theme-default);
+        box-shadow: 5.353px 5.945px 12px #14a800;
     }
 
     &.top {
