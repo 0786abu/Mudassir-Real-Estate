@@ -27,7 +27,7 @@ const RelatedProperty = ({relatedProperties}) => {
             </Col>
 
   return (
-    <section className="property-section pt-0">
+    <section className="property-section pt-0 mt-5">
       <Container>
         <div className="title-3 text-start inner-title">
           <h2>Related Properties</h2>
