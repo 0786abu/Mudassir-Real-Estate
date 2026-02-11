@@ -19,14 +19,14 @@ const addWatermark = async (imageBuffer, text = "PakEarth.com") => {
   const svg = `
     <svg width="${width}" height="${height}">
       <style>
-        .text {
-          fill: white;
-          font-size: ${fontSize}px;
-          font-weight: bold;
-          opacity: 0.35;
-          font-family: sans-serif;
-        }
-      </style>
+  .text {
+    fill: white;
+    font-size: ${fontSize}px;
+    font-weight: bold;
+    opacity: 0.35;
+    font-family: DejaVu Sans, sans-serif;
+  }
+</style>
       <text
         x="50%"
         y="50%"
