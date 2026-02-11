@@ -63,9 +63,9 @@ const MyInquiries = () => {
 
           <tbody>
                    {myInquiries?.length===0 ? (
-                    <td colSpan={7} align='center' style={{borderBottom:"none",paddingTop:"10px"}}>No leads yet</td>
+                    <tr><td colSpan={7} align='center' style={{borderBottom:"none",paddingTop:"10px"}}>No leads yet</td></tr>
                    ) : myInquiries?.map((lead,index)=>{
-                    let profile= lead.requestedTo.role==="agent" ? lead.requestedTo.agencyProfile : lead.requestedTo.profile;
+                    let profile= lead?.requestedTo?.role==="agent" ? lead?.requestedTo?.agencyProfile : lead?.requestedTo?.profile;
                     
                     return (
                          <tr key={lead._id}>
@@ -77,7 +77,7 @@ const MyInquiries = () => {
               <td className="fw-semibold">
                     <div className=' d-flex align-items-center gap-2'>
                         <Image 
-                        src={profile.url ? profile.url : "/assets/images/profile.webp"}
+                        src={profile?.url ? profile?.url : "/assets/images/profile.webp"}
                         alt={lead.name}
                         height={40}
                         width={40}
@@ -87,8 +87,8 @@ const MyInquiries = () => {
                         }}
                         />
                         <div className=' d-flex flex-column'>
-                            <span>{lead.requestedTo.name}</span>
-                        <Badge size="sm">{lead.requestedByModel}</Badge>
+                            <span>{lead?.requestedTo?.name}</span>
+                        <Badge size="sm">{lead?.requestedByModel}</Badge>
                         </div>
                     </div>
               </td>
