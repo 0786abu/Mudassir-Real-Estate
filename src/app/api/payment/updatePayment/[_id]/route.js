@@ -3,6 +3,7 @@ import Payment from "@/backend/model/paymentModel";
 import Property from "@/backend/model/propertyModel";
 import { isAuthorized } from "@/backend/utils/middlewere";
 import { ApprovedPaymentMail, RejectPaymentMail } from "@/backend/utils/NodeMailer";
+import { emailQueue } from "@/utils/Queue";
 import { NextResponse } from "next/server";
 
 export async function PUT(req,{params}) {
@@ -41,6 +42,18 @@ export async function PUT(req,{params}) {
             property.isApproved = "Approved"
             property.isPaid = true
             await ApprovedPaymentMail({name:payment.user.name,email:payment.user.email,link})
+                        await emailQueue.add("PROPERTY_CREATED", {
+                    property,
+                    
+                  },{
+                attempts: 5, // max 5 tries
+                backoff: {
+                  type: "exponential",
+                  delay: 3000, // 3 sec
+                },
+                removeOnComplete: { age: 3600 },
+                removeOnFail: { age: 86400 },
+              });
         }
         await payment.save();
         await property.save();
