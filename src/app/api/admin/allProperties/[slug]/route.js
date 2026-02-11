@@ -1,9 +1,10 @@
 import { DataBase } from "@/backend/config/database";
+import Agent from "@/backend/model/agentModel";
 import Property from "@/backend/model/propertyModel";
 import cloudinary from "@/backend/utils/cloudinary";
 import { isAuthorized } from "@/backend/utils/middlewere";
 import { DeletePropertyMail, FreePropertyApprovedMail, RejectPropertyApprovedMail } from "@/backend/utils/NodeMailer";
-import { emailQueue } from "@/utils/Queue";
+import { emailQueue } from "@/utils/Queue"; 
 import { NextResponse } from "next/server";
 
 export async function GET(req,{params}){
