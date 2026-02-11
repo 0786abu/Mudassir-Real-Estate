@@ -269,11 +269,15 @@ export async function GET(req) {
         const maxPrice = searchParams.get('maxPrice');
         const furnished = searchParams.get('furnished');
         const filter = {isApproved:"Approved"};
-         if (isLatest && isLatest.toLowerCase() === "latest") {
-      const twoDaysAgo = new Date();
-      twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-      query.createdAt = { $gte: twoDaysAgo };
-    }
+        if (isLatest?.toLowerCase() === "latest") {
+  const twoDaysAgo = new Date(Date.now() - 48 * 60 * 60 * 1000);
+
+  filter.createdAt = {
+    $gte: new Date(twoDaysAgo.toISOString()),
+  };
+
+}
+
         if (areaSize) filter.areaSize = areaSize;
         if (category) filter.category = category;
         if (type) filter.type = type;
