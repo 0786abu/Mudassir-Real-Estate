@@ -163,6 +163,30 @@
       }
     }
   }
+  .title-1-1 { 
+      text-align: start;
+      width: 350px;
+      position: relative;
+        h2 {
+            margin-bottom: -3px;
+            font-size: 22px;
+        }
+        hr{
+          position: absolute;
+            width: 80px;
+            left: 35%;
+            transform: translateX(-35%);
+            height: 2px;
+            color: #14a800;
+            opacity: 1;
+            transition: all 0.5s;
+        }
+        &:hover{
+            hr{
+                width: 150px;
+            }
+        }
+    }
   .title-1 {
     h2 {
       margin-bottom: -9px;

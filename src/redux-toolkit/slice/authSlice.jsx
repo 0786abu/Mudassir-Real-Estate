@@ -10,6 +10,7 @@ const initialState = {
     logoutloading:false,
     socialloading:false,
     uploadloading:false,
+    tab:null,
     error:null
 }
 
@@ -21,6 +22,9 @@ const authSlice = createSlice({
             state.userloading = false
             state.error = null
             state.user = action.payload
+        },
+        setTabb:(state,action)=>{
+            state.tab = action.payload
         },
         setRegisterloading:(state,action)=>{
             if(action.payload === undefined){
@@ -69,6 +73,6 @@ const authSlice = createSlice({
     }
 });
 
-export const {setUser, setRegisterloading, setAuthError, setUserLoading, setResendEmailloading, setLogoutLoading, setSampleUser, setSocialLoading,setUploadLoading} = authSlice.actions;
+export const {setUser, setRegisterloading, setAuthError, setUserLoading, setResendEmailloading, setLogoutLoading, setSampleUser, setSocialLoading,setUploadLoading, setTabb} = authSlice.actions;
 
 export default authSlice.reducer;

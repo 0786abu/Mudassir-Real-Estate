@@ -10,8 +10,8 @@ const ChildSaleProeprty = ({from,value,properties}) => {
       <Container>
         <Row className=' ratio_landscape'>
           <Col>
-            <div className='title-1'>
-              <h2>{from==="adminProperties" ? "Hot Properties" : LatestForSale}</h2>
+            <div className='title-1-1' style={{marginBottom:"50px"}}>
+              <h2>{from==="adminProperties" ? "Sponsored Properties" : LatestForSale}</h2>
               <hr />
             </div>
               {from==="adminProperties" ? (

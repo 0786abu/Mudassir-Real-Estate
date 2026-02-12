@@ -38,7 +38,7 @@ function PropertyFilter() {
 
   const renderCard = (category, title) => (
     <div className="card p-3 mb-3 shadow-sm border filter-card">
-      <h5>{title}</h5>
+      <h6 className="fw-bold">{title}</h6>
       <ul className="nav nav-tabs mb-2">
         {["type", "areaSize", "budget"].map((tab) => (
           <li key={tab} className="nav-item">
@@ -64,9 +64,9 @@ function PropertyFilter() {
 
   return (
     <div className="container mt-5">
-      <h4 className="mb-3">Browse Properties</h4>
+      <h4 className="mb-3 fw-bold">Browse Properties</h4>
       <div className="row">
-        <div className="col-md-6 col-lg-4 ">{renderCard("residential", "House")}</div>
+        <div className="col-md-6 col-lg-4 ">{renderCard("residential", "Residential")}</div>
         <div className="col-md-6 col-lg-4 ">{renderCard("plot", "Plots")}</div>
         <div className="col-md-6 col-lg-4 ">{renderCard("commercial", "Commercial")}</div>
       </div>
@@ -128,9 +128,9 @@ function PropertyFilter2() {
 
   return (
     <div className="container mt-5">
-      <h4 className="mb-3">Browse Properties</h4>
+      <h4 className="mb-3 fw-bold">Browse Properties</h4>
       <div className="row">
-        <div className="col-md-4">{renderCard("residential", "House")}</div>
+        <div className="col-md-4">{renderCard("residential", "Residential")}</div>
         <div className="col-md-4">{renderCard("commercial", "Commercial")}</div>
       </div>
     </div>
@@ -141,7 +141,7 @@ function PropertyFilter2() {
 const BoxFilterHOmePage = () => {
     const {selectedFilterCategory} = useSelector((state)=>state.Property);
   return (
-    <div>{selectedFilterCategory==="Sale" ? <PropertyFilter/> : <PropertyFilter2/>}</div>
+    <div className="homepagefiltersecond">{selectedFilterCategory==="Sale" ? <PropertyFilter/> : <PropertyFilter2/>}</div>
   )
 }
 

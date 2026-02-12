@@ -9,8 +9,8 @@ const SponsoredProjects = async() => {
 
 <section className="projects-section py-5">
   <div className="container">
-    <div className="d-flex justify-content-between align-items-center mb-4">
-      <h2 className="section-title">Sponsored Projects</h2>
+    <div className="d-flex justify-content-between align-items-center">
+      <h2 className="section-title text-black" style={{fontSize:"22px"}}>Sponsored Projects</h2>
       <Link href="/projects?sponsored=true" className="view-all">View All →</Link>
     </div>
     <div className="row g-4"> 

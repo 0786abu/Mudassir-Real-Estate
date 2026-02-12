@@ -1,6 +1,7 @@
 "use client"
 import { setSelectedFilterCategory } from "@/redux-toolkit/slice/propertySlice";
-import { areaSizes, bedsFilterData, popuarCities, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
+import { areaSizes, bedsFilterData, citiesLocationsData, popuarCities, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -11,11 +12,13 @@ const HomeBannerSection = () => {
   const [hovered, setHovered] = useState(null);
   const [isHover, setIsHover] = useState(false);
   const dispatch = useDispatch();
+  const [subCities, setSubCities] = useState([]);
 
   const [filterValues, setFilterValues] = useState({
     category:"Sale",
     type: "",
     city: "",
+    location:"",
     areaSize: "",
     beds: "",
     minPrice: "",
@@ -24,11 +27,7 @@ const HomeBannerSection = () => {
 
   const handleSearch = () => {
   const query = new URLSearchParams();
-
-  // Yeh optional values hain → sirf value ho tabhi URL mein add hongi
-  if (filterValues.category && filterValues.category !== "Project") {
-    query.set("category", filterValues.category);
-  }
+  if(filterValues.category) query.set("category", filterValues.category);
   if (filterValues.type) query.set("type", filterValues.type);
   if (filterValues.city) query.set("city", filterValues.city);
   if (filterValues.areaSize) query.set("areaSize", filterValues.areaSize);
@@ -36,15 +35,21 @@ const HomeBannerSection = () => {
   if (filterValues.minPrice) query.set("minPrice", filterValues.minPrice);
   if (filterValues.developer) query.set("developer", filterValues.developer);
 
-  if(filterValues.category==="Project"){
-    router.push(`/projects?${query.toString()}`)
-  }else{
     router.push(`/properties?${query.toString()}`)
-  }
 };
 useEffect(()=>{
   dispatch(setSelectedFilterCategory(filterValues.category))
 },[filterValues.category])
+useEffect(()=>{
+  if(filterValues.city){
+    const cityData = citiesLocationsData.find(city => city.city === filterValues.city);
+    if(cityData){
+      setSubCities(cityData.subCities);
+    } else {
+      setSubCities([]);
+    }
+  }
+},[filterValues.city])
 
 
   return (
@@ -124,7 +129,8 @@ professionals
         </span>
   Rent
 </button>
-<button
+<Link href={"/projects"}>
+  <button
   onMouseEnter={() => setHovered("Project")}
   onMouseLeave={() => setHovered(null)}
   style={{
@@ -138,15 +144,14 @@ professionals
     transition: "background 0.3s ease-in-out",
   }}
   className="btn d-flex align-items-center"
-  onClick={() =>
-    setFilterValues({ ...filterValues, category: "Project" })
-  }
+  onClick={() => setFilterValues({ ...filterValues, category: "Project" })}
 >
    <span style={{marginRight:"6px"}} className={`check-icon ${filterValues.category==="Project" ? "checked" : "unchecked"}`}>
           {filterValues.category==="Project" ? "✔" : ""}
         </span>
   Project
 </button>
+</Link>
 
             </div>
           </div>
@@ -155,7 +160,7 @@ professionals
           <div className="row gx-2 gy-2 align-items-center">
 
             {/* Property Type */}
-            <div className="col-md-3 col-6">
+            <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2 d-flex align-items-center">
                 <i className="fas fa-home me-2 text-primary"></i>
                 <select
@@ -191,7 +196,7 @@ professionals
             </div>
 
             {/* Location */}
-            <div className="col-md-3 col-6">
+            <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2 d-flex align-items-center">
                 <i className="fas fa-map-marker-alt me-2 text-primary"></i>
                 <select
@@ -204,12 +209,28 @@ professionals
                             return <option value={filt} key={index}>{filt}</option>
                           })}
                         </select>
+                
+              </div>
+            </div>
+            <div className="col-lg-2 col-md-3 col-6">
+              <div className="border rounded p-2 d-flex align-items-center">
+                <i className="fas fa-map-marker-alt me-2 text-primary"></i>
+                <select
+                          className="form-select border-0"
+                          value={filterValues.location}
+                          onChange={(e) => setFilterValues({...filterValues, location:e.target.value })}
+                        >
+                          <option value="">Popular locations</option>
+                          {subCities.length===0 && <option value="" disabled>Select city first</option>}
+                          {subCities?.map((filt,index)=>{
+                            return <option value={filt} key={index}>{filt}</option>
+                          })}
+                        </select>
               </div>
             </div>
 
             {/* Area */}
-           {filterValues.category !=="Project" && (
-             <div className="col-md-2 col-6">
+             <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2">
                 <select
                   className="form-select border-0"
@@ -228,11 +249,9 @@ professionals
                 </select>
               </div>
             </div>
-           )}
 
             {/* Beds */}
-            {filterValues.category !== "Project" && (
-              <div className="col-md-2 col-6">
+              <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2">
                 <select
                   className="form-select border-0"
@@ -250,11 +269,8 @@ professionals
                 </select>
               </div>
             </div>
-            )}
 
-            {/* Price */}
-            {filterValues.category !== "Project" && (
-              <div className="col-md-2 col-6">
+              <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2">
                 <input
                   type="number"
@@ -269,24 +285,6 @@ professionals
                 />
               </div>
             </div>
-            )}
-            {filterValues.category==="Project" && (
-              <div className="col-md-2 col-6">
-              <div className="border rounded p-2">
-                <input
-                  type="text"
-                  className="form-control border-0"
-                  placeholder="Enter developer name"
-                  onChange={(e) =>
-                    setFilterValues({
-                      ...filterValues,
-                      developer: e.target.value,
-                    })
-                  }
-                />
-              </div>
-            </div>
-            )}
             
 
             {/* Search Button */}

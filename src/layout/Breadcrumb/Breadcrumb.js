@@ -19,7 +19,7 @@ const Breadcrumb = ({ right, page, agentName }) => {
         <div className={`breadcrumb-content ${right ? "breadcrumb-right" : ""}`}>
           <div>
             <h2>{page==="agent" ? agentName : page==="Reset" ? "Reset Password" : path && path[path.length - 1].replaceAll("-", " ")}</h2>
-            {!page && (
+            {/* {!page && (
               <nav aria-label="breadcrumb" className="theme-breadcrumb">
               <ol className="breadcrumb">
                 {path?.map((data, i) => (
@@ -33,7 +33,7 @@ const Breadcrumb = ({ right, page, agentName }) => {
                 ))}
               </ol>
             </nav>
-            )}
+            )} */}
           </div>
         </div>
       </Container>

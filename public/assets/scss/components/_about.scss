@@ -250,8 +250,8 @@
             }
         }
     }
-
-    .title-1 {
+.title-1-1 { 
+      text-align: start;
         h2 {
             margin-bottom: -3px;
         }
@@ -266,7 +266,24 @@
         &:hover{
             hr{
                 width: 150px;
-                
+            }
+        }
+    }
+    .title-1 { 
+        h2 {
+            margin-bottom: -3px;
+        }
+        hr{
+            width: 80px;
+            margin: 20px auto 0;
+            height: 2px;
+            color: #14a800;
+            opacity: 1;
+            transition: all 0.5s;
+        }
+        &:hover{
+            hr{
+                width: 150px;
             }
         }
     }
@@ -1257,7 +1274,7 @@ p {
 }
 
 .section-title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 25px;
 }
@@ -1587,7 +1604,7 @@ p {
 .filter-card {
   position: relative;
   border-radius: 14px;
-  padding: 25px;
+  padding: 25px; 
   background: #fff;
 }
 
@@ -1934,4 +1951,9 @@ $primary: #108a00;
   .filter-card {
     height: auto;
   }
+}
+@media (max-width:768px) {
+  .homepagefiltersecond{
+  margin-top: -60px;
+}
 }

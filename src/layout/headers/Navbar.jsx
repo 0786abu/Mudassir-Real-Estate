@@ -10,7 +10,8 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode"
 import { GetFavouritesData } from "@/redux-toolkit/action/favouritesAction";
-import { User } from "lucide-react";
+import { House, User } from "lucide-react";
+import { setTabb } from "@/redux-toolkit/slice/authSlice";
 
 export default function Navbar() { 
   const {sampleuser,logoutloading} = useSelector((state)=>state.Auth);
@@ -45,7 +46,19 @@ export default function Navbar() {
   checkTokenExpiry();
 }, [token]);
 const router = useRouter();
-
+const hanleCraetePropertyClick = ()=>{
+  if(sampleuser?.role){
+    if(sampleuser.role === "agent"){
+      router.push("/dashboard/agent-dashboard");
+      dispatch(setTabb("CreateProperty"));
+    } else if(sampleuser.role === "individual"){
+      router.push("/dashboard/user-dashboard");
+      dispatch(setTabb("CreateProperty"));
+    } else {
+      router.push("/admin/dashboard/createProperty");
+    } 
+}
+}
   useEffect(() => {
     if (typeof window !== "undefined") {
       const bootstrap = require("bootstrap/dist/js/bootstrap.bundle.min.js");
@@ -103,6 +116,8 @@ const router = useRouter();
 
           {/* Right section */}
           <div className="d-flex align-items-center gap-2 ms-auto order-lg-3 order-2">
+
+            {sampleuser?.role ? <button onClick={hanleCraetePropertyClick} className="btn loginn rounded-pill px-3 py-1"><House size={16}/> Create Property</button> : <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><House size={16}/> Create Property</button>}
             {!sampleuser && (
               <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><User size={16}/> Login</button>
             )}

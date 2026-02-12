@@ -33,7 +33,7 @@ const LogInCard = () => {
   }
   return (
     <div className='log-in theme-card'>
-      <div className='title-3 text-start'>
+      <div className='mb-2 text-start'>
         <h2>Let's Get In Touch</h2>
       </div>
       <Form onSubmit={handleSubmit}>

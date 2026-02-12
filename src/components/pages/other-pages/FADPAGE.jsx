@@ -133,7 +133,7 @@ const Faq = () => {
             </div>
             <div className='col-lg-6'>
               <div className='faq-questions'>
-                <div className='title-3 text-start'>
+                <div className='mb-2 text-start'>
                   <h2>Frequently ask question</h2>
                 </div>
 

@@ -13,7 +13,7 @@ const AdvancedSearch = ({ advancedSearchOpen, setAdvancedSearchOpen, value }) =>
     <div style={{zIndex:"1300"}} className={`left-sidebar filter-bottom-content ${advancedSearchOpen ? "d-block open" : "d-none"}  ${!mobile ? "position-absolute" : ""} `}>
       <h6 className='d-lg-none d-block text-end'>
         <a className='close-filter-bottom' onClick={() => setAdvancedSearchOpen(false)}>
-          Close filter
+          Close
         </a>
       </h6>
       <InputForm value={value} lg={4} sm={12} />

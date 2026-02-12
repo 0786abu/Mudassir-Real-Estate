@@ -14,7 +14,7 @@ export const popuarCities =[
     ]
 export const citiesLocationsData = [
 {
-"city": " Lahore",
+"city": "Lahore",
     "subCities": [
 
 "Abdul Sattar Edhi Road, Lahore",

@@ -10,7 +10,7 @@ const AboutUsSection = () => {
             
             <div className='user-about'>
               <Row>
-                <div className='col-xl-7 col-lg-5'>
+                {/* <div className='col-xl-7 col-lg-5'>
                   <div className='about-image'>
                     <div className='img-box side-left'>
                       <img src='/assets/images/about/6.webp' className='img-fluid' alt='' />
@@ -21,8 +21,8 @@ const AboutUsSection = () => {
                       <div className='side-effect'></div>
                     </div>
                   </div>
-                </div>
-                <div className='col-xl-5 col-lg-7'>
+                </div> */}
+                <div className='mx-auto' style={{maxWidth:"1024px"}}>
                   <div className='about-content'>
                     <h3>Who We Are</h3>
                     <p className='font-roboto'>

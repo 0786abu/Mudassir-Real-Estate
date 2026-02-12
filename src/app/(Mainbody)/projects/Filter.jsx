@@ -2,7 +2,7 @@
 
 import { citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -21,7 +21,9 @@ const ProjectFilter = () => {
   const searchedCity = params.get("city")
   const searchedLocation = params.get("location")
   const searchedDeveloper = params.get("developer")
+  const [subCities, setSubCities] = useState([]);
   const [city, setCity] = useState(searchedCity ? searchedCity : "");
+  const [isSubCity, setIsSubCity] = useState(null);
   const [location, setLocation] = useState(searchedLocation ? searchedLocation : "");
   const [type, setType] = useState(searchedType ? searchedType : "");
   const [developer, setDeveloper] = useState(searchedDeveloper ? searchedDeveloper : "");
@@ -42,11 +44,24 @@ const ProjectFilter = () => {
     }
     router.push(`/projects?${newparams.toString()}`);
   }
+  useEffect(()=>{
+    if(city !==""){
+      const cityData = citiesLocationsData.find(item=>item.city === city);
+      if(cityData && cityData.subCities && cityData.subCities.length > 0){
+        setSubCities(cityData.subCities);
+        setIsSubCity(null);
+      }else{
+        setIsSubCity("noSubCity");
+        setSubCities([]);
+      }
+    }
+  },[city])
   const resetFilter = ()=>{
     setType("");
     setCity("");
     setDeveloper("");
     setLocation("");
+    setIsSubCity(null);
     router.push("/projects")
   }
   return (
@@ -101,7 +116,18 @@ const ProjectFilter = () => {
                               })}
                   </Input>
                 </Col>
-                <Col lg="3" md="6">
+                {isSubCity === "noSubCity" ? (
+                  <Col lg="3" md="6">
+                  <label className="filter-label">Location</label>
+                  <Input
+                    type="text"
+                    placeholder="Enter location"
+                    value={location}
+                  onChange={(e)=>setLocation(e.target.value)}
+                  />
+                </Col>
+                ) : (
+                  <Col lg="3" md="6">
                   <label className="filter-label">Location</label>
                   <Input 
                   type="select"
@@ -109,17 +135,15 @@ const ProjectFilter = () => {
                   onChange={(e)=>setLocation(e.target.value)}
                   >
                     <option value={""}>select location</option>
-                      {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
-                    <optgroup key={index} label={item.city}>
-                      {item.subCities.map((sub,index) => (
-                        <option key={index} value={sub}>
-                          {sub}
+                    {subCities.length === 0 && isSubCity===null && <option>select city first</option>}
+                      {subCities.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
                         </option>
-                      ))}
-                    </optgroup>
                   ))}
                   </Input>
-                </Col>
+                     </Col>
+                )}
 
                 {/* Location */}
                 <Col lg="3" md="6">

@@ -19,14 +19,17 @@ import MyInquiries from "./MyInquiries";
 
 const BodyContent = ({ active }) => {
   const [activeTab, setActiveTab] = useState(active);
-  const {user,userloading,socialloading} = useSelector((state)=>state.Auth);
+  const {user,userloading,socialloading,tab} = useSelector((state)=>state.Auth);
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(MyProfileData());
   },[dispatch])
-
-
+  useEffect(()=>{
+    if(tab){
+      setActiveTab(tab);
+    }
+  },[tab])
   return (
     <section style={{minHeight:"60vh"}} className='user-dashboard small-section'>
       {(userloading && !user) ? (<ProfileLoader/>) : (

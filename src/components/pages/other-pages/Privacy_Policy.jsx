@@ -1,4 +1,3 @@
-"use client";
 import React, { Fragment } from "react";
 import { Container } from "reactstrap";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
@@ -12,7 +11,6 @@ const PrivacyPolicy = () => {
           <div className='row log-in'>
             <div className='col-xl-9 col-lg-8 col-12'>
               <div className='theme-card'>
-                <h2>Privacy policy</h2>
                 <div className='terms-wrap'>
                   <div className='terms-wrapper'>
                     <p>Welcome to PakEarth.com! Your privacy is important to us, and we are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our real estate ad posting website.</p>

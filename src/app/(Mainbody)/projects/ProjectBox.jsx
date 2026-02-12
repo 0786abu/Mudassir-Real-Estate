@@ -62,17 +62,19 @@ const Projectbox = ({ data, from }) => {
         </h6>
 
           <span className="font-roboto d-block">{data.location} </span>
-          <div className="d-flex my-3 align-items-center gap-2 flex-wrap">
+          {data.offering?.length > 0 && (
+            <div className="d-flex my-3 align-items-center gap-2 flex-wrap">
             <span>Offers: </span>
             <div className=" d-flex gap-2 flex-wrap">
             {data.offering.slice(0,4).map((offer,index)=>{
-                return <Badge key={index}>{offer}</Badge>
+                return <Badge key={index} color="dark">{offer}</Badge>
             })}
           </div>
           </div>
+          )}
           <div className="d-flex gap-2 my-2">
-            <Link href={`tel:${data.projectOwnerPhone}`}><Button size="sm" onMouseEnter={()=>setCallHover(true)} onMouseLeave={()=>setCallHover(false)} style={{background:callHover ? "#108a00" : "#14A800"}}><span><Phone/></span> <span>Call</span></Button></Link>
-            <Link href={`${data.projectOwnerWhatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800"}}><BsWhatsapp size={22}/></Button></Link>
+            <Link href={`tel:${data.projectOwnerPhone}`}><Button size="sm" onMouseEnter={()=>setCallHover(true)} onMouseLeave={()=>setCallHover(false)} style={{background:callHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Phone/></span></Button></Link>
+            <Link href={`${data.projectOwnerWhatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800",padding:"6px"}}><BsWhatsapp size={22}/></Button></Link>
           </div>
         <div className="property-btn d-flex">
           <span>{formatDatenew(data.createdAt)}</span>

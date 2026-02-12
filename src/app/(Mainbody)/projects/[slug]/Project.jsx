@@ -123,7 +123,7 @@ const PaymentPlanSlider =  {
           <h3>PKR {formatPK(project?.minItemPrice)} to {formatPK(project?.maxItemPrice)}</h3>
         </div>
       </div>
-      <section className="ratio_40 breadcrumb-section p-0 single-property-images position-relative">
+      <section className="ratio_40 breadcrumb-section p-0 single-property-images-2 position-relative">
         <div style={{position:"absolute",top:"20px",right:"20px",zIndex:"100",background:"black",color:"white",padding:"6px 15px",borderRadius:"5px",display:"flex",alignItems:"center"}}>
                       <Camera />
                       <span className="ms-2">{project?.images?.length || 5}</span>
@@ -141,14 +141,14 @@ const PaymentPlanSlider =  {
     <Row className="mtt">
       {/* left-Side */}
       <Col lg="8" >
-        <div className=" d-md-flex mt-lg-0 mt-5 justify-content-between gap-2 ">
+        <div className=" d-md-flex mt-lg-0 justify-content-between gap-4 ">
           <div className="d-flex align-items-center gap-2">
           <Earth style={{width:"30px",height:"30px",color:"#108a00"}}/>
           <div>
             <span style={{fontSize:"18px"}}>Offering</span>
             <div className="d-flex align-items-center flex-wrap gap-2">
               {project?.offering?.map((off,index)=>{
-                return <Badge color="success" key={index}>{off}</Badge>
+                return <Badge color="dark" key={index}>{off}</Badge>
               })}
             </div>
           </div>

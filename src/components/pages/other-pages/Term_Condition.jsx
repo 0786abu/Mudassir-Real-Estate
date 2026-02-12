@@ -1,5 +1,4 @@
-"use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Col, Container, Row } from "reactstrap";
 import Breadcrumb from "@/layout/Breadcrumb/Breadcrumb";
 
@@ -12,7 +11,6 @@ const TermsAndConditions = () => {
           <Row className='log-in'>
             <Col sm='10'>
               <div className='theme-card'>
-                <h2>Terms & Conditions</h2>
                 <div className='terms-wrap'>
                   <div className='terms-wrapper' id='intro'>
                     <h4>Introduction</h4>

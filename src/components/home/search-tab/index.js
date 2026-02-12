@@ -1,7 +1,6 @@
 import SalePropertySection from "../slider-filter-search/SaleProperty";
 import HomeBannerSection from "./HomeBanner";
 import CategorySection from "@/layout/SearchByCategory";
-import BudgetSection from "@/components/property/BudgetSection";
 import SponsoredProjects from "@/components/property/SponsoredProjects";
 import { Suspense } from "react";
 import ProfileLoader from "@/components/common/Loader";
@@ -26,7 +25,6 @@ const BodyContent = async() => {
         <SponsoredProjects/>
       </Suspense>
       <HomePageFilter/>
-      <BudgetSection/>
       {/* <BrandSection /> */}
     </>
   );

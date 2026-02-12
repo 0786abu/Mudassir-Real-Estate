@@ -69,7 +69,7 @@ export default function PricingPage() {
       <section className="hero text-center text-white py-5">
         <Container>
           <h1 className="fw-bold">Advertise With PakEarth</h1>
-          <p className="mt-3 text-white-50">
+          <p className="mt-3 text-white">
             Reach 100,000+ monthly real estate buyers, sellers & investors across Pakistan
           </p>
         </Container>
@@ -176,7 +176,7 @@ export default function PricingPage() {
 
       <style jsx>{`
         .hero {
-          background: linear-gradient(135deg, ${PRIMARY}, #0e7c00);
+          background: #14a800;
         }
         .pricing-card {
           border-radius: 16px;
@@ -194,7 +194,7 @@ export default function PricingPage() {
           position: absolute;
           top: -10px;
           right: 20px;
-          background: ${PRIMARY} !important;
+          background-color: #14a800 !important;
         }
         .price {
           color: ${PRIMARY};
