@@ -55,7 +55,7 @@ const hanleCraetePropertyClick = ()=>{
       router.push("/dashboard/user-dashboard");
       dispatch(setTabb("CreateProperty"));
     } else {
-      router.push("/admin/dashboard/createProperty");
+      router.push("/admin/dashboard/create-property");
     } 
 }
 }
