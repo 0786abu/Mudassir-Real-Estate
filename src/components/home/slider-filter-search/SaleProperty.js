@@ -3,14 +3,14 @@
  * @returns A section with a container, row, and col.
  */
 
-import { GetLatestProperties } from "@/utils/HomePageValues";
+import { GetLatestPropertiesforSale } from "@/utils/HomePageValues";
 import ChildSaleProeprty from "./ChildSaleProeprty";
 
 
 const SalePropertySection = async() => {
- const properties = await GetLatestProperties();
+ const properties = await GetLatestPropertiesforSale();
   return (
-    <ChildSaleProeprty value={properties}/>
+    <ChildSaleProeprty value={properties} category={"sale"}/>
   );
 };
 

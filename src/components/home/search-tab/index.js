@@ -8,6 +8,7 @@ import AdminProperties from "../slider-filter-search/AdminProperties";
 import SkeletonLoader from "@/components/common/SkeletonLoader";
 import HomePageFilter from "./HomePageFilter";
 import PropertyFilter from "../slider-filter-search/BoxFilterHOmePage";
+import RentPropertySection from "../slider-filter-search/RentProperties";
 
 const BodyContent = async() => {  
   return (
@@ -17,6 +18,9 @@ const BodyContent = async() => {
       <CategorySection/>
       <Suspense fallback={ <SkeletonLoader/>}>
         <SalePropertySection/>
+      </Suspense>
+      <Suspense fallback={ <SkeletonLoader/>}>
+        <RentPropertySection category="rent" />
       </Suspense>
       <Suspense fallback={ <SkeletonLoader/>}>
         <AdminProperties />

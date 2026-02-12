@@ -7,13 +7,21 @@ export const GetSponsoredProjects = async()=>{
   const {projects} = data;
   return projects
 }
-export const GetLatestProperties = async()=>{
+export const GetLatestPropertiesforSale = async()=>{
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property`,{
     cache:"no-cache"
   });
   const data = await res.json();
-  const {properties} = data;
-  return properties
+  const {Saleproperties} = data;
+  return Saleproperties
+}
+export const GetLatestPropertiesforRent = async()=>{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property`,{
+    cache:"no-cache"
+  });
+  const data = await res.json();
+  const {Rentproperties} = data;
+  return Rentproperties
 }
 export const GetFeaturedProperties = async()=>{
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/property/FeaturedProperties`,{

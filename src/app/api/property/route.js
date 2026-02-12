@@ -10,14 +10,17 @@ export async function GET(req)  {
   try {
     await DataBase();
 
-    const properties = await Property.find({isApproved:"Approved"},{title:1,description:1,city:1,beds:1,rooms:1,baths:1,squareFits:1,slug:1,images:1,price:1,type:1,category:1,areaSize:1})
+    const Saleproperties = await Property.find({isApproved:"Approved",category:"Sale"},{title:1,description:1,city:1,beds:1,rooms:1,baths:1,squareFits:1,slug:1,images:1,price:1,type:1,category:1,areaSize:1})
+      .sort({ createdAt: -1 }) // newest first
+      .limit(4); // optional
+    const Rentproperties = await Property.find({isApproved:"Approved",category:"Rent"},{title:1,description:1,city:1,beds:1,rooms:1,baths:1,squareFits:1,slug:1,images:1,price:1,type:1,category:1,areaSize:1})
       .sort({ createdAt: -1 }) // newest first
       .limit(4); // optional
       
     return NextResponse.json({
       success: true,
-      count: properties.length,
-      properties,
+      Saleproperties,
+      Rentproperties,
     },{status:200});
   } catch (error) {
     NextResponse.json({

@@ -7,7 +7,7 @@ const SponsoredProjects = async() => {
   const projects = await GetSponsoredProjects();
   return (
 
-<section className="projects-section py-5">
+<section className="projects-section pt-4 pb-2">
   <div className="container">
     <div className="d-flex justify-content-between align-items-center">
       <h2 className="section-title text-black" style={{fontSize:"22px"}}>Sponsored Projects</h2>

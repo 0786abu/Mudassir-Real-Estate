@@ -16,7 +16,7 @@ const HomePageFilter = () => {
   }, [selectedFilterCategory])
 
   return (
-    <div className="container my-5" style={{ maxWidth: "1280px" }}>
+    <div className="container my-5" style={{ maxWidth: "1400px" }}>
       <h2 className="fs-5 fw-semibold mb-2">Popular Locations</h2>
 
        <div className=" border-bottom pb-1">

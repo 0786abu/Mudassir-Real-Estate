@@ -4,14 +4,14 @@ import { LatestForSale, Sale } from "@/constValues/constValues";
 import PropertyBoxOne from "@/components/elements/propertyBoxs/PropertyBoxOne";
 import Link from "next/link";
 
-const ChildSaleProeprty = ({from,value,properties}) => {
+const ChildSaleProeprty = ({from,value,properties,category}) => {
   return (
-    <section style={{marginTop:from==="adminProperties" ? "-80px" : undefined}} className='property-section slick-between slick-shadow'>
+    <section style={{marginTop: category==="sale" ? "-40px" : "-120px"}} className='property-section slick-between slick-shadow'>
       <Container>
         <Row className=' ratio_landscape'>
           <Col>
-            <div className='title-1-1' style={{marginBottom:"50px"}}>
-              <h2>{from==="adminProperties" ? "Sponsored Properties" : LatestForSale}</h2>
+            <div className={from==="adminProperties" ? "title-1-1" : "title-1-2"} style={{marginBottom:"50px"}}>
+              <h2>{from==="adminProperties" ? "Sponsored Properties" : category==="rent" ? "Latest For Rent" : LatestForSale}</h2>
               <hr />
             </div>
               {from==="adminProperties" ? (
@@ -20,7 +20,7 @@ const ChildSaleProeprty = ({from,value,properties}) => {
                 </div>
               ) : (
                 <div className=" d-flex justify-content-end" style={{marginTop:"-80px",marginBottom:"40px"}}>
-                  <Link href="/properties?isLatest=latest" className="view-all">View All →</Link>
+                  <Link href={category==="sale" ? "/properties?isLatest=latest&category=Sale" : "/properties?isLatest=latest&category=Rent"} className="view-all">View All →</Link>
                 </div>
               )}
             <Row className='listing-hover-property'>
