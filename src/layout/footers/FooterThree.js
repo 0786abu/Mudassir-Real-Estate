@@ -75,7 +75,8 @@ const FooterThree = () => {
                       </form>
                     </div>
                   </div>
-                      <div className="d-flex align-items-center gap-2">
+                      <div className="d-sm-block d-flex justify-content-center align-items-center">
+                        <div className="d-sm-flex m-auto align-items-center gap-2">
                         <div>
                          <ul className="agent-social">
    <li>
@@ -116,6 +117,7 @@ const FooterThree = () => {
                       </div>
                       <div className="barcode">
                         <Image src={"/assets/images/barcode.png"} fill/>
+                      </div>
                       </div>
                       </div>
                 </Col>

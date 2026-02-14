@@ -74,21 +74,11 @@ useEffect(()=>{
     position:"relative"
   }}
     className="home-banner ">
-<div className="main-gif-banner">
-  
-    <div className="gif-banner">
-      <Image
-        src="https://res.cloudinary.com/dmrk0ry6x/image/upload/v1771087032/ad_here_kknqgv.gif"
-        alt="Loading..."
-        fill
-        // style={{ objectFit: "cover" }}
-      />
-    </div>
-</div>
-      <Container>
+
+      <Container style={{marginBottom:"40px"}}>
 
         {/* ------- HERO TITLE (AUTO-STYLING KE LIYE AS-IT-IS) ------- */}
-        <div className="text-center mb-4 mt-5">
+        <div className="text-center mb-4 ">
           <h2 className="fw-bold">
             Search the best properties for {filterValues.category==="Sale" ? "Sale" : filterValues.category==="Rent" ? "Rent" : "Project"} in Pakistan
           </h2>
@@ -405,6 +395,17 @@ useEffect(()=>{
           </div>
         </div>
       </Container>
+      <div className="main-gif-banner">
+  
+    <div className="gif-banner">
+      <Image
+        src="https://res.cloudinary.com/dmrk0ry6x/image/upload/v1771087032/ad_here_kknqgv.gif"
+        alt="Loading..."
+        fill
+        // style={{ objectFit: "cover" }}
+      />
+    </div>
+</div>
     </section>
   );
 };
