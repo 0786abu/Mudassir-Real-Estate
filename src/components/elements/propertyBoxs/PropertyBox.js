@@ -109,7 +109,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
       </div>
 
       <div className="property-details">
-        <span className="font-roboto">{data.propertyID.location} </span>
+        <span style={{fontSize:"12px"}} className="font-roboto">{data.propertyID.location} </span>
 
         <Link href={`/properties/${data.propertyID.slug}`}>
           <h3>{data.propertyID.title}</h3>
@@ -135,7 +135,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           <div className="d-flex gap-2">
             <Link href={`mailto:${data.savedBy.email}`}><button className="listing-social-icon-group"><span><Mail className="sub-listing-icon"/></span></button></Link>
             {data.savedBy.whatsappAPI && <Link href={`${data.savedBy.whatsappAPI}`}><button className="listing-social-icon-group"><BsWhatsapp size={22} className="sub-listing-icon"/></button></Link>}
-            <Link href={`tel:${data.savedBy.phone}`}><button className="listing-social-icon-group"><span className="sub-listing-icon"><Phone className="sub-listing-icon"/> Call</span></button></Link>
+            <Link href={`tel:${data.savedBy.phone}`}><button className="listing-social-icon-group"><span className="sub-listing-span"><Phone className="sub-listing-icon"/> Call</span></button></Link>
           </div>
         </div>
       </div>
@@ -225,7 +225,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           <li><Ruler size={12} className="me-1"/>: {data.squareFits || 5}</li>
         </ul>
 
-          <span className="font-roboto">{data.location} </span>
+          <span style={{fontSize:"12px"}} className="font-roboto">{data.location} </span>
         <div className="property-btn d-flex">
           <span style={{fontSize:"11px"}}>{formatDistanceToNowStrict(new Date(data.createdAt), { addSuffix: true })}</span>
            {fromPanel ? (
@@ -250,7 +250,7 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
         <div className=" d-flex align-items-center gap-1">
             <Link href={`mailto:${data.createdBy.email}`}><button className="listing-social-icon-group"><span><Mail className="sub-listing-icon"/></span></button></Link>
             {data.createdBy.whatsappAPI && <Link href={`${data.createdBy.whatsappAPI}`}><button className="listing-social-icon-group"><BsWhatsapp className="sub-listing-icon" size={22}/></button></Link>}
-            <Link href={`tel:${data.createdBy.phone}`}><button className="listing-social-icon-group"><span className="sub-listing-icon"><Phone className="sub-listing-icon"/> Call</span></button></Link>
+            <Link href={`tel:${data.createdBy.phone}`}><button className="listing-social-icon-group"><span className="sub-listing-span"><Phone className="sub-listing-icon"/> Call</span></button></Link>
           </div>
       )}
         </div>

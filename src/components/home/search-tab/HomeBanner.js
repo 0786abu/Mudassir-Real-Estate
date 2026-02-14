@@ -1,12 +1,14 @@
 "use client"
 import { setSelectedFilterCategory } from "@/redux-toolkit/slice/propertySlice";
 import { areaSizes, bedsFilterData, citiesLocationsData, FLATTENED_BUDGET_FILTERS, popuarCities, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
+import { formatPK } from "@/utils/Formatter";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { getTrackBackground, Range } from "react-range";
 import { useDispatch } from "react-redux";
-import { Container, Input } from "reactstrap";
+import { Button, Container, Input } from "reactstrap";
 
 const HomeBannerSection = () => {
   const router = useRouter();
@@ -15,6 +17,7 @@ const HomeBannerSection = () => {
   const dispatch = useDispatch();
   const [subCities, setSubCities] = useState([]);
 
+
   const [filterValues, setFilterValues] = useState({
     category:"Sale",
     type: "",
@@ -22,7 +25,6 @@ const HomeBannerSection = () => {
     location:"",
     areaSize: "",
     beds: "",
-    budget: "",
     developer:""
   });
   const [isSubCity, setIsSubCity] = useState(null);
@@ -34,23 +36,16 @@ const HomeBannerSection = () => {
   if (filterValues.city) query.set("city", filterValues.city);
   if (filterValues.areaSize) query.set("areaSize", filterValues.areaSize);
   if (filterValues.beds) query.set("beds", filterValues.beds);
-  if (filterValues.minPrice) query.set("minPrice", filterValues.minPrice);
+   if (priceRange[0]>0) query.set("minPrice", priceRange[0]);
+  if (priceRange[1]) query.set("maxPrice", priceRange[1]);
   if (filterValues.developer) query.set("developer", filterValues.developer);
-  if(filterValues.budget){
-    const [min, max] = filterValues.budget.split("-").map(Number);
-
-    if(min !== null && min !== undefined && !isNaN(min)) {
-      query.set("minPrice", min);
-    }
-
-    if(max !== null && max !== undefined && !isNaN(max)) {
-      query.set("maxPrice", max);
-    }
-
-  }
 
     router.push(`/properties?${query.toString()}`)
 };
+const MIN = 0;
+const MAX = 1000000000;
+const [showBudget, setShowBudget] = useState(false);
+const [priceRange, setPriceRange] = useState([ MIN,MAX]);
 useEffect(()=>{
   dispatch(setSelectedFilterCategory(filterValues.category))
 },[filterValues.category])
@@ -93,7 +88,7 @@ useEffect(()=>{
       <Container>
 
         {/* ------- HERO TITLE (AUTO-STYLING KE LIYE AS-IT-IS) ------- */}
-        <div className="text-center mb-4">
+        <div className="text-center mb-4 mt-5">
           <h2 className="fw-bold">
             Search the best properties for {filterValues.category==="Sale" ? "Sale" : filterValues.category==="Rent" ? "Rent" : "Project"} in Pakistan
           </h2>
@@ -302,25 +297,96 @@ useEffect(()=>{
                       />
                       </div>
                       </div> */}
-            <div className="col-lg-2 col-md-3 col-6">
-              <div className=" border rounded-2 p-2">
-                <select 
-                className="form-select border-0"
-                value={filterValues.budget}
-                onChange={(e)=>setFilterValues({...filterValues, budget:e.target.value})}
-              >
-                <option value={""}>select budget</option>
-                {FLATTENED_BUDGET_FILTERS.map((item, index) => (
-                  <option 
-                    key={index} 
-                    value={`${item.minPrice}-${item.maxPrice}`} // backend ko send karne ke liye
-                  >
-                   {item.label}
-                  </option>
-                ))}
-              </select>
-              </div>
-            </div>
+                       <div className="position-relative col-lg-2 col-md-3 col-6">
+                      
+                        {/* Budget Button */}
+                        <div
+                          className="budget-trigger"
+                          style={{padding:"14px"}}
+                          onClick={() => setShowBudget(!showBudget)}
+                        >
+                          Rs. {formatPK(priceRange[0])} - Rs. {formatPK(priceRange[1])}
+                        </div>
+                      
+                        {/* Dropdown */}
+                        {showBudget && (
+                          <div className="budget-dropdown shadow">
+                            <label className="form-label">
+                              Price: Rs. {formatPK(priceRange[0])} - Rs. {formatPK(priceRange[1])}
+                            </label>
+                      
+                            <Range
+                                step={100}
+                                min={MIN}
+                                max={MAX}
+                                values={priceRange}
+                                onChange={(values) => setPriceRange(values)} // live update while dragging
+                                renderTrack={({ props, children }) => {
+                                  const { key, ...restProps } = props;
+                                  return (
+                                  <div
+                                  key={key}
+                                    {...restProps}
+                                    style={{
+                                      ...props.style,
+                                      height: "6px",
+                                      width: "100%",
+                                      borderRadius: "4px",
+                                      background: getTrackBackground({
+                                        values: priceRange,
+                                        colors: ["#ccc", "#14a800", "#ccc"],
+                                        min: MIN,
+                                        max: MAX,
+                                      }),
+                                      alignSelf: "center",
+                                    }}
+                                  >
+                                    {children}
+                                  </div>
+                                )
+                                }}
+                                renderThumb={({ props }) => {
+                                  const { key, ...restProps } = props;
+                                  return (
+                                  <div
+                                    key={key}
+                                    {...restProps}
+                                    style={{
+                                      position:"absolute",
+                                      height: "20px",
+                                      width: "20px",
+                                      borderRadius: "50%",
+                                      backgroundColor: "#14a800",
+                                      display: "flex",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        height: "6px",
+                                        width: "6px",
+                                        borderRadius: "50%",
+                                        backgroundColor: "white",
+                                      }}
+                                    />
+                                  </div>
+                                )
+                                }}
+                              />
+                      
+                            <div className="text-end mt-3">
+                              <Button
+                                size="sm"
+                                color="success"
+                                onClick={() => setShowBudget(false)}
+                              >
+                                Apply
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
             
 
             {/* Search Button */}

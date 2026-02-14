@@ -1980,7 +1980,7 @@ $primary: #108a00;
   margin: 0px auto;
   top: 0px;
   width: 100%;
-  height: 100px;
+  height: 190px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -2000,9 +2000,41 @@ $primary: #108a00;
     color: #14a800;
   }
 }
+.sub-listing-span{
+  font-weight: bold !important;
+  color: #108a00 !important;
+}
 .listing-social-icon-group:hover{
   background-color: #14a800;
   .sub-listing-icon{
     color: white;
   }
+  .sub-listing-span{
+    color: white !important;
+  }
+}
+.budget-trigger {
+  border: 1px solid #ced4da;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #fff;
+}
+
+.budget-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.barcode{
+   position: relative;
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
 }

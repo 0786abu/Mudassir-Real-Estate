@@ -74,7 +74,10 @@ const FooterThree = () => {
                         </div>
                       </form>
                     </div>
-                       <ul className="agent-social">
+                  </div>
+                      <div className="d-flex align-items-center gap-2">
+                        <div>
+                         <ul className="agent-social">
    <li>
     <a href={"#"}>
       {/* <i className="fab fa-facebook-f"></i> */}
@@ -106,11 +109,15 @@ const FooterThree = () => {
     </a>
   </li>
 </ul>
-                  </div>
                   <div className="d-flex gap-2">
                     <Image src={"/assets/images/app-store.svg"} alt="app store icon" width={150} height={60} />
                     <Image src={"/assets/images/play-store.svg"} alt="play store icon" width={150} height={60} />
                   </div>
+                      </div>
+                      <div className="barcode">
+                        <Image src={"/assets/images/barcode.png"} fill/>
+                      </div>
+                      </div>
                 </Col>
               </Row>
             </Col>
