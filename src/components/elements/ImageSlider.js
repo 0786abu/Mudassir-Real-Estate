@@ -11,13 +11,13 @@ const ImageSlider = ({ images }) => {
     dots: true,
     infinite: images?.length>1 ? true : false,
     speed: 500,
-    arrows: true,
+    // arrows: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
   };
   return (
-      <Slider className="property-slider" {...propertySlider}>
+      <Slider className="property-slider"  {...propertySlider}>
         {images?.map((data, i) => (
           <div key={i}>
             <div>

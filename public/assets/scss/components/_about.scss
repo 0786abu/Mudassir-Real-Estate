@@ -1774,7 +1774,7 @@ p {
   background: #e53935;
   color: #fff;
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   border-radius: 6px;
 }
@@ -1904,6 +1904,17 @@ $primary: #108a00;
 .loginn{
   background-color: #14a800;
   color: white;
+  border: none;
+}
+.loginn-2{
+  background-color: #14a800;
+  color: white;
+  border: none;
+}
+.loginn-2:hover{ 
+  background-color: white;
+  color: black;
+  box-shadow: 1px 1px 4px 2px #14a800;
   border: none;
 }
 .loginn:hover{

@@ -36,7 +36,6 @@ export async function POST(req) {
 const bankDetails = rawBankDetails
   ? JSON.parse(rawBankDetails)
   : undefined;
-    console.log(bankDetails)
     if(!propertyID){
         return NextResponse.json(
         { success: false, message: "PropertyID required, please try again" },
@@ -81,7 +80,6 @@ const bankDetails = rawBankDetails
       },
       createdByModel:isUser?.role==="agent" ? "Agent" : "User"
     };
-    console.log("paymentData",paymentData)
 
     const payment = await Payment.create(paymentData);
           const Notitype= "payment_created"
@@ -97,7 +95,6 @@ const bankDetails = rawBankDetails
     });
 
   } catch (error) {
-    console.log(error)
     return NextResponse.json(
       { success: false, message:error.message},
       { status: 500 }

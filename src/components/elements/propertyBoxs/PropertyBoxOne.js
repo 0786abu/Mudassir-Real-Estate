@@ -13,10 +13,6 @@ const PropertyBoxOne = ({ data }) => {
         <Img src={data?.images[0]?.url} className="bg-img" />
 
         <span className="tag">{data?.type}</span>
-
-        <div className="price-badge">
-         PKR {formatPK(data?.price)}
-        </div>
       </div>
 
       <div className="card-body">
@@ -26,6 +22,9 @@ const PropertyBoxOne = ({ data }) => {
           </Link>
         </h4>
 
+        <p className="price rounded-2 d-inline-block" style={{fontSize:"16px"}}>
+         {formatPK(data?.price)}{" "}<span style={{fontSize:"11px"}}>PKR</span>
+        </p>
         <p className="location">
           {data?.city}, {data?.location}
         </p>

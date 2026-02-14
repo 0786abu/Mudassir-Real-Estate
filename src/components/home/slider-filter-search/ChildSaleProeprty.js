@@ -11,7 +11,7 @@ const ChildSaleProeprty = ({from,value,properties,category}) => {
         <Row className=' ratio_landscape'>
           <Col>
             <div className={from==="adminProperties" ? "title-1-1" : "title-1-2"} style={{marginBottom:"50px"}}>
-              <h2>{from==="adminProperties" ? "Sponsored Properties" : category==="rent" ? "Latest For Rent" : LatestForSale}</h2>
+              <h2>{from==="adminProperties" ? "Sponsored Properties" : category==="rent" ? "Latest Properties For Rent" : LatestForSale}</h2>
               <hr />
             </div>
               {from==="adminProperties" ? (

@@ -29,7 +29,6 @@ const BodyContent = async() => {
         <SponsoredProjects/>
       </Suspense>
       <HomePageFilter/>
-      {/* <BrandSection /> */}
     </>
   );
 };

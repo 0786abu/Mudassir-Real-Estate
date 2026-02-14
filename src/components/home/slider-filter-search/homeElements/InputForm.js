@@ -3,7 +3,7 @@
 import { citiesLocationsData, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
 import { formatPK } from "@/utils/Formatter";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Range, getTrackBackground } from "react-range";
 
 export default function FilterSidebar() {
@@ -19,6 +19,26 @@ export default function FilterSidebar() {
   const [type, setType] = useState(searchedType ? searchedType : "");
   const [city, setCity] = useState(searchedCity ? searchedCity : "");
   const [location, setLocation] = useState("");
+  const [subCities, setSubCities] = useState([]);
+  const [isSubCity, setIsSubCity] = useState(null);
+
+   useEffect(() => {
+    if (city) {
+      const cityData = citiesLocationsData.find((item) => item.city === city);
+      if (cityData && Array.isArray(cityData.subCities)) {
+        setSubCities(cityData.subCities);
+        setIsSubCity(null);
+      } else {
+        setSubCities([]);
+        setIsSubCity("no-subcities");
+        setLocation("");
+      }
+    } else {
+      setSubCities([]);
+      setIsSubCity(null);
+      setLocation("");
+    }
+  }, [city]);
 
   // Dynamic min/max for slider
   const MIN = 0;
@@ -68,6 +88,17 @@ export default function FilterSidebar() {
 
     router.push(`/properties?${newParams.toString()}`);
   };
+  const debounceTimeout = useRef(null);
+
+const handleDebouncedInput = (value) => {
+  setLocation(value); // Update local state immediately for UI
+
+  if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+
+  debounceTimeout.current = setTimeout(() => {
+    updateFilter("location", value); // Apply filter after 500ms of inactivity
+  }, 2000); // 500ms debounce delay
+};
 
   const resetFilters = () => {
     setCategory("");
@@ -152,7 +183,16 @@ export default function FilterSidebar() {
       {/* Location */}
       <div className="mb-3">
         {/* <label className="form-label">Location</label> */}
-        <select
+        {isSubCity === "no-subcities" ? (
+          <input
+            type="text"
+            placeholder="Enter location"
+            value={location}
+            onChange={(e) => updateFilter("location", e.target.value)}
+            style={{outline:"none",width:"100%",padding:"8px",borderRadius:"4px",border:"0.5px solid #ced4da"}}
+          />
+        ) : (
+          <select
   style={{
     outline: "none",
     width: "100%",
@@ -161,20 +201,18 @@ export default function FilterSidebar() {
     border: "0.5px solid #ced4da"
   }}
   value={location}
-  onChange={(e) => updateFilter("location", e.target.value)}
+  onChange={(e)=>handleDebouncedInput(e.target.value)}
 >
   <option value="">Select Location</option>
+  {subCities.length === 0 && <option>select city first</option>}
 
-  {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
-    <optgroup key={index} label={item.city}>
-      {item.subCities.map((sub,index) => (
-        <option key={index} value={sub}>
-          {sub}
+  {subCities.map((item,index) => (
+        <option key={index} value={item}>
+          {item}
         </option>
-      ))}
-    </optgroup>
   ))}
 </select>
+        )}
       </div>
 
       {/* Dual Price Slider */}

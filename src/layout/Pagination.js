@@ -28,7 +28,6 @@ const Pagination = ({ totalPages, currentPage, searchParams, from, agentID }) =>
       }
     }
     setLoading(false);
-    console.log(page)
   };
 
   // Generate pages array

@@ -14,6 +14,7 @@ import { useState } from "react";
 import PropertyLabel from "@/components/elements/PropertyLabel";
 import { Badge, Button } from "reactstrap";
 import { BsWhatsapp } from "react-icons/bs";
+import { formatDistanceToNowStrict } from "date-fns";
 const ImageSlider = dynamic(() => import("../../../components/elements/ImageSlider"),{ssr:false});
 
 export const formatDatenew = (dateString) => {
@@ -53,12 +54,11 @@ const Projectbox = ({ data, from }) => {
       <div className="property-details" style={{width:"100%"}}>
 
         <Link href={`/properties/${data.slug}`} className="property-card-title">
-          <h3>{data.projectTitle}</h3>
+          <h3 style={{fontSize:"18px"}}>{data.projectTitle}</h3>
         </Link>
 
-        <h6 style={{fontSize:"13px"}}>
-          PKR {" "}
-          {formatPK(data.minItemPrice)} - {formatPK(data.maxItemPrice)}
+        <h6 style={{fontSize:"16px"}}>
+          {formatPK(data.minItemPrice)}{" "}<span style={{fontSize:"10px"}}>PKR</span> - {formatPK(data.maxItemPrice)}{" "}<span style={{fontSize:"10px"}}>PKR</span>
         </h6>
 
           <span className="font-roboto d-block">{data.location} </span>
@@ -77,7 +77,7 @@ const Projectbox = ({ data, from }) => {
             <Link href={`${data.projectOwnerWhatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800",padding:"6px"}}><BsWhatsapp size={22}/></Button></Link>
           </div>
         <div className="property-btn d-flex">
-          <span>{formatDatenew(data.createdAt)}</span>
+          <span style={{fontSize:"11px"}}>{formatDistanceToNowStrict(new Date(data.createdAt), { addSuffix: true })}</span>
         <Link href={`${from==="admin" ? `/admin/dashboard/allProjects/${data.slug}` : `/projects/${data.slug}`}`}>
           <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
               background:isHover ? "#14A800" : "",

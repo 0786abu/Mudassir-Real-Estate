@@ -18,6 +18,10 @@ import { useState } from "react";
 import AddToWhishList from "../AddToWhishList";
 import { setSelectedSlug } from "@/redux-toolkit/slice/propertySlice";
 import { useRouter } from "next/navigation";
+import { Button } from "reactstrap";
+import { Bath, Bed, Mail, Phone, Ruler } from "lucide-react";
+import { BsWhatsapp } from "react-icons/bs";
+import { formatDistanceToNowStrict } from 'date-fns';
 const ImageSlider = dynamic(() => import("../ImageSlider"),{ssr:false});
 
 export const formatDatenew = (dateString) => {
@@ -34,9 +38,10 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
   const router = useRouter();
   const {addfavloading,favProperties} = useSelector((state)=>state.Favourites);
   const [itemID, setItemID] = useState("");
-  const [isHover, setIsHover] = useState(false);
-  const [hoverIndex, setHoverIndex] = useState(null);
-
+    const [isHover, setIsHover] = useState(false);
+  const [callHover, setCallHover] = useState(false);
+  const [WhatsAppHover, setWhatsAppHover] = useState(false);
+  const [emailHover, setEmailHover] = useState(false);
   
   const handleRemoveFav = (id)=>{
     setItemID(id)
@@ -85,12 +90,19 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           <ImageSlider images={data.propertyID.images} />
         {/* )} */}
 
-        <div className="labels-left">
+        <div className="labels-left d-md-block d-none">
+          <PropertyLabel labels={data.propertyID.type} />
+        </div>
+        <div className="labels-left-2 d-md-none d-block">
           <PropertyLabel labels={data.propertyID.type} />
         </div>
         
 
-            <div className="seen-data">
+            <div className="seen-data d-md-block d-none">
+              <Camera />
+              <span>{data.propertyID.images?.length || 5}</span>
+            </div>
+            <div className="seen-data-2 d-md-none d-block">
               <Camera />
               <span>{data.propertyID.images?.length || 5}</span>
             </div>
@@ -103,30 +115,28 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           <h3>{data.propertyID.title}</h3>
         </Link>
 
-        <h6>
-          PKR {" "}
-          {formatPK(data.propertyID.price)}
+        <h6 style={{fontSize:"16px"}}>
+           {formatPK(data.propertyID.price)}{" "}<span style={{fontSize:"10px"}}>PKR</span>
         </h6>
 
-        <p className="font-roboto">
-          {data.propertyID.details ||
+        <p className="font-roboto line-clamp-2">
+          {data.propertyID.description ||
             "This home provides wonderful entertaining spaces with a chef kitchen opening..."}
         </p>
 
         <ul>
-          <li>Bed: {data.propertyID.beds || 5}</li>
-          <li>Bath: {data.propertyID.baths || 5}</li>
-          <li>Sq Ft: {data.propertyID.squareFits || 5}</li>
+          <li><Bed size={12} className="me-1"/> : {data.propertyID.beds || 5}</li>
+          <li><Bath size={12} className="me-1"/> : {data.propertyID.baths || 5}</li>
+          <li><Ruler size={12} className="me-1"/> : {data.propertyID.squareFits || 5}</li>
         </ul>
 
         <div className="property-btn d-flex">
-          <span>{formatDatenew(data.propertyID.createdAt)}</span>
-          <Link href={`/properties/${data.propertyID.slug}`}>
-            <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
-              background:isHover ? "#14A800" : "",
-              color:isHover ? "#108A00" : ""
-            }} className="btn rounded-pill border border-1">Details</button>
-          </Link>
+          <span>{formatDistanceToNowStrict(new Date(data.propertyID.createdAt), { addSuffix: true })}</span>
+          <div className="d-flex gap-2">
+            <Link href={`tel:${data.savedBy.phone}`}><Button size="sm" onMouseEnter={()=>setCallHover(true)} onMouseLeave={()=>setCallHover(false)} style={{background:callHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Phone style={{color:"white"}}/></span></Button></Link>
+            <Link href={`mailto:${data.savedBy.email}`}><Button size="sm" onMouseEnter={()=>setEmailHover(true)} onMouseLeave={()=>setEmailHover(false)} style={{background:emailHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Mail style={{color:"white"}}/></span></Button></Link>
+            {data.savedBy.whatsappAPI && <Link href={`${data.savedBy.whatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800",padding:"6px"}}><BsWhatsapp size={22} style={{color:"white"}}/></Button></Link>}
+          </div>
         </div>
       </div>
     </div>
@@ -139,7 +149,10 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
           <ImageSlider images={data.images} />
         {/* )} */}
 
-        <div className="labels-left" style={{top:"20px"}}>
+        <div className="labels-left d-md-block d-none">
+          <PropertyLabel labels={data.type} />
+        </div>
+        <div className="labels-left-2 d-md-none d-block">
           <PropertyLabel labels={data.type} />
         </div>
         {(fromPanel==="user-panel") && (
@@ -169,10 +182,13 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
         )}
 
             {!fromPanel && (
-              <div className="seen-data">
-              <Camera />
-              <span>{data.images?.length || 5}</span>
-            </div>
+              <><div className="seen-data d-md-block d-none">
+                  <Camera />
+                  <span>{data.images?.length || 5}</span>
+                </div><div className="seen-data-2 d-md-none d-block">
+                    <Camera />
+                    <span>{data.images?.length || 5}</span>
+                  </div></>
             )}
             <div className="overlay-property-box">
               {/* <a className="effect-round" title="Compare">
@@ -184,35 +200,34 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
             </div>
       </div>
 
-      <div className="property-details">
+      <div className="property-details" style={{width:"100%"}}>
 
         <Link href={`/properties/${data.slug}`} className="property-card-title">
           <h3>{data.title}</h3>
         </Link>
 
-        <h6 style={{fontSize:"13px"}}>
-          PKR {" "}
-          {formatPK(data.price)}
+        <h6 style={{fontSize:"16px"}}>
+          {formatPK(data.price)}{" "}<span style={{fontSize:"10px"}}>PKR</span>
         </h6>
 
-        <p className="font-roboto">
-          {data.details ||
+        <p className="font-roboto line-clamp-2">
+          {data.description ||
             "This home provides wonderful entertaining spaces with a chef kitchen opening..."}
         </p>
 
         <ul>
           {data.beds>0 && (
-            <li>Bed: {data.beds || 5}</li>
+            <li><Bed size={12} className="me-1"/>: {data.beds || 5}</li>
           )}
           {data.baths>0 && (
-            <li>Bath: {data.baths || 5}</li>
+            <li><Bath size={12} className="me-1"/>: {data.baths || 5}</li>
           )}
-          <li>Sq Ft: {data.squareFits || 5}</li>
+          <li><Ruler size={12} className="me-1"/>: {data.squareFits || 5}</li>
         </ul>
 
           <span className="font-roboto">{data.location} </span>
         <div className="property-btn d-flex">
-          <span>{formatDatenew(data.createdAt)}</span>
+          <span style={{fontSize:"11px"}}>{formatDistanceToNowStrict(new Date(data.createdAt), { addSuffix: true })}</span>
            {fromPanel ? (
         <button
           onClick={from==="admin" ? handleAdminViewDetail : handleViewDetails}
@@ -232,12 +247,11 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
             }} className="btn rounded-pill border border-1">Details</button>
         </Link>
       ) : (
-        <Link href={`/properties/${data.slug}`}>
-          <button onMouseEnter={()=>setIsHover(true)} onMouseLeave={()=>setIsHover(false)} style={{
-              background:isHover ? "#14A800" : "",
-              color:isHover ? "white" : "black"
-            }} className="btn rounded-pill border border-1">Details</button>
-        </Link>
+        <div>
+            <Link href={`tel:${data.createdBy.phone}`}><Button size="sm" onMouseEnter={()=>setCallHover(true)} onMouseLeave={()=>setCallHover(false)} style={{background:callHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Phone style={{color:"white"}}/></span></Button></Link>
+            <Link href={`mailto:${data.createdBy.email}`}><Button size="sm" onMouseEnter={()=>setEmailHover(true)} onMouseLeave={()=>setEmailHover(false)} style={{background:emailHover ? "#108a00" : "#14A800",padding:"6px",margin:"0 4px"}}><span><Mail style={{color:"white"}}/></span></Button></Link>
+            {data.createdBy.whatsappAPI && <Link href={`${data.createdBy.whatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800",padding:"6px"}}><BsWhatsapp style={{color:"white"}} size={22}/></Button></Link>}
+          </div>
       )}
         </div>
       </div>

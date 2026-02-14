@@ -36,7 +36,6 @@ export const getPayments = ()=>async(dispatch)=>{
             },
             withCredentials:true
         });
-        console.log(data.payments)
         dispatch(setPayments(data.payments));
     } catch (error) {
         toast.error(error?.response?.data?.message || error?.response?.data?.error);

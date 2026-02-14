@@ -23,6 +23,7 @@
     "bullmq": "^5.66.4",
     "canvas": "^3.2.1",
     "cloudinary": "^2.8.0",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.19",
     "dotenv": "^17.2.3",
     "formik": "^2.4.6",

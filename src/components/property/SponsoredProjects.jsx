@@ -19,11 +19,11 @@ const SponsoredProjects = async() => {
       return  <div key={index} className="col-xl-3 col-lg-4 col-md-6">
              <Link className='text-black' href={`/projects/${project?.slug}`}>
           <div className="project-card">
-          <span className="badge-hot">HOT</span>
+          <span className="badge-hot">Sponsored</span>
           <img src={project?.images[0]?.url} alt="project image" />
           <div className="card-body">
             <h5 className='line-clamp-1'>{project?.projectTitle}</h5>
-            <p className="price rounded-2 d-inline-block" style={{fontSize:"13px"}}>PKR {formatPK(project?.minItemPrice)} – {formatPK(project?.maxItemPrice)}</p>
+            <p className="price rounded-2 d-inline-block" style={{fontSize:"16px"}}>{formatPK(project?.minItemPrice)}{" "}<span style={{fontSize:"11px"}}>PKR</span> – {formatPK(project?.maxItemPrice)}{" "}<span style={{fontSize:"11px"}}>PKR</span></p>
             <p className="location">{project?.city}, {project?.location}</p>
             <p className="meta">
   {project?.offering?.slice(0,3)?.map((item, i) => (

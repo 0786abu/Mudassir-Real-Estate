@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Container } from "reactstrap";
+import { Container, Input } from "reactstrap";
 
 const HomeBannerSection = () => {
   const router = useRouter();
@@ -24,6 +24,7 @@ const HomeBannerSection = () => {
     minPrice: "",
     developer:""
   });
+  const [isSubCity, setIsSubCity] = useState(null);
 
   const handleSearch = () => {
   const query = new URLSearchParams();
@@ -41,15 +42,17 @@ useEffect(()=>{
   dispatch(setSelectedFilterCategory(filterValues.category))
 },[filterValues.category])
 useEffect(()=>{
-  if(filterValues.city){
-    const cityData = citiesLocationsData.find(city => city.city === filterValues.city);
-    if(cityData){
-      setSubCities(cityData.subCities);
-    } else {
-      setSubCities([]);
+    if(filterValues.city){
+      const cityData = citiesLocationsData.find(item=>item.city === filterValues.city);
+      if(cityData && cityData.subCities && cityData.subCities.length > 0){
+        setSubCities(cityData.subCities);
+        setIsSubCity(null);
+      }else{
+        setIsSubCity("noSubCity");
+        setSubCities([]);
+      }
     }
-  }
-},[filterValues.city])
+  },[filterValues.city])
 
 
   return (
@@ -67,10 +70,8 @@ useEffect(()=>{
         {/* ------- HERO TITLE (AUTO-STYLING KE LIYE AS-IT-IS) ------- */}
         <div className="text-center mb-4">
           <h2 className="fw-bold">
-            You are local Real estate
-professionals
+            Search the best properties for {filterValues.category==="Sale" ? "Sale" : filterValues.category==="Rent" ? "Rent" : "Project"} in Pakistan
           </h2>
-          <p className="text-muted">Residences can be classified by and connected to residences. Different types of housing can be use same physical type.</p>
         </div>
 
         {/* ---------------- FILTER BOX UI ---------------- */}
@@ -212,10 +213,12 @@ professionals
                 
               </div>
             </div>
+
             <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2 d-flex align-items-center">
                 <i className="fas fa-map-marker-alt me-2 text-primary"></i>
-                <select
+                {isSubCity !== "noSubCity" ? (
+                  <select
                           className="form-select border-0"
                           value={filterValues.location}
                           onChange={(e) => setFilterValues({...filterValues, location:e.target.value })}
@@ -226,6 +229,14 @@ professionals
                             return <option value={filt} key={index}>{filt}</option>
                           })}
                         </select>
+                ) : (
+                  <Input
+                                type="text"
+                                placeholder="Enter location"
+                                value={filterValues.location}
+                              onChange={(e)=>setFilterValues({...filterValues, location:e.target.value})}
+                              />
+                )}
               </div>
             </div>
 
@@ -250,25 +261,6 @@ professionals
               </div>
             </div>
 
-            {/* Beds */}
-              <div className="col-lg-2 col-md-3 col-6">
-              <div className="border rounded p-2">
-                <select
-                  className="form-select border-0"
-                  onChange={(e) =>
-                    setFilterValues({
-                      ...filterValues,
-                      beds: e.target.value,
-                    })
-                  }
-                >
-                  <option>No. of Beds</option>
-                   {bedsFilterData.map((filt,index)=>{
-                            return <option value={filt} key={index}>{filt}</option>
-                          })}
-                </select>
-              </div>
-            </div>
 
               <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2">

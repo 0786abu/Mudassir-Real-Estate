@@ -51,7 +51,7 @@
   .property-slider {
     margin-bottom: 0;
     .slick-dots {
-      bottom: 10px;
+      bottom: 20px;
       li {
         button {
           &:before {
@@ -129,7 +129,7 @@
         background-color: $white;
         h6 {
           font-weight: 500;
-          font-size: 17px;
+          font-size: 18px;
           color: $black;
         }
         ul {
@@ -150,7 +150,6 @@
             }
 
             .label {
-              text-transform: uppercase;
               font-size: 10px;
               padding-top: 5px;
               margin-left: 15px;

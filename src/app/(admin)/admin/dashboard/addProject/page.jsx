@@ -166,7 +166,6 @@ const CreateProject = () => {
   formData.images.forEach((file) => {
     payload.append("images", file);
   });
-console.log(formData.images)
     // ---------- Floor Plans ----------
 payload.append(
   "floorPlans",

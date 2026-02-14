@@ -120,7 +120,7 @@ const PaymentPlanSlider =  {
           </div>
         </div>
         <div>
-          <h3>PKR {formatPK(project?.minItemPrice)} to {formatPK(project?.maxItemPrice)}</h3>
+          <h3>{formatPK(project?.minItemPrice)}{" "}<span style={{fontSize:"11px"}}>PKR</span> to {formatPK(project?.maxItemPrice)}{" "}<span style={{fontSize:"11px"}}>PKR</span></h3>
         </div>
       </div>
       <section className="ratio_40 breadcrumb-section p-0 single-property-images-2 position-relative">
@@ -188,9 +188,8 @@ const PaymentPlanSlider =  {
                 </div>
 
                 <strong className="price">
-                  PKR {" "}
-                  {formatPK(item.parentMinPrice)} to{" "}
-                  {formatPK(item.parentMaxPrice)}
+                  {formatPK(item.parentMinPrice)}{" "}<span style={{fontSize:"11px"}}>PKR</span> to{" "}
+                  {formatPK(item.parentMaxPrice)}{" "}<span style={{fontSize:"11px"}}>PKR</span>
                 </strong>
               </div>
             </AccordionHeader>
@@ -206,9 +205,8 @@ const PaymentPlanSlider =  {
                       <div className="subitem-top">
                         <h6>{sub.subItemTitle}</h6>
                         <Badge color="success">
-                           PKR {" "}
-                          {formatPK(sub.minPrice)} to{" "}
-                          {formatPK(sub.maxPrice)}
+                          {formatPK(sub.minPrice)}{" "}<span style={{fontSize:"9px"}}>PKR</span>  to{" "}
+                          {formatPK(sub.maxPrice)}{" "}<span style={{fontSize:"9px"}}>PKR</span>
                         </Badge>
                       </div>
 

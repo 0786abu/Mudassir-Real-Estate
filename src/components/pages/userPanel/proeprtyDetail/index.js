@@ -112,11 +112,6 @@ const PropertyDetailDashboard = ({setActivetab}) => {
     if(selectedBank !==null && selectedMethod?.type==="bank"){
       formData.append("bankDetails", JSON.stringify(selectedBank));
     };
-    console.log(
-  "bankDetails before append:",
-  selectedBank,
-  typeof selectedBank
-);
 
     dispatch(CreatePayment({formData,setMakePayment,setPaidModal}))
   }

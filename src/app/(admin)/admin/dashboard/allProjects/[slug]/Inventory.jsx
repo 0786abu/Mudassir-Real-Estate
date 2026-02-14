@@ -46,7 +46,6 @@ const Inventory = ({mainItems,slug,loader}) => {
   const dispatch = useDispatch();
   const handleSubmitData = ()=>{
     dispatch(UpdateProjectItems(items,slug,setOpen))
-    console.log(items)
   }
   useEffect(() => {
   if (open) {

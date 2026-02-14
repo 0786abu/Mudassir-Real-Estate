@@ -73,7 +73,6 @@
   > span {
     letter-spacing: 5px;
     color: $light-color;
-    text-transform: uppercase;
     font-weight: 500;
   }
 
@@ -189,7 +188,7 @@
     }
      .title-1-2 { 
       text-align: start;
-      width: 220px;
+      width: 350px;
       position: relative;
         h2 {
             margin-bottom: -3px;
@@ -319,13 +318,13 @@
               }
             }         
           .slick-prev {
-            left: 15px;
+            left: 80px;
             &::before {
               content: "\f053";              
             }
           }
           .slick-next {
-            right: 15px;           
+            right: 80px;           
             &::before {
               content: "\f054";              
             }
@@ -380,11 +379,10 @@
           }
         }
       }
-
       .labels-left {
         position: absolute;
         left: -6px;
-        top: 20px;
+        top: 20px; 
         div{
           &+div{
             margin-top: 6px;
@@ -538,7 +536,7 @@
     .property-details {
       h6 {
         font-weight: 600;
-        font-size: 17px;
+        font-size: 18px;
         color: var(--theme-default);      
       }
       .icon-property {

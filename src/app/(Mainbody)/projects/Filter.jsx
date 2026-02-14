@@ -1,6 +1,6 @@
 "use client";
 
-import { citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
+import { BUDGET_FILTERS, citiesLocationsData, FLATTENED_BUDGET_FILTERS, propertyTypesData } from "@/utils/FiltersCities";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
@@ -19,49 +19,39 @@ const ProjectFilter = () => {
   const params = useSearchParams();
    const searchedType = params.get("type")
   const searchedCity = params.get("city")
-  const searchedLocation = params.get("location")
   const searchedDeveloper = params.get("developer")
-  const [subCities, setSubCities] = useState([]);
   const [city, setCity] = useState(searchedCity ? searchedCity : "");
-  const [isSubCity, setIsSubCity] = useState(null);
-  const [location, setLocation] = useState(searchedLocation ? searchedLocation : "");
   const [type, setType] = useState(searchedType ? searchedType : "");
   const [developer, setDeveloper] = useState(searchedDeveloper ? searchedDeveloper : "");
+  const [budget, setBudget] = useState("");
 
-  const handleSearch = ()=>{
-    const newparams = new URLSearchParams(params.toString());
-    if(developer){
-      newparams.set("developer", developer);
+  const handleSearch = () => {
+  const newparams = new URLSearchParams(params.toString());
+
+  if(developer) newparams.set("developer", developer);
+  if(city) newparams.set("city", city);
+  if(type) newparams.set("type", type);
+
+  if(budget) {
+    const [min, max] = budget.split("-").map(Number);
+
+    if(min !== null && min !== undefined && !isNaN(min)) {
+      newparams.set("minPrice", min);
     }
-    if(city){
-      newparams.set("city", city);
+
+    if(max !== null && max !== undefined && !isNaN(max)) {
+      newparams.set("maxPrice", max);
     }
-    if(type){
-      newparams.set("type", type);
-    }
-    if(location){
-      newparams.set("location", location);
-    }
-    router.push(`/projects?${newparams.toString()}`);
   }
-  useEffect(()=>{
-    if(city !==""){
-      const cityData = citiesLocationsData.find(item=>item.city === city);
-      if(cityData && cityData.subCities && cityData.subCities.length > 0){
-        setSubCities(cityData.subCities);
-        setIsSubCity(null);
-      }else{
-        setIsSubCity("noSubCity");
-        setSubCities([]);
-      }
-    }
-  },[city])
+
+  router.push(`/projects?${newparams.toString()}`);
+};
+
+
   const resetFilter = ()=>{
     setType("");
     setCity("");
     setDeveloper("");
-    setLocation("");
-    setIsSubCity(null);
     router.push("/projects")
   }
   return (
@@ -116,34 +106,25 @@ const ProjectFilter = () => {
                               })}
                   </Input>
                 </Col>
-                {isSubCity === "noSubCity" ? (
-                  <Col lg="3" md="6">
-                  <label className="filter-label">Location</label>
-                  <Input
-                    type="text"
-                    placeholder="Enter location"
-                    value={location}
-                  onChange={(e)=>setLocation(e.target.value)}
-                  />
-                </Col>
-                ) : (
-                  <Col lg="3" md="6">
-                  <label className="filter-label">Location</label>
-                  <Input 
-                  type="select"
-                  value={location}
-                  onChange={(e)=>setLocation(e.target.value)}
-                  >
-                    <option value={""}>select location</option>
-                    {subCities.length === 0 && isSubCity===null && <option>select city first</option>}
-                      {subCities.map((item) => (
-                        <option key={item} value={item}>
-                          {item}
-                        </option>
-                  ))}
-                  </Input>
-                     </Col>
-                )}
+                <Col lg="3" md="6">
+  <label className="filter-label">Budget</label>
+  <Input 
+    type="select"
+    value={budget}
+    onChange={(e)=>setBudget(e.target.value)}
+  >
+    <option value={""}>select budget</option>
+    {FLATTENED_BUDGET_FILTERS.map((item, index) => (
+      <option 
+        key={index} 
+        value={`${item.minPrice}-${item.maxPrice}`} // backend ko send karne ke liye
+      >
+       {item.label}
+      </option>
+    ))}
+  </Input>
+</Col>
+
 
                 {/* Location */}
                 <Col lg="3" md="6">

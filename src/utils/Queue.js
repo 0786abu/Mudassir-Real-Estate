@@ -1,6 +1,11 @@
 import { Queue } from "bullmq";
-import redis from "./Redis";
+import connection from "./Redis";
 
 export const emailQueue = new Queue("emailQueue", {
-  connection: redis,
+  connection:connection,
+  defaultJobOptions: {
+    removeOnComplete: true, // VERY IMPORTANT (Upstash safe)
+    removeOnFail: false,
+    attempts: 2,
+  },
 });

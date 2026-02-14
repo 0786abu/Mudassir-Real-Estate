@@ -2131,7 +2131,7 @@
   .property-wrapper-grid {
     .property-box {
       .property-image {
-        .overlay-property-box {
+        .overlay-property-box { 
           bottom: 8px;
           .effect-round {
             width: 30px;
@@ -4080,7 +4080,7 @@
       }
     }
   }
-  .property-section {
+  .property-section { 
     .property-box {
       .property-image {
         .property-slider {
@@ -6385,7 +6385,27 @@
   }
 }
 @media (max-width: 767px) {
- 
+ .property-section {
+    .property-box {
+      .property-image {
+        .property-slider {
+          .slick-dot {
+            margin-bottom: 0px !important;
+            li {
+              button {
+                &::before {
+                  font-size: 10px;
+                  width: 18px;
+                  height: 18px;
+                  line-height: 18px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   .property-section {
     .nav-tabs {
       .nav-item {
@@ -6408,6 +6428,19 @@
         .property-box {
           .property-details {
             margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+  .property-wrapper-grid {
+    .property-box {
+      .property-image {
+        .overlay-property-box { 
+          bottom: 16px;
+          .effect-round {
+            width: 30px;
+            height: 30px;
           }
         }
       }

@@ -307,7 +307,7 @@ export async function GET(req) {
                 { status: 400 }
             );
         }
-        const properties = await Property.find(filter,{images:1,title:1,createdBy:1,description:1,price:1,beds:1,baths:1,squareFits:1,createdAt:1,slug:1,category:1,type:1,location:1}).skip(skip).limit(limit).populate('createdBy', 'name email agencyProfile profile whatsappAPI socialMedia');
+        const properties = await Property.find(filter).skip(skip).limit(limit).populate("createdBy","name email address role agencyName agencyProfile profile whatsappAPI phone");
         return NextResponse.json({
             success: true,
             totalProperties: numOfProperties,

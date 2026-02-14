@@ -107,6 +107,10 @@ const FooterThree = () => {
   </li>
 </ul>
                   </div>
+                  <div className="d-flex gap-2">
+                    <Image src={"/assets/images/app-store.svg"} alt="app store icon" width={150} height={60} />
+                    <Image src={"/assets/images/play-store.svg"} alt="play store icon" width={150} height={60} />
+                  </div>
                 </Col>
               </Row>
             </Col>

@@ -10,7 +10,6 @@ const escapeXML = (str) =>
 const addWatermark = async (imageBuffer, text = "PakEarth.com") => {
   try {
     const metadata = await sharp(imageBuffer).metadata();
-    console.log("functio run")
 
     const width = metadata.width || 800;
     const height = metadata.height || 600;

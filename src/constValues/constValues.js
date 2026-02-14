@@ -1,6 +1,6 @@
 // path: home/slider-filter-search
 export const MainTitle = "Reality Properties solve your problems";
-export const LatestForSale = "Latest For Sale";
+export const LatestForSale = "Latest Properties For Sale";
 export const SubmitProperty = "submit property";
 export const WantToBuyOrRentHome = "Want to buy or rent Home ?";
 export const Sale = "Sale";

@@ -3590,6 +3590,38 @@ export const BUDGET_FILTERS = {
     },
   },
 };
+export const FLATTENED_BUDGET_FILTERS = [
+  // House
+  {label: "Budget below 30 Lakh", minPrice: 0, maxPrice: 3000000 },
+  {label: "Budget 30 - 80 Lakh", minPrice: 3000000, maxPrice: 8000000 },
+  {label: "Budget above 80 Lakh", minPrice: 8000000, maxPrice: null },
+
+  // Apartment
+  {label: "Budget below 30 Lakh", minPrice: 0, maxPrice: 3000000 },
+  {label: "Budget 30 - 80 Lakh", minPrice: 3000000, maxPrice: 8000000 },
+  {label: "Budget above 80 Lakh", minPrice: 8000000, maxPrice: null },
+
+  // Residential Plot
+  {label: "Budget below 15 Lakh", minPrice: 0, maxPrice: 1500000 },
+  {label: "Budget 15 - 70 Lakh", minPrice: 1500000, maxPrice: 7000000 },
+  {label: "Budget above 70 Lakh", minPrice: 7000000, maxPrice: null },
+
+  // Commercial Plot
+  {label: "Budget below 20 Lakh", minPrice: 0, maxPrice: 2000000 },
+  {label: "Budget 20 - 60 Lakh", minPrice: 2000000, maxPrice: 6000000 },
+  {label: "Budget above 60 Lakh", minPrice: 6000000, maxPrice: null },
+
+  // Shop
+  {label: "Budget below 20 Lakh", minPrice: 0, maxPrice: 2000000 },
+  {label: "Budget 20 - 60 Lakh", minPrice: 2000000, maxPrice: 6000000 },
+  {label: "Budget above 60 Lakh", minPrice: 6000000, maxPrice: null },
+
+  // Office
+  {label: "Budget below 20 Lakh", minPrice: 0, maxPrice: 2000000 },
+  {label: "Budget 20 - 60 Lakh", minPrice: 2000000, maxPrice: 6000000 },
+  {label: "Budget above 60 Lakh", minPrice: 6000000, maxPrice: null },
+];
+
 export const RentedpropertyTypesData = [
   {
     mainType: " House & Flat Residential",

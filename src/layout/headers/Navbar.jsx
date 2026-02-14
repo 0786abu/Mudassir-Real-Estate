@@ -12,6 +12,7 @@ import { jwtDecode } from "jwt-decode"
 import { GetFavouritesData } from "@/redux-toolkit/action/favouritesAction";
 import { House, User } from "lucide-react";
 import { setTabb } from "@/redux-toolkit/slice/authSlice";
+import { Badge } from "reactstrap";
 
 export default function Navbar() { 
   const {sampleuser,logoutloading} = useSelector((state)=>state.Auth);
@@ -117,9 +118,9 @@ const hanleCraetePropertyClick = ()=>{
           {/* Right section */}
           <div className="d-flex align-items-center gap-2 ms-auto order-lg-3 order-2">
 
-            {sampleuser?.role ? <button onClick={hanleCraetePropertyClick} className="btn loginn rounded-pill px-3 py-1"><House size={16}/> Create Property</button> : <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><House size={16}/> Create Property</button>}
+            {sampleuser?.role ? <button onClick={hanleCraetePropertyClick} className="btn loginn-2 px-3 py-1"> Create Property <Badge size="sm" color="danger" style={{marginLeft:"2px"}}>Free</Badge></button> : <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><House size={16}/> Create Property</button>}
             {!sampleuser && (
-              <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><User size={16}/> Login</button>
+              <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><User size={16}/></button>
             )}
 
              {sampleuser && (

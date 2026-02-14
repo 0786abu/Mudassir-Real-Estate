@@ -2,7 +2,9 @@ import { DataBase } from "@/backend/config/database";
 import Favourite from "@/backend/model/favouriteModel";
 import { isAuthenticated } from "@/backend/utils/middlewere";
 import { NextResponse } from "next/server";
-import Property from "@/backend/model/propertyModel"; 
+// import Agent from "@/backend/model/agentModel";
+// import User from "@/backend/model/authModel";
+// import Admin from "@/backend/model/adminModel";
 
 export async function POST(req){
     try {
@@ -58,7 +60,7 @@ export async function GET(req){
                 success: false
             },{status: 401});
         };
-        const favourites = await Favourite.find({savedBy:isUser._id}).populate("propertyID","title slug description price category type beds baths images squareFits location city createdAt")
+        const favourites = await Favourite.find({savedBy:isUser._id}).populate("propertyID","title slug description price category type beds baths images squareFits location city createdAt").populate("savedBy", "name email phone whatsappAPI")
         return NextResponse.json({
             message: "Favourites fetched successfully",
             success: true,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Label, Row } from "reactstrap";
 import NoSsr from "@/utils/NoSsr";
 import { areaSizes, citiesLocationsData, propertyTypesData } from "@/utils/FiltersCities";
@@ -14,6 +14,8 @@ const CreatePropertyTab = ({from}) => {
  const [hovered, setHovered] = useState(false);
   const [amenityInput, setAmenityInput] = useState("");
   const dispatch = useDispatch();
+  const [hasSubCities, setHasSubCities] = useState(null);
+  const [subCities, setSubCities] = useState([]);
   const [propertyData, setPropertyData] = useState({
     seo_title:"",
     seo_description:"",
@@ -48,6 +50,19 @@ const CreatePropertyTab = ({from}) => {
     const files = e.target.files[0];
     setFloorImage(files);
   }
+  useEffect(()=>{
+    if(propertyData.city){
+      const cityData = citiesLocationsData.find(item=>item.city === propertyData.city);
+      if(cityData && Array.isArray(cityData.subCities) && cityData.subCities.length > 0){
+        setHasSubCities(null);
+        setSubCities(cityData.subCities);
+      }else{
+        setHasSubCities("noSubCities");
+        setSubCities([]);
+        setPropertyData({...propertyData, location:""})
+      }
+    }
+  },[propertyData.city])
 
   const handleSubmit = (e)=>{
     e.preventDefault();
@@ -331,22 +346,30 @@ if (floorImage !==null) {
                                </select>
                       </Col>
                       <Col sm="4" className="form-group">
-                       <select
+                      {hasSubCities === null ? (
+                         <select
                        name="location"
                         value={propertyData.location} onChange={(e)=>setPropertyData({...propertyData, location:e.target.value})}
                        className="form-control h-100"
                        >
                          <option value="">Select Location</option>
-                         {citiesLocationsData.filter(item=>Array.isArray(item.subCities) && item.subCities.length > 0).map((item,index) => (
-                           <optgroup key={index} label={item.city}>
-                             {item.subCities.map((sub,index) => (
-                               <option key={index} value={sub}>
-                                 {sub}
+                         {subCities.length === 0 && hasSubCities === null  && <option>select city first</option>}
+                         {subCities.map((item,index) => (
+                               <option key={index} value={item}>
+                                 {item}
                                </option>
-                             ))}
-                           </optgroup>
                          ))}
                        </select>
+                      ) : (
+                        <input
+                          name="location"
+                          type="text"
+                          value={propertyData.location} onChange={(e)=>setPropertyData({...propertyData, location:e.target.value})}
+                          className="form-control h-100"
+                          label="location"
+                          placeholder="Enter your town name (ex. Gulshan-e-Iqbal)"
+                        />
+                      )}
                       </Col>
                       <Col sm="4" className="form-group">
                         <input

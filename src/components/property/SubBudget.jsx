@@ -34,7 +34,7 @@ const handleLocation = (city)=>{
         <h4 className=' text-decoration-underline mt-2'>Nearby towns and cities</h4>
         <Row>
           {popuarCities.map((city,index)=>{
-            return <Col xs="6" className='my-1' onClick={()=>handleLocation(city)}><Badge color='light' className=' fw-semibold text-black' style={{cursor:"pointer",fontSize:"15px"}} key={index}>{city}</Badge></Col>
+            return <Col key={index} xs="6" className='my-1' onClick={()=>handleLocation(city)}><Badge color='light' className=' fw-semibold text-black' style={{cursor:"pointer",fontSize:"15px"}} key={index}>{city}</Badge></Col>
           })}
         </Row>
       </div>
