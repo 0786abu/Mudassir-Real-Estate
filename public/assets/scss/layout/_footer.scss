@@ -389,14 +389,17 @@ footer {
 }
 
 .footer-bg {
-    position: relative;
+    position: relative; 
   background-color: rgba($black, 0.9);
   overflow: hidden;
 
   &::before {
     content: "";
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    height: 250px;
     background-image: url(../../images/footer-img.png);
     background-size: cover;
     background-position: center;
@@ -579,42 +582,64 @@ footer {
         }
     }
 }
-@media (max-width:900px) {
-    .footer-bg{
-           position: relative;
-  background-color: rgba($black, 0.9);
-  overflow: hidden;
+// @media (max-width:900px) {
+//     .footer-bg{
+//            position: relative;
+//   background-color: rgba($black, 0.9);
+//   overflow: hidden;
 
-  &::before {
+//   &::before {
+//     content: "";
+//     position: absolute;
+//     inset: 0;
+//     background-image: url(../../images/footer-tab.png);
+//     background-size: cover;
+//     background-position: center;
+//     opacity: 0.2; // 👈 yahan opacity control karo
+//     z-index: 0;
+//   }
+//     }
+// }
+@media (max-width: 800px) {
+  .footer-bg {
+    position: relative;
+    overflow: hidden; // container ke bahar content hide kare
+    // width: 100vw; // 👈 viewport width
+    // min-height: 400px; // 👈 adjust karo according to content
+  }
+
+  .footer-bg::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background-image: url(../../images/footer-tab.png);
-    background-size: cover;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // width: 100vw;   // full viewport width
+    height: 200px;
+    background-image: url("/assets/images/footer-mobile.png");
+    background-size: cover; // poora container cover ho
     background-position: center;
-    opacity: 0.2; // 👈 yahan opacity control karo
+    background-repeat: no-repeat;
+    opacity: 0.2;
     z-index: 0;
   }
+
+  .footer-bg > * {
+    position: relative; // content pseudo ke upar
+    z-index: 1;
+  }
+}
+@media (max-width:600px) {
+    .footer::before{
+        height: 150px !important;
     }
 }
 @media (max-width:500px) {
-    .footer-bg{
-           position: relative;
-  background-color: rgba($black, 0.9);
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url(../../images/footer-mobile.png);
-    background-size: cover;
-    background-position: center;
-    opacity: 0.2; // 👈 yahan opacity control karo
-    z-index: 0;
-  }
+    .footer::before{
+        height: 110px !important;
     }
 }
+
 
 /**=====================
      footer css end

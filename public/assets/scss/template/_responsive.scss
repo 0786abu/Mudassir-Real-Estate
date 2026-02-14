@@ -13662,3 +13662,19 @@
 /**=====================
      Responsive css start
 ==========================**/
+@media (max-width:640px) {
+  .title-1-2{
+  width: 300px !important;
+   h2{
+    font-size: 18px !important;
+    font-weight: 600 !important;
+   } 
+  }
+  .title-1-1{
+    width: 300px !important;
+    h2{
+     font-size: 18px !important;
+     font-weight: 600 !important;
+    } 
+}
+}

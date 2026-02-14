@@ -1,6 +1,7 @@
 "use client"
 import { setSelectedFilterCategory } from "@/redux-toolkit/slice/propertySlice";
-import { areaSizes, bedsFilterData, citiesLocationsData, popuarCities, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
+import { areaSizes, bedsFilterData, citiesLocationsData, FLATTENED_BUDGET_FILTERS, popuarCities, propertyTypesData, RentedpropertyTypesData, SalepropertyTypesData } from "@/utils/FiltersCities";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -21,7 +22,7 @@ const HomeBannerSection = () => {
     location:"",
     areaSize: "",
     beds: "",
-    minPrice: "",
+    budget: "",
     developer:""
   });
   const [isSubCity, setIsSubCity] = useState(null);
@@ -35,6 +36,18 @@ const HomeBannerSection = () => {
   if (filterValues.beds) query.set("beds", filterValues.beds);
   if (filterValues.minPrice) query.set("minPrice", filterValues.minPrice);
   if (filterValues.developer) query.set("developer", filterValues.developer);
+  if(filterValues.budget){
+    const [min, max] = filterValues.budget.split("-").map(Number);
+
+    if(min !== null && min !== undefined && !isNaN(min)) {
+      query.set("minPrice", min);
+    }
+
+    if(max !== null && max !== undefined && !isNaN(max)) {
+      query.set("maxPrice", max);
+    }
+
+  }
 
     router.push(`/properties?${query.toString()}`)
 };
@@ -62,9 +75,21 @@ useEffect(()=>{
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    padding:"150px 0"
+    padding:"150px 0",
+    position:"relative"
   }}
     className="home-banner ">
+<div className="main-gif-banner">
+  
+    <div className="gif-banner">
+      <Image
+        src="https://res.cloudinary.com/dmrk0ry6x/image/upload/v1771087032/ad_here_kknqgv.gif"
+        alt="Loading..."
+        fill
+        // style={{ objectFit: "cover" }}
+      />
+    </div>
+</div>
       <Container>
 
         {/* ------- HERO TITLE (AUTO-STYLING KE LIYE AS-IT-IS) ------- */}
@@ -262,7 +287,7 @@ useEffect(()=>{
             </div>
 
 
-              <div className="col-lg-2 col-md-3 col-6">
+              {/* <div className="col-lg-2 col-md-3 col-6">
               <div className="border rounded p-2">
                 <input
                   type="number"
@@ -272,15 +297,34 @@ useEffect(()=>{
                     setFilterValues({
                       ...filterValues,
                       minPrice: +e.target.value,
-                    })
-                  }
-                />
+                      })
+                      }
+                      />
+                      </div>
+                      </div> */}
+            <div className="col-lg-2 col-md-3 col-6">
+              <div className=" border rounded-2 p-2">
+                <select 
+                className="form-select border-0"
+                value={filterValues.budget}
+                onChange={(e)=>setFilterValues({...filterValues, budget:e.target.value})}
+              >
+                <option value={""}>select budget</option>
+                {FLATTENED_BUDGET_FILTERS.map((item, index) => (
+                  <option 
+                    key={index} 
+                    value={`${item.minPrice}-${item.maxPrice}`} // backend ko send karne ke liye
+                  >
+                   {item.label}
+                  </option>
+                ))}
+              </select>
               </div>
             </div>
             
 
             {/* Search Button */}
-            <div className="col-md-2 col-12">
+            <div className="col-md-1 col-12">
               <button
               onMouseEnter={()=>setIsHover(true)}
               onMouseLeave={()=>setIsHover(false)}

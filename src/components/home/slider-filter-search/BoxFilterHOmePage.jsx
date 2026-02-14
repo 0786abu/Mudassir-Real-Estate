@@ -63,7 +63,7 @@ function PropertyFilter() {
   );
 
   return (
-    <div className="container mt-5">
+    <div className="container" style={{marginTop:"60px"}}>
       <h4 className="mb-3 fw-bold">Browse Properties</h4>
       <div className="row">
         <div className="col-md-6 col-lg-4 ">{renderCard("residential", "Residential")}</div>
@@ -127,7 +127,7 @@ function PropertyFilter2() {
   );
 
   return (
-    <div className="container mt-5">
+    <div className="container" style={{marginTop:"60px"}}>
       <h4 className="mb-3 fw-bold">Browse Properties</h4>
       <div className="row">
         <div className="col-md-4">{renderCard("residential", "Residential")}</div>

@@ -1926,6 +1926,12 @@ $primary: #108a00;
     width: 150px;
     margin: auto;
   }
+  .loginn-2{
+    font-size: 12px !important;
+  }
+  .loginn{
+    font-size: 12px !important;
+  }
 }
 .filter-card {
   height: 285px;              /* 👈 apni need ke hisaab se */
@@ -1967,4 +1973,36 @@ $primary: #108a00;
   .homepagefiltersecond{
   margin-top: -60px;
 }
+}
+.gif-banner{
+  position: absolute;
+  max-width: 1370px;
+  margin: 0px auto;
+  top: 0px;
+  width: 100%;
+  height: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+// .main-gif-banner{
+//   position: absolute;
+//   top: 200px;
+//   left: 50%;
+//   transform: translateX(-50%);
+// }
+.listing-social-icon-group{
+  border: 2px solid #14a800;
+  border-radius: 8px;
+  padding: 6px;
+  background-color: white;
+  transition: all 0.3s ease;
+  .sub-listing-icon{
+    color: #14a800;
+  }
+}
+.listing-social-icon-group:hover{
+  background-color: #14a800;
+  .sub-listing-icon{
+    color: white;
+  }
 }

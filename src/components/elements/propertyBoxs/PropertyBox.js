@@ -133,9 +133,9 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
         <div className="property-btn d-flex">
           <span>{formatDistanceToNowStrict(new Date(data.propertyID.createdAt), { addSuffix: true })}</span>
           <div className="d-flex gap-2">
-            <Link href={`tel:${data.savedBy.phone}`}><Button size="sm" onMouseEnter={()=>setCallHover(true)} onMouseLeave={()=>setCallHover(false)} style={{background:callHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Phone style={{color:"white"}}/></span></Button></Link>
-            <Link href={`mailto:${data.savedBy.email}`}><Button size="sm" onMouseEnter={()=>setEmailHover(true)} onMouseLeave={()=>setEmailHover(false)} style={{background:emailHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Mail style={{color:"white"}}/></span></Button></Link>
-            {data.savedBy.whatsappAPI && <Link href={`${data.savedBy.whatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800",padding:"6px"}}><BsWhatsapp size={22} style={{color:"white"}}/></Button></Link>}
+            <Link href={`mailto:${data.savedBy.email}`}><button className="listing-social-icon-group"><span><Mail className="sub-listing-icon"/></span></button></Link>
+            {data.savedBy.whatsappAPI && <Link href={`${data.savedBy.whatsappAPI}`}><button className="listing-social-icon-group"><BsWhatsapp size={22} className="sub-listing-icon"/></button></Link>}
+            <Link href={`tel:${data.savedBy.phone}`}><button className="listing-social-icon-group"><span className="sub-listing-icon"><Phone className="sub-listing-icon"/> Call</span></button></Link>
           </div>
         </div>
       </div>
@@ -247,10 +247,10 @@ const PropertyBox = ({ data,from,fromPanel,setActiveTab, fromTo }) => {
             }} className="btn rounded-pill border border-1">Details</button>
         </Link>
       ) : (
-        <div>
-            <Link href={`tel:${data.createdBy.phone}`}><Button size="sm" onMouseEnter={()=>setCallHover(true)} onMouseLeave={()=>setCallHover(false)} style={{background:callHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Phone style={{color:"white"}}/></span></Button></Link>
-            <Link href={`mailto:${data.createdBy.email}`}><Button size="sm" onMouseEnter={()=>setEmailHover(true)} onMouseLeave={()=>setEmailHover(false)} style={{background:emailHover ? "#108a00" : "#14A800",padding:"6px",margin:"0 4px"}}><span><Mail style={{color:"white"}}/></span></Button></Link>
-            {data.createdBy.whatsappAPI && <Link href={`${data.createdBy.whatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800",padding:"6px"}}><BsWhatsapp style={{color:"white"}} size={22}/></Button></Link>}
+        <div className=" d-flex align-items-center gap-1">
+            <Link href={`mailto:${data.createdBy.email}`}><button className="listing-social-icon-group"><span><Mail className="sub-listing-icon"/></span></button></Link>
+            {data.createdBy.whatsappAPI && <Link href={`${data.createdBy.whatsappAPI}`}><button className="listing-social-icon-group"><BsWhatsapp className="sub-listing-icon" size={22}/></button></Link>}
+            <Link href={`tel:${data.createdBy.phone}`}><button className="listing-social-icon-group"><span className="sub-listing-icon"><Phone className="sub-listing-icon"/> Call</span></button></Link>
           </div>
       )}
         </div>

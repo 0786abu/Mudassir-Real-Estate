@@ -2123,6 +2123,22 @@
           font-family: $font_1, $font_3;
         }
       }
+      .labels-left-sp{
+        position: absolute;
+        left: 10px;
+        top: 70px !important;
+        div{
+          &+div{
+            margin-top: 6px;
+          }
+        }
+        .label {
+          text-transform: uppercase;
+          font-size: 10px;
+          font-weight: 500;
+          font-family: $font_1, $font_3;
+        }
+      }
 .seen-data-2 {
         position: absolute;
         right: 20px;
@@ -2147,4 +2163,13 @@
   top: 120px !important;
   // margin: 0 auto !important;
 }
+}
+.loggo{
+  aspect-ratio: 16/9;
+  width: 100px;
+}
+@media (max-width:500px) {
+  .loggo{
+    width: 70px;
+  }
 }

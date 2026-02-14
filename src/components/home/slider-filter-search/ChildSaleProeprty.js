@@ -3,10 +3,19 @@ import { Col, Container, Row } from "reactstrap";
 import { LatestForSale, Sale } from "@/constValues/constValues";
 import PropertyBoxOne from "@/components/elements/propertyBoxs/PropertyBoxOne";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const ChildSaleProeprty = ({from,value,properties,category}) => {
+  const [width, setWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
-    <section style={{marginTop: category==="sale" ? "-40px" : "-120px"}} className='property-section slick-between slick-shadow'>
+    <section style={{marginTop:width >768 ? category==="sale" ? "-40px" : "-120px" : width < 768 ? category==="sale" ? "-5px" : "-40px" : ""}} className='property-section slick-between slick-shadow'>
       <Container>
         <Row className=' ratio_landscape'>
           <Col>

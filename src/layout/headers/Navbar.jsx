@@ -102,7 +102,7 @@ const hanleCraetePropertyClick = ()=>{
         <div className="container">
 
           {/* Logo */}
-          <Link href="/" style={{aspectRatio:"16/9",width:"100px"}} className="navbar-brand position-relative fw-bold fs-4 order-lg-1 order-1">
+          <Link href="/" className="navbar-brand loggo position-relative fw-bold fs-4 order-lg-1 order-1">
           <Image 
           src={"/assets/images/final-logo.png"}
           alt="Pak Earth Logo"
@@ -116,15 +116,15 @@ const hanleCraetePropertyClick = ()=>{
           </Link>
 
           {/* Right section */}
-          <div className="d-flex align-items-center gap-2 ms-auto order-lg-3 order-2">
+          <div className="d-flex align-items-center gap-1 ms-auto order-lg-3 order-2">
 
-            {sampleuser?.role ? <button onClick={hanleCraetePropertyClick} className="btn loginn-2 px-3 py-1"> Create Property <Badge size="sm" color="danger" style={{marginLeft:"2px"}}>Free</Badge></button> : <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><House size={16}/> Create Property</button>}
+            {sampleuser?.role ? <button onClick={hanleCraetePropertyClick} className="btn loginn-2 px-1 px-sm-3 py-1"> Create Property <Badge size="sm" color="danger" style={{marginLeft:"2px"}}>Free</Badge></button> : <button className="btn loginn rounded-pill px-sm-3 px-1 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><House size={16}/> Create Property</button>}
             {!sampleuser && (
               <button className="btn loginn rounded-pill px-3 py-1" data-bs-toggle="modal" data-bs-target="#authModal"><User size={16}/></button>
             )}
 
              {sampleuser && (
-              <div className="dropdown">
+              <div className="dropdown" style={{marginRight:"-10px"}}>
                 <a href="#" className="d-flex align-items-center text-decoration-none" data-bs-toggle="dropdown">
                 <Image src={sampleuser?.profile ? sampleuser?.profile?.url : "/assets/images/profile.webp"} width={40} height={40} alt="profile" className="rounded-circle" />
               </a>
@@ -137,7 +137,7 @@ const hanleCraetePropertyClick = ()=>{
             </div>
              )}
 
-            <button className="navbar-toggler border-0 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <button className="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
               <span className="navbar-toggler-icon"></span>
             </button>
           </div>

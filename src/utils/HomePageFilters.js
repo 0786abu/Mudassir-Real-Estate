@@ -94,7 +94,7 @@ export const HomePageFilter2 = [
   { title: "Houses for sale in GT Road", query: { category:"Sale", type: "House", city: "Lahore", location: "GT Road" } },
   { title: "Houses for sale in Johar Town", query: { category:"Sale", type: "House", city: "Lahore", location: "Johar Town" } },
   { title: "Houses for sale in Wapda Town", query: { category:"Sale", type: "House", city: "Lahore", location: "Wapda Town" } },
-  { title: "Houses for sale in Central Park Housing Scheme", query: { category:"Sale", type: "House", city: "Lahore", location: "Central Park Housing Scheme" } },
+  { title: "Houses for sale in Central Park H.S", query: { category:"Sale", type: "House", city: "Lahore", location: "Central Park Housing Scheme, Lahore" } },
   { title: "Houses for sale in Iqbal Garden", query: { category:"Sale", type: "House", city: "Lahore", location: "Iqbal Garden" } }
     ]
   },
@@ -149,7 +149,7 @@ export const HomePageFilter2 = [
   { title: "Houses for sale in Dream Gardens", query: { category:"Sale", type: "House", city: "Multan", location: "Dream Gardens" } },
   { title: "Houses for sale in Model Town", query: { category:"Sale", type: "House", city: "Multan", location: "Model Town" } },
   { title: "Houses for sale in New Crystal City", query: { category:"Sale", type: "House", city: "Multan", location: "New Crystal City" } },
-  { title: "Houses for sale in Nishtarian’s Cooperative Housing", query: { category:"Sale", type: "House", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
+  { title: "Houses for sale in Nishtarian’s C.H", query: { category:"Sale", type: "House", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
     ]
   }
 ];
@@ -167,7 +167,7 @@ export const HomePageFilter3 = [
       { title: "Plots for sale in GT Road", query: { category:"Sale", type: "Residential Plot", city: "Lahore", location: "GT Road" } },
       { title: "Plots for sale in Johar Town", query: { category:"Sale", type: "Residential Plot", city: "Lahore", location: "Johar Town" } },
       { title: "Plots for sale in Wapda Town Lahore", query: { category:"Sale", type: "Residential Plot", city: "Lahore", location: "Wapda Town" } },
-      { title: "Plots for sale in Central Park Housing Scheme", query: { category:"Sale", type: "Residential Plot", city: "Lahore", location: "Central Park Housing Scheme" } },
+      { title: "Plots for sale in Central Park H.S", query: { category:"Sale", type: "Residential Plot", city: "Lahore", location: "Central Park Housing Scheme" } },
       { title: "Plots for sale in Iqbal Garden", query: { category:"Sale", type: "Residential Plot", city: "Lahore", location: "Iqbal Garden" } }
     ]
   },
@@ -222,7 +222,7 @@ export const HomePageFilter3 = [
       { title: "Plots for sale in Dream Gardens", query: { category:"Sale", type: "Residential Plot", city: "Multan", location: "Dream Gardens" } },
       { title: "Plots for sale in Model Town", query: { category:"Sale", type: "Residential Plot", city: "Multan", location: "Model Town" } },
       { title: "Plots for sale in New Crystal City", query: { category:"Sale", type: "Residential Plot", city: "Multan", location: "New Crystal City" } },
-      { title: "Plots for sale in Nishtarian’s Cooperative Housing", query: { category:"Sale", type: "Residential Plot", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
+      { title: "Plots for sale in Nishtarian’s C.H", query: { category:"Sale", type: "Residential Plot", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
     ]
   }
 ];
@@ -240,7 +240,7 @@ export const HomePageFilter4 = [
       { title: "Flats for sale in GT Road", query: { category:"Sale", type: "Apartment - Flat", city: "Lahore", location: "GT Road" } },
       { title: "Flats for sale in Johar Town", query: { category:"Sale", type: "Apartment - Flat", city: "Lahore", location: "Johar Town" } },
       { title: "Flats for sale in Wapda Town Lahore", query: { category:"Sale", type: "Apartment - Flat", city: "Lahore", location: "Wapda Town" } },
-      { title: "Flats for sale in Central Park Housing Scheme", query: { category:"Sale", type: "Apartment - Flat", city: "Lahore", location: "Central Park Housing Scheme" } },
+      { title: "Flats for sale in Central Park H.S", query: { category:"Sale", type: "Apartment - Flat", city: "Lahore", location: "Central Park Housing Scheme, Lahore" } },
       { title: "Flats for sale in Iqbal Garden", query: { category:"Sale", type: "Apartment - Flat", city: "Lahore", location: "Iqbal Garden" } }
     ]
   },
@@ -295,7 +295,7 @@ export const HomePageFilter4 = [
       { title: "Flats for sale in Dream Gardens", query: { category:"Sale", type: "Apartment - Flat", city: "Multan", location: "Dream Gardens" } },
       { title: "Flats for sale in Model Town", query: { category:"Sale", type: "Apartment - Flat", city: "Multan", location: "Model Town" } },
       { title: "Flats for sale in New Crystal City", query: { category:"Sale", type: "Apartment - Flat", city: "Multan", location: "New Crystal City" } },
-      { title: "Flats for sale in Nishtarian’s Cooperative Housing", query: { category:"Sale", type: "Apartment - Flat", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
+      { title: "Flats for sale in Nishtarian’s C.H", query: { category:"Sale", type: "Apartment - Flat", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
     ]
   }
 ];
@@ -394,7 +394,7 @@ export const HomePageFilter6 = [
   { title: "Houses for rent in GT Road", query: { category:"Rent", type: "House", city: "Lahore", location: "GT Road" } },
   { title: "Houses for rent in Johar Town", query: { category:"Rent", type: "House", city: "Lahore", location: "Johar Town" } },
   { title: "Houses for rent in Wapda Town", query: { category:"Rent", type: "House", city: "Lahore", location: "Wapda Town" } },
-  { title: "Houses for rent in Central Park Housing Scheme", query: { category:"Rent", type: "House", city: "Lahore", location: "Central Park Housing Scheme" } },
+  { title: "Houses for rent in Central Park H.S", query: { category:"Rent", type: "House", city: "Lahore", location: "Central Park Housing Scheme, Lahore" } },
   { title: "Houses for rent in Iqbal Garden", query: { category:"Rent", type: "House", city: "Lahore", location: "Iqbal Garden" } }
     ]
   },
@@ -449,7 +449,7 @@ export const HomePageFilter6 = [
   { title: "Houses for rent in Dream Gardens", query: { category:"Rent", type: "House", city: "Multan", location: "Dream Gardens" } },
   { title: "Houses for rent in Model Town", query: { category:"Rent", type: "House", city: "Multan", location: "Model Town" } },
   { title: "Houses for rent in New Crystal City", query: { category:"Rent", type: "House", city: "Multan", location: "New Crystal City" } },
-  { title: "Houses for rent in Nishtarian’s Cooperative Housing", query: { category:"Rent", type: "House", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
+  { title: "Houses for rent in Nishtarian’s C.H", query: { category:"Rent", type: "House", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
     ]
   }
 ];
@@ -522,7 +522,7 @@ export const HomePageFilter7 = [
       { title: "Plots for rent in Dream Gardens", query: { category:"Rent", type: "Residential Plot", city: "Multan", location: "Dream Gardens" } },
       { title: "Plots for rent in Model Town", query: { category:"Rent", type: "Residential Plot", city: "Multan", location: "Model Town" } },
       { title: "Plots for rent in New Crystal City", query: { category:"Rent", type: "Residential Plot", city: "Multan", location: "New Crystal City" } },
-      { title: "Plots for rent in Nishtarian’s Cooperative Housing", query: { category:"Rent", type: "Residential Plot", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
+      { title: "Plots for rent in Nishtarian’s C.H", query: { category:"Rent", type: "Residential Plot", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
     ]
   }
 ];
@@ -539,8 +539,8 @@ export const HomePageFilter8 = [
       { title: "Flats for rent in Raiwind Road", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "Raiwind Road" } },
       { title: "Flats for rent in GT Road", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "GT Road" } },
       { title: "Flats for rent in Johar Town", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "Johar Town" } },
-      { title: "Flats for rent in Wapda Town Lahore", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "Wapda Town" } },
-      { title: "Flats for rent in Central Park Housing Scheme", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "Central Park Housing Scheme" } },
+      { title: "Flats for rent in Wapda Town Lahore", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "Wapda Town Lahore" } },
+      { title: "Flats for rent in Central Park H.S", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "Central Park Housing Scheme, Lahore" } },
       { title: "Flats for rent in Iqbal Garden", query: { category:"Rent", type: "Apartment - Flat", city: "Lahore", location: "Iqbal Garden" } }
     ]
   },
@@ -595,7 +595,7 @@ export const HomePageFilter8 = [
       { title: "Flats for rent in Dream Gardens", query: { category:"Rent", type: "Apartment - Flat", city: "Multan", location: "Dream Gardens" } },
       { title: "Flats for rent in Model Town", query: { category:"Rent", type: "Apartment - Flat", city: "Multan", location: "Model Town" } },
       { title: "Flats for rent in New Crystal City", query: { category:"Rent", type: "Apartment - Flat", city: "Multan", location: "New Crystal City" } },
-      { title: "Flats for rent in Nishtarian’s Cooperative Housing", query: { category:"Rent", type: "Apartment - Flat", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
+      { title: "Flats for rent in Nishtarian’s C.H", query: { category:"Rent", type: "Apartment - Flat", city: "Multan", location: "Nishtarian’s Cooperative Housing" } }
     ]
   }
 ];

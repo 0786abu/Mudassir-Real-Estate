@@ -36,11 +36,11 @@ const Projectbox = ({ data, from }) => {
       <div className="property-image" style={{ position: "relative" }}>
           <ImageSlider images={data.images} />
 
-        <div className="labels-left" style={{top:"20px"}}>
+        <div className="labels-left">
           <PropertyLabel labels={data.type} />
         </div>
         {data.isSponsored && (
-          <div className="labels-left" style={{top:"50px"}}>
+          <div className="labels-left-sp">
           <span className={`label text-bg-warning`}>Sponsored</span>
         </div>
         )}
@@ -73,8 +73,8 @@ const Projectbox = ({ data, from }) => {
           </div>
           )}
           <div className="d-flex gap-2 my-2">
-            <Link href={`tel:${data.projectOwnerPhone}`}><Button size="sm" onMouseEnter={()=>setCallHover(true)} onMouseLeave={()=>setCallHover(false)} style={{background:callHover ? "#108a00" : "#14A800",padding:"6px"}}><span><Phone/></span></Button></Link>
-            <Link href={`${data.projectOwnerWhatsappAPI}`}><Button size="sm" onMouseEnter={()=>setWhatsAppHover(true)} onMouseLeave={()=>setWhatsAppHover(false)} style={{background:WhatsAppHover ? "#108a00" : "#14A800",padding:"6px"}}><BsWhatsapp size={22}/></Button></Link>
+            <Link href={`${data.projectOwnerWhatsappAPI}`}><button className="listing-social-icon-group"><BsWhatsapp size={22} className="sub-listing-icon"/></button></Link>
+            <Link href={`tel:${data.projectOwnerPhone}`}><button className="listing-social-icon-group"><span className="sub-listing-icon"><Phone size={22} className="sub-listing-icon"/> Call</span></button></Link>
           </div>
         <div className="property-btn d-flex">
           <span style={{fontSize:"11px"}}>{formatDistanceToNowStrict(new Date(data.createdAt), { addSuffix: true })}</span>
