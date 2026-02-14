@@ -74,7 +74,7 @@ const Projectbox = ({ data, from }) => {
           )}
           <div className="d-flex gap-2 my-2">
             <Link href={`${data.projectOwnerWhatsappAPI}`}><button className="listing-social-icon-group"><BsWhatsapp size={22} className="sub-listing-icon"/></button></Link>
-            <Link href={`tel:${data.projectOwnerPhone}`}><button className="listing-social-icon-group"><span className="sub-listing-icon"><Phone size={22} className="sub-listing-icon"/> Call</span></button></Link>
+            <Link href={`tel:${data.projectOwnerPhone}`}><button className="listing-social-icon-group"><span className="sub-listing-span"><Phone size={22} className="sub-listing-icon"/> Call</span></button></Link>
           </div>
         <div className="property-btn d-flex">
           <span style={{fontSize:"11px"}}>{formatDistanceToNowStrict(new Date(data.createdAt), { addSuffix: true })}</span>
