@@ -70,7 +70,8 @@ useEffect(()=>{
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
-    padding:"150px 0",
+    paddingTop:"50px",
+    paddingBottom:"150px",
     position:"relative"
   }}
     className="home-banner ">
